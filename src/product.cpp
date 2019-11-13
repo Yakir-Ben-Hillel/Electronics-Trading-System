@@ -1,5 +1,30 @@
 #include "product.h"
 
+Product:: Product(const char* name,eCategory category,unsigned int serial=0,float price=0)
+{
+    setName(name);
+    setCategory(category);
+    setSerialNumber(serial);
+    setPrice(price);
+    cout<<"in product constructor"<<endl;//check its working remove befor uploading
+}
+
+Product:: Product(Product& other)
+{
+    p_name=new char[strlen(other.p_name)+1];
+    strcpy(p_name,other.p_name);
+    p_price=other.p_price;
+    p_serialNumber=other.p_serialNumber;
+    p_category=other.p_category;
+    cout<<"in copy constructor"<<endl;//check its working remove befor uploading
+}
+
+Product:: ~Product()
+{
+    delete[] p_name;
+    cout<<"in product distructor"<<endl;//check its working remove befor uploading
+}
+
 bool Product::setName(const char* name)
 {
     p_name=new char[strlen(name)+1];
