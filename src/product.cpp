@@ -9,7 +9,7 @@ Product:: Product(const char* name,eCategory category,unsigned int serial=0,floa
     cout<<"in product constructor"<<endl;//check its working remove befor uploading
 }
 
-Product:: Product(Product& other)
+Product:: Product(const Product& other)
 {
     p_name=new char[strlen(other.p_name)+1];
     strcpy(p_name,other.p_name);
