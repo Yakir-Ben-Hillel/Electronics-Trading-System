@@ -13,7 +13,7 @@ class Product
         bool setSerialNumber(unsigned int serial);
 		bool setCategory(eCategory category);
 
-		char* getName() const;
+		const char* getName() const;
 		float getPrice() const;
 		eCategory getCategory() const;
 		unsigned int getSerialNumber() const;
