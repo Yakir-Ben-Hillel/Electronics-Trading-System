@@ -10,7 +10,7 @@ class Product
 		//constructors&&distructors
 		Product() = default;
 		Product(const char* name,eCategory category,unsigned int serial=0,float price=0);
-		Product(Product& other);
+		Product(const Product &other);
 		~Product();
         //seters
 		bool setName(const char* name);
