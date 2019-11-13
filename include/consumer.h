@@ -7,8 +7,8 @@
 
 class Consumer
 {
-  
-
+    public:
+        
 
 
     private:
