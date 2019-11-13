@@ -7,6 +7,11 @@ class Product
 {
     public:
 		enum eCategory {Children,Electricity,Office,Clothing};
+		//constructors&&distructors
+		Product() = default;
+		Product(const char* name,float price=0,unsigned int serial=0,eCategory category);
+		Product(Product& other);
+		~Product();
 
 		bool setName(const char* name);
         bool setPrice(float price);
