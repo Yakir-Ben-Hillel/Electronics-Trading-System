@@ -48,9 +48,7 @@ bool System::setSellersArray(const Seller **given_sellers_array)
 {
     s_sellers_array = new Seller *[seller_array_size];
     for (int i = 0; i < seller_array_size; i++)
-    {
         s_sellers_array[i] = new Seller(*given_sellers_array[i]);
-    }
     return true;
 }
 bool System::setSellersArraySize(const unsigned int newSize)

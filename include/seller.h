@@ -14,20 +14,37 @@ public:
 		D,
 		E
 	}; //A is like 5 stars and E is like 1 star
+	struct FeedBack
+	{
+		char *feedback;
+		efeedback rating;
+	};
+	//Constructors && Distructors
+	Seller() = default;
+	Seller(char *userName, char *address, char *password, Product **stockArray, FeedBack *feedbacksArray);
+	Seller(const Seller &other);
+	~Seller();
+	//Getters Functions.
 	char *getUserName() const;
 	char *getAddress() const;
-	efeedback getfeedback() const;
-	void setUserName(char *userName);
-	void setPassword(char *password);
-	void setAddress(char *address);
-	bool setfeedback(efeedback feedback);
+	Product **getStock() const;
+	FeedBack *getfeedBacksArray() const;
+	//Setters Functions.
+	bool setUserName(char *userName);
+	bool setPassword(char *password);
+	bool setAddress(char *address);
+	bool setStockArray(Product **given_stock_array);
+	FeedBack setFeedback(FeedBack given_feedBack);
+	bool setFeedbacksArray(FeedBack *given_feedBacks_array);
 
 private:
-	efeedback curr_fidback;
 	char *userName;
 	char *address;
 	char password[11]; //max length of password is 10 chars,can be letter or a number
 	Product **s_stock;
+	unsigned int stock_array_length = 0;
+	FeedBack *feedBack_array;
+	unsigned int feedbacks_array_length = 0;
 };
 
 #endif // !__Seller_H

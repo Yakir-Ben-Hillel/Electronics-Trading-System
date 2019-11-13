@@ -4,6 +4,7 @@
         "Moshe"
     ],
     "files.associations": {
-        "*.tcc": "cpp"
+        "*.tcc": "cpp",
+        "type_traits": "cpp"
     }
 }
