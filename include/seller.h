@@ -16,9 +16,11 @@ public:
 	}; //A is like 5 stars and E is like 1 star
 	char *getUserName() const;
 	char *getAddress() const;
+	efeedback getfeedback() const;
 	void setUserName(char *userName);
 	void setPassword(char *password);
 	void setAddress(char *address);
+	bool setfeedback(efeedback feedback);
 
 private:
 	efeedback curr_fidback;
