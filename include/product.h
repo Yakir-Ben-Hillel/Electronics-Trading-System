@@ -9,7 +9,7 @@ class Product
 		enum eCategory {Children,Electricity,Office,Clothing};
 		//constructors&&distructors
 		Product() = default;
-		Product(const char* name,float price=0,unsigned int serial=0,eCategory category);
+		Product(const char* name,eCategory category,unsigned int serial=0,float price=0);
 		Product(Product& other);
 		~Product();
 
