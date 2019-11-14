@@ -8,7 +8,7 @@
       "request": "launch",
       "program": "${workspaceFolder}/main.exe",
       "args": [],
-      "stopAtEntry": false,
+      "stopAtEntry": true,
       "cwd": "${workspaceRoot}",
       "miDebuggerPath": "C:\\Mingw-w64\\mingw32\\bin\\gdb.exe",
       "externalConsole": true,
