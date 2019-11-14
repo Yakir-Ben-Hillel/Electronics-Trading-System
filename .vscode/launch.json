@@ -10,7 +10,6 @@
       "args": [],
       "stopAtEntry": false,
       "cwd": "${workspaceRoot}",
-      "environment": [],
       "miDebuggerPath": "C:\\Mingw-w64\\mingw32\\bin\\gdb.exe",
       "externalConsole": true,
       "preLaunchTask": "build",
