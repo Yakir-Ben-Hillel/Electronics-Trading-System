@@ -10,7 +10,7 @@ bool Seller::setAddress(char *givenAddress)
 {
     address = new char[strlen(givenAddress) + 1];
     strcpy(givenAddress, address);
-    return true;
+    return false;
 }
 bool Seller::setPassword(char *givenPassword)
 {
