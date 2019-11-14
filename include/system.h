@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <string.h>
-#include "costumer.h"
+#include "customer.h"
 #include "seller.h"
 using namespace std;
 
@@ -15,26 +15,26 @@ public:
 	//Constructors && Distructors
 	System() = default;
 	//In my option the user should not set arrays sizes by himself.-Yakir
-	System(const char *name, Costumer **costumers_array, Seller **sellers_array, unsigned int costumers_array_size = 0, unsigned int sellers_array_size = 0);
+	System(const char *name, Customer **customers_array, Seller **sellers_array, unsigned int customers_array_size = 0, unsigned int sellers_array_size = 0);
 	System(System &_nother);
 	~System();
 	//Setters Functions.
 	bool setSystemName(const char *given_system_name);
-	bool setCostumersArray(const Costumer **given_costumer_array);
+	bool setCustomersArray(const Customer **given_customer_array);
 	bool setSellersArray(const Seller **given_sellers_array);
 	bool setSellersArraySize(const unsigned int newSize);
-	bool setCostumersArraySize(const unsigned int newSIze);
+	bool setCustomersArraySize(const unsigned int newSIze);
 	//Getters Functions.
 	char *getSystemName();
-	Costumer **getCostumeArray();
+	Customer **getCostumeArray();
 	Seller **getSellersArray();
 	int getSellersArraySize();
-	int getCostumerArraySize();
+	int getCustomerArraySize();
 
 private:
 	char *system_name;
-	Costumer **s_costumers_array;
-	int costumer_array_size = 0;
+	Customer **s_customers_array;
+	int customer_array_size = 0;
 	Seller **s_sellers_array;
 	int seller_array_size = 0;
 };
