@@ -1,5 +1,5 @@
-#include "../include/costumer.h"
-Costumer::Costumer(const char *username, const char *password, const char *address, const Product **wishlist, int size = 0)
+#include "../include/customer.h"
+Customer::Customer(const char *username, const char *password, const char *address, const Product **wishlist, int size = 0)
 {
     setName(username);
     setPassword(password);
@@ -8,7 +8,7 @@ Costumer::Costumer(const char *username, const char *password, const char *addre
     setAddress(address);
 }
 
-Costumer::Costumer(const Costumer &other)
+Customer::Customer(const Customer &other)
 {
     c_user_name = new char[strlen(other.c_user_name) + 1];
     strcpy(c_user_name, other.c_user_name);
@@ -24,7 +24,7 @@ Costumer::Costumer(const Costumer &other)
     }
 }
 
-Costumer::~Costumer()
+Customer::~Customer()
 {
     delete[] c_user_name;
     delete[] c_address;
@@ -36,7 +36,7 @@ Costumer::~Costumer()
     c_wish_size = 0;
 }
 
-bool Costumer::setSize(int size)
+bool Customer::setSize(int size)
 {
     if (size < 0)
     {
@@ -47,21 +47,21 @@ bool Costumer::setSize(int size)
     return true;
 }
 
-bool Costumer::setName(const char *userName)
+bool Customer::setName(const char *userName)
 {
     c_user_name = new char[strlen(userName) + 1];
     strcpy(c_user_name, userName);
     return true;
 }
 
-bool Costumer::setAddress(const char *address)
+bool Customer::setAddress(const char *address)
 {
     c_address = new char[strlen(address) + 1];
     strcpy(c_address, address);
     return true;
 }
 
-bool Costumer::setPassword(const char *password)
+bool Customer::setPassword(const char *password)
 {
     if (strlen(password) <= 10)
     {
@@ -72,7 +72,7 @@ bool Costumer::setPassword(const char *password)
     return false;
 }
 
-bool Costumer::setWishList(const Product **wishList)
+bool Customer::setWishList(const Product **wishList)
 {
     c_wishList = new Product *[c_wish_size];
     for (int i = 0; i < c_wish_size; i++)
@@ -82,27 +82,27 @@ bool Costumer::setWishList(const Product **wishList)
     return true;
 }
 
-const char *Costumer::getName() const
+const char *Customer::getName() const
 {
     return c_user_name;
 }
 
-const char *Costumer::getAddress() const
+const char *Customer::getAddress() const
 {
     return c_address;
 }
 
-const char *Costumer::getPassWord() const
+const char *Customer::getPassWord() const
 {
     return c_password;
 }
 
-const Product **Costumer::getWishList() const
+const Product **Customer::getWishList() const
 {
     return c_wishList;
 }
 
-int Costumer::getSize() const
+int Customer::getSize() const
 {
     return c_wish_size;
 }

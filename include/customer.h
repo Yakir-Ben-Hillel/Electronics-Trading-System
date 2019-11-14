@@ -1,18 +1,18 @@
-#ifndef __Costumer_H
-#define __Costumer_H
+#ifndef __Customer_H
+#define __Customer_H
 
 #include "system.h"
 #include "product.h"
 #include "seller.h"
 
-class Costumer
+class Customer
 {
 public:
 	//constructors && distructors
-	Costumer() = default;
-	Costumer(const char *username, const char *password, const char *address, const Product **wishlist, int size = 0);
-	Costumer(const Costumer &other);
-	~Costumer();
+	Customer() = default;
+	Customer(const char *username, const char *password, const char *address, const Product **wishlist, int size = 0);
+	Customer(const Customer &other);
+	~Customer();
 
 	//seters
 	bool setName(const char *userName);
@@ -38,4 +38,4 @@ private:
 	int c_wish_size = 0;  //bu default the size of the wish list is 0
 };
 
-#endif // !__Costumer_H
+#endif // !__Customer_H
