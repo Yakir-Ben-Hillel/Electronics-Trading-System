@@ -8,6 +8,12 @@
 class Customer
 {
 public:
+	/*struct Address
+	{
+		char city[12];
+		char street[12];
+		unsigned short int num_of_street;
+	}an option to define the address by struct or use another class?*/
 	//constructors && distructors
 	Customer() = default;
 	Customer(const char *username, const char *password, const char *address, const Product **wishlist, int size = 0);
