@@ -6,12 +6,13 @@
       "name": "Debug",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/bin/main",
+      "program": "${workspaceFolder}/main.exe",
       "args": [],
       "stopAtEntry": false,
       "cwd": "${workspaceRoot}",
       "environment": [],
-      "externalConsole": false,
+      "miDebuggerPath": "C:\\Mingw-w64\\mingw32\\bin\\gdb.exe",
+      "externalConsole": true,
       "preLaunchTask": "build",
       "linux": {
         "MIMode": "gdb"
