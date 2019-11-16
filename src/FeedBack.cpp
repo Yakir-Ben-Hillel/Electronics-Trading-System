@@ -1,18 +1,21 @@
-#include "./include/FeedBack.h"
+#include "FeedBack.h"
 
-FeedBack::FeedBack(const char *note, efeedback givenrating)
+FeedBack::FeedBack(const char *note, efeedback givenrating,const char* customer_name)
 {
     setNotes(note);
     setRating(givenrating);
+    setCustomerName(customer_name);
 }
 FeedBack::FeedBack(FeedBack &other)
 {
     setNotes(other.notes);
     setRating(other.rating);
+    setCustomerName(other.name_of_customer);
 }
 FeedBack::~FeedBack()
 {
     delete[] notes;
+    delete[] name_of_customer;
 }
 
 bool FeedBack::setNotes(const char *givenNote)
@@ -31,6 +34,12 @@ bool FeedBack::setRating(FeedBack::efeedback givenrating)
     rating = givenrating;
     return true;
 }
+bool FeedBack::setCustomerName(const char *name)
+{
+    name_of_customer = new char[strlen(name) + 1];
+    strcpy(name_of_customer, name);
+    return true;
+}
 const char *FeedBack::getNotes() const
 {
     return notes;
@@ -38,4 +47,8 @@ const char *FeedBack::getNotes() const
 FeedBack::efeedback FeedBack::getrating() const
 {
     return rating;
+}
+const char *FeedBack::getCustomerName() const
+{
+    return name_of_customer;
 }

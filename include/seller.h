@@ -11,7 +11,7 @@ class Seller
 public:
 	//Constructors && Distructors
 	Seller() = default;
-	Seller(char *userName, Address address,const char *password, Product **stockArray, FeedBack *feedbacksArray);
+	Seller(char *userName, Address* address,const char *password, Product **stockArray, FeedBack **feedbacksArray);
 	Seller(const Seller &other);
 	~Seller();
 	//Getters Functions.
@@ -23,18 +23,18 @@ public:
 	//Setters Functions.
 	bool setUserName(const char *userName);
 	bool setPassword(const char *password);
-	bool setAddress(Address address);
+	bool setAddress(Address* address);
 	bool setStockArray(Product **given_stock_array);
-	FeedBack setFeedback(FeedBack given_feedBack);
+	FeedBack setFeedback(FeedBack* given_feedBack);
 	bool setFeedbacksArray(FeedBack **given_feedBacks_array);
 
 private:
 	char *userName;
-	Address address;
+	Address* address;//pointer to class address
 	char password[11]; //max length of password is 10 chars,can be letter or a number
-	Product **s_stock = nullptr;
+	Product **s_stock;
 	unsigned int stock_array_length = 0;
-	FeedBack **feedBack_array = nullptr;
+	FeedBack **feedBack_array;
 	unsigned int feedbacks_array_length = 0;
 };
 

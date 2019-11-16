@@ -1,6 +1,8 @@
 #ifndef __Product_H
 #define __Product_H
+
 #include "system.h"
+
 class Product
 {
 public:
@@ -13,7 +15,7 @@ public:
 	};
 	//constructors&&distructors
 	Product() = default;
-	Product(const char *name, eCategory category, unsigned int serial = 0, float price = 0);
+	Product(const char *name, eCategory category, unsigned int serial = 0,float price = 0);
 	Product(const Product &other);
 	~Product();
 	//seters

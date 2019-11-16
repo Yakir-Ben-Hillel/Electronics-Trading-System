@@ -1,6 +1,8 @@
-#ifndef __ADDRESS
-#define __ADDRESS
-#include "system.h"
+#ifndef __ADDRESS_H
+#define __ADDRESS_H
+#include <iostream>
+#include <string.h>
+using namespace std;
 class Address
 {
 public:
@@ -21,4 +23,4 @@ private:
     char *streetName;
     unsigned int apartmentNumber;
 };
-#endif //!__ADDRESS
+#endif

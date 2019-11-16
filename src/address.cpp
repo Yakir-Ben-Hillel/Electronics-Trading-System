@@ -31,13 +31,13 @@ bool Address::setStreetName(const char *givenStreetName)
 }
 bool Address::setApartmentNumber(unsigned int givenApartmentNumber)
 {
-    if (givenApartmentNumber != 0) //the num is must be positive because of that it is unsigned.
+    if (givenApartmentNumber != 0) //the number is must be positive because of that it is unsigned.
     {
         apartmentNumber = givenApartmentNumber;
         return true;
     }
-    else
-        return false;
+    cout << "apartment number must be positive" << endl;
+    return false;
 }
 const char *Address::getCityName() const
 {

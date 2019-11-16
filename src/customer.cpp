@@ -10,17 +10,11 @@ Customer::Customer(const char *username, const char *password, const Address *ad
 
 Customer::Customer(const Customer &other)
 {
-    c_user_name = new char[strlen(other.c_user_name) + 1];
-    strcpy(c_user_name, other.c_user_name);
-    c_address = new Address((*other.c_address));
-    strcpy(c_password, other.c_password);
-
-    c_wishList = new Product *[other.c_wish_size];
-    c_wish_size = other.c_wish_size;
-    for (int i = 0; i < c_wish_size; i++)
-    {
-        c_wishList[i] = new Product(*other.c_wishList[i]);
-    }
+    setName(other.c_user_name);
+    setPassword(other.c_password);
+    setAddress(other.c_address);
+    setSize(other.c_wish_size);
+    setWishList(other.c_wishList);
 }
 
 Customer::~Customer()

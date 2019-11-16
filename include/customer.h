@@ -3,15 +3,12 @@
 
 #include "system.h"
 
+class Address;
+class Product;
+
 class Customer
 {
 public:
-	/*struct Address
-	{
-		char city[12];
-		char street[12];
-		unsigned short int num_of_street;
-	};an option to define the address by struct or use another class?*/
 	//constructors && distructors
 	Customer() = default;
 	Customer(const char *username, const char *password, const Address *address, const Product **wishlist, int size = 0);
@@ -39,7 +36,7 @@ private:
 	Address *c_address;
 	char c_password[11];  //max length of password is 10 chars,can be letter or a number
 	Product **c_wishList; //pointer array for product wish list
-	int c_wish_size = 0;  //bu default the size of the wish list is 0
+	int c_wish_size = 0;  //by default the size of the wish list is 0
 };
 
 #endif // !__Customer_H
