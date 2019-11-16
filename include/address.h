@@ -5,22 +5,20 @@ class Address
 {
 public:
     Address() = default;
-    Address(char *streetName, int ApartmentNumber, int zip = NULL);
+    Address(const char* cityName ,const char *streetName,unsigned int ApartmentNumber);
     Address(const Address &other);
     ~Address();
-    bool setCityName(char *cityName);
-    bool setStreetName(char *streetName);
-    bool setApartmentNumber(int apartmentNumber);
-    bool setZIP(int zip);
-    char *getCityName() const;
-    char *getStreetName() const;
-    int getApartmentNumber() const;
-    int getZIP() const;
+    bool setCityName(const char *cityName);
+    bool setStreetName(const char *streetName);
+    bool setApartmentNumber(unsigned int apartmentNumber);
+    
+    const char *getCityName() const;
+    const char *getStreetName() const;
+    unsigned int getApartmentNumber() const;
 
 private:
     char *cityName;
     char *streetName;
-    int apartmentNumber;
-    int zip = NULL;
+    unsigned int apartmentNumber;
 };
 #endif //!__ADDRESS

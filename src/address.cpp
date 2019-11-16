@@ -1,36 +1,37 @@
 #include "../include/address.h"
 
-Address::Address(char *streetName, int apartmentNumber, int zip = NULL)
+Address::Address(const char *cityName, const char *streetName, unsigned int apartmentNumber)
 {
+    setCityName(cityName);
     setStreetName(streetName);
     setApartmentNumber(apartmentNumber);
-    if (zip)
-        setZIP(zip);
 }
 Address::Address(const Address &other)
 {
     setStreetName(other.streetName);
     setApartmentNumber(other.apartmentNumber);
-    if (other.zip)
-        setZIP(other.zip);
+    setStreetName(other.streetName);
 }
 Address::~Address()
 {
-    delete streetName;
+    delete[] cityName;
+    delete[] streetName;
 }
-bool Address::setCityName(char *givenCityName)
+bool Address::setCityName(const char *givenCityName)
 {
     cityName = new char[(strlen(givenCityName) + 1)];
+    strcpy(cityName, givenCityName);
     return true;
 }
-bool Address::setStreetName(char *givenStreetName)
+bool Address::setStreetName(const char *givenStreetName)
 {
     streetName = new char[(strlen(givenStreetName) + 1)];
+    strcpy(streetName, givenStreetName);
     return true;
 }
-bool Address::setApartmentNumber(int givenApartmentNumber)
+bool Address::setApartmentNumber(unsigned int givenApartmentNumber)
 {
-    if (givenApartmentNumber != 0)
+    if (givenApartmentNumber != 0) //the num is must be positive because of that it is unsigned.
     {
         apartmentNumber = givenApartmentNumber;
         return true;
@@ -38,29 +39,15 @@ bool Address::setApartmentNumber(int givenApartmentNumber)
     else
         return false;
 }
-bool Address::setZIP(int givenZIP)
-{
-    if (givenZIP != 0)
-    {
-        zip = givenZIP;
-        return true;
-    }
-    else
-        return false;
-}
-char *Address::getCityName() const
+const char *Address::getCityName() const
 {
     return cityName;
 }
-char *Address::getStreetName() const
+const char *Address::getStreetName() const
 {
     return streetName;
 }
-int Address::getApartmentNumber() const
+unsigned int Address::getApartmentNumber() const
 {
     return apartmentNumber;
-}
-int Address::getZIP() const
-{
-    return zip;
 }
