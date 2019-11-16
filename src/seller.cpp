@@ -1,4 +1,32 @@
 #include "../include/seller.h"
+Seller::Seller(char *userName, Address address, char *password, Product **stockArray, FeedBack *feedbacksArray)
+{
+    setUserName(userName);
+    setAddress(address);
+    setPassword(password);
+    setStockArray(stockArray);
+    setFeedbacksArray(feedBack_array);
+}
+Seller::Seller(const Seller &other)
+{
+    setUserName(other.userName);
+    setAddress(other.address);
+    char *pass = password;
+    setPassword(pass); //Might need to fix that.
+    setStockArray(other.s_stock);
+    setFeedbacksArray(other.feedBack_array);
+}
+Seller::~Seller()
+{
+    for (int i = 0; i < feedbacks_array_length; i++)
+        delete feedBack_array[i].feedback;
+    delete[] feedBack_array;
+    for (int i = 0; i < stock_array_length; i++)
+        delete s_stock[i];
+    delete[] s_stock;
+    delete userName;
+    delete password;
+}
 bool Seller::setUserName(char *givenUserName)
 {
     userName = new char[strlen(givenUserName) + 1];
@@ -6,10 +34,9 @@ bool Seller::setUserName(char *givenUserName)
     return true;
 }
 
-bool Seller::setAddress(char *givenAddress)
+bool Seller::setAddress(Address givenAddress)
 {
-    address = new char[strlen(givenAddress) + 1];
-    strcpy(givenAddress, address);
+    address = givenAddress;
     return true;
 }
 bool Seller::setPassword(char *givenPassword)
@@ -49,7 +76,7 @@ char *Seller::getUserName() const
 {
     return userName;
 }
-char *Seller::getAddress() const
+Address Seller::getAddress() const
 {
     return address;
 }
