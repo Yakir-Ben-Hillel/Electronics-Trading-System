@@ -9,36 +9,24 @@ class Product;
 class Seller
 {
 public:
-	enum efeedback
-	{
-		A = 'A',
-		B,
-		C,
-		D,
-		E
-	}; //A is like 5 stars and E is like 1 star
-	/*struct FeedBack
-	{
-		char *feedback;
-		efeedback rating;
-	};*/
 	//Constructors && Distructors
 	Seller() = default;
-	Seller(char *userName, Address address, char *password, Product **stockArray, FeedBack *feedbacksArray);
+	Seller(char *userName, Address address,const char *password, Product **stockArray, FeedBack *feedbacksArray);
 	Seller(const Seller &other);
 	~Seller();
 	//Getters Functions.
-	char *getUserName() const;
+	const char *getUserName() const;
+	const char* getPassword() const;
 	Address getAddress() const;
 	Product **getStock() const;
 	FeedBack *getfeedBacksArray() const;
 	//Setters Functions.
-	bool setUserName(char *userName);
-	bool setPassword(char *password);
+	bool setUserName(const char *userName);
+	bool setPassword(const char *password);
 	bool setAddress(Address address);
 	bool setStockArray(Product **given_stock_array);
 	FeedBack setFeedback(FeedBack given_feedBack);
-	bool setFeedbacksArray(FeedBack *given_feedBacks_array);
+	bool setFeedbacksArray(FeedBack **given_feedBacks_array);
 
 private:
 	char *userName;

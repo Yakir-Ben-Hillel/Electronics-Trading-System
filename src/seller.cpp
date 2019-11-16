@@ -1,5 +1,5 @@
 #include "../include/seller.h"
-Seller::Seller(char *userName, Address address, char *password, Product **stockArray, FeedBack *feedbacksArray)
+Seller::Seller(char *userName, Address address,const char *password, Product **stockArray, FeedBack *feedbacksArray)
 {
     setUserName(userName);
     setAddress(address);
@@ -11,15 +11,14 @@ Seller::Seller(const Seller &other)
 {
     setUserName(other.userName);
     setAddress(other.address);
-    char *pass = password;
-    setPassword(pass); //Might need to fix that.
+    setPassword(other.password); //Might need to fix that.
     setStockArray(other.s_stock);
     setFeedbacksArray(other.feedBack_array);
 }
 Seller::~Seller()
 {
     for (int i = 0; i < feedbacks_array_length; i++)
-        delete feedBack_array[i].feedback;
+        delete *feedBack_array[i].feedback;
     delete[] feedBack_array;
     for (int i = 0; i < stock_array_length; i++)
         delete s_stock[i];
@@ -27,7 +26,7 @@ Seller::~Seller()
     delete userName;
     delete password;
 }
-bool Seller::setUserName(char *givenUserName)
+bool Seller::setUserName(const char *givenUserName)
 {
     userName = new char[strlen(givenUserName) + 1];
     strcpy(givenUserName, userName);
@@ -39,11 +38,11 @@ bool Seller::setAddress(Address givenAddress)
     address = givenAddress;
     return true;
 }
-bool Seller::setPassword(char *givenPassword)
+bool Seller::setPassword(const char *givenPassword)
 {
     if (strlen(givenPassword) <= 10)
     {
-        strcpy(givenPassword, password);
+        strcpy(password,givenPassword);
         return true;
     }
     else
@@ -72,7 +71,7 @@ bool Seller::setFeedbacksArray(Seller::FeedBack *given_feedBacks_array)
         feedBack_array[i] = Seller::setFeedback(given_feedBacks_array[i]);
     return true;
 }
-char *Seller::getUserName() const
+const char *Seller::getUserName() const
 {
     return userName;
 }
