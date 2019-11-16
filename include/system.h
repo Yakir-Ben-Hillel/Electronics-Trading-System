@@ -1,13 +1,16 @@
+#pragma once
 #ifndef __System_H
 #define __System_H
 
 #include <iostream>
 #include <string.h>
+#include "address.h"
+#include "product.h"
 #include "customer.h"
 #include "seller.h"
+#include "adding.h"
 using namespace std;
 
-#pragma warning(disable : 4996)
 
 class System
 {

@@ -1,5 +1,5 @@
-#include "../include/customer.h"
-Customer::Customer(const char *username, const char *password, const char *address, const Product **wishlist, int size = 0)
+#include "../include/system.h"
+Customer::Customer(const char *username, const char *password, const Address *address, const Product **wishlist, int size = 0)
 {
     setName(username);
     setPassword(password);
@@ -12,8 +12,7 @@ Customer::Customer(const Customer &other)
 {
     c_user_name = new char[strlen(other.c_user_name) + 1];
     strcpy(c_user_name, other.c_user_name);
-    c_address = new char[strlen(other.c_address) + 1];
-    strcpy(c_address, other.c_address);
+    c_address = new Address((*other.c_address));
     strcpy(c_password, other.c_password);
 
     c_wishList = new Product *[other.c_wish_size];
@@ -27,7 +26,7 @@ Customer::Customer(const Customer &other)
 Customer::~Customer()
 {
     delete[] c_user_name;
-    delete[] c_address;
+    delete c_address;
     for (int i = 0; i < c_wish_size; i++)
     {
         delete c_wishList[i];
@@ -54,10 +53,9 @@ bool Customer::setName(const char *userName)
     return true;
 }
 
-bool Customer::setAddress(const char *address)
+bool Customer::setAddress(const Address *address)
 {
-    c_address = new char[strlen(address) + 1];
-    strcpy(c_address, address);
+    c_address = new Address(*address);
     return true;
 }
 
@@ -87,7 +85,7 @@ const char *Customer::getName() const
     return c_user_name;
 }
 
-const char *Customer::getAddress() const
+const Address *Customer::getAddress() const
 {
     return c_address;
 }
