@@ -1,11 +1,12 @@
 #include "../include/system.h"
-Customer::Customer(const char *username, const char *password, const Address *address, const Product **wishlist, int size = 0)
+Customer::Customer(const char *username, const char *password, const Address *address, const Product **wishlist, int size = 0, int price = 0)
 {
     setName(username);
     setPassword(password);
     setWishList(wishlist);
     setSize(size);
     setAddress(address);
+    setTotalPrice(price);
 }
 
 Customer::Customer(const Customer &other)
@@ -15,6 +16,7 @@ Customer::Customer(const Customer &other)
     setAddress(other.c_address);
     setSize(other.c_wish_size);
     setWishList(other.c_wishList);
+    setTotalPrice(other.c_total_price);
 }
 
 Customer::~Customer()
@@ -73,6 +75,16 @@ bool Customer::setWishList(const Product **wishList)
     }
     return true;
 }
+bool Customer::setTotalPrice(int price)
+{
+    if (price < 0)
+    {
+        cout << "error,price can't be negative" << endl;
+        return false;
+    }
+    c_total_price = price;
+    return true;
+}
 
 const char *Customer::getName() const
 {
@@ -97,4 +109,8 @@ const Product **Customer::getWishList() const
 int Customer::getSize() const
 {
     return c_wish_size;
+}
+int Customer::getTotalPrice() const
+{
+    return c_total_price;
 }

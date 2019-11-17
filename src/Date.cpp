@@ -1,40 +1,52 @@
 #include "Date.h"
 
-   Date:: Date(unsigned int day, unsigned int month, unsigned int year)
-    {
+Date::Date(unsigned int day, unsigned int month, unsigned int year)
+{
+   setDay(day);
+   setMonth(month);
+   setYear(year);
+}
+Date::Date(Date &other)
+{
+   setDay(other.m_day);
+   setMonth(other.m_month);
+   setYear(other.m_year);
+}
+bool Date::setDay(unsigned int givenday)
+{
+   if(givenday>31||givenday<1)
+   {
+      cout<<"day has to be between the values 1-31(depends on the month)"<<endl;
+      return false;
+   }
+   m_day=givenday;
+   return true;
+}
+bool Date::setMonth(unsigned int givenmonth)
+{
+   if(givenmonth>12||givenmonth<1)
+   {
+      cout<<"month has to be between the values 1-12"<<endl;
+      return false;
+   }
+   m_month=givenmonth;
+   return true;
+}
+bool Date::setYear(unsigned int givenyear)
+{
+   m_year = givenyear;
+   return true;
+}
 
-    }
-   Date:: Date(Date &other)
-    {
-
-    }
-   Date:: ~Date()
-    {
-
-    }
-
-    bool Date::setDay(unsigned int day)
-    {
-
-    }
-    bool Date::setMonth(unsigned int month)
-    {
-
-    }
-    bool Date::setYear(unsigned int year)
-    {
-
-    }
-
-    unsigned int Date::getDay() const
-    {
-
-    }
-    unsigned int Date::getMonth() const
-    {
-
-    }
-    unsigned int Date::getYear() const
-    {
-
-    }
+unsigned int Date::getDay() const
+{
+   return m_day;
+}
+unsigned int Date::getMonth() const
+{
+   return m_month;
+}
+unsigned int Date::getYear() const
+{
+   return m_year;
+}

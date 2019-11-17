@@ -8,7 +8,6 @@
 #include "product.h"
 #include "customer.h"
 #include "seller.h"
-#include "adding.h"
 #include "FeedBack.h"
 #include "Date.h"
 using namespace std;
