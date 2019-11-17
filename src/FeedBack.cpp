@@ -1,24 +1,30 @@
-#include "FeedBack.h"
+#include "../include/FeedBack.h"
+#include "../include/Date.h"
+#include "../include/customer.h"
+#include <iostream>
+#include <string.h>
+using namespace std;
 
-FeedBack::FeedBack(const char *note, efeedback givenrating, const char *customer_name, Date *curr_date)
+
+FeedBack::FeedBack(const char *note, efeedback givenrating, Customer *customer_data, Date *curr_date)
 {
     setNotes(note);
     setRating(givenrating);
-    setCustomerName(customer_name);
+    setCustomerName(customer);
     setDateOfFeedBack(curr_date);
 }
 FeedBack::FeedBack(FeedBack &other)
 {
     setNotes(other.notes);
     setRating(other.rating);
-    setCustomerName(other.name_of_customer);
+    setCustomerName(other.customer);
     setDateOfFeedBack(other.date_of_feedback);
 }
 FeedBack::~FeedBack()
 {
     delete date_of_feedback;
     delete[] notes;
-    delete[] name_of_customer;
+    delete customer;
 }
 
 bool FeedBack::setNotes(const char *givenNote)
@@ -37,10 +43,9 @@ bool FeedBack::setRating(FeedBack::efeedback givenrating)
     rating = givenrating;
     return true;
 }
-bool FeedBack::setCustomerName(const char *name)
+bool FeedBack::setCustomerName(const Customer *other_customer)
 {
-    name_of_customer = new char[strlen(name) + 1];
-    strcpy(name_of_customer, name);
+    *customer=Customer(*other_customer);
     return true;
 }
 bool FeedBack::setDateOfFeedBack(Date *date)
@@ -56,9 +61,9 @@ FeedBack::efeedback FeedBack::getrating() const
 {
     return rating;
 }
-const char *FeedBack::getCustomerName() const
+Customer *FeedBack::getCustomerName() const
 {
-    return name_of_customer;
+    return customer;
 }
 Date *FeedBack::getDate()
 {

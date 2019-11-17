@@ -1,16 +1,14 @@
 #ifndef __DATE_H
 #define __DATE_H
 
-#include "system.h"
-
 class Date
 {
 public:
     //constructors and distructors
     Date() = default;
     Date(unsigned int day, unsigned int month, unsigned int year);
-    Date(Date &other);
-    ~Date()=default;
+    Date(const Date &other);
+    ~Date() = default;
     //seters and geters
     bool setDay(unsigned int givenday);
     bool setMonth(unsigned int givenmonth);

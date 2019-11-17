@@ -1,6 +1,9 @@
 #include "../include/address.h"
+#include <iostream>
+#include <string.h>
+using namespace std;
 
-Address::Address(const char *cityName, const char *streetName, unsigned int apartmentNumber)
+Address::Address(unsigned int ApartmentNumber,const char* cityName=nullptr ,const char *streetName=nullptr)
 {
     setCityName(cityName);
     setStreetName(streetName);
@@ -11,6 +14,15 @@ Address::Address(const Address &other)
     setStreetName(other.streetName);
     setApartmentNumber(other.apartmentNumber);
     setStreetName(other.streetName);
+}
+Address::Address(const Address &&other)
+{
+    cityName=other.cityName;
+    streetName=other.streetName;
+    apartmentNumber=other.apartmentNumber;
+
+    /*other.cityName=nullptr;
+    other.streetName=nullptr;have a problem with these lines*/
 }
 Address::~Address()
 {
