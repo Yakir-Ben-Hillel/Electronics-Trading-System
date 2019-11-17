@@ -1,6 +1,8 @@
-#include "product.h"
+#include "../include/product.h"
+#include "../include/seller.h"
 
-Product::Product(const char *name, eCategory category, const char *seller, unsigned int serial = 0, float price = 0)
+
+Product::Product(const char *name, eCategory category, Seller *seller, unsigned int serial = 0, float price = 0)
 {
     setName(name);
     setCategory(category);
@@ -17,14 +19,14 @@ Product::Product(const Product &other)
     p_price = other.p_price;
     p_serialNumber = other.p_serialNumber;
     p_category = other.p_category;
-    setSellerName(other.seller_name);
+    setSellerName(other.p_seller);
     cout << "in copy constructor" << endl; //check its working remove befor uploading
 }
 
 Product::~Product()
 {
     delete[] p_name;
-    delete[] seller_name;
+    delete p_seller;
     cout << "in product distructor" << endl; //check its working remove befor uploading
 }
 
@@ -63,10 +65,9 @@ bool Product::setCategory(eCategory category)
     cout << "please choose one of the available sections" << endl;
     return false;
 }
-bool Product::setSellerName(const char *seller)
+bool Product::setSellerName(Seller *seller)
 {
-    seller_name = new char[strlen(seller) + 1];
-    strcpy(seller_name, seller);
+    *p_seller=Seller(*seller);
     return true;
 }
 
@@ -89,7 +90,7 @@ unsigned int Product::getSerialNumber() const
 {
     return p_serialNumber;
 }
-const char *Product::getSellerName() const
+Seller *Product::getSellerName() const
 {
-    return seller_name;
+    return p_seller;
 }

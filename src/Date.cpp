@@ -1,4 +1,7 @@
 #include "Date.h"
+#include <iostream>
+#include <string.h>
+using namespace std;
 
 Date::Date(unsigned int day, unsigned int month, unsigned int year)
 {
@@ -6,7 +9,7 @@ Date::Date(unsigned int day, unsigned int month, unsigned int year)
    setMonth(month);
    setYear(year);
 }
-Date::Date(Date &other)
+Date::Date(const Date &other)
 {
    setDay(other.m_day);
    setMonth(other.m_month);
