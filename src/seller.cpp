@@ -1,5 +1,5 @@
 #include "../include/seller.h"
-Seller::Seller(char *userName, Address address,const char *password, Product **stockArray, FeedBack *feedbacksArray)
+Seller::Seller(char *userName, Address *address, const char *password, Product **stockArray, FeedBack **feedbacksArray)
 {
     setUserName(userName);
     setAddress(address);
@@ -18,7 +18,7 @@ Seller::Seller(const Seller &other)
 Seller::~Seller()
 {
     for (int i = 0; i < feedbacks_array_length; i++)
-        delete *feedBack_array[i].feedback;
+        delete feedBack_array[i];
     delete[] feedBack_array;
     for (int i = 0; i < stock_array_length; i++)
         delete s_stock[i];
@@ -29,11 +29,11 @@ Seller::~Seller()
 bool Seller::setUserName(const char *givenUserName)
 {
     userName = new char[strlen(givenUserName) + 1];
-    strcpy(givenUserName, userName);
+    strcpy(userName, givenUserName);
     return true;
 }
 
-bool Seller::setAddress(Address givenAddress)
+bool Seller::setAddress(Address *givenAddress)
 {
     address = givenAddress;
     return true;
@@ -42,7 +42,7 @@ bool Seller::setPassword(const char *givenPassword)
 {
     if (strlen(givenPassword) <= 10)
     {
-        strcpy(password,givenPassword);
+        strcpy(password, givenPassword);
         return true;
     }
     else
@@ -58,17 +58,11 @@ bool Seller::setStockArray(Product **given_product_array)
         s_stock[i] = new Product(*given_product_array[i]);
     return true;
 }
-Seller::FeedBack Seller::setFeedback(Seller::FeedBack given_feedBack)
+bool Seller::setFeedbacksArray(FeedBack **given_feedBacks_array)
 {
-    FeedBack feedback;
-    feedback.feedback = new char[strlen(given_feedBack.feedback)];
-    return feedback;
-}
-bool Seller::setFeedbacksArray(Seller::FeedBack *given_feedBacks_array)
-{
-    feedBack_array = new FeedBack[feedbacks_array_length];
+    feedBack_array = new FeedBack *[feedbacks_array_length];
     for (int i = 0; i < feedbacks_array_length; i++)
-        feedBack_array[i] = Seller::setFeedback(given_feedBacks_array[i]);
+        feedBack_array[i] = new FeedBack(*given_feedBacks_array[i]);
     return true;
 }
 const char *Seller::getUserName() const
@@ -77,5 +71,5 @@ const char *Seller::getUserName() const
 }
 Address Seller::getAddress() const
 {
-    return address;
+    return *address;
 }

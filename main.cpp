@@ -3,5 +3,6 @@
 
 int main()
 {
- 
+
+    Seller *seller = new Seller();
 }
