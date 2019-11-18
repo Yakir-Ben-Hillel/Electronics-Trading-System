@@ -7,7 +7,7 @@ System::System(const char *name, Customer **customers_array, Seller **sellers_ar
     setCustomersArraySize(customer_array_size);
     setSellersArraySize(seller_array_size);
 }
-System::System(System &other)
+System::System(const System &other)
 {
     setSystemName(other.system_name);
     setCustomersArray(other.s_customers_array);

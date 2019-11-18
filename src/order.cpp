@@ -1,6 +1,6 @@
 #include "../include/system.h"
 
-Order::Order(Product **order_list, int price, int size)
+Order::Order(Product **order_list, int price=0, int size=0)
 {
     setProductList(order_list);
     setPrice(price);
@@ -8,17 +8,24 @@ Order::Order(Product **order_list, int price, int size)
 }
 Order::Order(const Order &other)
 {
-    setProductList(other.order_history);
+    setProductList(other.order_products);
     setPrice(other.price_of_order);
     setSize(other.size_of_list);
+}
+Order::Order(Order &&other)
+{
+    this->price_of_order=other.price_of_order;
+    this->size_of_list=other.size_of_list;
+    this->order_products=other.order_products;
+    other.order_products=nullptr;
 }
 Order::~Order()
 {
     for (int i = 0; i < this->size_of_list; i++)
     {
-        delete[](order_history)[i];
+        delete[](order_products)[i];
     }
-    delete[] order_history;
+    delete[] order_products;
 }
 
 bool Order::setPrice(int price_of_order)
@@ -33,10 +40,10 @@ bool Order::setPrice(int price_of_order)
 }
 bool Order::setProductList(Product **order_list)
 {
-    this->order_history = new Product *[this->size_of_list];
+    this->order_products = new Product *[this->size_of_list];
     for (int i = 0; i < this->size_of_list; i++)
     {
-        this->order_history[i] = new Product(*order_list[i]);
+        this->order_products[i] = new Product(*order_list[i]);
     }
     return true;
 }
@@ -56,7 +63,7 @@ int Order::getPrice() const
 }
 Product **Order::getList() const
 {
-    return order_history;
+    return order_products;
 }
 int Order::getSize() const
 {

@@ -1,12 +1,11 @@
-#include "../include/system.h"
-Customer::Customer(const char *username, const char *password, const Address *address, const Product **wishlist, int size = 0, int price = 0)
+#include "../include/includes.h"
+Customer::Customer(const char *username, const char *password, const Address *address, const Product **wishlist, int size = 0)
 {
     setName(username);
     setPassword(password);
     setWishList(wishlist);
-    setSize(size);
+    setSizeWishList(size);
     setAddress(address);
-    setTotalPrice(price);
 }
 
 Customer::Customer(const Customer &other)
@@ -14,14 +13,31 @@ Customer::Customer(const Customer &other)
     setName(other.c_user_name);
     setPassword(other.c_password);
     setAddress(other.c_address);
-    setSize(other.c_wish_size);
+    setSizeWishList(other.c_wish_size);
     setWishList(other.c_wishList);
-    setTotalPrice(other.c_total_price);
+}
+
+Customer::Customer(Customer&& other)
+{
+    this->c_user_name=other.c_user_name;
+    this->c_wish_size=other.c_wish_size;
+    this->c_address=other.c_address;
+    this->c_wishList=other.c_wishList;
+    this->c_password=other.c_password;
+    this->orders_history=other.orders_history;
+    
+
+    other.orders_history=nullptr;
+    other.c_address=nullptr;
+    other.c_password=nullptr;
+    other.c_user_name=nullptr;
+    other.c_wishList=nullptr;
 }
 
 Customer::~Customer()
 {
     delete[] c_user_name;
+    delete[] c_password;
     delete c_address;
     for (int i = 0; i < c_wish_size; i++)
     {
@@ -31,7 +47,7 @@ Customer::~Customer()
     c_wish_size = 0;
 }
 
-bool Customer::setSize(int size)
+bool Customer::setSizeWishList(int size)
 {
     if (size < 0)
     {
@@ -75,16 +91,6 @@ bool Customer::setWishList(const Product **wishList)
     }
     return true;
 }
-bool Customer::setTotalPrice(int price)
-{
-    if (price < 0)
-    {
-        cout << "error,price can't be negative" << endl;
-        return false;
-    }
-    c_total_price = price;
-    return true;
-}
 
 const char *Customer::getName() const
 {
@@ -106,11 +112,7 @@ const Product **Customer::getWishList() const
     return c_wishList;
 }
 
-int Customer::getSize() const
+int Customer::getSizeWishList() const
 {
     return c_wish_size;
-}
-int Customer::getTotalPrice() const
-{
-    return c_total_price;
 }

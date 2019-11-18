@@ -7,7 +7,7 @@ Product::Product(const char *name, eCategory category, Seller *seller, unsigned 
     setCategory(category);
     setSerialNumber(serial);
     setPrice(price);
-    setSellerName(seller);
+    setSeller(seller);
     cout << "in product constructor" << endl; //check its working remove befor uploading
 }
 
@@ -18,8 +18,20 @@ Product::Product(const Product &other)
     p_price = other.p_price;
     p_serialNumber = other.p_serialNumber;
     p_category = other.p_category;
-    setSellerName(other.p_seller);
+    setSeller(other.p_seller);
     cout << "in copy constructor" << endl; //check its working remove befor uploading
+}
+
+Product::Product(Product &&other)
+{
+    this->p_seller=other.p_seller;
+    this->p_name=other.p_name;
+    this->p_category=other.p_category;
+    this->p_price=other.p_price;
+    this->p_serialNumber=other.p_serialNumber;
+
+    other.p_seller=nullptr;
+    other.p_name=nullptr;
 }
 
 Product::~Product()
@@ -64,9 +76,9 @@ bool Product::setCategory(eCategory category)
     cout << "please choose one of the available sections" << endl;
     return false;
 }
-bool Product::setSellerName(Seller *seller)
+bool Product::setSeller(Seller *seller)
 {
-    *p_seller=Seller(*seller);
+    p_seller=new Seller(*seller);
     return true;
 }
 
@@ -89,7 +101,7 @@ unsigned int Product::getSerialNumber() const
 {
     return p_serialNumber;
 }
-Seller *Product::getSellerName() const
+Seller *Product::getSeller() const
 {
     return p_seller;
 }
