@@ -1,24 +1,41 @@
-<<<<<<< HEAD
-#include "../include/seller.h"
-Seller::Seller(char *userName, Address *address, const char *password, Product **stockArray, FeedBack **feedbacksArray)
-=======
 #include "../include/includes.h"
-Seller::Seller(char *userName, Address* address,const char *password, Product **stockArray, FeedBack **feedbacksArray)
->>>>>>> Maor
+Seller::Seller(char *userName, Address *address, const char *password, Product **stockArray, 
+FeedBack **feedbacksArray,unsigned int s_size=0,unsigned int f_size=0)
 {
     setUserName(userName);
     setAddress(address);
     setPassword(password);
     setStockArray(stockArray);
     setFeedbacksArray(feedBack_array);
+     stock_array_length = s_size;
+    feedbacks_array_length = f_size;
 }
 Seller::Seller(const Seller &other)
 {
     setUserName(other.userName);
     setAddress(other.address);
-    setPassword(other.password); //Might need to fix that.
+    setPassword(other.password);
     setStockArray(other.s_stock);
     setFeedbacksArray(other.feedBack_array);
+    stock_array_length = other.stock_array_length;
+    feedbacks_array_length = other.feedbacks_array_length;
+}
+Seller::Seller(Seller &&other)
+{
+    this->userName = other.userName;
+    this->address = other.address;
+    this->password = other.password;
+    this->s_stock = other.s_stock;
+    this->feedBack_array=other.feedBack_array;
+    this->stock_array_length = other.stock_array_length;
+    this->feedbacks_array_length = other.feedbacks_array_length;
+
+    other.userName=nullptr;
+    other.s_stock=nullptr;
+    other.password=nullptr;
+    other.address=nullptr;
+    other.feedBack_array=nullptr;
+}
 }
 Seller::~Seller()
 {
@@ -34,19 +51,11 @@ Seller::~Seller()
 bool Seller::setUserName(const char *givenUserName)
 {
     userName = new char[strlen(givenUserName) + 1];
-<<<<<<< HEAD
     strcpy(userName, givenUserName);
     return true;
 }
 
 bool Seller::setAddress(Address *givenAddress)
-=======
-    strcpy(userName,givenUserName);
-    return true;
-}
-
-bool Seller::setAddress(Address* givenAddress)
->>>>>>> Maor
 {
     address = new Address(*givenAddress);
     return true;
@@ -71,31 +80,18 @@ bool Seller::setStockArray(Product **given_product_array)
         s_stock[i] = new Product(*given_product_array[i]);
     return true;
 }
-<<<<<<< HEAD
 bool Seller::setFeedbacksArray(FeedBack **given_feedBacks_array)
 {
     feedBack_array = new FeedBack *[feedbacks_array_length];
     for (int i = 0; i < feedbacks_array_length; i++)
         feedBack_array[i] = new FeedBack(*given_feedBacks_array[i]);
-=======
-FeedBack Seller::setFeedback(FeedBack* given_feedBack)
-{
-    FeedBack feedback(*given_feedBack);
-    return feedback;
-}
-bool Seller::setFeedbacksArray(FeedBack **given_feedBacks_array)
-{
-    feedBack_array = new FeedBack*[feedbacks_array_length];
-    for (int i = 0; i < feedbacks_array_length; i++)
-        feedBack_array[i]=new FeedBack(*given_feedBacks_array[i]);
->>>>>>> Maor
     return true;
 }
 const char *Seller::getUserName() const
 {
     return userName;
 }
-Address* Seller::getAddress() const
+Address *Seller::getAddress() const
 {
-    return *address;
+    return this->address;
 }

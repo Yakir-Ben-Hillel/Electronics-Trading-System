@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string.h>
 using namespace std;
+#pragma warning (disable:4996)
 
 #include "./include/order.h"
 #include "./include/address.h"

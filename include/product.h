@@ -17,16 +17,17 @@ public:
 	Product() = default;
 	Product(const char *name, eCategory category,Seller* given_seller_name, unsigned int serial = 0,float price = 0);
 	Product(const Product &other);
+	Product(Product &&other);
 	~Product();
 	//seters
 	bool setName(const char *name);
 	bool setPrice(float price);
 	bool setSerialNumber(unsigned int serial);
 	bool setCategory(eCategory category);
-	bool setSellerName(Seller* seller);
+	bool setSeller(Seller* seller);
 	//geters
 	const char *getName() const;
-	Seller* getSellerName() const;
+	Seller* getSeller() const;
 	float getPrice() const;
 	eCategory getCategory() const;
 	unsigned int getSerialNumber() const;

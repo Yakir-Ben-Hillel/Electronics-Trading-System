@@ -10,8 +10,10 @@ class Seller
 public:
 	//Constructors && Distructors
 	Seller() = default;
-	Seller(char *userName, Address* address,const char *password, Product **stockArray, FeedBack **feedbacksArray);
+	Seller(char *userName, Address* address,const char *password, Product **stockArray, 
+	FeedBack **feedbacksArray,unsigned int s_size=0,unsigned int f_size=0);
 	Seller(const Seller &other);
+	Seller(Seller &&other);
 	~Seller();
 	//Getters Functions.
 	const char *getUserName() const;
@@ -30,10 +32,10 @@ public:
 private:
 	char *userName;
 	Address* address;//pointer to class address
-	char password[11]; //max length of password is 10 chars,can be letter or a number
-	Product **s_stock;
+	char* password; //max length of password is 10 chars,can be letter or a number
+	Product **s_stock;//array of all product this seller sells.
 	unsigned int stock_array_length = 0;
-	FeedBack **feedBack_array;
+	FeedBack **feedBack_array;//array of feedback from all of his buyers.
 	unsigned int feedbacks_array_length = 0;
 };
 
