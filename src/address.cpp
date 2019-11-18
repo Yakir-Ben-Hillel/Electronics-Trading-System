@@ -1,6 +1,6 @@
 #include "../include/system.h"
 
-Address::Address(unsigned int ApartmentNumber,const char* cityName ,const char *streetName)
+Address::Address(unsigned int apartmentNumber,const char* cityName ,const char *streetName)
 {
     setCityName(cityName);
     setStreetName(streetName);

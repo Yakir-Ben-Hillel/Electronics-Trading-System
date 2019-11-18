@@ -43,9 +43,10 @@ Seller::~Seller()
     delete[] feedBack_array;
     for (int i = 0; i < stock_array_length; i++)
         delete s_stock[i];
+    delete this->address;
     delete[] s_stock;
-    delete userName;
-    delete password;
+    delete[] userName;
+    delete[] password;
 }
 bool Seller::setUserName(const char *givenUserName)
 {
@@ -56,7 +57,7 @@ bool Seller::setUserName(const char *givenUserName)
 
 bool Seller::setAddress(Address *givenAddress)
 {
-    address = new Address(*givenAddress);
+    address = givenAddress;
     return true;
 }
 bool Seller::setPassword(const char *givenPassword)

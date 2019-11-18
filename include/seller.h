@@ -10,8 +10,8 @@ class Seller
 public:
 	//Constructors && Distructors
 	Seller() = default;
-	Seller(char *userName, Address *address, const char *password, Product **stockArray,
-		   FeedBack **feedbacksArray, unsigned int s_size = 0, unsigned int f_size = 0);
+	Seller(char *userName, Address *address, const char *password, Product **stockArray = nullptr,
+		   FeedBack **feedbacksArray = nullptr, unsigned int s_size = 0, unsigned int f_size = 0);
 	Seller(const Seller &other);
 	Seller(Seller &&other);
 	~Seller();
