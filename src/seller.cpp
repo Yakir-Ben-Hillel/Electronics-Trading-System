@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-#include "../include/seller.h"
-Seller::Seller(char *userName, Address *address, const char *password, Product **stockArray, FeedBack **feedbacksArray)
-=======
-#include "../include/includes.h"
+#include "../include/system.h"
 Seller::Seller(char *userName, Address* address,const char *password, Product **stockArray, FeedBack **feedbacksArray)
->>>>>>> Maor
 {
     setUserName(userName);
     setAddress(address);
@@ -34,19 +29,11 @@ Seller::~Seller()
 bool Seller::setUserName(const char *givenUserName)
 {
     userName = new char[strlen(givenUserName) + 1];
-<<<<<<< HEAD
-    strcpy(userName, givenUserName);
-    return true;
-}
-
-bool Seller::setAddress(Address *givenAddress)
-=======
     strcpy(userName,givenUserName);
     return true;
 }
 
 bool Seller::setAddress(Address* givenAddress)
->>>>>>> Maor
 {
     address = new Address(*givenAddress);
     return true;
@@ -71,13 +58,6 @@ bool Seller::setStockArray(Product **given_product_array)
         s_stock[i] = new Product(*given_product_array[i]);
     return true;
 }
-<<<<<<< HEAD
-bool Seller::setFeedbacksArray(FeedBack **given_feedBacks_array)
-{
-    feedBack_array = new FeedBack *[feedbacks_array_length];
-    for (int i = 0; i < feedbacks_array_length; i++)
-        feedBack_array[i] = new FeedBack(*given_feedBacks_array[i]);
-=======
 FeedBack Seller::setFeedback(FeedBack* given_feedBack)
 {
     FeedBack feedback(*given_feedBack);
@@ -88,7 +68,6 @@ bool Seller::setFeedbacksArray(FeedBack **given_feedBacks_array)
     feedBack_array = new FeedBack*[feedbacks_array_length];
     for (int i = 0; i < feedbacks_array_length; i++)
         feedBack_array[i]=new FeedBack(*given_feedBacks_array[i]);
->>>>>>> Maor
     return true;
 }
 const char *Seller::getUserName() const
@@ -97,5 +76,5 @@ const char *Seller::getUserName() const
 }
 Address* Seller::getAddress() const
 {
-    return *address;
+    return address;
 }
