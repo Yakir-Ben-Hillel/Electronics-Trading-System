@@ -1,7 +1,4 @@
-#include "../include/address.h"
-#include <iostream>
-#include <string.h>
-using namespace std;
+#include "../include/includes.h"
 
 Address::Address(unsigned int ApartmentNumber,const char* cityName=nullptr ,const char *streetName=nullptr)
 {

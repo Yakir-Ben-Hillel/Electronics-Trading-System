@@ -1,17 +1,5 @@
-#pragma once
 #ifndef __System_H
 #define __System_H
-
-#include <iostream>
-#include <string.h>
-#include "address.h"
-#include "product.h"
-#include "customer.h"
-#include "seller.h"
-#include "FeedBack.h"
-#include "Date.h"
-using namespace std;
-
 
 class System
 {

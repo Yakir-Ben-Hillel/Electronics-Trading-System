@@ -1,9 +1,4 @@
-#include "../include/FeedBack.h"
-#include "../include/Date.h"
-#include "../include/customer.h"
-#include <iostream>
-#include <string.h>
-using namespace std;
+#include "../include/includes.h"
 
 
 FeedBack::FeedBack(const char *note, efeedback givenrating, Customer *customer_data, Date *curr_date)
