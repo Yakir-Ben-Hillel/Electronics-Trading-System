@@ -5,5 +5,6 @@
 int main()
 {
     Seller *seller = new Seller();
+    cout<<seller->getAddress()<<endl;
     delete seller;
 }

@@ -1,6 +1,6 @@
 #include "../include/system.h"
 
-Order::Order(Product **order_list, int price=0, int size=0)
+Order::Order(Product **order_list, int price, int size)
 {
     setProductList(order_list);
     setPrice(price);

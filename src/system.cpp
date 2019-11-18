@@ -1,18 +1,18 @@
 #include "../include/system.h"
-System::System(const char *name, Customer **customers_array, Seller **sellers_array, unsigned int customers_array_size = 0, unsigned int sellers_array_size = 0)
+System::System(const char *name, Customer **customers_array, Seller **sellers_array, unsigned int customers_array_size, unsigned int sellers_array_size)
 {
     setSystemName(name);
-    setCustomersArray(customers_array);
-    setSellersArray(sellers_array);
+    setCustomersArray((const Customer **)customers_array);
+    setSellersArray((const Seller **)sellers_array);
     setCustomersArraySize(customer_array_size);
     setSellersArraySize(seller_array_size);
 }
 System::System(const System &other)
 {
     setSystemName(other.system_name);
-    setCustomersArray(other.s_customers_array);
+    setCustomersArray((const Customer **)other.s_customers_array);
     setCustomersArraySize(other.customer_array_size);
-    setSellersArray(other.s_sellers_array);
+    setSellersArray((const Seller **)other.s_sellers_array);
     setSellersArraySize(other.seller_array_size);
 }
 System::~System()

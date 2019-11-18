@@ -1,7 +1,7 @@
 #include "../include/system.h"
 
 
-Product::Product(const char *name, eCategory category, Seller *seller, unsigned int serial = 0, float price = 0)
+Product::Product(const char *name, eCategory category, Seller *seller, unsigned int serial, float price)
 {
     setName(name);
     setCategory(category);

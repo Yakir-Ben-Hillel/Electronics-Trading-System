@@ -1,5 +1,5 @@
-#include "../include/includes.h"
-Customer::Customer(const char *username, const char *password, const Address *address, const Product **wishlist, int size = 0)
+#include "../include/system.h"
+Customer::Customer(const char *username, const char *password, const Address *address, const Product **wishlist, int size)
 {
     setName(username);
     setPassword(password);
@@ -13,25 +13,24 @@ Customer::Customer(const Customer &other)
     setName(other.c_user_name);
     setPassword(other.c_password);
     setAddress(other.c_address);
+    setWishList((const Product **)other.c_wishList);
     setSizeWishList(other.c_wish_size);
-    setWishList(other.c_wishList);
 }
 
-Customer::Customer(Customer&& other)
+Customer::Customer(Customer &&other)
 {
-    this->c_user_name=other.c_user_name;
-    this->c_wish_size=other.c_wish_size;
-    this->c_address=other.c_address;
-    this->c_wishList=other.c_wishList;
-    this->c_password=other.c_password;
-    this->orders_history=other.orders_history;
-    
+    this->c_user_name = other.c_user_name;
+    this->c_wish_size = other.c_wish_size;
+    this->c_address = other.c_address;
+    this->c_wishList = other.c_wishList;
+    this->c_password = other.c_password;
+    this->orders_history = other.orders_history;
 
-    other.orders_history=nullptr;
-    other.c_address=nullptr;
-    other.c_password=nullptr;
-    other.c_user_name=nullptr;
-    other.c_wishList=nullptr;
+    other.orders_history = nullptr;
+    other.c_address = nullptr;
+    other.c_password = nullptr;
+    other.c_user_name = nullptr;
+    other.c_wishList = nullptr;
 }
 
 Customer::~Customer()
@@ -107,7 +106,8 @@ const char *Customer::getPassWord() const
     return c_password;
 }
 
-const Product **Customer::getWishList() const
+
+Product **Customer::getWishList() const
 {
     return c_wishList;
 }

@@ -21,20 +21,19 @@ public:
 	bool setPassword(const char *password);
 	bool setWishList(const Product **wishList);
 	bool setSizeWishList(int size);
-	bool setOrder(Order* curr_order);//
-	bool SetOrderArray(Order** order_array);//
-	
+	bool setOrder(Order *curr_order);		 //
+	bool SetOrderArray(Order **order_array); //
 
 	//geters
 	const char *getName() const;
 	const Address *getAddress() const;
 	const char *getPassWord() const;
-	const Product **getWishList() const;
+	Product **getWishList() const;
 	int getSizeWishList() const;
 	int getSizeOfOrder() const;			 //
 	Order *getOrder(int location) const; //
 	Order **getOrderHistory() const;	 //
-	//other methoods
+										 //other methoods
 
 private:
 	char *c_user_name;
