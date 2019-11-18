@@ -11,10 +11,6 @@ int main()
     store->setSystemName(system_name);
     Seller *seller;
     seller = makeSeller();
-
-    cout
-        << seller->getUserName() << endl;
-    cout << seller->getPassword() << endl;
     store->addSellerToArray(seller);
     delete store;
 }
