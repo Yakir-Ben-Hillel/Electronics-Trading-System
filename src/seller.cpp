@@ -63,6 +63,7 @@ bool Seller::setPassword(const char *givenPassword)
 {
     if (strlen(givenPassword) <= 10)
     {
+        password = new char[(strlen(givenPassword) + 1)];
         strcpy(password, givenPassword);
         return true;
     }
@@ -94,6 +95,10 @@ bool Seller::setFeedbacksArray(FeedBack **given_feedBacks_array)
 const char *Seller::getUserName() const
 {
     return userName;
+}
+const char *Seller::getPassword() const
+{
+    return password;
 }
 Address *Seller::getAddress() const
 {

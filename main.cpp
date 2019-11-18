@@ -5,6 +5,7 @@
 int main()
 {
     Seller *seller = new Seller();
-    cout<<seller->getAddress()<<endl;
+    seller->setPassword("y9349931");
+    cout<<seller->getPassword()<<endl;
     delete seller;
 }
