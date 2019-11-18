@@ -1,7 +1,4 @@
-#include "../include/order.h"
-#include "../include/product.h"
-#include <iostream>
-using namespace std;
+#include "../include/includes.h"
 
 Order::Order(Product **order_list, int price, int size)
 {

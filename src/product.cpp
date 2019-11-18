@@ -1,5 +1,4 @@
-#include "../include/product.h"
-#include "../include/seller.h"
+#include "../include/includes.h"
 
 
 Product::Product(const char *name, eCategory category, Seller *seller, unsigned int serial = 0, float price = 0)

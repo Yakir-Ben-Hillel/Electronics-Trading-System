@@ -9,5 +9,9 @@
         "*.tcc": "cpp",
         "type_traits": "cpp"
     },
-    "git.ignoreLimitWarning": true
+    "git.ignoreLimitWarning": true,
+    "cSpell.ignoreWords": [
+        "c'tor",
+        
+    ]
 }

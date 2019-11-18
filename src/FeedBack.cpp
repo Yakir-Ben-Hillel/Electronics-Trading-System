@@ -1,9 +1,4 @@
-#include "../include/FeedBack.h"
-#include "../include/Date.h"
-#include "../include/customer.h"
-#include <iostream>
-#include <string.h>
-using namespace std;
+#include "../include/includes.h"
 
 
 FeedBack::FeedBack(const char *note, efeedback givenrating, Customer *customer_data, Date *curr_date)
@@ -13,12 +8,16 @@ FeedBack::FeedBack(const char *note, efeedback givenrating, Customer *customer_d
     setCustomerName(customer);
     setDateOfFeedBack(curr_date);
 }
-FeedBack::FeedBack(FeedBack &other)
+FeedBack::FeedBack(const FeedBack &other)
 {
     setNotes(other.notes);
     setRating(other.rating);
     setCustomerName(other.customer);
     setDateOfFeedBack(other.date_of_feedback);
+}
+FeedBack::FeedBack(FeedBack &&other)
+{
+    
 }
 FeedBack::~FeedBack()
 {

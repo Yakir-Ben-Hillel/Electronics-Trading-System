@@ -1,6 +1,5 @@
 #ifndef __Seller_H
 #define __Seller_H
-#include "system.h"
 
 class FeedBack;
 class Address;
@@ -17,9 +16,9 @@ public:
 	//Getters Functions.
 	const char *getUserName() const;
 	const char* getPassword() const;
-	Address getAddress() const;
+	Address* getAddress() const;
 	Product **getStock() const;
-	FeedBack *getfeedBacksArray() const;
+	FeedBack **getfeedBacksArray() const;
 	//Setters Functions.
 	bool setUserName(const char *userName);
 	bool setPassword(const char *password);

@@ -1,7 +1,4 @@
-#include "../include/address.h"
-#include <iostream>
-#include <string.h>
-using namespace std;
+#include "../include/includes.h"
 
 Address::Address(unsigned int ApartmentNumber,const char* cityName=nullptr ,const char *streetName=nullptr)
 {
@@ -15,14 +12,14 @@ Address::Address(const Address &other)
     setApartmentNumber(other.apartmentNumber);
     setStreetName(other.streetName);
 }
-Address::Address(const Address &&other)
+Address::Address(Address &&other)
 {
     cityName=other.cityName;
     streetName=other.streetName;
     apartmentNumber=other.apartmentNumber;
 
-    /*other.cityName=nullptr;
-    other.streetName=nullptr;have a problem with these lines*/
+    other.cityName=nullptr;
+    other.streetName=nullptr;
 }
 Address::~Address()
 {
