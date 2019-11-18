@@ -18,7 +18,8 @@ public:
     //constructors and distructors
     FeedBack() = default;
     FeedBack(const char *note, efeedback givenrating, Customer *customer_data, Date *curr_date);
-    FeedBack(FeedBack &other);
+    FeedBack(const FeedBack &other);
+    FeedBack(FeedBack &&other);//need to finish move c'tor
     ~FeedBack();
 
     //seters and geters
@@ -36,7 +37,7 @@ private:
     Customer *customer;
     char *notes;
     FeedBack::efeedback rating;
-    Date *date_of_feedback; //need to do seters and geters and update the constructor
+    Date *date_of_feedback; 
 };
 
 #endif

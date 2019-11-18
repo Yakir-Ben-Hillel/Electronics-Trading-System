@@ -7,7 +7,7 @@ public:
     Address() = default;
     Address(unsigned int ApartmentNumber, const char *cityName = nullptr, const char *streetName = nullptr);
     Address(const Address &other);
-    Address(const Address &&other);
+    Address(Address &&other);
     ~Address();
     bool setCityName(const char *cityName);
     bool setStreetName(const char *streetName);

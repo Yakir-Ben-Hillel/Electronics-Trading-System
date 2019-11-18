@@ -13,12 +13,16 @@ FeedBack::FeedBack(const char *note, efeedback givenrating, Customer *customer_d
     setCustomerName(customer);
     setDateOfFeedBack(curr_date);
 }
-FeedBack::FeedBack(FeedBack &other)
+FeedBack::FeedBack(const FeedBack &other)
 {
     setNotes(other.notes);
     setRating(other.rating);
     setCustomerName(other.customer);
     setDateOfFeedBack(other.date_of_feedback);
+}
+FeedBack::FeedBack(FeedBack &&other)
+{
+    
 }
 FeedBack::~FeedBack()
 {
