@@ -8,7 +8,7 @@
             "name": "g++ build and debug active file",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "program": "${workspaceRoot}/main.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
@@ -23,7 +23,7 @@
                 }
             ],
             "preLaunchTask": "g++ build active file",
-            "miDebuggerPath":  "C:\\mingw-w64\\mingw32\\bin\\gdb.exe"
+            "miDebuggerPath": "C:\\Mingw-w64\\mingw32\\bin\\gdb.exe"
         }
     ]
 }
