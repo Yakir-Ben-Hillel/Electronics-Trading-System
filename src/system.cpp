@@ -78,6 +78,7 @@ bool System::addSellerToArray(Seller *newSeller)
         resizeSellersArray();
     s_sellers_array[seller_array_logical_size] = newSeller;
     seller_array_logical_size++;
+    return true;
 }
 void System::resizeSellersArray()
 {
