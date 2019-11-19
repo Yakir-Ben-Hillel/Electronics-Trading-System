@@ -1,6 +1,6 @@
 *.exe
 *.json
 Makefile
-.vscode
+./.vscode
 .vscode/launch.json
 .vscode/tasks.json
