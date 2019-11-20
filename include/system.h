@@ -40,6 +40,7 @@ public:
 	int getCustomerArraySize();
 	unsigned int getCurrentID();
 	bool addSellerToArray(Seller *seller);
+	bool addCustomerToArray(Customer *customer);
 
 private:
 	char *system_name;
@@ -55,10 +56,16 @@ private:
 	bool setCustomersArrayLogicalSize(const unsigned int newSIze);
 
 	void resizeSellersArray();
+	void resizeCustomersArray();
 };
 void mainMenu();
 Seller *makeSeller();
+Customer *makeCustomer();
 void printOptions();
 void printSellersNames(System *system);
-void makeProduct(System *system);
+void printSellerProducts(Seller *seller);
+void makeProductForSale(System *system);
+void chooseProductToAddToCustomerWishlist(System *system);
+
+
 #endif // !__System_H

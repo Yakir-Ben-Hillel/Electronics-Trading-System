@@ -1,5 +1,7 @@
 #include "../include/system.h"
-Seller::Seller(char *userName, Address *address, const char *password, Product **stockArray, FeedBack **feedbacksArray, unsigned int s_size, unsigned int f_size)
+Seller::Seller(char *userName, Address *address, const char *password,
+               Product **stockArray, FeedBack **feedbacksArray,
+               unsigned int s_size, unsigned int f_size)
 {
     setUserName(userName);
     setAddress(address);
@@ -96,6 +98,10 @@ bool Seller::setFeedbacksArray(FeedBack **given_feedBacks_array)
     for (int i = 0; i < feedbacks_array_physical_length; i++)
         feedBack_array[i] = new FeedBack(*given_feedBacks_array[i]);
     return true;
+}
+Product **Seller::getStock() const
+{
+    return s_stock;
 }
 unsigned int Seller::getStockArraySize()
 {

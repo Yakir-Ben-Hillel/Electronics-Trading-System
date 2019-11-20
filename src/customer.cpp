@@ -1,10 +1,12 @@
 #include "../include/system.h"
-Customer::Customer(const char *username, const char *password, const Address *address, const Product **wishlist, int size)
+Customer::Customer(const char *username, const char *password, Address *address,
+                   const Product **wishlist, unsigned int physicalSize, unsigned int logicalSize)
 {
     setName(username);
     setPassword(password);
     setWishList(wishlist);
-    setSizeWishList(size);
+    setWishListPhysicalSize(physicalSize);
+    setWishListLogicalSize(logicalSize);
     setAddress(address);
 }
 
@@ -14,13 +16,15 @@ Customer::Customer(const Customer &other)
     setPassword(other.c_password);
     setAddress(other.c_address);
     setWishList((const Product **)other.c_wishList);
-    setSizeWishList(other.c_wish_size);
+    setWishListPhysicalSize(other.c_wish_physical_size);
+    setWishListLogicalSize(other.c_wish_logical_size);
 }
 
 Customer::Customer(Customer &&other)
 {
     this->c_user_name = other.c_user_name;
-    this->c_wish_size = other.c_wish_size;
+    this->c_wish_physical_size = other.c_wish_physical_size;
+    this->c_wish_logical_size = other.c_wish_logical_size;
     this->c_address = other.c_address;
     this->c_wishList = other.c_wishList;
     this->c_password = other.c_password;
@@ -38,22 +42,32 @@ Customer::~Customer()
     delete[] c_user_name;
     delete[] c_password;
     delete c_address;
-    for (int i = 0; i < c_wish_size; i++)
+    for (int i = 0; i < c_wish_logical_size; i++)
     {
         delete c_wishList[i];
     }
     delete[] c_wishList;
-    c_wish_size = 0;
+    c_wish_physical_size = c_wish_logical_size = 0;
 }
 
-bool Customer::setSizeWishList(int size)
+bool Customer::setWishListPhysicalSize(unsigned int size)
 {
     if (size < 0)
     {
         cout << "size cannot be negative" << endl;
         return false;
     }
-    c_wish_size = size;
+    c_wish_physical_size = size;
+    return true;
+}
+bool Customer::setWishListLogicalSize(unsigned int size)
+{
+    if (size < c_wish_physical_size)
+    {
+        cout << "logical size cannot be below his physical one" << endl;
+        return false;
+    }
+    c_wish_logical_size = size;
     return true;
 }
 
@@ -64,9 +78,9 @@ bool Customer::setName(const char *userName)
     return true;
 }
 
-bool Customer::setAddress(const Address *address)
+bool Customer::setAddress(Address *address)
 {
-    c_address = new Address(*address);
+    c_address = address;
     return true;
 }
 
@@ -74,6 +88,7 @@ bool Customer::setPassword(const char *password)
 {
     if (strlen(password) <= 10)
     {
+        c_password = new char[strlen(password) + 1];
         strcpy(c_password, password);
         return true;
     }
@@ -83,8 +98,8 @@ bool Customer::setPassword(const char *password)
 
 bool Customer::setWishList(const Product **wishList)
 {
-    c_wishList = new Product *[c_wish_size];
-    for (int i = 0; i < c_wish_size; i++)
+    c_wishList = new Product *[c_wish_physical_size];
+    for (int i = 0; i < c_wish_logical_size; i++)
     {
         c_wishList[i] = new Product(*wishList[i]);
     }
@@ -106,13 +121,35 @@ const char *Customer::getPassWord() const
     return c_password;
 }
 
-
 Product **Customer::getWishList() const
 {
     return c_wishList;
 }
 
-int Customer::getSizeWishList() const
+unsigned int Customer::getWishListPhysicalSize() const
 {
-    return c_wish_size;
+    return c_wish_physical_size;
+}
+unsigned int Customer::getWishListLogicalSize() const
+{
+    return c_wish_logical_size;
+}
+bool Customer::addProductToWishlistArray(Product *new_product)
+{
+    if (c_wish_logical_size == c_wish_physical_size)
+        resizeWishlistArray();
+    c_wishList[c_wish_logical_size] = new_product;
+    c_wish_logical_size++;
+    return true;
+}
+void Customer::resizeWishlistArray()
+{
+    int newSize = this->c_wish_physical_size * 2 + 1;
+    Product **newArray = new Product *[newSize];
+    memcpy(newArray, this->c_wishList, this->c_wish_logical_size * sizeof(Product *));
+    for (int i = 0; i < this->c_wish_logical_size; i++)
+        delete this->c_wishList[i];
+    delete[] this->c_wishList;
+    this->c_wish_physical_size = newSize;
+    this->c_wishList = newArray;
 }

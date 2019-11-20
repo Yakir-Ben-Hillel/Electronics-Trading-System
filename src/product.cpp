@@ -7,7 +7,6 @@ Product::Product(const char *name, eCategory category, Seller *seller, unsigned 
     setSerialNumber(serial);
     setPrice(price);
     setSeller(seller);
-    cout << "in product constructor" << endl; //check its working remove befor uploading
 }
 
 Product::Product(const Product &other)
@@ -18,7 +17,6 @@ Product::Product(const Product &other)
     p_serialNumber = other.p_serialNumber;
     p_category = other.p_category;
     setSeller(other.p_seller);
-    cout << "in copy constructor" << endl; //check its working remove befor uploading
 }
 
 Product::Product(Product &&other)
@@ -36,7 +34,6 @@ Product::Product(Product &&other)
 Product::~Product()
 {
     delete[] p_name;
-    cout << "in product distructor" << endl; //check its working remove befor uploading
 }
 
 bool Product::setName(const char *name)

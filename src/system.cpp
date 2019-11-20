@@ -91,6 +91,26 @@ void System::resizeSellersArray()
     this->seller_array_physical_size = newSize;
     this->s_sellers_array = newArray;
 }
+bool System::addCustomerToArray(Customer *newCustomer)
+{
+    if (this->customer_array_logical_size == this->customer_array_physical_size)
+        resizeCustomersArray();
+    s_customers_array[customer_array_logical_size] = newCustomer;
+    customer_array_logical_size++;
+    return true;
+}
+void System::resizeCustomersArray()
+{
+    int newSize = this->customer_array_physical_size * 2 + 1;
+    Customer **newArray = new Customer *[newSize];
+    memcpy(newArray, this->s_customers_array, this->customer_array_logical_size * sizeof(Seller *));
+    for (int i = 0; i < this->customer_array_logical_size; i++)
+        delete this->s_customers_array[i];
+    delete[] this->s_customers_array;
+    this->customer_array_physical_size = newSize;
+    this->s_customers_array = newArray;
+}
+
 char *System::getSystemName()
 {
     return system_name;

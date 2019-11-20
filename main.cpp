@@ -8,9 +8,12 @@ int main()
     cin.getline(system_name, 19);
     store->setSystemName(system_name);
     Seller *seller;
+    Customer *customer;
     seller = makeSeller();
     store->addSellerToArray(seller);
-    makeProduct(store);
-    printSellersNames(store);
+    makeProductForSale(store);
+    customer = makeCustomer();
+    store->addCustomerToArray(customer);
+    chooseProductToAddToCustomerWishlist(store);
     delete store;
 }
