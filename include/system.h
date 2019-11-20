@@ -38,6 +38,7 @@ public:
 	Seller **getSellersArray();
 	int getSellersArraySize();
 	int getCustomerArraySize();
+	unsigned int getCurrentID();
 	bool addSellerToArray(Seller *seller);
 
 private:
@@ -45,7 +46,6 @@ private:
 	Customer **s_customers_array;
 	int customer_array_physical_size = 0;
 	int customer_array_logical_size = 0;
-
 	Seller **s_sellers_array;
 	int seller_array_physical_size = 0;
 	int seller_array_logical_size = 0;
@@ -58,4 +58,7 @@ private:
 };
 void mainMenu();
 Seller *makeSeller();
+void printOptions();
+void printSellersNames(System *system);
+void makeProduct(System *system);
 #endif // !__System_H

@@ -1,7 +1,5 @@
 //electorincs project by Maor Ben Moshe,ID:316041466 and Yakir Ben Hillel,ID:209509348
 #include "./include/system.h"
-#pragma warning(disable : 4996)
-
 int main()
 {
     System *store = new System();
@@ -12,5 +10,7 @@ int main()
     Seller *seller;
     seller = makeSeller();
     store->addSellerToArray(seller);
+    makeProduct(store);
+    printSellersNames(store);
     delete store;
 }
