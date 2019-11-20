@@ -1,9 +1,6 @@
 #include "../include/system.h"
 
 void mainMenu();
-void printOptions();
-void printSellersNames(System *system);
-Seller *makeSeller();
 void printOptions()
 {
     cout << "***************************************" << endl;
@@ -42,6 +39,7 @@ Address *makeAddress()
     cin.getline(street_name, 20);
     cout << "Please insert your apartment number :";
     cin >> apartment_number;
+    cin.ignore(256, '\n');
     new_address = new Address(apartment_number, city_name, street_name);
     return new_address;
 }
@@ -58,7 +56,7 @@ Seller *makeSeller()
     new_seller = new Seller(username, address, password);
     return new_seller;
 }
-void makeProduct(System *system)
+void makeProductForSale(System *system)
 {
     char x;
     Product *new_product;
@@ -70,7 +68,6 @@ void makeProduct(System *system)
     unsigned int seller_index;
     bool isCategoryValid = false;
     cout << "Please choose a name: ";
-    cin >> x;
     cin.getline(product_name, 10);
     while (!isCategoryValid)
     {
@@ -113,6 +110,7 @@ void makeProduct(System *system)
         printSellersNames(system);
         cout << "Please choose yourself from the given list: ";
         cin >> seller_index;
+        cin.ignore(256, '\n');
         seller_index--;
         Seller **sellers_array = system->getSellersArray();
         seller_of_product = sellers_array[seller_index];
@@ -121,10 +119,68 @@ void makeProduct(System *system)
     UUID++;
     seller_of_product->addProductToStockArray(new_product);
 }
+Customer *makeCustomer()
+{
+    int x;
+    Customer *new_customer;
+    Address *address;
+    char username[11], password[11];
+    cout << "Please choose an username: ";
+    cin.getline(username, 10);
+    cout << "Please choose a password: ";
+    cin.getline(password, 10);
+    address = makeAddress();
+    new_customer = new Customer(username, password, address);
+    return new_customer;
+}
+void printCustomersNames(System *system)
+{
+    unsigned int index = 1;
+    Customer **customer_array = system->getCostumeArray();
+    for (int i = 0; i < system->getCustomerArraySize(); i++)
+    {
+        char name[11];
+        strcpy(name, customer_array[i]->getName());
+        printf("%d) %s\n", index, name);
+        index++;
+    }
+}
+void chooseProductToAddToCustomerWishlist(System *system)
+{
+    unsigned int customer_index, seller_index, product_index;
+    Seller **sellers_array = system->getSellersArray();
+    Product **product_array = nullptr;
+    Customer **customers_array = system->getCostumeArray();
+    do
+    {
+        printCustomersNames(system);
+        cout << "Please choose the customer you want to use: ";
+        cin >> customer_index;
+        customer_index--;
+    } while (!(customer_index <= system->getCustomerArraySize() && customer_index >= 0));
 
+    do
+    {
+        printSellersNames(system);
+        cout << "Please choose a seller in-order to view his products: ";
+        cin >> seller_index;
+        seller_index--;
+    } while (!(seller_index <= system->getSellersArraySize() && seller_index >= 0));
+    Seller *chosen_seller = sellers_array[seller_index];
+    do
+    {
+        printSellerProducts(chosen_seller);
+        cout << endl
+             << "Please choose the product you want to add into your wishlist: ";
+        cin >> product_index;
+        product_index--;
+    } while (!(product_index <= chosen_seller->getStockArraySize() && product_index >= 0));
+    product_array = chosen_seller->getStock();
+    customers_array[customer_index]->addProductToWishlistArray(product_array[product_index]);
+}
 void printSellersNames(System *system)
 {
-    int index = 1;
+    unsigned int index = 1;
     Seller **sellers_array = system->getSellersArray();
     for (int i = 0; i < system->getSellersArraySize(); i++)
     {
@@ -134,14 +190,14 @@ void printSellersNames(System *system)
         index++;
     }
 }
-// void resize() {
-//     size_t newSize = size * 2;
-//     int* newArr = new int[newSize];
-
-//     memcpy( newArr, arr, size * sizeof(int) );
-
-//     size = newSize;
-//     delete [] arr;
-//     arr = newArr;
-// }
-//Resize algorithm structure.
+void printSellerProducts(Seller *seller)
+{
+    int length = seller->getStockArraySize();
+    Product **products_array = seller->getStock();
+    Product *product = nullptr;
+    for (int i = 0; i < length; i++)
+    {
+        product = products_array[i];
+        printf("%d) %s", i + 1, product->getName());
+    }
+}

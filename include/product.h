@@ -15,7 +15,8 @@ public:
 	};
 	//constructors&&distructors
 	Product() = default;
-	Product(const char *name, eCategory category,Seller* given_seller_name, unsigned int serial = 0,float price = 0);
+	Product(const char *name, eCategory category, Seller *given_seller_name,
+			unsigned int serial = 0, float price = 0);
 	Product(const Product &other);
 	Product(Product &&other);
 	~Product();
@@ -24,10 +25,10 @@ public:
 	bool setPrice(float price);
 	bool setSerialNumber(unsigned int serial);
 	bool setCategory(eCategory category);
-	bool setSeller(Seller* seller);
+	bool setSeller(Seller *seller);
 	//geters
 	const char *getName() const;
-	Seller* getSeller() const;
+	Seller *getSeller() const;
 	float getPrice() const;
 	eCategory getCategory() const;
 	unsigned int getSerialNumber() const;
@@ -37,7 +38,7 @@ private:
 	char *p_name;
 	float p_price;
 	unsigned int p_serialNumber;
-	Seller* p_seller;
+	Seller *p_seller;
 };
 
 #endif
