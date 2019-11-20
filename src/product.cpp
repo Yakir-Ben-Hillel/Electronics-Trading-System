@@ -1,6 +1,5 @@
 #include "../include/system.h"
 
-
 Product::Product(const char *name, eCategory category, Seller *seller, unsigned int serial, float price)
 {
     setName(name);
@@ -24,20 +23,19 @@ Product::Product(const Product &other)
 
 Product::Product(Product &&other)
 {
-    this->p_seller=other.p_seller;
-    this->p_name=other.p_name;
-    this->p_category=other.p_category;
-    this->p_price=other.p_price;
-    this->p_serialNumber=other.p_serialNumber;
+    this->p_seller = other.p_seller;
+    this->p_name = other.p_name;
+    this->p_category = other.p_category;
+    this->p_price = other.p_price;
+    this->p_serialNumber = other.p_serialNumber;
 
-    other.p_seller=nullptr;
-    other.p_name=nullptr;
+    other.p_seller = nullptr;
+    other.p_name = nullptr;
 }
 
 Product::~Product()
 {
     delete[] p_name;
-    delete p_seller;
     cout << "in product distructor" << endl; //check its working remove befor uploading
 }
 
@@ -78,7 +76,7 @@ bool Product::setCategory(eCategory category)
 }
 bool Product::setSeller(Seller *seller)
 {
-    p_seller=new Seller(*seller);
+    p_seller = seller;
     return true;
 }
 

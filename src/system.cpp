@@ -78,6 +78,7 @@ bool System::addSellerToArray(Seller *newSeller)
         resizeSellersArray();
     s_sellers_array[seller_array_logical_size] = newSeller;
     seller_array_logical_size++;
+    return true;
 }
 void System::resizeSellersArray()
 {
@@ -90,7 +91,6 @@ void System::resizeSellersArray()
     this->seller_array_physical_size = newSize;
     this->s_sellers_array = newArray;
 }
-
 char *System::getSystemName()
 {
     return system_name;
