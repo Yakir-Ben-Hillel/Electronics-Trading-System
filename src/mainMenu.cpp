@@ -45,8 +45,8 @@ Address *makeAddress()
 }
 Seller *makeSeller()
 {
-    Seller *new_seller;
-    Address *address;
+    Seller *new_seller=nullptr;
+    Address *address=nullptr;
     char username[11], password[11];
     cout << "Please choose an username: ";
     cin.getline(username, 10);

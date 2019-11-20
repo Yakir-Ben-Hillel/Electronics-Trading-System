@@ -2,9 +2,9 @@
 Seller::Seller(char *userName, Address *address, const char *password,
                Product **stockArray, FeedBack **feedbacksArray,
                unsigned int s_size, unsigned int f_size)
+               :address(address)
 {
     setUserName(userName);
-    setAddress(address);
     setPassword(password);
     setStockArray(stockArray);
     setFeedbacksArray(feedBack_array);

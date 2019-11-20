@@ -22,8 +22,8 @@ public:
 	bool setAddress(Address *address);
 	bool setPassword(const char *password);
 	bool setWishList(const Product **wishList);
-	bool setOrder(Order *curr_order);		 //
-	bool SetOrderArray(Order **order_array); //
+	bool setOrder(Order *curr_order);		 //need to do the same as wish list realloc
+	bool SetOrderArray(Order **order_array); //need to do the same as wish list realloc
 	bool addProductToWishlistArray(Product *new_product);
 
 	//geters
@@ -34,10 +34,10 @@ public:
 	unsigned int getWishListPhysicalSize() const;
 	unsigned int getWishListLogicalSize() const;
 
-	int getSizeOfOrder() const;			 //
-	Order *getOrder(int location) const; //
-	Order **getOrderHistory() const;	 //
-										 //other methoods
+	int getSizeOfOrder() const;			 
+	Order *getOrder(int location) const; 
+	Order **getOrderHistory() const;	 
+	
 
 private:
 	bool setWishListPhysicalSize(unsigned int physicalSize);

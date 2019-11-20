@@ -2,7 +2,7 @@
 
 Order::Order(Product **order_list, int price, int size)
 {
-    setProductList(order_list);
+    setProductList(order_products);
     setPrice(price);
     setSize(size);
 }
@@ -23,7 +23,7 @@ Order::~Order()
 {
     for (int i = 0; i < this->size_of_list; i++)
     {
-        delete[](order_products)[i];
+        delete (order_products)[i];
     }
     delete[] order_products;
 }

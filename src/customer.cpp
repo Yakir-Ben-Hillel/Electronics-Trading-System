@@ -1,13 +1,13 @@
 #include "../include/system.h"
 Customer::Customer(const char *username, const char *password, Address *address,
                    const Product **wishlist, unsigned int physicalSize, unsigned int logicalSize)
+    : c_address(address)
 {
     setName(username);
     setPassword(password);
     setWishList(wishlist);
     setWishListPhysicalSize(physicalSize);
     setWishListLogicalSize(logicalSize);
-    setAddress(address);
 }
 
 Customer::Customer(const Customer &other)
@@ -119,6 +119,21 @@ const Address *Customer::getAddress() const
 const char *Customer::getPassWord() const
 {
     return c_password;
+}
+
+Order **Customer::getOrderHistory() const
+{
+    return this->orders_history;
+}
+
+Order *Customer::getOrder(int location) const
+{
+    return this->orders_history[location];
+}
+
+int Customer::getSizeOfOrder() const
+{
+    return order_logical_size;
 }
 
 Product **Customer::getWishList() const
