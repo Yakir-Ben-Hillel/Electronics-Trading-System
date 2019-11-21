@@ -7,23 +7,28 @@ class Order
 {
 public:
     Order() = default;
-    Order(Product **order_list, int price=0, int size=0);
+    Order(Product **order_list, int price = 0,
+          unsigned int o_list_physical_size = 0, unsigned int o_list_logical_size = 0);
     Order(const Order &other);
-    Order(Order &&other);//
+    Order(Order &&other); //
     ~Order();
 
     bool setPrice(int price_of_order);
     bool setProductList(Product **order_list);
-    bool setSize(int size);
-
+    bool setPhysicalSize(unsigned int physical_size);
+    bool setLogicalSize(unsigned int logical_size);
+    bool addProductToOrderList(Product *new_product);
     int getPrice() const;
     Product **getList() const;
-    int getSize() const;
+    unsigned int getPhysicalSize() const;
+    unsigned int getLogicalSize() const;
 
 private:
-    int price_of_order=0;
+    void resizeOrderList();
+    int price_of_order = 0;
     Product **order_products; //pointer to array of products we have already bought.
-    int size_of_list = 0;
+    unsigned int o_list_physical_size = 0;
+    unsigned int o_list_logical_size = 0;
 };
 
 #endif

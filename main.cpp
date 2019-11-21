@@ -3,9 +3,8 @@
 int main()
 {
     System *store = new System();
-    char system_name[20];
+    char system_name[20] = "trading-app";
     cout << "Please choose a name for your system: ";
-    cin.getline(system_name, 19);
     store->setSystemName(system_name);
     Seller *seller;
     Customer *customer;
