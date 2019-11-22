@@ -40,6 +40,7 @@ public:
 	int getSellersArraySize();
 	int getCustomerArraySize();
 	unsigned int getCurrentID();
+	//other methoods
 	bool addSellerToArray(Seller *seller);
 	bool addCustomerToArray(Customer *customer);
 	void mainMenu();
@@ -68,6 +69,7 @@ private:
 	Seller **s_sellers_array;
 	int seller_array_physical_size = 0;
 	int seller_array_logical_size = 0;
+	//private methoods
 	bool setSellersArrayPhysicalSize(const unsigned int newSize);
 	bool setCustomersArrayPhysicalSize(const unsigned int newSIze);
 	bool setSellersArrayLogicalSize(const unsigned int newSize);
