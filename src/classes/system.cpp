@@ -1,5 +1,6 @@
 #include "../../include/system.h"
-System::System(Customer **customers_array, Seller **sellers_array,
+System::System(Customer **customers_array, Customer *logged_in_customer,
+               Seller *logged_in_seller, Seller **sellers_array,
                unsigned int customers_array_physical_size,
                unsigned int customers_array_logical_size,
                unsigned int sellers_array_physical_size,
@@ -111,9 +112,17 @@ Customer **System::getCostumeArray()
 {
     return s_customers_array;
 }
+Customer *System::getLoggedInCustomer() const
+{
+    return logged_in_customer;
+}
 Seller **System::getSellersArray()
 {
     return s_sellers_array;
+}
+Seller *System::getLoggedInSeller() const
+{
+    return logged_in_seller;
 }
 int System::getSellersArraySize()
 {

@@ -1,38 +1,55 @@
 #include "../../include/system.h"
-void mainMenu();
 
-void printOpening()
+void System::mainMenu()
 {
-    cout << "***************************************" << endl;
-    cout << "***************************************" << endl;
-    cout << " #########   ##    ##    ########     ########" << endl;
-    cout << "##           ##    ##   ##      ##    ##    ##" << endl;
-    cout << " ##          ##    ##  ##        ##   ##   ##" << endl;
-    cout << " #########   ########  ##        ##   ######" << endl;
-    cout << "        ##   ##    ##   ##      ##    ##" << endl;
-    cout << "       ##    ##    ##    ########     ##" << endl;
-    cout << " #######     ##    ##                 ##" << endl;
-    cout << "*****************************************" << endl;
-    cout << "*****************************************" << endl;
-    cout << endl;
-}
-void printOptions()
-{
-    cout << "1) Add a Customer." << endl;
-    cout << "2) Add a Seller." << endl;
-    cout << "3)Add an new product to a Seller." << endl;
-    cout << "4) Add a Feedback to a Seller." << endl;
-    cout << "5) Add a Product to a Customer Wishlist." << endl;
-    cout << "Please insert the number of your chosen option" << endl;
-}
-Address *makeAddress();
-void mainMenu(System *system)
-{
-    printOptions();
     bool isFinished = false;
+    unsigned int option;
+    printOpening();
+    while (!isFinished)
+    {
+        if (this->logged_in_customer == nullptr && this->logged_in_seller == nullptr)
+        { //Both are nullptr.
+            printOptionsAsGuest();
+            cin >> option;
+            switch (option)
+            {
+            case 1:
+                this->login();
+                break;
+            case 2:
+                this->signup();
+                break;
+            case 3:
+                this->printCustomersNames();
+                break;
+            case 4:
+                this->printSellersNames();
+            case 5:
+                exit(1);
+            default:
+                break;
+            }
+        }
+        else if (this->logged_in_customer != nullptr)
+        {
+            printOptionsAsCustomer();
+            cin >> option;
+            switch (option)
+            {
+            case 1:
+                this->chooseProductToAddToCustomerWishlist();
+                break;
+            // case 2:
+            //     this->/*addFeedbackToSeller*/
+            //         break;
+            default:
+                break;
+            }
+        }
+    }
 }
 
-Address *makeAddress()
+Address *System::makeAddress()
 {
     Address *new_address = nullptr;
     char city_name[11], street_name[21];
@@ -137,18 +154,6 @@ Customer *System::makeCustomer()
     new_customer = new Customer(username, password, address);
     return new_customer;
 }
-void System::printCustomersNames()
-{
-    unsigned int index = 1;
-    Customer **customer_array = this->getCostumeArray();
-    for (int i = 0; i < this->getCustomerArraySize(); i++)
-    {
-        char name[11];
-        strcpy(name, customer_array[i]->getName());
-        printf("%d) %s\n", index, name);
-        index++;
-    }
-}
 void System::chooseProductToAddToCustomerWishlist()
 {
     unsigned int customer_index, seller_index, product_index;
@@ -182,29 +187,6 @@ void System::chooseProductToAddToCustomerWishlist()
     product_array = chosen_seller->getStock();
     customers_array[customer_index]->addProductToWishlistArray(product_array[product_index]);
 }
-void System::printSellersNames()
-{
-    unsigned int index = 1;
-    Seller **sellers_array = this->getSellersArray();
-    for (int i = 0; i < this->getSellersArraySize(); i++)
-    {
-        char name[11];
-        strcpy(name, sellers_array[i]->getUserName());
-        printf("%d) %s\n", index, name);
-        index++;
-    }
-}
-void Seller::printSellerProducts()
-{
-    int length = this->getStockArraySize();
-    Product **products_array = this->getStock();
-    Product *product = nullptr;
-    for (int i = 0; i < length; i++)
-    {
-        product = products_array[i];
-        printf("%d) %s", i + 1, product->getName());
-    }
-}
 void System::makeOrder()
 {
     unsigned int customer_index;
@@ -217,4 +199,130 @@ void System::makeOrder()
         cin >> customer_index;
         customer_index--;
     } while (!(customer_index <= this->getCustomerArraySize() && customer_index >= 0));
+}
+void System::login()
+{
+    unsigned int chosen_type;
+    do
+    {
+        cout << "Are you a Customer or a Seller?" << endl;
+        cout << "1) Customer" << endl;
+        cout << "2) Seller" << endl;
+        cin >> chosen_type;
+        cin.ignore(256, '\n');
+        if (chosen_type < 1 || chosen_type > 2)
+            cout << "Input invalid please try again." << endl;
+    } while (chosen_type < 1 || chosen_type > 2);
+    if (chosen_type == 1)
+        customerLogin();
+    else
+        sellerLogin();
+}
+void System::signup()
+{
+    unsigned int chosen_type;
+    do
+    {
+        cout << "What do you want to signup as?" << endl;
+        cout << "1) Customer" << endl;
+        cout << "2) Seller" << endl;
+        cin >> chosen_type;
+        cin.ignore(256, '\n');
+        if (chosen_type < 1 || chosen_type > 2)
+            cout << "Input invalid please try again." << endl;
+    } while (chosen_type < 1 || chosen_type > 2);
+    if (chosen_type == 1)
+        this->makeCustomer();
+    else
+        this->makeSeller();
+}
+void System::customerLogin()
+{
+    if (this->customer_array_logical_size != 0)
+    {
+        char username[11], password[11];
+        cout << "Please enter your Username" << endl;
+        cin.getline(username, 10);
+        int i = 0;
+        bool isFinishedSearch = false;
+        while (isFinishedSearch == false)
+        {
+            if (s_customers_array[i]->getName() == username)
+            {
+                bool isMatch = false;
+                bool isExitedByWill = false;
+
+                isFinishedSearch = true;
+                do
+                {
+                    cout << "Please insert your Password, write 'back' in any given time to go main menu." << endl;
+                    cin.getline(password, 10);
+                    if (strcmp(password, "back") == 0)
+                        isExitedByWill = true;
+                    else if (strcmp(password, s_customers_array[i]->getPassWord()) == 0)
+                    {
+                        this->logged_in_customer = s_customers_array[i];
+                        this->logged_in_seller = nullptr;
+                        isMatch = true;
+                    }
+                    else
+                    {
+                        cout << "Password incorrect please try again." << endl;
+                    }
+
+                } while (isMatch == false && isFinishedSearch == false);
+            }
+            i++;
+        }
+    }
+    else
+    {
+        cout << "There are no Customers Available" << endl;
+        system("pause");
+    }
+}
+void System::sellerLogin()
+{
+    if (this->seller_array_logical_size != 0)
+    {
+        char username[11], password[11];
+        cout << "Please enter your Username" << endl;
+        cin.getline(username, 10);
+        int i = 0;
+        bool isFinishedSearch = false;
+        while (isFinishedSearch == false)
+        {
+            if (s_sellers_array[i]->getUserName() == username)
+            {
+                bool isMatch = false;
+                bool isExitedByWill = false;
+
+                isFinishedSearch = true;
+                do
+                {
+                    cout << "Please insert your Password, write 'back' in any given time to go main menu." << endl;
+                    cin.getline(password, 10);
+                    if (strcmp(password, "back") == 0)
+                        isExitedByWill = true;
+                    else if (strcmp(password, s_sellers_array[i]->getPassword()) == 0)
+                    {
+                        this->logged_in_seller = s_sellers_array[i];
+                        this->logged_in_customer = nullptr;
+                        isMatch = true;
+                    }
+                    else
+                    {
+                        cout << "Password incorrect please try again." << endl;
+                    }
+
+                } while (isMatch == false && isFinishedSearch == false);
+            }
+            i++;
+        }
+    }
+    else
+    {
+        cout << "There are no Sellers Available" << endl;
+        system("pause");
+    }
 }

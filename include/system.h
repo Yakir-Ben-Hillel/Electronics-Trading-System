@@ -20,7 +20,8 @@ class System
 public:
 	//Constructors && Distructors
 	//In my option the user should not set arrays sizes by himself.-Yakir
-	System(Customer **customers_array = nullptr, Seller **sellers_array = nullptr,
+	System(Customer **customers_array = nullptr, Customer *logged_in_customer = nullptr,
+		   Seller *logged_in_seller = nullptr, Seller **sellers_array = nullptr,
 		   unsigned int customers_array_physical_size = 0,
 		   unsigned int customers_array_logical_size = 0,
 		   unsigned int sellers_array_physical_size = 0,
@@ -34,6 +35,8 @@ public:
 	const char *getSystemName() const;
 	Customer **getCostumeArray();
 	Seller **getSellersArray();
+	Customer *getLoggedInCustomer() const;
+	Seller *getLoggedInSeller() const;
 	int getSellersArraySize();
 	int getCustomerArraySize();
 	unsigned int getCurrentID();
@@ -41,18 +44,27 @@ public:
 	bool addCustomerToArray(Customer *customer);
 	void mainMenu();
 	Seller *makeSeller();
+	Address *makeAddress();
 	Customer *makeCustomer();
 	void printCustomersNames();
-	void printOptions();
+	void printOptionsAsGuest();
 	void printSellersNames();
 	void makeProductForSale();
 	void chooseProductToAddToCustomerWishlist();
 	void makeOrder();
+	void login();
+	void signup();
+	void printOpening();
+	void printOptionsAsCustomer();
+	void printOptionsAsSeller();
+
 private:
 	const char system_name[24] = "Electronic Trade System";
+	Customer *logged_in_customer;
 	Customer **s_customers_array;
 	int customer_array_physical_size = 0;
 	int customer_array_logical_size = 0;
+	Seller *logged_in_seller;
 	Seller **s_sellers_array;
 	int seller_array_physical_size = 0;
 	int seller_array_logical_size = 0;
@@ -60,6 +72,8 @@ private:
 	bool setCustomersArrayPhysicalSize(const unsigned int newSIze);
 	bool setSellersArrayLogicalSize(const unsigned int newSize);
 	bool setCustomersArrayLogicalSize(const unsigned int newSIze);
+	void customerLogin();
+	void sellerLogin();
 
 	void resizeSellersArray();
 	void resizeCustomersArray();

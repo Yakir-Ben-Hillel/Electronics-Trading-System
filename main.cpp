@@ -4,13 +4,6 @@ int main()
 {
     System *store = new System();
     printf("welcome to %s\n", store->getSystemName());
-    Seller *seller;
-    Customer *customer;
-    seller = store->makeSeller();
-    store->addSellerToArray(seller);
-    store->makeProductForSale();
-    customer = store->makeCustomer();
-    store->addCustomerToArray(customer);
-    store->chooseProductToAddToCustomerWishlist();
+    store->mainMenu();
     delete store;
 }
