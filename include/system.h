@@ -19,9 +19,8 @@ class System
 {
 public:
 	//Constructors && Distructors
-	System() = default;
 	//In my option the user should not set arrays sizes by himself.-Yakir
-	System(const char *name, Customer **customers_array, Seller **sellers_array,
+	System(Customer **customers_array=nullptr, Seller **sellers_array=nullptr,
 		   unsigned int customers_array_physical_size = 0,
 		   unsigned int customers_array_logical_size = 0,
 		   unsigned int sellers_array_physical_size = 0,
@@ -29,11 +28,10 @@ public:
 	System(const System &other);
 	~System();
 	//Setters Functions.
-	bool setSystemName(const char *given_system_name);
 	bool setCustomersArray(const Customer **given_customer_array);
 	bool setSellersArray(const Seller **given_sellers_array);
 	//Getters Functions.
-	char *getSystemName();
+	const char *getSystemName() const;
 	Customer **getCostumeArray();
 	Seller **getSellersArray();
 	int getSellersArraySize();
@@ -43,7 +41,7 @@ public:
 	bool addCustomerToArray(Customer *customer);
 
 private:
-	char *system_name;
+	const char system_name[24] = "Electronic Trade System";
 	Customer **s_customers_array;
 	int customer_array_physical_size = 0;
 	int customer_array_logical_size = 0;
@@ -66,6 +64,5 @@ void printSellersNames(System *system);
 void printSellerProducts(Seller *seller);
 void makeProductForSale(System *system);
 void chooseProductToAddToCustomerWishlist(System *system);
-
 
 #endif // !__System_H

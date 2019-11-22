@@ -1,11 +1,10 @@
 #include "../include/system.h"
-System::System(const char *name, Customer **customers_array, Seller **sellers_array,
+System::System(Customer **customers_array, Seller **sellers_array,
                unsigned int customers_array_physical_size,
                unsigned int customers_array_logical_size,
                unsigned int sellers_array_physical_size,
                unsigned int sellers_array_logical_size)
 {
-    setSystemName(name);
     setCustomersArray((const Customer **)customers_array);
     setSellersArray((const Seller **)sellers_array);
     setCustomersArrayPhysicalSize(customers_array_physical_size);
@@ -13,7 +12,6 @@ System::System(const char *name, Customer **customers_array, Seller **sellers_ar
 }
 System::System(const System &other)
 {
-    setSystemName(other.system_name);
     setCustomersArray((const Customer **)other.s_customers_array);
     setCustomersArrayPhysicalSize(other.customer_array_logical_size);
     setSellersArray((const Seller **)other.s_sellers_array);
@@ -27,12 +25,6 @@ System::~System()
     for (int i = 0; i < seller_array_logical_size; i++)
         delete s_sellers_array[i];
     delete[] s_sellers_array;
-}
-bool System::setSystemName(const char *given_system_name)
-{
-    system_name = new char[strlen(given_system_name) + 1];
-    strcpy(system_name, given_system_name);
-    return true;
 }
 bool System::setCustomersArray(const Customer **given_customer_array)
 {
@@ -111,7 +103,7 @@ void System::resizeCustomersArray()
     this->s_customers_array = newArray;
 }
 
-char *System::getSystemName()
+const char *System::getSystemName() const
 {
     return system_name;
 }

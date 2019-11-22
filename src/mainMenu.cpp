@@ -21,6 +21,9 @@ void printOptions()
     cout << "3)Add an new product to a Seller." << endl;
     cout << "4) Add a Feedback to a Seller." << endl;
     cout << "5) Add a Product to a Customer Wishlist." << endl;
+
+    Customer* c1;
+    
 }
 Address *makeAddress();
 void mainMenu()
@@ -45,8 +48,8 @@ Address *makeAddress()
 }
 Seller *makeSeller()
 {
-    Seller *new_seller=nullptr;
-    Address *address=nullptr;
+    Seller *new_seller = nullptr;
+    Address *address = nullptr;
     char username[11], password[11];
     cout << "Please choose an username: ";
     cin.getline(username, 10);
@@ -200,4 +203,17 @@ void printSellerProducts(Seller *seller)
         product = products_array[i];
         printf("%d) %s", i + 1, product->getName());
     }
+}
+void makeOrder(System *system)
+{
+    unsigned int customer_index;
+    Order *new_order = new Order();
+    Product **product_array = nullptr;
+    do
+    {
+        printCustomersNames(system);
+        cout << "Please choose yourself from the list" << endl;
+        cin >> customer_index;
+        customer_index--;
+    } while (!(customer_index <= system->getCustomerArraySize() && customer_index >= 0));
 }

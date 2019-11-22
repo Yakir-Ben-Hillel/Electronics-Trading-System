@@ -3,9 +3,7 @@
 int main()
 {
     System *store = new System();
-    char system_name[20] = "trading-app";
-    cout << "Please choose a name for your system: ";
-    store->setSystemName(system_name);
+    printf("welcome to %s\n", store->getSystemName());
     Seller *seller;
     Customer *customer;
     seller = makeSeller();
