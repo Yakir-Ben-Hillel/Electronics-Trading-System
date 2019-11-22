@@ -228,7 +228,13 @@ void Customer::makeOrder()
     unsigned int price_of_order=0;
     char answer;
     cout << "please pick from the following products the product you want to buy: " << endl;
-    printProducts(c_wishList,c_wish_logical_size);
+    for(int j=0;j<this->c_wish_logical_size;j++)
+    {
+        cout<<"Product number #"<<j+1<<" "<<endl;
+        this->c_wishList[j]->printProduct();
+    }
+
+
     do
     {
         cout << "please enter the number of product you would like to buy: " << endl;

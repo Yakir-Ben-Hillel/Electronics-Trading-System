@@ -13,6 +13,7 @@ public:
 		Office,
 		Clothing
 	};
+	char* eCategoryNames[4]={"Children","Electricity","Office","Clothing"};
 	//constructors&&distructors
 	Product() = default;
 	Product(const char *name, eCategory category, Seller *given_seller_name,
@@ -32,6 +33,8 @@ public:
 	float getPrice() const;
 	eCategory getCategory() const;
 	unsigned int getSerialNumber() const;
+
+	void printProduct();
 
 private:
 	eCategory p_category;
