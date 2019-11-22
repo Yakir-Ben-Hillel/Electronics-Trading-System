@@ -40,6 +40,7 @@ public:
 
 	//other methoods
 	void makeOrder();
+	void showOrder(Order* curr);
 
 private:
 	bool setWishListPhysicalSize(unsigned int physicalSize);

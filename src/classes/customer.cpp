@@ -233,8 +233,6 @@ void Customer::makeOrder()
         cout<<"Product number #"<<j+1<<" "<<endl;
         this->c_wishList[j]->printProduct();
     }
-
-
     do
     {
         cout << "please enter the number of product you would like to buy: " << endl;
@@ -250,7 +248,22 @@ void Customer::makeOrder()
 
     Order* temp_order=new Order(temp_list,price_of_order,c_wish_logical_size,temp_index);
     this->setOrder(temp_order);
-    PrintOrder(temp_order);
+    showOrder(temp_order);
     delete temp_order;
     delete temp_list;
+}
+
+void Customer::showOrder(Order* curr)
+{
+    Product** temp=curr->getList();
+    unsigned int size=curr->getLogicalSize();
+    cout<<"the details of your order are: "<<endl;
+    for(int i=0;i<=size;i++)
+    {
+        temp[i]->printProduct();
+        cout<<endl;
+    }
+
+    cout<<"the final price of your order is: "<<curr->getPrice()<<endl;
+    cout<<"thank you for buying from us,have a nice day."<<endl;
 }
