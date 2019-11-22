@@ -1,4 +1,4 @@
-#include "../include/system.h"
+#include "../../include/system.h"
 
 Product::Product(const char *name, eCategory category, Seller *seller, unsigned int serial, float price)
 {

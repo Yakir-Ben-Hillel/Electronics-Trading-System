@@ -4,7 +4,7 @@
 class FeedBack;
 class Address;
 class Product;
-static int UUID = 0;//should be a static member in class product cause every product in system needs to be with different serial number.
+static int UUID = 0; //should be a static member in class product cause every product in system needs to be with different serial number.
 class Seller
 {
 public:
@@ -32,6 +32,7 @@ public:
 	bool setFeedbacksArray(FeedBack **given_feedBacks_array);
 	bool addProductToStockArray(Product *new_product);
 	unsigned int getStockArraySize();
+	void printSellerProducts();
 
 private:
 	char *userName;

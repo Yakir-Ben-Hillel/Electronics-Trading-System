@@ -1,4 +1,4 @@
-#include "../include/system.h"
+#include "../../include/system.h"
 
 FeedBack::FeedBack(const char *note, Customer *customer_data, Date *curr_date)
 :customer(customer_data),date_of_feedback(curr_date)//init lines

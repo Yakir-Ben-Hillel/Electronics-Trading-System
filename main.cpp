@@ -6,11 +6,11 @@ int main()
     printf("welcome to %s\n", store->getSystemName());
     Seller *seller;
     Customer *customer;
-    seller = makeSeller();
+    seller = store->makeSeller();
     store->addSellerToArray(seller);
-    makeProductForSale(store);
-    customer = makeCustomer();
+    store->makeProductForSale();
+    customer = store->makeCustomer();
     store->addCustomerToArray(customer);
-    chooseProductToAddToCustomerWishlist(store);
+    store->chooseProductToAddToCustomerWishlist();
     delete store;
 }

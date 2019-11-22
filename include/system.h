@@ -20,7 +20,7 @@ class System
 public:
 	//Constructors && Distructors
 	//In my option the user should not set arrays sizes by himself.-Yakir
-	System(Customer **customers_array=nullptr, Seller **sellers_array=nullptr,
+	System(Customer **customers_array = nullptr, Seller **sellers_array = nullptr,
 		   unsigned int customers_array_physical_size = 0,
 		   unsigned int customers_array_logical_size = 0,
 		   unsigned int sellers_array_physical_size = 0,
@@ -39,7 +39,15 @@ public:
 	unsigned int getCurrentID();
 	bool addSellerToArray(Seller *seller);
 	bool addCustomerToArray(Customer *customer);
-
+	void mainMenu();
+	Seller *makeSeller();
+	Customer *makeCustomer();
+	void printCustomersNames();
+	void printOptions();
+	void printSellersNames();
+	void makeProductForSale();
+	void chooseProductToAddToCustomerWishlist();
+	void makeOrder();
 private:
 	const char system_name[24] = "Electronic Trade System";
 	Customer **s_customers_array;
@@ -56,13 +64,5 @@ private:
 	void resizeSellersArray();
 	void resizeCustomersArray();
 };
-void mainMenu();
-Seller *makeSeller();
-Customer *makeCustomer();
-void printOptions();
-void printSellersNames(System *system);
-void printSellerProducts(Seller *seller);
-void makeProductForSale(System *system);
-void chooseProductToAddToCustomerWishlist(System *system);
 
 #endif // !__System_H
