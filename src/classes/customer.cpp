@@ -1,10 +1,11 @@
 #include "../..//include/system.h"
 Customer::Customer(const char *username, const char *password, Address *address, const Product **wishlist,
                    unsigned int physicalSize, unsigned int logicalSize)
-    : c_address(address)
+    
 {
     setName(username);
     setPassword(password);
+    setAddress(address);
     setWishList(wishlist, logicalSize);
     setWishListPhysicalSize(physicalSize);
     setWishListLogicalSize(logicalSize);
@@ -98,7 +99,7 @@ bool Customer::setPassword(const char *password)
 
 bool Customer::setWishList(const Product **wishList, int size)
 {
-    c_wishList = new Product *[this->c_wish_physical_size];
+    c_wishList = new Product *[size];
     for (int i = 0; i < size; i++)
     {
         c_wishList[i] = new Product(*wishList[i]);
@@ -108,7 +109,7 @@ bool Customer::setWishList(const Product **wishList, int size)
 
 bool Customer::SetOrderArray(Order **order_array, int size)
 {
-    orders_history = new Order *[this->order_physical_size];
+    orders_history = new Order *[size];
     for (int i = 0; i < size; i++)
     {
         setOrder(order_array[i]);
@@ -227,12 +228,14 @@ void Customer::makeOrder()
     int index, temp_index = 0;
     unsigned int price_of_order=0;
     char answer;
+
     cout << "please pick from the following products the product you want to buy: " << endl;
     for(int j=0;j<this->c_wish_logical_size;j++)
     {
         cout<<"Product number #"<<j+1<<" "<<endl;
         this->c_wishList[j]->printProduct();
     }
+
     do
     {
         cout << "please enter the number of product you would like to buy: " << endl;
@@ -240,7 +243,7 @@ void Customer::makeOrder()
         temp_list[temp_index] = new Product(*c_wishList[index - 1]);
         price_of_order+=temp_list[temp_index]->getPrice();
         temp_index++;
-        deleteFromWishList(this->c_wishList[index-1]);
+        deleteFromWishList(index-1);
         cout<<"do you want to buy something else?(y/n)"<<endl;
         cin>>answer;
         fcontinue=(answer=='y'?true:false);
@@ -267,3 +270,12 @@ void Customer::showOrder(Order* curr)
     cout<<"the final price of your order is: "<<curr->getPrice()<<endl;
     cout<<"thank you for buying from us,have a nice day."<<endl;
 }
+
+void Customer::deleteFromWishList(int location)
+{
+    //all the parts of the array are pointers, because of that we just put the address in the right pointer and free the wanted memory.
+   delete this->c_wishList[location];
+   this->c_wishList[location]=this->c_wishList[this->c_wish_logical_size-1];
+   this->c_wish_logical_size--;
+}
+
