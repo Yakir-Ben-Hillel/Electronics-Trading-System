@@ -42,7 +42,7 @@ public:
 	void makeOrder();
 	void showOrder(Order* curr);
 	void deleteFromWishList(int location);
-	void addFeedBackToSeller(const char* seller_name);
+	FeedBack& addFeedBackToSeller(const char* seller_name);
 	
 
 private:
