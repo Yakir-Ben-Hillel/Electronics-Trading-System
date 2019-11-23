@@ -1,8 +1,9 @@
 #include "../../include/system.h"
 
-FeedBack::FeedBack(const char *note, Customer *customer_data, Date *curr_date)
-:customer(customer_data),date_of_feedback(curr_date)//init lines
+FeedBack::FeedBack(char *note, Customer *customer_data, Date *curr_date)
 {
+    setCustomer(customer_data);
+    setDateOfFeedBack(curr_date);
     setNotes(note);
 }
 FeedBack::FeedBack(const FeedBack &other)
