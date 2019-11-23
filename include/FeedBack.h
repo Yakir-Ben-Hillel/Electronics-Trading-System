@@ -9,7 +9,7 @@ class FeedBack
 public:
     //constructors and distructors
     FeedBack() = default;
-    FeedBack(const char *note, Customer *customer_data, Date *curr_date);
+    FeedBack(char *note, Customer *customer_data, Date *curr_date);
     FeedBack(const FeedBack &other);
     FeedBack(FeedBack &&other);
     ~FeedBack();
