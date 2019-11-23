@@ -279,3 +279,27 @@ void Customer::deleteFromWishList(int location)
    this->c_wish_logical_size--;
 }
 
+void Customer::addFeedBackToSeller(const char* seller_name)
+{
+    bool can_give_a_feedback;
+    //i think this do while loop should be in the "switch"
+    do
+    {
+        //the function "ifCustomerBought" should check if the seller name appear in one of the orders in the orders array history.(return true if the name appears else false.)
+        can_give_a_feedback=ifCustomerBought(seller_name);//undone yet.
+        if(can_give_a_feedback==false)
+          cout<<"you can't give a feedback to a seller you didn't bought from"<<endl;
+    } while (can_give_a_feedback==false);
+
+    cout<<"please enter your notes about the seller: "<<endl;
+    char* temp=new char[256];
+    cin.ignore(256,'\n');
+    cin.getline(temp,256);
+    int day,month,year;
+    cout<<"what date is it? (format: dd/mm/yy)"<<endl;
+    cin>>day>>month>>year;
+    FeedBack curr_feedback(temp,this,Date(day,month,year));//unknown problem 
+    delete []temp;
+    
+    //need to add this feedback to the seller feedback_array!!
+}
