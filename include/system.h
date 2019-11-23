@@ -44,9 +44,9 @@ public:
 	bool addSellerToArray(Seller *seller);
 	bool addCustomerToArray(Customer *customer);
 	void mainMenu();
-	Seller *makeSeller();
+	void makeSeller();
 	Address *makeAddress();
-	Customer *makeCustomer();
+	void makeCustomer();
 	void printCustomersNames();
 	void printOptionsAsGuest();
 	void printSellersNames();

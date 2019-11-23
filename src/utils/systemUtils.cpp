@@ -24,6 +24,7 @@ void System::mainMenu()
                 break;
             case 4:
                 this->printSellersNames();
+                break;
             case 5:
                 exit(1);
             default:
@@ -105,7 +106,7 @@ Address *System::makeAddress()
     new_address = new Address(apartment_number, city_name, street_name);
     return new_address;
 }
-Seller *System::makeSeller()
+void System::makeSeller()
 {
     Seller *new_seller = nullptr;
     Address *address = nullptr;
@@ -116,7 +117,7 @@ Seller *System::makeSeller()
     cin.getline(password, 10);
     address = makeAddress();
     new_seller = new Seller(username, address, password);
-    return new_seller;
+    this->addSellerToArray(new_seller);
 }
 void Seller::makeProductForSale()
 {
@@ -171,7 +172,7 @@ void Seller::makeProductForSale()
     UUID++;
     this->addProductToStockArray(new_product);
 }
-Customer *System::makeCustomer()
+void System::makeCustomer()
 {
     int x;
     Customer *new_customer;
@@ -183,7 +184,7 @@ Customer *System::makeCustomer()
     cin.getline(password, 10);
     address = makeAddress();
     new_customer = new Customer(username, password, address);
-    return new_customer;
+    this->addCustomerToArray(new_customer);
 }
 void System::chooseProductToAddToCustomerWishlist()
 {
@@ -276,9 +277,9 @@ void System::customerLogin()
         cin.getline(username, 10);
         int i = 0;
         bool isFinishedSearch = false;
-        while (isFinishedSearch == false)
+        while (isFinishedSearch == false || i != this->customer_array_logical_size)
         {
-            if (s_customers_array[i]->getName() == username)
+            if (strcmp(s_customers_array[i]->getName(), username) == 0)
             {
                 bool isMatch = false;
                 bool isExitedByWill = false;
@@ -321,9 +322,9 @@ void System::sellerLogin()
         cin.getline(username, 10);
         int i = 0;
         bool isFinishedSearch = false;
-        while (isFinishedSearch == false)
+        while (isFinishedSearch == false && i != this->seller_array_logical_size)
         {
-            if (s_sellers_array[i]->getUserName() == username)
+            if (strcmp(s_sellers_array[i]->getUserName(), username) == 0)
             {
                 bool isMatch = false;
                 bool isExitedByWill = false;
