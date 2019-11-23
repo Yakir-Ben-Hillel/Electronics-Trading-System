@@ -326,3 +326,21 @@ void System::sellerLogin()
         system("pause");
     }
 }
+
+void System::showProductsWithTheSameName(const char *name)
+{
+    cout<<"The Products you have searched for ,show to you below: "<<endl;
+    for (int i = 0; i < this->seller_array_logical_size; i++)
+    {
+        int size = this->s_sellers_array[i]->getStockArraySize();
+        Product **stock = this->s_sellers_array[i]->getStock();
+        for (int j = 0; j < size; j++)
+        {
+            if (strcmp(name, stock[j]->getName()) == 0)
+            {
+                stock[j]->printProduct();
+                cout << endl;
+            }
+        }
+    }
+}

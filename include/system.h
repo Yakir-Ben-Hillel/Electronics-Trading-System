@@ -58,6 +58,7 @@ public:
 	void printOpening();
 	void printOptionsAsCustomer();
 	void printOptionsAsSeller();
+	void showProductsWithTheSameName(const char* name);
 
 private:
 	const char system_name[24] = "Electronic Trade System";

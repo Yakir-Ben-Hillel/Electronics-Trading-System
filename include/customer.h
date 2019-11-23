@@ -42,6 +42,7 @@ public:
 	void makeOrder();
 	void showOrder(Order* curr);
 	void deleteFromWishList(int location);
+	
 
 private:
 	bool setWishListPhysicalSize(unsigned int physicalSize);
