@@ -39,9 +39,46 @@ void System::mainMenu()
             case 1:
                 this->chooseProductToAddToCustomerWishlist();
                 break;
-            // case 2:
-            //     this->/*addFeedbackToSeller*/
-            //         break;
+            case 2:
+                this->logged_in_customer->addFeedBackToSeller();
+                break;
+            case 3:
+                this->logged_in_customer->makeOrder();
+                break;
+            case 4:
+                this->printSellersNames();
+                break;
+            case 5:
+                cout << "Please insert the name of the product you want to search for: ";
+                char name[11];
+                cin.getline(name, 10);
+                this->showProductsWithTheSameName(name);
+                break;
+            case 6:
+                logged_in_customer = nullptr;
+                break;
+            case 7:
+                exit(1);
+            default:
+                break;
+            }
+        }
+        else
+        {
+            printOptionsAsSeller();
+            cin >> option;
+            switch (option)
+            {
+            case 1:
+                this->logged_in_seller->makeProductForSale();
+                break;
+            case 2:
+                /*this->printFeedbacks()*/
+                break;
+            case 3:
+                this->logged_in_seller = nullptr;
+            case 4:
+                exit(1);
             default:
                 break;
             }
@@ -77,7 +114,7 @@ Seller *System::makeSeller()
     new_seller = new Seller(username, address, password);
     return new_seller;
 }
-void System::makeProductForSale()
+void Seller::makeProductForSale()
 {
     char x;
     Product *new_product;
@@ -126,19 +163,9 @@ void System::makeProductForSale()
     }
     cout << "Please choose a price for your product: ";
     cin >> price;
-    do
-    {
-        printSellersNames();
-        cout << "Please choose yourself from the given list: ";
-        cin >> seller_index;
-        cin.ignore(256, '\n');
-        seller_index--;
-        Seller **sellers_array = this->getSellersArray();
-        seller_of_product = sellers_array[seller_index];
-    } while (!(seller_index <= this->getSellersArraySize() && seller_index >= 0));
-    new_product = new Product(product_name, category, seller_of_product, UUID, price);
+    new_product = new Product(product_name, category, this, UUID, price);
     UUID++;
-    seller_of_product->addProductToStockArray(new_product);
+    this->addProductToStockArray(new_product);
 }
 Customer *System::makeCustomer()
 {
@@ -329,7 +356,7 @@ void System::sellerLogin()
 
 void System::showProductsWithTheSameName(const char *name)
 {
-    cout<<"The Products you have searched for ,show to you below: "<<endl;
+    cout << "The Products you have searched for ,show to you below: " << endl;
     for (int i = 0; i < this->seller_array_logical_size; i++)
     {
         int size = this->s_sellers_array[i]->getStockArraySize();

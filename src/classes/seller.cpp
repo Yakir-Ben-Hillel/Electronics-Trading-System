@@ -2,7 +2,7 @@
 Seller::Seller(char *userName, Address *address, const char *password,
                Product **stockArray, FeedBack **feedbacksArray,
                unsigned int s_size, unsigned int f_size)
-               :address(address)
+    : address(address)
 {
     setUserName(userName);
     setPassword(password);
@@ -125,6 +125,24 @@ void Seller::resizeStockArray()
     delete[] this->s_stock;
     this->stock_array_physical_length = newSize;
     this->s_stock = newArray;
+}
+bool Seller::addFeedbackToArray(FeedBack *new_feedback)
+{
+    if (this->feedbacks_array_logical_length == this->feedbacks_array_physical_length)
+        resizeFeedbackArray();
+    feedBack_array[this->feedbacks_array_logical_length] = new_feedback;
+    this->feedbacks_array_logical_length++;
+}
+void Seller::resizeFeedbackArray()
+{
+    int newSize = this->feedbacks_array_physical_length * 2 + 1;
+    FeedBack **newArray = new FeedBack *[newSize];
+    memcpy(newArray, this->feedBack_array, this->feedbacks_array_logical_length * sizeof(FeedBack *));
+    for (int i = 0; i < this->feedbacks_array_logical_length; i++)
+        delete this->feedBack_array[i];
+    delete[] feedBack_array;
+    this->feedbacks_array_physical_length = newSize;
+    this->feedBack_array = newArray;
 }
 const char *Seller::getUserName() const
 {
