@@ -44,9 +44,9 @@ public:
 	bool addSellerToArray(Seller *seller);
 	bool addCustomerToArray(Customer *customer);
 	void mainMenu();
-	Seller *makeSeller();
+	void makeSeller();
 	Address *makeAddress();
-	Customer *makeCustomer();
+	void makeCustomer();
 	void printCustomersNames();
 	void printOptionsAsGuest();
 	void printSellersNames();
@@ -56,9 +56,10 @@ public:
 	void login();
 	void signup();
 	void printOpening();
+	void printAllAvailableSellersToGiveFeedbacks(Customer *customer);
 	void printOptionsAsCustomer();
 	void printOptionsAsSeller();
-	void showProductsWithTheSameName(const char* name);
+	void showProductsWithTheSameName(const char *name);
 
 private:
 	const char system_name[24] = "Electronic Trade System";
