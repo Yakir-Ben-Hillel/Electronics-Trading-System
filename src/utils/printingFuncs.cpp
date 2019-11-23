@@ -77,3 +77,16 @@ void Seller::printSellerProducts()
         cout << endl;
     }
 }
+void System::printAllAvailableSellersToGiveFeedbacks(Customer *customer)
+{
+    unsigned int counter = 0;
+    unsigned int length = this->seller_array_logical_size;
+    for (int i = 0; i < length; i++)
+    {
+        if (customer->didCustomerOrderedFromSeller(this->s_sellers_array[i]) == true)
+        {
+            counter++;
+            printf("%d) %s", counter, this->s_sellers_array[i]->getUserName());
+        }
+    }
+}

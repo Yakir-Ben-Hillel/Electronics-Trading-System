@@ -40,7 +40,11 @@ void System::mainMenu()
                 this->chooseProductToAddToCustomerWishlist();
                 break;
             case 2:
-                this->logged_in_customer->addFeedBackToSeller();
+                int x;
+                this->printAllAvailableSellersToGiveFeedbacks(this->logged_in_customer);
+                cout << "Please insert the number of the seller you want to leave a feedback on: ";
+                cin >> x;
+                this->logged_in_customer->addFeedBackToSeller(this->s_sellers_array[x - 1]);
                 break;
             case 3:
                 this->logged_in_customer->makeOrder();

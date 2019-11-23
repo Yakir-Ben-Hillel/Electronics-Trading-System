@@ -13,7 +13,6 @@ public:
 		Office,
 		Clothing
 	};
-	char* eCategoryNames[4]={"Children","Electricity","Office","Clothing"};
 	//constructors&&distructors
 	Product() = default;
 	Product(const char *name, eCategory category, Seller *given_seller_name,

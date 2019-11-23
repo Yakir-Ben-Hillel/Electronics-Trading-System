@@ -104,7 +104,7 @@ Seller *Product::getSeller() const
 void Product::printProduct()
 {
     cout<<"Product name: "<<this->p_name<<endl;
-    cout<<"Product category: "<<Product::eCategoryNames[this->p_category]<<endl;
+    cout<<"Product category: "<<this->getCategory()<<endl;
     cout<<"Product Price: "<<this->p_price<<endl;
     cout<<"Product seller's name: "<<this->p_seller->getUserName()<<endl;
 }
