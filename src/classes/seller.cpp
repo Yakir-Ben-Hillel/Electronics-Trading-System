@@ -132,6 +132,7 @@ bool Seller::addFeedbackToArray(FeedBack *new_feedback)
         resizeFeedbackArray();
     feedBack_array[this->feedbacks_array_logical_length] = new_feedback;
     this->feedbacks_array_logical_length++;
+    return true;
 }
 void Seller::resizeFeedbackArray()
 {
