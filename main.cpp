@@ -3,7 +3,8 @@
 int main()
 {
     System *store = new System();
-    printf("welcome to %s\n", store->getSystemName());
+    cout << "Welcome to"
+         << " " << store->getSystemName() << endl;
     store->mainMenu();
     delete store;
 }
