@@ -63,11 +63,11 @@ public:
 
 private:
 	const char system_name[24] = "Electronic Trade System";
-	Customer *logged_in_customer;
+	Customer *logged_in_customer; //Use only for pointing this variable is never initialized.
 	Customer **s_customers_array;
 	int customer_array_physical_size = 0;
 	int customer_array_logical_size = 0;
-	Seller *logged_in_seller;
+	Seller *logged_in_seller; //Use only for pointing this variable is never initialized.
 	Seller **s_sellers_array;
 	int seller_array_physical_size = 0;
 	int seller_array_logical_size = 0;

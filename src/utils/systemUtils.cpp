@@ -26,7 +26,8 @@ void System::mainMenu()
                 this->printSellersNames();
                 break;
             case 5:
-                exit(1);
+                isFinished = true;
+                break;
             default:
                 break;
             }
@@ -63,7 +64,8 @@ void System::mainMenu()
                 logged_in_customer = nullptr;
                 break;
             case 7:
-                exit(1);
+                isFinished = true;
+                break;
             default:
                 break;
             }
@@ -82,8 +84,10 @@ void System::mainMenu()
                 break;
             case 3:
                 this->logged_in_seller = nullptr;
+                break;
             case 4:
-                exit(1);
+                isFinished = true;
+                break;
             default:
                 break;
             }
@@ -94,12 +98,12 @@ void System::mainMenu()
 Address *System::makeAddress()
 {
     Address *new_address = nullptr;
-    char city_name[11], street_name[21];
+    char city_name[11], street_name[31];
     int apartment_number;
     cout << "Please insert your city name: ";
     cin.getline(city_name, 10);
     cout << "Please insert your street name :";
-    cin.getline(street_name, 20);
+    cin.getline(street_name, 30);
     cout << "Please insert your apartment number :";
     cin >> apartment_number;
     cin.ignore(256, '\n');
@@ -355,7 +359,6 @@ void System::sellerLogin()
     else
     {
         cout << "There are no Sellers Available" << endl;
-        system("pause");
     }
 }
 
