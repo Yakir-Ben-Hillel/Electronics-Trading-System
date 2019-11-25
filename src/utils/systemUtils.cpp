@@ -135,6 +135,7 @@ void Seller::makeProductForSale()
     unsigned int seller_index;
     bool isCategoryValid = false;
     cout << "Please choose a name: ";
+    cin.ignore(256,'\n');
     cin.getline(product_name, 10);
     while (!isCategoryValid)
     {
