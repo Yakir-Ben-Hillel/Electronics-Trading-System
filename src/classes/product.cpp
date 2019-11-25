@@ -1,6 +1,6 @@
 #include "../../include/system.h"
 //static declaration
-char* Product::CategoryNames[4]={"Children","Electricity","Office","Clothing"};
+char* Product::CategoryNames[4]={(char*)"Children",(char*)"Electricity",(char*)"Office",(char*)"Clothing"};
 unsigned int Product::counter=0;
 
 Product::Product(const char *name, eCategory category, Seller *seller,float price)
