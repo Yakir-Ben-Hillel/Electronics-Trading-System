@@ -4,7 +4,6 @@
 class FeedBack;
 class Address;
 class Product;
-static int UUID = 0; //should be a static member in class product cause every product in system needs to be with different serial number.
 class Seller
 {
 public:

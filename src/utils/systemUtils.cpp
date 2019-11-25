@@ -172,8 +172,7 @@ void Seller::makeProductForSale()
     }
     cout << "Please choose a price for your product: ";
     cin >> price;
-    new_product = new Product(product_name, category, this, UUID, price);
-    UUID++;
+    new_product = new Product(product_name, category, this,price);
     this->addProductToStockArray(new_product);
 }
 void System::makeCustomer()

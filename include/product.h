@@ -13,10 +13,10 @@ public:
 		Office,
 		Clothing
 	};
+	static char* CategoryNames[4];
 	//constructors&&distructors
 	Product() = default;
-	Product(const char *name, eCategory category, Seller *given_seller_name,
-			unsigned int serial = 0, float price = 0);
+	Product(const char *name, eCategory category, Seller *given_seller_name,float price = 0);
 	Product(const Product &other);
 	Product(Product &&other);
 	~Product();
@@ -41,6 +41,7 @@ private:
 	float p_price;
 	unsigned int p_serialNumber;
 	Seller *p_seller;
+	static unsigned int counter;//for the serial number
 };
 
 #endif

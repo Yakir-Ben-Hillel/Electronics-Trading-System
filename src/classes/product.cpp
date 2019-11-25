@@ -1,10 +1,13 @@
 #include "../../include/system.h"
+//static declaration
+char* Product::CategoryNames[4]={"Children","Electricity","Office","Clothing"};
+unsigned int Product::counter=0;
 
-Product::Product(const char *name, eCategory category, Seller *seller, unsigned int serial, float price)
+Product::Product(const char *name, eCategory category, Seller *seller,float price)
+:p_serialNumber(++counter)
 {
     setName(name);
     setCategory(category);
-    setSerialNumber(serial);
     setPrice(price);
     setSeller(seller);
 }
@@ -104,7 +107,7 @@ Seller *Product::getSeller() const
 void Product::printProduct()
 {
     cout<<"Product name: "<<this->p_name<<endl;
-    cout<<"Product category: "<<this->getCategory()<<endl;
+    cout<<"Product category: "<<CategoryNames[this->getCategory()]<<endl;
     cout<<"Product Price: "<<this->p_price<<endl;
     cout<<"Product seller's name: "<<this->p_seller->getUserName()<<endl;
 }
