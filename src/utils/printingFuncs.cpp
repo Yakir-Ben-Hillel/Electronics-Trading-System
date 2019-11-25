@@ -57,6 +57,10 @@ void System::printSellersNames()
 {
     unsigned int index = 1;
     Seller **sellers_array = this->getSellersArray();
+    if(this->getSellersArraySize()==0)
+    {
+        cout<<"There are no sellers available in the store now,please try again later."<<endl;
+    }
     for (int i = 0; i < this->getSellersArraySize(); i++)
     {
         char name[11];
