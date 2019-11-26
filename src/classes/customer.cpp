@@ -42,7 +42,7 @@ Customer::~Customer()
 {
     delete[] c_user_name;
     delete[] c_password;
-    delete c_address;
+    c_address=nullptr;
     for (int i = 0; i < c_wish_logical_size; i++)
     {
         delete c_wishList[i];

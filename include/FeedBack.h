@@ -17,16 +17,16 @@ public:
     //seters and geters
     bool setNotes(const char *givenNote);
     bool setCustomer(const Customer *other_customer);
-    bool setDateOfFeedBack(Date *date);
+    bool setDateOfFeedBack(const Date *date);
 
     const char *getNotes() const;
-    Customer *getCustomer() const;
-    Date *getDate();
+    const Customer *getCustomer() const;
+    const Date *getDate();
 
 private:
-    Customer *customer;
+    const Customer *customer;
     char *notes;
-    Date *date_of_feedback; 
+    const Date *date_of_feedback; 
 };
 
 #endif

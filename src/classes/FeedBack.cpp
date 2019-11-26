@@ -1,9 +1,10 @@
 #include "../../include/system.h"
 
 FeedBack::FeedBack(char *note, Customer *customer_data, Date *curr_date)
+:customer(customer_data),date_of_feedback(curr_date)
 {
-    setCustomer(customer_data);
-    setDateOfFeedBack(curr_date);
+    //setCustomer(customer_data);
+    //setDateOfFeedBack(curr_date);
     setNotes(note);
 }
 FeedBack::FeedBack(const FeedBack &other)
@@ -24,9 +25,9 @@ FeedBack::FeedBack(FeedBack &&other)
 }
 FeedBack::~FeedBack()
 {
-    delete date_of_feedback;
+    date_of_feedback=nullptr;
     delete[] notes;
-    delete customer;
+    customer=nullptr;
 }
 
 bool FeedBack::setNotes(const char *givenNote)
@@ -37,23 +38,23 @@ bool FeedBack::setNotes(const char *givenNote)
 }
 bool FeedBack::setCustomer(const Customer *other_customer)
 {
-    customer = new Customer(*other_customer);
+    customer = other_customer;
     return true;
 }
-bool FeedBack::setDateOfFeedBack(Date *date)
+bool FeedBack::setDateOfFeedBack(const Date *date)
 {
-    date_of_feedback = new Date(*date);
+    date_of_feedback =date;
     return true;
 }
 const char *FeedBack::getNotes() const
 {
     return notes;
 }
-Customer *FeedBack::getCustomer() const
+const Customer *FeedBack::getCustomer() const
 {
     return customer;
 }
-Date *FeedBack::getDate()
+const Date *FeedBack::getDate()
 {
     return date_of_feedback;
 }
