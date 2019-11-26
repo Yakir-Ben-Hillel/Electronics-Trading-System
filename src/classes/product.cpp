@@ -4,12 +4,12 @@ char* Product::CategoryNames[4]={(char*)"Children",(char*)"Electricity",(char*)"
 unsigned int Product::counter=0;
 
 Product::Product(const char *name, eCategory category, Seller *seller,float price)
-:p_serialNumber(++counter)
+:p_serialNumber(++counter),p_seller(seller)
 {
     setName(name);
     setCategory(category);
     setPrice(price);
-    setSeller(seller);
+    //setSeller(seller);
 }
 
 Product::Product(const Product &other)
@@ -74,7 +74,7 @@ bool Product::setCategory(eCategory category)
     cout << "please choose one of the available sections" << endl;
     return false;
 }
-bool Product::setSeller(Seller *seller)
+bool Product::setSeller(const Seller *seller)
 {
     p_seller = seller;
     return true;
@@ -99,7 +99,7 @@ unsigned int Product::getSerialNumber() const
 {
     return p_serialNumber;
 }
-Seller *Product::getSeller() const
+const Seller *Product::getSeller() const
 {
     return p_seller;
 }

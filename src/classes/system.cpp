@@ -26,6 +26,8 @@ System::~System()
     for (int i = 0; i < seller_array_logical_size; i++)
         delete s_sellers_array[i];
     delete[] s_sellers_array;
+    logged_in_customer=nullptr;
+    logged_in_seller=nullptr;
 }
 bool System::setCustomersArray(const Customer **given_customer_array)
 {

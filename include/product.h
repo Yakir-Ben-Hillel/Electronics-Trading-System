@@ -25,10 +25,10 @@ public:
 	bool setPrice(float price);
 	bool setSerialNumber(unsigned int serial);
 	bool setCategory(eCategory category);
-	bool setSeller(Seller *seller);
+	bool setSeller(const Seller *seller);
 	//geters
 	const char *getName() const;
-	Seller *getSeller() const;
+	const Seller *getSeller() const;
 	float getPrice() const;
 	eCategory getCategory() const;
 	unsigned int getSerialNumber() const;
@@ -40,7 +40,7 @@ private:
 	char *p_name;
 	float p_price;
 	unsigned int p_serialNumber;
-	Seller *p_seller;
+	const Seller *p_seller;
 	static unsigned int counter;//for the serial number
 };
 
