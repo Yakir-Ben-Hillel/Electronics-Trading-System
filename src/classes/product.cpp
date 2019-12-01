@@ -4,12 +4,12 @@ char* Product::CategoryNames[4]={(char*)"Children",(char*)"Electricity",(char*)"
 unsigned int Product::counter=0;
 
 Product::Product(const char *name, eCategory category, Seller *seller,float price)
-:p_serialNumber(++counter),p_seller(seller)
+:p_serialNumber(++counter)
 {
     setName(name);
     setCategory(category);
     setPrice(price);
-    //setSeller(seller);
+    setSeller(seller);
 }
 
 Product::Product(const Product &other)

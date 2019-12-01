@@ -58,3 +58,11 @@ const Date *FeedBack::getDate()
 {
     return date_of_feedback;
 }
+
+void FeedBack::show() const
+{
+  cout<<"the customer who gave you the feedback: "<<this->customer->getName()<<endl;
+  cout<<"the date of the feedback is: "<<this->date_of_feedback->getDay()<<"/"<<
+  this->date_of_feedback->getMonth()<<"/"<<this->date_of_feedback->getYear()<<endl;
+  cout<<"the notes are: "<<this->notes;
+}

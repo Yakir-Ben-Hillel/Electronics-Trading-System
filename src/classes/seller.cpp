@@ -157,3 +157,9 @@ Address *Seller::getAddress() const
 {
     return address;
 }
+
+FeedBack **Seller::getfeedBacksArray(int& size) const
+{
+   size=this->feedbacks_array_logical_length;
+   return this->feedBack_array;
+}

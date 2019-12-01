@@ -80,7 +80,13 @@ void System::mainMenu()
                 this->logged_in_seller->makeProductForSale();
                 break;
             case 2:
-                /*this->printFeedbacks()*/
+                int size;
+                FeedBack** array=this->logged_in_seller->getfeedBacksArray(size);
+                cout<<"your feedbacks are: "<<endl;
+                for(int i=0;i<size;i++)
+                {
+                    array[i]->show();
+                }
                 break;
             case 3:
                 this->logged_in_seller = nullptr;
@@ -104,9 +110,14 @@ Address *System::makeAddress()
     cin.getline(city_name, 10);
     cout << "Please insert your street name :";
     cin.getline(street_name, 30);
+   do
+   {
     cout << "Please insert your apartment number :";
     cin >> apartment_number;
     cin.ignore(256, '\n');
+    cout<< (apartment_number<0 ? "invalid number, please try again":" ")<<endl; 
+   } while(apartment_number<0);
+
     new_address = new Address(apartment_number, city_name, street_name);
     return new_address;
 }
@@ -131,7 +142,6 @@ void Seller::makeProductForSale()
     char product_name[11];
     float price;
     Seller *seller_of_product;
-    unsigned int serialNumber;
     unsigned int seller_index;
     bool isCategoryValid = false;
     cout << "Please choose a name: ";
@@ -173,7 +183,7 @@ void Seller::makeProductForSale()
     }
     cout << "Please choose a price for your product: ";
     cin >> price;
-    new_product = new Product(product_name, category, this,price);
+    new_product = new Product(product_name, category,this,price);
     this->addProductToStockArray(new_product);
 }
 void System::makeCustomer()
@@ -314,7 +324,6 @@ void System::customerLogin()
     else
     {
         cout << "There are no Customers Available" << endl;
-        system("pause");
     }
 }
 void System::sellerLogin()

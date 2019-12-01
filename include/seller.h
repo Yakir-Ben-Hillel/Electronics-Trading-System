@@ -21,7 +21,7 @@ public:
 	const char *getPassword() const;
 	Address *getAddress() const;
 	Product **getStock() const;
-	FeedBack **getfeedBacksArray() const;
+	FeedBack **getfeedBacksArray(int& size) const;
 	//Setters Functions.
 	bool setUserName(const char *userName);
 	bool setPassword(const char *password);
