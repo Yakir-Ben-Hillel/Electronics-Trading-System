@@ -1,15 +1,15 @@
 #include "../../include/system.h"
 //static declaration
-char* Product::CategoryNames[4]={(char*)"Children",(char*)"Electricity",(char*)"Office",(char*)"Clothing"};
-unsigned int Product::counter=0;
+char *Product::CategoryNames[4] = {(char *)"Children", (char *)"Electricity", (char *)"Office", (char *)"Clothing"};
+unsigned int Product::counter = 0;
 
-Product::Product(const char *name, eCategory category, Seller *seller,float price)
-:p_serialNumber(++counter),p_seller(seller)
+Product::Product(const char *name, eCategory category, Seller *seller, float price)
+    : p_serialNumber(++counter), p_seller(seller)
 {
     setName(name);
     setCategory(category);
     setPrice(price);
-    //setSeller(seller);
+    setSeller(seller);
 }
 
 Product::Product(const Product &other)
@@ -106,9 +106,8 @@ const Seller *Product::getSeller() const
 
 void Product::printProduct()
 {
-    cout<<"Product name: "<<this->p_name<<endl;
-    cout<<"Product category: "<<CategoryNames[this->getCategory()]<<endl;
-    cout<<"Product Price: "<<this->p_price<<endl;
-    cout<<"Product seller's name: "<<this->p_seller->getUserName()<<endl;
+    cout << "Product name: " << this->p_name << endl;
+    cout << "Product category: " << CategoryNames[this->getCategory()] << endl;
+    cout << "Product Price: " << this->p_price << endl;
+    cout << "Product seller's name: " << this->p_seller->getUserName() << endl;
 }
-

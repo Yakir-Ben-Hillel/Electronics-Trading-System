@@ -78,7 +78,6 @@ private:
 	bool setCustomersArrayLogicalSize(const unsigned int newSIze);
 	void customerLogin();
 	void sellerLogin();
-
 	void resizeSellersArray();
 	void resizeCustomersArray();
 };

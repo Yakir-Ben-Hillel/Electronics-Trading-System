@@ -135,7 +135,7 @@ void Seller::makeProductForSale()
     unsigned int seller_index;
     bool isCategoryValid = false;
     cout << "Please choose a name: ";
-    cin.ignore(256,'\n');
+    cin.ignore(256, '\n');
     cin.getline(product_name, 10);
     while (!isCategoryValid)
     {
@@ -173,7 +173,7 @@ void Seller::makeProductForSale()
     }
     cout << "Please choose a price for your product: ";
     cin >> price;
-    new_product = new Product(product_name, category, this,price);
+    new_product = new Product(product_name, category, this, price);
     this->addProductToStockArray(new_product);
 }
 void System::makeCustomer()
@@ -322,7 +322,7 @@ void System::sellerLogin()
     if (this->seller_array_logical_size != 0)
     {
         char username[11], password[11];
-        cout << "Please enter your Username" << endl;
+        cout << "Please enter your Username: ";
         cin.getline(username, 10);
         int i = 0;
         bool isFinishedSearch = false;
