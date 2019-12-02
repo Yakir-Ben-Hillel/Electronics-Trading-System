@@ -26,7 +26,7 @@ public:
 private:
     void resizeOrderList();
     int price_of_order = 0;
-    Product **order_products; //pointer to array of products we have already bought.
+    Product **order_products = nullptr; //pointer to array of products we have already bought.
     unsigned int o_list_physical_size = 0;
     unsigned int o_list_logical_size = 0;
 };

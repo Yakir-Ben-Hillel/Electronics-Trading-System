@@ -3,15 +3,15 @@
 Order::Order(Product **order_list, int price,
              unsigned int physical_size, unsigned int logical_size)
 {
-    setProductList(order_products);
-    setPrice(price);
     setPhysicalSize(physical_size);
+    setProductList(order_list);
+    setPrice(price);
 }
 Order::Order(const Order &other)
 {
-    setProductList(other.order_products);
     setPrice(other.price_of_order);
     setPhysicalSize(other.o_list_physical_size);
+    setProductList(other.order_products);
 }
 Order::Order(Order &&other)
 {

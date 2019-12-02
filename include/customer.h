@@ -12,7 +12,9 @@ public:
 	Customer() = default;
 	Customer(const char *username, const char *password,
 			 Address *address, const Product **wishlist = nullptr,
-			 unsigned int physicalSize = 0, unsigned int logicalSize = 0);
+			 const Order **orderHistory = nullptr,
+			 unsigned int orderHistoryPhysicalSize = 0, unsigned int orderHistoryLogicalSize = 0,
+			 unsigned int wishlistPhysicalSize = 0, unsigned int wishlistLogicalSize = 0);
 	Customer(const Customer &other);
 	Customer(Customer &&other);
 	~Customer();
@@ -22,8 +24,8 @@ public:
 	bool setAddress(Address *address);
 	bool setPassword(const char *password);
 	bool setWishList(const Product **wishList, int size);
-	bool setOrder(Order *curr_order);
-	bool SetOrderArray(Order **order_array, int size);
+	bool setOrder(const Order *curr_order);
+	bool SetOrderArray(const Order **order_array, int size);
 	bool addProductToWishlistArray(Product *new_product);
 
 	//geters

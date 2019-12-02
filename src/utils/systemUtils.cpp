@@ -112,16 +112,17 @@ Address *System::makeAddress()
     Address *new_address = nullptr;
     char city_name[11], street_name[21];
     int apartment_number;
-    cout << "Please insert your city name: (10 chars max)";
+    cout << "Please insert your city name (10 chars max): ";
     cin.getline(city_name, 10);
-    cout << "Please insert your street name: (20 chars max)";
+    cout << "Please insert your street name (20 chars max): ";
     cin.getline(street_name, 20);
     do
     {
         cout << "Please insert your apartment number :";
         cin >> apartment_number;
         cin.ignore(256, '\n');
-        cout << (apartment_number < 0 ? "invalid number, please try again" : " ") << endl;
+        apartment_number < 0 && cout << ("invalid number, please try again") << endl;
+
     } while (apartment_number < 0);
 
     new_address = new Address(apartment_number, city_name, street_name);
@@ -132,9 +133,9 @@ void System::makeSeller()
     Seller *new_seller = nullptr;
     Address *address = nullptr;
     char username[11], password[11];
-    cout << "Please choose an username: (10 chars max)";
+    cout << "Please choose an username (10 chars max): ";
     cin.getline(username, 10);
-    cout << "Please choose a password: (10 chars max)";
+    cout << "Please choose a password (10 chars max): ";
     cin.getline(password, 10);
     address = makeAddress();
     new_seller = new Seller(username, address, password);
@@ -184,6 +185,7 @@ void Seller::makeProductForSale()
         default:
             cout << "Inserted number is not valid please try again." << endl;
             isCategoryValid = false;
+            cin.ignore(256, '\n');
             break;
         }
     }
@@ -198,9 +200,9 @@ void System::makeCustomer()
     Customer *new_customer;
     Address *address;
     char username[11], password[11];
-    cout << "Please choose an username: (10 chars max)";
+    cout << "Please choose an username (10 chars max): ";
     cin.getline(username, 10);
-    cout << "Please choose a password: (10 chars max)";
+    cout << "Please choose a password (10 chars max): ";
     cin.getline(password, 10);
     address = makeAddress();
     new_customer = new Customer(username, password, address);
@@ -208,36 +210,30 @@ void System::makeCustomer()
 }
 void System::chooseProductToAddToCustomerWishlist()
 {
-    unsigned int customer_index, seller_index, product_index;
-    Seller **sellers_array = this->getSellersArray();
-    Product **product_array = nullptr;
-    Customer **customers_array = this->getCostumeArray();
-    do
+    if (this->logged_in_customer) //Double check.
     {
-        printCustomersNames();
-        cout << "Please choose the customer you want to use: ";
-        cin >> customer_index;
-        customer_index--;
-    } while (!(customer_index <= this->getCustomerArraySize() && customer_index >= 0));
-
-    do
-    {
-        printSellersNames();
-        cout << "Please choose a seller in-order to view his products: ";
-        cin >> seller_index;
-        seller_index--;
-    } while (!(seller_index <= this->getSellersArraySize() && seller_index >= 0));
-    Seller *chosen_seller = sellers_array[seller_index];
-    do
-    {
-        chosen_seller->printSellerProducts();
-        cout << endl
-             << "Please choose the product you want to add into your wishlist: ";
-        cin >> product_index;
-        product_index--;
-    } while (!(product_index <= chosen_seller->getStockArraySize() && product_index >= 0));
-    product_array = chosen_seller->getStock();
-    customers_array[customer_index]->addProductToWishlistArray(product_array[product_index]);
+        unsigned int customer_index, seller_index, product_index;
+        Seller **sellers_array = this->getSellersArray();
+        Product **product_array = nullptr;
+        do
+        {
+            printSellersNames();
+            cout << "Please choose a seller in-order to view his products: ";
+            cin >> seller_index;
+            seller_index--;
+        } while (!(seller_index <= this->getSellersArraySize() && seller_index >= 0));
+        Seller *chosen_seller = sellers_array[seller_index];
+        do
+        {
+            chosen_seller->printSellerProducts();
+            cout << endl
+                 << "Please choose the product you want to add into your wishlist: ";
+            cin >> product_index;
+            product_index--;
+        } while (!(product_index <= chosen_seller->getStockArraySize() && product_index >= 0));
+        product_array = chosen_seller->getStock();
+        this->logged_in_customer->addProductToWishlistArray(product_array[product_index]);
+    }
 }
 void System::makeOrder()
 {

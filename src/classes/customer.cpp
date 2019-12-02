@@ -1,14 +1,17 @@
 #include "../..//include/system.h"
-Customer::Customer(const char *username, const char *password, Address *address, const Product **wishlist,
-                   unsigned int physicalSize, unsigned int logicalSize)
+Customer::Customer(const char *username, const char *password, Address *address,
+                   const Product **wishlist, const Order **orderHistory,
+                   unsigned int orderHistoryPhysicalSize, unsigned int orderHistoryLogicalSize,
+                   unsigned int wishlistPhysicalSize, unsigned int wishlistLogicalSize)
 
 {
     setName(username);
     setPassword(password);
     setAddress(address);
-    setWishList(wishlist, logicalSize);
-    setWishListPhysicalSize(physicalSize);
-    setWishListLogicalSize(logicalSize);
+    setWishList(wishlist, wishlistLogicalSize);
+    SetOrderArray(orderHistory, orderHistoryLogicalSize);
+    setWishListPhysicalSize(wishlistPhysicalSize);
+    setWishListLogicalSize(wishlistLogicalSize);
 }
 
 Customer::Customer(const Customer &other)
@@ -42,7 +45,7 @@ Customer::~Customer()
 {
     delete[] c_user_name;
     delete[] c_password;
-    c_address=nullptr;
+    c_address = nullptr;
     for (int i = 0; i < c_wish_logical_size; i++)
     {
         delete c_wishList[i];
@@ -107,7 +110,7 @@ bool Customer::setWishList(const Product **wishList, int size)
     return true;
 }
 
-bool Customer::SetOrderArray(Order **order_array, int size)
+bool Customer::SetOrderArray(const Order **order_array, int size)
 {
     orders_history = new Order *[size];
     for (int i = 0; i < size; i++)
@@ -173,7 +176,7 @@ bool Customer::addProductToWishlistArray(Product *new_product)
     c_wish_logical_size++;
     return true;
 }
-bool Customer::setOrder(Order *curr_order)
+bool Customer::setOrder(const Order *curr_order)
 {
     if (this->order_logical_size == this->order_physical_size)
         resizeOrderlistArray();
@@ -220,7 +223,6 @@ void Customer::resizeOrderlistArray()
     this->order_physical_size = newSize;
     this->orders_history = newArray;
 }
-
 void Customer::makeOrder()
 {
     bool fContinue = true;
@@ -249,7 +251,7 @@ void Customer::makeOrder()
         fContinue = (answer == 'y' ? true : false);
     } while (fContinue != false);
 
-    Order *temp_order = new Order(temp_list, price_of_order, c_wish_logical_size, temp_index);
+    Order *temp_order = new Order(temp_list, price_of_order, temp_index, c_wish_logical_size);
     this->setOrder(temp_order);
     showOrder(temp_order);
     delete temp_order;
