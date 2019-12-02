@@ -80,7 +80,19 @@ void System::mainMenu()
                 this->logged_in_seller->makeProductForSale();
                 break;
             case 2:
-                /*this->printFeedbacks()*/
+                int size;
+                FeedBack **array_feedbacks;
+                array_feedbacks = this->logged_in_seller->getfeedBacksArray(size);
+                if (size == 0)
+                    cout << "there are no feedback availables please try again later" << endl;
+                else
+                {
+                    cout << "your feedbacks are: " << endl;
+                    for (int i = 0; i < size; i++)
+                    {
+                        array_feedbacks[i]->show();
+                    }
+                }
                 break;
             case 3:
                 this->logged_in_seller = nullptr;
@@ -98,15 +110,20 @@ void System::mainMenu()
 Address *System::makeAddress()
 {
     Address *new_address = nullptr;
-    char city_name[11], street_name[31];
+    char city_name[11], street_name[21];
     int apartment_number;
-    cout << "Please insert your city name: ";
+    cout << "Please insert your city name: (10 chars max)";
     cin.getline(city_name, 10);
-    cout << "Please insert your street name :";
-    cin.getline(street_name, 30);
-    cout << "Please insert your apartment number :";
-    cin >> apartment_number;
-    cin.ignore(256, '\n');
+    cout << "Please insert your street name: (20 chars max)";
+    cin.getline(street_name, 20);
+    do
+    {
+        cout << "Please insert your apartment number :";
+        cin >> apartment_number;
+        cin.ignore(256, '\n');
+        cout << (apartment_number < 0 ? "invalid number, please try again" : " ") << endl;
+    } while (apartment_number < 0);
+
     new_address = new Address(apartment_number, city_name, street_name);
     return new_address;
 }
@@ -115,9 +132,9 @@ void System::makeSeller()
     Seller *new_seller = nullptr;
     Address *address = nullptr;
     char username[11], password[11];
-    cout << "Please choose an username: ";
+    cout << "Please choose an username: (10 chars max)";
     cin.getline(username, 10);
-    cout << "Please choose a password: ";
+    cout << "Please choose a password: (10 chars max)";
     cin.getline(password, 10);
     address = makeAddress();
     new_seller = new Seller(username, address, password);
@@ -131,7 +148,6 @@ void Seller::makeProductForSale()
     char product_name[11];
     float price;
     Seller *seller_of_product;
-    unsigned int serialNumber;
     unsigned int seller_index;
     bool isCategoryValid = false;
     cout << "Please choose a name: ";
@@ -182,9 +198,9 @@ void System::makeCustomer()
     Customer *new_customer;
     Address *address;
     char username[11], password[11];
-    cout << "Please choose an username: ";
+    cout << "Please choose an username: (10 chars max)";
     cin.getline(username, 10);
-    cout << "Please choose a password: ";
+    cout << "Please choose a password: (10 chars max)";
     cin.getline(password, 10);
     address = makeAddress();
     new_customer = new Customer(username, password, address);
@@ -314,7 +330,6 @@ void System::customerLogin()
     else
     {
         cout << "There are no Customers Available" << endl;
-        system("pause");
     }
 }
 void System::sellerLogin()

@@ -23,6 +23,8 @@ public:
     const Customer *getCustomer() const;
     const Date *getDate();
 
+    void show() const;
+
 private:
     const Customer *customer;
     char *notes;

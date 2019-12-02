@@ -3,8 +3,8 @@
 char *Product::CategoryNames[4] = {(char *)"Children", (char *)"Electricity", (char *)"Office", (char *)"Clothing"};
 unsigned int Product::counter = 0;
 
-Product::Product(const char *name, eCategory category, Seller *seller, float price)
-    : p_serialNumber(++counter), p_seller(seller)
+Product::Product(const char *name, eCategory category, Seller *seller,float price)
+:p_serialNumber(++counter)
 {
     setName(name);
     setCategory(category);
