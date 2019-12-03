@@ -53,6 +53,7 @@ void System::mainMenu()
                 this->printAllAvailableSellersToGiveFeedbacks(this->logged_in_customer);
                 cout << "Please insert the number of the seller you want to leave a feedback on: ";
                 cin >> x;
+
                 this->logged_in_customer->addFeedBackToSeller(this->s_sellers_array[x - 1]);
                 break;
             case '3':
@@ -340,12 +341,12 @@ void System::customerLogin()
         cin.getline(username, 10);
         int i = 0;
         bool isFinishedSearch = false;
-        while (isFinishedSearch == false || i != this->customer_array_logical_size)
+        bool isMatch = false;
+        bool isExitedByWill = false;
+        while (isFinishedSearch == false && i != this->customer_array_logical_size)
         {
             if (strcmp(s_customers_array[i]->getName(), username) == 0)
             {
-                bool isMatch = false;
-                bool isExitedByWill = false;
 
                 isFinishedSearch = true;
                 do
@@ -365,10 +366,13 @@ void System::customerLogin()
                         cout << "Password incorrect please try again." << endl;
                     }
 
-                } while (isMatch == false && isFinishedSearch == false);
+                } while (isMatch == false && isExitedByWill == false);
             }
-            i++;
+            else
+                i++;
         }
+        if (isFinishedSearch == false)
+            cout << "Username did not found, returning to main menu." << endl;
     }
     else
     {
@@ -409,10 +413,13 @@ void System::sellerLogin()
                         cout << "Password incorrect please try again." << endl;
                     }
 
-                } while (isMatch == false && isFinishedSearch == false);
+                } while (isMatch == false && isExitedByWill == false);
             }
-            i++;
+            else
+                i++;
         }
+        if (isFinishedSearch == false)
+            cout << "Username did not found, returning to main menu." << endl;
     }
     else
     {

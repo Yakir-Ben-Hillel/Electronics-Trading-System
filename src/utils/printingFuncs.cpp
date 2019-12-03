@@ -92,7 +92,7 @@ void System::printAllAvailableSellersToGiveFeedbacks(Customer *customer)
         if (customer->didCustomerOrderedFromSeller(this->s_sellers_array[i]) == true)
         {
             counter++;
-            cout<<counter<<" "<<this->s_sellers_array[i]->getUserName()<<endl;
+            cout<<counter<<") "<<this->s_sellers_array[i]->getUserName()<<endl;
         }
     }
 }

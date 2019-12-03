@@ -230,40 +230,45 @@ void Customer::makeOrder()
     int index, temp_index = 0;
     unsigned int price_of_order = 0;
     char answer;
-
-    cout << "please pick from the following products the product you want to buy: " << endl;
-    for (int j = 0; j < this->c_wish_logical_size; j++)
-    {
-        cout << "Product number #" << j + 1 << " " << endl;
-        this->c_wishList[j]->printProduct();
-    }
-
     do
     {
-        cout << "please enter the number of product you would like to buy: " << endl;
-        cin >> index;
-        temp_list[temp_index] = new Product(*c_wishList[index - 1]);
-        price_of_order += temp_list[temp_index]->getPrice();
-        temp_index++;
-        deleteFromWishList(index - 1);
-        cout << "do you want to buy something else?(y/n)" << endl;
-        cin >> answer;
-        fContinue = (answer == 'y' ? true : false);
-    } while (fContinue != false);
+        if (this->c_wish_logical_size != 0)
+        {
+            cout << "please pick from the following products the product you want to buy: " << endl;
+            for (int j = 0; j < this->c_wish_logical_size; j++)
+            {
+                cout << "Product number #" << j + 1 << " " << endl;
+                this->c_wishList[j]->printProduct();
+            }
 
+            cout << "please enter the number of product you would like to buy: " << endl;
+            cin >> index;
+            temp_list[temp_index] = new Product(*c_wishList[index - 1]);
+            price_of_order += temp_list[temp_index]->getPrice();
+            temp_index++;
+            deleteFromWishList(index - 1);
+            cout << "do you want to buy something else?(y/n)" << endl;
+            cin >> answer;
+            fContinue = (answer == 'y' ? true : false);
+        }
+        else
+        {
+            cout << "Wishlist is Empty." << endl;
+            fContinue = false;
+        }
+    } while (fContinue != false);
     Order *temp_order = new Order(temp_list, price_of_order, temp_index, c_wish_logical_size);
     this->setOrder(temp_order);
     showOrder(temp_order);
     delete temp_order;
     delete temp_list;
 }
-
 void Customer::showOrder(Order *curr)
 {
     Product **temp = curr->getList();
-    unsigned int size = curr->getLogicalSize();
+    unsigned int size = curr->getPhysicalSize();
     cout << "the details of your order are: " << endl;
-    for (int i = 0; i <= size; i++)
+    for (int i = 0; i < size; i++)
     {
         temp[i]->printProduct();
         cout << endl;
@@ -290,7 +295,7 @@ bool Customer::didCustomerOrderedFromSeller(Seller *seller)
         for (int i = 0; i < orders_array_length; i++)
         {
             Product **products_list = this->orders_history[i]->getList();
-            unsigned int order_length = this->orders_history[i]->getLogicalSize();
+            unsigned int order_length = this->orders_history[i]->getPhysicalSize();
             for (int j = 0; j < order_length; j++)
             {
                 if (products_list[j]->getSeller() == seller)
@@ -308,6 +313,7 @@ void Customer::addFeedBackToSeller(Seller *seller)
         cout << "you can't give a feedback to a seller you didn't bought from" << endl;
     else
     {
+        cin.ignore(256, '\n');
         cout << "please enter your notes about the seller: " << endl;
         char temp[256];
         cin.getline(temp, 255);
