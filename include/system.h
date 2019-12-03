@@ -63,15 +63,16 @@ public:
 
 private:
 	const char system_name[24] = "Electronic Trade System";
-	Customer *logged_in_customer=nullptr; //Use only for pointing this variable is never initialized.
+	Customer *logged_in_customer = nullptr; //Use only for pointing this variable is never initialized.
 	Customer **s_customers_array;
 	int customer_array_physical_size = 0;
 	int customer_array_logical_size = 0;
-	Seller *logged_in_seller=nullptr; //Use only for pointing this variable is never initialized.
+	Seller *logged_in_seller = nullptr; //Use only for pointing this variable is never initialized.
 	Seller **s_sellers_array;
 	int seller_array_physical_size = 0;
 	int seller_array_logical_size = 0;
 	//private methoods
+	bool checkUsernameAvailability(const char *username);
 	bool setSellersArrayPhysicalSize(const unsigned int newSize);
 	bool setCustomersArrayPhysicalSize(const unsigned int newSIze);
 	bool setSellersArrayLogicalSize(const unsigned int newSize);

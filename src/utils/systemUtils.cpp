@@ -3,32 +3,38 @@
 void System::mainMenu()
 {
     bool isFinished = false;
-    unsigned int option;
+    char option;
+    cout << "Welcome to"
+         << " " << this->getSystemName() << endl;
     printOpening();
     while (!isFinished)
     {
+        bool isValid = true;
         if (this->logged_in_customer == nullptr && this->logged_in_seller == nullptr)
         { //Both are nullptr.
             printOptionsAsGuest();
             cin >> option;
             switch (option)
             {
-            case 1:
+            case '1':
                 this->login();
                 break;
-            case 2:
+            case '2':
                 this->signup();
                 break;
-            case 3:
+            case '3':
                 this->printCustomersNames();
                 break;
-            case 4:
+            case '4':
                 this->printSellersNames();
                 break;
-            case 5:
+            case '5':
                 isFinished = true;
                 break;
             default:
+                cout << "Chosen option is not valid,try again." << endl;
+                isValid = false;
+                cin.ignore(256, '\n');
                 break;
             }
         }
@@ -37,36 +43,39 @@ void System::mainMenu()
             printOptionsAsCustomer();
             cin >> option;
             switch (option)
+
             {
-            case 1:
+            case '1':
                 this->chooseProductToAddToCustomerWishlist();
                 break;
-            case 2:
+            case '2':
                 int x;
                 this->printAllAvailableSellersToGiveFeedbacks(this->logged_in_customer);
                 cout << "Please insert the number of the seller you want to leave a feedback on: ";
                 cin >> x;
                 this->logged_in_customer->addFeedBackToSeller(this->s_sellers_array[x - 1]);
                 break;
-            case 3:
+            case '3':
                 this->logged_in_customer->makeOrder();
                 break;
-            case 4:
+            case '4':
                 this->printSellersNames();
                 break;
-            case 5:
+            case '5':
                 cout << "Please insert the name of the product you want to search for: ";
                 char name[11];
                 cin.getline(name, 10);
                 this->showProductsWithTheSameName(name);
                 break;
-            case 6:
+            case '6':
                 logged_in_customer = nullptr;
                 break;
-            case 7:
+            case '7':
                 isFinished = true;
                 break;
             default:
+                cout << "Chosen option is not valid,try again." << endl;
+                isValid = false;
                 break;
             }
         }
@@ -76,10 +85,10 @@ void System::mainMenu()
             cin >> option;
             switch (option)
             {
-            case 1:
+            case '1':
                 this->logged_in_seller->makeProductForSale();
                 break;
-            case 2:
+            case '2':
                 int size;
                 FeedBack **array_feedbacks;
                 array_feedbacks = this->logged_in_seller->getfeedBacksArray(size);
@@ -94,13 +103,15 @@ void System::mainMenu()
                     }
                 }
                 break;
-            case 3:
+            case '3':
                 this->logged_in_seller = nullptr;
                 break;
-            case 4:
+            case '4':
                 isFinished = true;
                 break;
             default:
+                cout << "Chosen option is not valid,try again." << endl;
+                isValid = false;
                 break;
             }
         }
@@ -132,14 +143,39 @@ void System::makeSeller()
 {
     Seller *new_seller = nullptr;
     Address *address = nullptr;
+    bool availabilty = true;
     char username[11], password[11];
-    cout << "Please choose an username (10 chars max): ";
-    cin.getline(username, 10);
+    do
+    {
+        cout << "Please choose an username (10 chars max): ";
+        cin.getline(username, 10);
+        if (checkUsernameAvailability(username) == false)
+        {
+            availabilty = false;
+            cout << "Username is taken, please choose another name." << endl;
+        }
+        else
+            availabilty = true;
+    } while (availabilty == false);
     cout << "Please choose a password (10 chars max): ";
     cin.getline(password, 10);
     address = makeAddress();
     new_seller = new Seller(username, address, password);
     this->addSellerToArray(new_seller);
+}
+bool System::checkUsernameAvailability(const char *username)
+{
+    for (int i = 0; i < this->customer_array_logical_size; i++)
+    {
+        if (strcmp(this->s_customers_array[i]->getName(), username) == 0)
+            return false;
+    }
+    for (int i = 0; i < this->seller_array_logical_size; i++)
+    {
+        if (strcmp(this->s_sellers_array[i]->getUserName(), username) == 0)
+            return false;
+    }
+    return true;
 }
 void Seller::makeProductForSale()
 {
@@ -199,9 +235,20 @@ void System::makeCustomer()
     int x;
     Customer *new_customer;
     Address *address;
+    bool availabilty = true;
     char username[11], password[11];
-    cout << "Please choose an username (10 chars max): ";
-    cin.getline(username, 10);
+    do
+    {
+        cout << "Please choose an username (10 chars max): ";
+        cin.getline(username, 10);
+        if (checkUsernameAvailability(username) == false)
+        {
+            cout << "Username is not available, please choose another name." << endl;
+            availabilty = false;
+        }
+        else
+            availabilty = true;
+    } while (availabilty == false);
     cout << "Please choose a password (10 chars max): ";
     cin.getline(password, 10);
     address = makeAddress();
