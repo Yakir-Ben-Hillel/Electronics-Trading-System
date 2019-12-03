@@ -1,7 +1,7 @@
 #include "../../include/system.h"
 
 FeedBack::FeedBack(char *note, Customer *customer_data, Date *curr_date)
-:customer(customer_data),date_of_feedback(curr_date)
+    : customer(customer_data), date_of_feedback(curr_date)
 {
     //setCustomer(customer_data);
     //setDateOfFeedBack(curr_date);
@@ -25,9 +25,9 @@ FeedBack::FeedBack(FeedBack &&other)
 }
 FeedBack::~FeedBack()
 {
-    date_of_feedback=nullptr;
+    date_of_feedback = nullptr;
     delete[] notes;
-    customer=nullptr;
+    customer = nullptr;
 }
 
 bool FeedBack::setNotes(const char *givenNote)
@@ -43,7 +43,7 @@ bool FeedBack::setCustomer(const Customer *other_customer)
 }
 bool FeedBack::setDateOfFeedBack(const Date *date)
 {
-    date_of_feedback =date;
+    date_of_feedback = date;
     return true;
 }
 const char *FeedBack::getNotes() const
@@ -61,8 +61,7 @@ const Date *FeedBack::getDate()
 
 void FeedBack::show() const
 {
-  cout<<"the customer who gave you the feedback: "<<this->customer->getName()<<endl;
-  cout<<"the date of the feedback is: "<<this->date_of_feedback->getDay()<<"/"<<
-  this->date_of_feedback->getMonth()<<"/"<<this->date_of_feedback->getYear()<<endl;
-  cout<<"the notes are: "<<this->notes;
+    cout << "the customer who gave you the feedback: " << this->customer->getName() << endl;
+    cout << "the date of the feedback is: " << this->date_of_feedback->getDay() << "/" << this->date_of_feedback->getMonth() << "/" << this->date_of_feedback->getYear() << endl;
+    cout << "the notes are: " << this->notes << endl;
 }

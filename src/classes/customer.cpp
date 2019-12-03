@@ -225,14 +225,15 @@ void Customer::resizeOrderlistArray()
 }
 void Customer::makeOrder()
 {
-    bool fContinue = true;
-    Product **temp_list = new Product *[this->c_wish_logical_size];
-    int index, temp_index = 0;
-    unsigned int price_of_order = 0;
-    char answer;
-    do
+    if (this->c_wish_logical_size != 0)
     {
-        if (this->c_wish_logical_size != 0)
+
+        bool fContinue = true;
+        Product **temp_list = new Product *[this->c_wish_logical_size];
+        int index, temp_index = 0;
+        unsigned int price_of_order = 0;
+        char answer;
+        do
         {
             cout << "please pick from the following products the product you want to buy: " << endl;
             for (int j = 0; j < this->c_wish_logical_size; j++)
@@ -251,17 +252,18 @@ void Customer::makeOrder()
             cin >> answer;
             fContinue = (answer == 'y' ? true : false);
         }
-        else
-        {
-            cout << "Wishlist is Empty." << endl;
-            fContinue = false;
-        }
-    } while (fContinue != false);
-    Order *temp_order = new Order(temp_list, price_of_order, temp_index, c_wish_logical_size);
-    this->setOrder(temp_order);
-    showOrder(temp_order);
-    delete temp_order;
-    delete temp_list;
+
+        while (fContinue != false);
+        Order *temp_order = new Order(temp_list, price_of_order, temp_index, c_wish_logical_size);
+        this->setOrder(temp_order);
+        showOrder(temp_order);
+        delete temp_order;
+        delete temp_list;
+    }
+    else
+    {
+        cout << "Wishlist is Empty." << endl;
+    }
 }
 void Customer::showOrder(Order *curr)
 {
