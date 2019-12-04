@@ -390,7 +390,7 @@ void System::sellerLogin()
         bool isFinishedSearch = false;
         while (isFinishedSearch == false && i != this->seller_array_logical_size)
         {
-            if (strcmp(s_sellers_array[i]->getUserName(), username) == 0)
+            if (strcmp(this->s_sellers_array[i]->getUserName(), username) == 0)
             {
                 bool isMatch = false;
                 bool isExitedByWill = false;

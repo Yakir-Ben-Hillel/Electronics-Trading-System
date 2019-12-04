@@ -100,8 +100,6 @@ void Order::resizeOrderList()
     Product **newArray = new Product *[newSize];
     memcpy(newArray, this->order_products,
            this->o_list_logical_size * sizeof(Product *));
-    for (int i = 0; i < this->o_list_logical_size; i++)
-        delete this->order_products[i];
     delete[] this->order_products;
     this->o_list_physical_size = newSize;
     this->order_products = newArray;

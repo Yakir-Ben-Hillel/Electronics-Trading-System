@@ -51,7 +51,7 @@ void System::printCustomersNames()
     {
         char name[11];
         strcpy(name, customer_array[i]->getName());
-        cout << index << " " << name << endl;
+        cout << index << ") " << name << endl;
         index++;
     }
 }
@@ -67,7 +67,7 @@ void System::printSellersNames()
     {
         char name[11];
         strcpy(name, sellers_array[i]->getUserName());
-        cout << index << " " << name << endl;
+        cout << index << ") " << name << endl;
         index++;
     }
 }

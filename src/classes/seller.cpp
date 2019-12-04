@@ -120,8 +120,6 @@ void Seller::resizeStockArray()
     int newSize = this->stock_array_physical_length * 2 + 1;
     Product **newArray = new Product *[newSize];
     memcpy(newArray, this->s_stock, this->stock_array_logical_length * sizeof(Product *));
-    for (int i = 0; i < this->stock_array_logical_length; i++)
-        delete this->s_stock[i];
     delete[] this->s_stock;
     this->stock_array_physical_length = newSize;
     this->s_stock = newArray;
@@ -139,8 +137,6 @@ void Seller::resizeFeedbackArray()
     int newSize = this->feedbacks_array_physical_length * 2 + 1;
     FeedBack **newArray = new FeedBack *[newSize];
     memcpy(newArray, this->feedBack_array, this->feedbacks_array_logical_length * sizeof(FeedBack *));
-    for (int i = 0; i < this->feedbacks_array_logical_length; i++)
-        delete this->feedBack_array[i];
     delete[] feedBack_array;
     this->feedbacks_array_physical_length = newSize;
     this->feedBack_array = newArray;
