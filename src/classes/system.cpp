@@ -26,8 +26,8 @@ System::~System()
     for (int i = 0; i < seller_array_logical_size; i++)
         delete s_sellers_array[i];
     delete[] s_sellers_array;
-    logged_in_customer=nullptr;
-    logged_in_seller=nullptr;
+    logged_in_customer = nullptr;
+    logged_in_seller = nullptr;
 }
 bool System::setCustomersArray(const Customer **given_customer_array)
 {
@@ -80,8 +80,6 @@ void System::resizeSellersArray()
     int newSize = this->seller_array_physical_size * 2 + 1;
     Seller **newArray = new Seller *[newSize];
     memcpy(newArray, this->s_sellers_array, this->seller_array_logical_size * sizeof(Seller *));
-    for (int i = 0; i < this->seller_array_logical_size; i++)
-        delete this->s_sellers_array[i];
     delete[] this->s_sellers_array;
     this->seller_array_physical_size = newSize;
     this->s_sellers_array = newArray;
@@ -99,8 +97,6 @@ void System::resizeCustomersArray()
     int newSize = this->customer_array_physical_size * 2 + 1;
     Customer **newArray = new Customer *[newSize];
     memcpy(newArray, this->s_customers_array, this->customer_array_logical_size * sizeof(Seller *));
-    for (int i = 0; i < this->customer_array_logical_size; i++)
-        delete this->s_customers_array[i];
     delete[] this->s_customers_array;
     this->customer_array_physical_size = newSize;
     this->s_customers_array = newArray;

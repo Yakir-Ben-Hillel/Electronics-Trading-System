@@ -45,12 +45,13 @@ Customer::~Customer()
 {
     delete[] c_user_name;
     delete[] c_password;
-    c_address = nullptr;
+    delete c_address;
     for (int i = 0; i < c_wish_logical_size; i++)
-    {
         delete c_wishList[i];
-    }
     delete[] c_wishList;
+    for (int i = 0; i < order_physical_size; i++)
+        delete orders_history[i];
+    delete[] orders_history;
     c_wish_physical_size = c_wish_logical_size = 0;
 }
 
@@ -186,11 +187,9 @@ bool Customer::setOrder(const Order *curr_order)
 }
 void Customer::resizeWishlistArray()
 {
-    int newSize = this->c_wish_physical_size * 2;
+    int newSize = this->c_wish_physical_size * 2 + 1;
     Product **newArray = new Product *[newSize];
     memcpy(newArray, this->c_wishList, this->c_wish_logical_size * sizeof(Product *));
-    for (int i = 0; i < this->c_wish_logical_size; i++)
-        delete this->c_wishList[i];
     delete[] this->c_wishList;
     this->c_wish_physical_size = newSize;
     this->c_wishList = newArray;
@@ -214,11 +213,9 @@ bool Customer::setOrderListLogicSize(unsigned int LogicSize)
 }
 void Customer::resizeOrderlistArray()
 {
-    int newSize = this->order_physical_size * 2;
+    int newSize = this->order_physical_size * 2 + 1;
     Order **newArray = new Order *[newSize];
-    memcpy(newArray, this->orders_history, this->order_logical_size * sizeof(Product *));
-    for (int i = 0; i < this->order_logical_size; i++)
-        delete this->orders_history[i];
+    memcpy(newArray, this->orders_history, this->order_logical_size * sizeof(Order *));
     delete[] this->orders_history;
     this->order_physical_size = newSize;
     this->orders_history = newArray;
@@ -235,22 +232,30 @@ void Customer::makeOrder()
         char answer;
         do
         {
-            cout << "please pick from the following products the product you want to buy: " << endl;
-            for (int j = 0; j < this->c_wish_logical_size; j++)
+            if (this->c_wish_logical_size != 0)
             {
-                cout << "Product number #" << j + 1 << " " << endl;
-                this->c_wishList[j]->printProduct();
-            }
+                cout << "please pick from the following products the product you want to buy: " << endl;
+                for (int j = 0; j < this->c_wish_logical_size; j++)
+                {
+                    cout << "Product number #" << j + 1 << " " << endl;
+                    this->c_wishList[j]->printProduct();
+                }
 
-            cout << "please enter the number of product you would like to buy: " << endl;
-            cin >> index;
-            temp_list[temp_index] = new Product(*c_wishList[index - 1]);
-            price_of_order += temp_list[temp_index]->getPrice();
-            temp_index++;
-            deleteFromWishList(index - 1);
-            cout << "do you want to buy something else?(y/n)" << endl;
-            cin >> answer;
-            fContinue = (answer == 'y' ? true : false);
+                cout << "please enter the number of product you would like to buy: " << endl;
+                cin >> index;
+                temp_list[temp_index] = new Product(*c_wishList[index - 1]);
+                price_of_order += temp_list[temp_index]->getPrice();
+                temp_index++;
+                deleteFromWishList(index - 1);
+                cout << "do you want to buy something else?(y/n)" << endl;
+                cin >> answer;
+                fContinue = (answer == 'y' ? true : false);
+            }
+            else
+            {
+                fContinue = false;
+                cout << "Wishlist is Empty." << endl;
+            }
         }
 
         while (fContinue != false);
@@ -258,7 +263,9 @@ void Customer::makeOrder()
         this->setOrder(temp_order);
         showOrder(temp_order);
         delete temp_order;
-        delete temp_list;
+        for (int i = 0; i < temp_index; i++)
+            delete temp_list[i];
+        delete[] temp_list;
     }
     else
     {
