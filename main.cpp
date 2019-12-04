@@ -1,5 +1,6 @@
-/*electorincs project by Maor Ben Moshe,ID:316041466 and Yakir Ben Hillel,ID:209509348
-we are both on the class of Keren ,day:Sunday*/
+/*Trading App project by :
+1) Maor Ben Moshe,ID:316041466
+2) Yakir Ben Hillel,ID:209509348 */
 #include "./include/system.h"
 int main()
 {
