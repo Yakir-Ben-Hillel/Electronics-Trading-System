@@ -101,6 +101,7 @@ void System::mainMenu()
                     for (int i = 0; i < size; i++)
                     {
                         array_feedbacks[i]->show();
+                        cout<<endl;
                     }
                 }
                 break;
@@ -338,7 +339,7 @@ void System::customerLogin()
     {
         char username[11], password[11];
         cout << "Please enter your Username" << endl;
-        cin.getline(username, 20);
+        cin.getline(username, 10);
         int i = 0;
         bool isFinishedSearch = false;
         bool isMatch = false;

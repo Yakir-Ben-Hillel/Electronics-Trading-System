@@ -1,6 +1,6 @@
 #include "../../include/system.h"
 
-Order::Order(Product **order_list, int price,
+Order::Order(Product **order_list, float price,
              unsigned int physical_size, unsigned int logical_size)
 {
     setPhysicalSize(physical_size);
@@ -29,7 +29,7 @@ Order::~Order()
     delete[] order_products;
 }
 
-bool Order::setPrice(int price_of_order)
+bool Order::setPrice(float price_of_order)
 {
     if (price_of_order < 0)
     {
@@ -69,7 +69,7 @@ bool Order::setLogicalSize(unsigned int logical_size)
     return true;
 }
 
-int Order::getPrice() const
+float Order::getPrice() const
 {
     return price_of_order;
 }

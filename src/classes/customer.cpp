@@ -228,7 +228,7 @@ void Customer::makeOrder()
         bool fContinue = true;
         Product **temp_list = new Product *[this->c_wish_logical_size];
         int index, temp_index = 0;
-        unsigned int price_of_order = 0;
+        float price_of_order = 0;
         char answer;
         do
         {
