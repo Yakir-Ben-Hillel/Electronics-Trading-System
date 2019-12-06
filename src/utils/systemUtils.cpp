@@ -183,14 +183,14 @@ void Seller::makeProductForSale()
     char x;
     Product *new_product;
     Product::eCategory category;
-    char product_name[11];
+    char product_name[21];
     float price;
     Seller *seller_of_product;
     unsigned int seller_index;
     bool isCategoryValid = false;
-    cout << "Please choose a name: ";
+    cout << "Please choose a name: (20 chars max)";
     cin.ignore(256, '\n');
-    cin.getline(product_name, 10);
+    cin.getline(product_name, 20);
     while (!isCategoryValid)
     {
         isCategoryValid = true;
@@ -338,7 +338,7 @@ void System::customerLogin()
     {
         char username[11], password[11];
         cout << "Please enter your Username" << endl;
-        cin.getline(username, 10);
+        cin.getline(username, 20);
         int i = 0;
         bool isFinishedSearch = false;
         bool isMatch = false;
@@ -347,7 +347,6 @@ void System::customerLogin()
         {
             if (strcmp(s_customers_array[i]->getName(), username) == 0)
             {
-
                 isFinishedSearch = true;
                 do
                 {

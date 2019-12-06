@@ -47,6 +47,8 @@ void System::printCustomersNames()
     Customer **customer_array = this->getCostumeArray();
     if (this->getCustomerArraySize() == 0)
         cout << "there are no customers in the store" << endl;
+    else
+        cout << "the customers are: " << endl;
     for (int i = 0; i < this->getCustomerArraySize(); i++)
     {
         char name[11];
@@ -54,6 +56,7 @@ void System::printCustomersNames()
         cout << index << ") " << name << endl;
         index++;
     }
+    cout << endl;
 }
 void System::printSellersNames()
 {
@@ -63,6 +66,8 @@ void System::printSellersNames()
     {
         cout << "There are no sellers available in the store now,please try again later." << endl;
     }
+    else
+        cout << "the sellers are: " << endl;
     for (int i = 0; i < this->getSellersArraySize(); i++)
     {
         char name[11];
@@ -70,6 +75,7 @@ void System::printSellersNames()
         cout << index << ") " << name << endl;
         index++;
     }
+    cout << endl;
 }
 void Seller::printSellerProducts()
 {
@@ -92,7 +98,7 @@ void System::printAllAvailableSellersToGiveFeedbacks(Customer *customer)
         if (customer->didCustomerOrderedFromSeller(this->s_sellers_array[i]) == true)
         {
             counter++;
-            cout<<counter<<") "<<this->s_sellers_array[i]->getUserName()<<endl;
+            cout << counter << ") " << this->s_sellers_array[i]->getUserName() << endl;
         }
     }
 }
