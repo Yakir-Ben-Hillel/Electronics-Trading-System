@@ -247,18 +247,21 @@ void Customer::makeOrder()
                 price_of_order += temp_list[temp_index]->getPrice();
                 temp_index++;
                 deleteFromWishList(index - 1);
-                cout << "do you want to buy something else?(y/n)" << endl;
-                cin >> answer;
-                fContinue = (answer == 'y' ? true : false);
+                if (this->c_wish_logical_size != 0)
+                {
+                    cout << "do you want to buy something else?(y/n)" << endl;
+                    cin >> answer;
+                    fContinue = (answer == 'y' ? true : false);
+                }
+                else
+                    fContinue = false;
             }
             else
             {
                 fContinue = false;
                 cout << "Wishlist is Empty." << endl;
             }
-        }
-
-        while (fContinue != false);
+        } while (fContinue != false);
         Order *temp_order = new Order(temp_list, price_of_order, temp_index, c_wish_logical_size);
         this->setOrder(temp_order);
         showOrder(temp_order);
@@ -322,12 +325,13 @@ void Customer::addFeedBackToSeller(Seller *seller)
         cout << "you can't give a feedback to a seller you didn't bought from" << endl;
     else
     {
+        bool isDateValid = true;
         cin.ignore(256, '\n');
         cout << "please enter your notes about the seller: " << endl;
         char temp[256];
         cin.getline(temp, 255);
         int day, month, year;
-        cout << "what date is it? (format: dd/mm/yy)" << endl;
+        cout << "what date is it? (format: dd/mm/yyyy)" << endl;
         cin >> day >> month >> year;
         Date *date = new Date(day, month, year);
         FeedBack *curr_feedback = new FeedBack(temp, this, date);

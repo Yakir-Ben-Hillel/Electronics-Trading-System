@@ -40,7 +40,7 @@ bool Address::setStreetName(const char *givenStreetName)
 }
 bool Address::setApartmentNumber(unsigned int givenApartmentNumber)
 {
-    if (givenApartmentNumber > 0) //the number is must be positive because of that it is unsigned.
+    if (givenApartmentNumber > 0) //the number is must be positive because it is unsigned.
     {
         apartmentNumber = givenApartmentNumber;
         return true;
