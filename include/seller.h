@@ -1,31 +1,29 @@
 #ifndef __Seller_H
 #define __Seller_H
 
+#include "user.h"
 class FeedBack;
-class Address;
 class Product;
-class Seller: virtual public User
+class Seller : virtual public User
 {
 public:
 	//Constructors && Distructors
 	Seller() = default;
-	Seller(char *userName, Address *address, const char *password,
-		   Product **stockArray = nullptr,
-		   FeedBack **feedbacksArray = nullptr, unsigned int s_size = 0,
-		   unsigned int f_size = 0);
+	Seller(const User &user, Product **stockArray = nullptr, FeedBack **feedbacksArray = nullptr,
+		   unsigned int s_size = 0, unsigned int f_size = 0);
 	Seller(const Seller &other);
 	Seller(Seller &&other);
 	~Seller();
 	//Getters Functions.
 	const char *getUserName() const;
 	const char *getPassword() const;
-	Address *getAddress() const;
+	const Address &getAddress() const;
 	Product **getStock() const;
-	FeedBack **getfeedBacksArray(int& size) const;
+	FeedBack **getfeedBacksArray(int &size) const;
 	//Setters Functions.
-	bool setUserName(const char *userName);
-	bool setPassword(const char *password);
-	bool setAddress(Address *address);
+	bool setUserName(char *userName);
+	bool setPassword(char *password);
+	bool setAddress(Address address);
 	bool setStockArray(Product **given_stock_array);
 	FeedBack setFeedback(FeedBack *given_feedBack);
 	bool setFeedbacksArray(FeedBack **given_feedBacks_array);
@@ -35,12 +33,11 @@ public:
 	void printSellerProducts();
 	void makeProductForSale();
 
+	const Seller &operator=(const Seller &other);
+
 protected:
-	char *userName;
 	void resizeStockArray();
 	void resizeFeedbackArray();
-	Address *address;  //pointer to class address
-	char *password;	//max length of password is 10 chars,can be letter or a number
 	Product **s_stock; //array of all product this seller sells.
 	unsigned int stock_array_physical_length = 0;
 	unsigned int stock_array_logical_length = 0;

@@ -1,6 +1,5 @@
 #include "../..//include/system.h"
-Customer::Customer(const User &user,
-                   const Product **wishlist, const Order **orderHistory,
+Customer::Customer(const User &user, const Product **wishlist, const Order **orderHistory,
                    unsigned int orderHistoryPhysicalSize, unsigned int orderHistoryLogicalSize,
                    unsigned int wishlistPhysicalSize, unsigned int wishlistLogicalSize) : User(user)
 
@@ -11,14 +10,12 @@ Customer::Customer(const User &user,
     setWishListLogicalSize(wishlistLogicalSize);
 }
 
-Customer::Customer(const Customer &other):User(other)
+Customer::Customer(const Customer &other) : User(other)
 {
-    setWishList((const Product **)other.c_wishList, other.c_wish_logical_size);
-    setWishListPhysicalSize(other.c_wish_physical_size);
-    setWishListLogicalSize(other.c_wish_logical_size);
+   *this=other;
 }
 
-Customer::Customer(Customer &&other):User(std::move(other))
+Customer::Customer(Customer &&other) : User(std::move(other))
 {
     this->c_wish_physical_size = other.c_wish_physical_size;
     this->c_wish_logical_size = other.c_wish_logical_size;
@@ -104,7 +101,7 @@ const char *Customer::getName() const
     return User::getName();
 }
 
-const Address& Customer::getAddress() const
+const Address &Customer::getAddress() const
 {
     return User::getAddress();
 }
@@ -315,4 +312,16 @@ void Customer::addFeedBackToSeller(Seller *seller)
         FeedBack *curr_feedback = new FeedBack(temp, this, date);
         seller->addFeedbackToArray(curr_feedback);
     }
+}
+
+const Customer &Customer::operator=(const Customer &other)
+{
+    if (this != &other)
+    {
+        (User &)*this = other;
+        setWishList((const Product **)other.c_wishList, other.c_wish_logical_size);
+        setWishListPhysicalSize(other.c_wish_physical_size);
+        setWishListLogicalSize(other.c_wish_logical_size);
+    }
+    return *this;
 }

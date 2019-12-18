@@ -21,8 +21,8 @@ void setPassword(char* password);
 void setAddress(Address address);
 const User& operator=(const User& other);
 const User& operator=(User&& other);
-char* getName() const;
-char* getPassword() const;
+const char* getName() const;
+const char* getPassword() const;
 const Address& getAddress() const;
 };
 

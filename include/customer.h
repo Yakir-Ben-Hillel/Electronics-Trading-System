@@ -11,14 +11,14 @@ class Customer: virtual public User
 public:
 	//constructors && distructors
 	Customer() = default;
-	Customer(const User& user,const Product **wishlist = nullptr,
-			 const Order **orderHistory = nullptr,
-			 unsigned int orderHistoryPhysicalSize = 0, unsigned int orderHistoryLogicalSize = 0,
+	Customer(const User& user,const Product **wishlist = nullptr,const Order **orderHistory = nullptr
+	         ,unsigned int orderHistoryPhysicalSize = 0, unsigned int orderHistoryLogicalSize = 0,
 			 unsigned int wishlistPhysicalSize = 0, unsigned int wishlistLogicalSize = 0);
 	Customer(const Customer &other);
 	Customer(Customer &&other);
 	~Customer();
-
+    //operator=
+	const Customer& operator=(const Customer& other);
 	//seters
 	bool setName(char *userName);
 	bool setAddress(Address address);

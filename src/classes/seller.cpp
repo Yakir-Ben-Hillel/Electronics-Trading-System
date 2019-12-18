@@ -1,33 +1,18 @@
 #include "../../include/system.h"
-Seller::Seller(char *userName, Address *address, const char *password,
-               Product **stockArray, FeedBack **feedbacksArray,
-               unsigned int s_size, unsigned int f_size)
-    : address(address)
+Seller::Seller(const User &user, Product **stockArray = nullptr, FeedBack **feedbacksArray = nullptr,
+               unsigned int s_size = 0, unsigned int f_size = 0) : User(user)
 {
-    setUserName(userName);
-    setPassword(password);
     setStockArray(stockArray);
     setFeedbacksArray(feedBack_array);
     stock_array_physical_length = s_size;
     feedbacks_array_physical_length = f_size;
 }
-Seller::Seller(const Seller &other)
+Seller::Seller(const Seller &other) : User(other)
 {
-    setUserName(other.userName);
-    setAddress(other.address);
-    setPassword(other.password);
-    setStockArray(other.s_stock);
-    setFeedbacksArray(other.feedBack_array);
-    stock_array_physical_length = other.stock_array_physical_length;
-    stock_array_logical_length = other.stock_array_logical_length;
-    feedbacks_array_physical_length = other.feedbacks_array_physical_length;
-    feedbacks_array_logical_length = other.feedbacks_array_logical_length;
+    *this = other;
 }
-Seller::Seller(Seller &&other)
+Seller::Seller(Seller &&other) : User(std::move(other))
 {
-    this->userName = other.userName;
-    this->address = other.address;
-    this->password = other.password;
     this->s_stock = other.s_stock;
     this->feedBack_array = other.feedBack_array;
     this->stock_array_physical_length = other.stock_array_physical_length;
@@ -35,10 +20,7 @@ Seller::Seller(Seller &&other)
     this->feedbacks_array_physical_length = other.feedbacks_array_physical_length;
     this->feedbacks_array_logical_length = other.feedbacks_array_logical_length;
 
-    other.userName = nullptr;
     other.s_stock = nullptr;
-    other.password = nullptr;
-    other.address = nullptr;
     other.feedBack_array = nullptr;
 }
 
@@ -49,36 +31,22 @@ Seller::~Seller()
     delete[] feedBack_array;
     for (int i = 0; i < stock_array_physical_length; i++)
         delete s_stock[i];
-    delete address;
     delete[] s_stock;
-    delete[] userName;
-    delete[] password;
 }
-bool Seller::setUserName(const char *givenUserName)
+bool Seller::setUserName(char *givenUserName)
 {
-    userName = new char[strlen(givenUserName) + 1];
-    strcpy(userName, givenUserName);
+    this->User::setName(givenUserName);
     return true;
 }
-
-bool Seller::setAddress(Address *givenAddress)
+bool Seller::setAddress(Address givenAddress)
 {
-    address = givenAddress;
+    User::setAddress(givenAddress);
     return true;
 }
-bool Seller::setPassword(const char *givenPassword)
+bool Seller::setPassword(char *givenPassword)
 {
-    if (strlen(givenPassword) <= 10)
-    {
-        password = new char[(strlen(givenPassword) + 1)];
-        strcpy(password, givenPassword);
-        return true;
-    }
-    else
-    {
-        cout << "Maximum password length is 10." << endl;
-        return false;
-    }
+    User::setPassword(givenPassword);
+    return true;
 }
 bool Seller::setStockArray(Product **given_product_array)
 {
@@ -143,19 +111,34 @@ void Seller::resizeFeedbackArray()
 }
 const char *Seller::getUserName() const
 {
-    return userName;
+    return User::getName();
 }
 const char *Seller::getPassword() const
 {
-    return password;
+    return User::getPassword();
 }
-Address *Seller::getAddress() const
+const Address &Seller::getAddress() const
 {
-    return address;
+    return User::getAddress();
 }
 
-FeedBack **Seller::getfeedBacksArray(int& size) const
+FeedBack **Seller::getfeedBacksArray(int &size) const
 {
-   size=this->feedbacks_array_logical_length;
-   return this->feedBack_array;
+    size = this->feedbacks_array_logical_length;
+    return this->feedBack_array;
+}
+
+const Seller &Seller::operator=(const Seller &other)
+{
+    if (this != &other)
+    {
+        (User &)*this = other;
+        setStockArray(other.s_stock);
+        setFeedbacksArray(other.feedBack_array);
+        stock_array_physical_length = other.stock_array_physical_length;
+        stock_array_logical_length = other.stock_array_logical_length;
+        feedbacks_array_physical_length = other.feedbacks_array_physical_length;
+        feedbacks_array_logical_length = other.feedbacks_array_logical_length;
+    }
+    return *this;
 }

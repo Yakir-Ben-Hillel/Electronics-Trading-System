@@ -52,11 +52,11 @@ const User &User::operator=(User &&other)
 
     return *this;
 }
-char *User::getName() const
+const char *User::getName() const
 {
     return this->m_username;
 }
-char *User::getPassword() const
+const char *User::getPassword() const
 {
     return this->m_password;
 }
