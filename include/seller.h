@@ -4,7 +4,7 @@
 class FeedBack;
 class Address;
 class Product;
-class Seller
+class Seller: virtual public User
 {
 public:
 	//Constructors && Distructors
@@ -35,7 +35,7 @@ public:
 	void printSellerProducts();
 	void makeProductForSale();
 
-private:
+protected:
 	char *userName;
 	void resizeStockArray();
 	void resizeFeedbackArray();

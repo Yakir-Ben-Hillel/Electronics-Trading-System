@@ -1,17 +1,17 @@
 #ifndef __Customer_H
 #define __Customer_H
 
+#include "user.h"
 class Address;
 class Product;
 class Order;
 
-class Customer
+class Customer: virtual public User
 {
 public:
 	//constructors && distructors
 	Customer() = default;
-	Customer(const char *username, const char *password,
-			 Address *address, const Product **wishlist = nullptr,
+	Customer(const User& user,const Product **wishlist = nullptr,
 			 const Order **orderHistory = nullptr,
 			 unsigned int orderHistoryPhysicalSize = 0, unsigned int orderHistoryLogicalSize = 0,
 			 unsigned int wishlistPhysicalSize = 0, unsigned int wishlistLogicalSize = 0);
@@ -20,9 +20,9 @@ public:
 	~Customer();
 
 	//seters
-	bool setName(const char *userName);
-	bool setAddress(Address *address);
-	bool setPassword(const char *password);
+	bool setName(char *userName);
+	bool setAddress(Address address);
+	bool setPassword(char *password);
 	bool setWishList(const Product **wishList, int size);
 	bool setOrder(const Order *curr_order);
 	bool SetOrderArray(const Order **order_array, int size);
@@ -30,7 +30,7 @@ public:
 
 	//geters
 	const char *getName() const;
-	const Address *getAddress() const;
+	const Address& getAddress() const;
 	const char *getPassWord() const;
 	Product **getWishList() const;
 	unsigned int getWishListPhysicalSize() const;
@@ -47,7 +47,7 @@ public:
 	void addFeedBackToSeller(Seller *seller);
 	bool didCustomerOrderedFromSeller(Seller *seller);
 
-private:
+protected:
 	bool setWishListPhysicalSize(unsigned int physicalSize);
 	bool setWishListLogicalSize(unsigned int logicallSize);
 	void resizeWishlistArray();
@@ -56,9 +56,6 @@ private:
 	bool setOrderListLogicSize(unsigned int LogicSize);
 	void resizeOrderlistArray();
 
-	char *c_user_name;
-	Address *c_address;
-	char *c_password;	 //max length of password is 10 chars,can be letter or a number
 	Product **c_wishList; //pointer array for product wish list
 	int c_wish_physical_size = 1;
 	unsigned int c_wish_logical_size = 0;

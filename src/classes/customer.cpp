@@ -1,51 +1,36 @@
 #include "../..//include/system.h"
-Customer::Customer(const char *username, const char *password, Address *address,
+Customer::Customer(const User &user,
                    const Product **wishlist, const Order **orderHistory,
                    unsigned int orderHistoryPhysicalSize, unsigned int orderHistoryLogicalSize,
-                   unsigned int wishlistPhysicalSize, unsigned int wishlistLogicalSize)
+                   unsigned int wishlistPhysicalSize, unsigned int wishlistLogicalSize) : User(user)
 
 {
-    setName(username);
-    setPassword(password);
-    setAddress(address);
     setWishList(wishlist, wishlistLogicalSize);
     SetOrderArray(orderHistory, orderHistoryLogicalSize);
     setWishListPhysicalSize(wishlistPhysicalSize);
     setWishListLogicalSize(wishlistLogicalSize);
 }
 
-Customer::Customer(const Customer &other)
+Customer::Customer(const Customer &other):User(other)
 {
-    setName(other.c_user_name);
-    setPassword(other.c_password);
-    setAddress(other.c_address);
     setWishList((const Product **)other.c_wishList, other.c_wish_logical_size);
     setWishListPhysicalSize(other.c_wish_physical_size);
     setWishListLogicalSize(other.c_wish_logical_size);
 }
 
-Customer::Customer(Customer &&other)
+Customer::Customer(Customer &&other):User(std::move(other))
 {
-    this->c_user_name = other.c_user_name;
     this->c_wish_physical_size = other.c_wish_physical_size;
     this->c_wish_logical_size = other.c_wish_logical_size;
-    this->c_address = other.c_address;
     this->c_wishList = other.c_wishList;
-    this->c_password = other.c_password;
     this->orders_history = other.orders_history;
 
     other.orders_history = nullptr;
-    other.c_address = nullptr;
-    other.c_password = nullptr;
-    other.c_user_name = nullptr;
     other.c_wishList = nullptr;
 }
 
 Customer::~Customer()
 {
-    delete[] c_user_name;
-    delete[] c_password;
-    delete c_address;
     for (int i = 0; i < c_wish_logical_size; i++)
         delete c_wishList[i];
     delete[] c_wishList;
@@ -76,29 +61,22 @@ bool Customer::setWishListLogicalSize(unsigned int size)
     return true;
 }
 
-bool Customer::setName(const char *userName)
+bool Customer::setName(char *userName)
 {
-    c_user_name = new char[strlen(userName) + 1];
-    strcpy(c_user_name, userName);
+    this->User::setName(userName);
     return true;
 }
 
-bool Customer::setAddress(Address *address)
+bool Customer::setAddress(Address address)
 {
-    c_address = address;
+    this->User::setAddress(address);
     return true;
 }
 
-bool Customer::setPassword(const char *password)
+bool Customer::setPassword(char *password)
 {
-    if (strlen(password) <= 10)
-    {
-        c_password = new char[strlen(password) + 1];
-        strcpy(c_password, password);
-        return true;
-    }
-    cout << "the password must be 10 chars max" << endl;
-    return false;
+    this->User::setPassword(password);
+    return true;
 }
 
 bool Customer::setWishList(const Product **wishList, int size)
@@ -123,17 +101,17 @@ bool Customer::SetOrderArray(const Order **order_array, int size)
 
 const char *Customer::getName() const
 {
-    return c_user_name;
+    return User::getName();
 }
 
-const Address *Customer::getAddress() const
+const Address& Customer::getAddress() const
 {
-    return c_address;
+    return User::getAddress();
 }
 
 const char *Customer::getPassWord() const
 {
-    return c_password;
+    return User::getPassword();
 }
 
 Order **Customer::getOrderHistory() const
