@@ -9,5 +9,9 @@ class CAS :public Customer,public Seller
    CAS(const User& user,const Customer& customer,const Seller& seller);
    CAS(const CAS& other);
    ~CAS();
+
+   //methoods
+   void show();//show the details of the customer&seller
+   
 };
 #endif
