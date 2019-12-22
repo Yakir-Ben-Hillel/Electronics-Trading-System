@@ -7,6 +7,9 @@ CAS::CAS(const User &user, const Customer &customer, const Seller &seller)
 CAS::CAS(const CAS &other) : User(other), Customer(other), Seller(other)
 {
 }
+CAS::CAS(const User &user) : User(user), Customer(user), Seller(user)
+{
+}
 CAS::~CAS()
 {
 }

@@ -123,5 +123,5 @@ void System::makeOrder()
         cout << "Please choose yourself from the list" << endl;
         cin >> customer_index;
         customer_index--;
-    } while (!(customer_index <= this->getCustomerArraySize() && customer_index >= 0));
+    } while (!(customer_index <= this->users_array_logical_size && customer_index >= 0));
 }

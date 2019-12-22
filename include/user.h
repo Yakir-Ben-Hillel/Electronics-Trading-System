@@ -22,7 +22,7 @@ public:
     virtual const User &operator=(User &&other);
     const char *getName() const;
     const char *getPassword() const;
-    virtual void printOptions() const;
+    //virtual void printOptions() const;
 
     const Address &getAddress() const;
 };
