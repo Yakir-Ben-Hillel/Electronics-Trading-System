@@ -7,11 +7,14 @@ void System::mainMenu()
     cout << "Welcome to"
          << " " << this->getSystemName() << endl;
     printOpening();
-    Customer *customer_temp = dynamic_cast<Customer *>(this->logged_in_user);
-    Seller *seller_temp = dynamic_cast<Seller *>(this->logged_in_user);
-    CAS *cas_temp = dynamic_cast<CAS *>(this->logged_in_user);
+    Customer *customer_temp = nullptr;
+    Seller *seller_temp = nullptr;
+    CAS *cas_temp = nullptr;
     while (!isFinished)
     {
+        customer_temp = dynamic_cast<Customer *>(this->logged_in_user);
+        seller_temp = dynamic_cast<Seller *>(this->logged_in_user);
+        cas_temp = dynamic_cast<CAS *>(this->logged_in_user);
         bool isValid = true;
         if (!this->logged_in_user)
         {
