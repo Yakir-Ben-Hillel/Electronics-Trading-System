@@ -138,7 +138,13 @@ bool System::addFeedback(Customer *customer)
     cin >> x;
     x--;
     seller_temp = dynamic_cast<Seller *>(this->users_array[indexes_array[x]]);
-    customer->addFeedBackToSeller(seller_temp);
+    if (seller_temp)
+    {
+        customer->addFeedBackToSeller(seller_temp);
+        return true;
+    }
+    else
+        return false;
 }
 bool System::checkUsernameAvailability(const char *username)
 {
