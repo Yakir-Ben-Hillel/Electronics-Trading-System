@@ -2,28 +2,29 @@
 #define __USER_H
 
 #include "address.h"
-#include "system.h"
-
-class User 
+class Address;
+class User
 {
 protected:
-char* m_username;
-char* m_password;
-Address m_address;
+    char *m_username;
+    char *m_password;
+    Address m_address;
 
 public:
-User(char* name,char* password,Address &address);
-User(const User& other);
-User(User&& move);
-~User();
-void setName(char* name);
-void setPassword(char* password);
-void setAddress(Address address);
-const User& operator=(const User& other);
-const User& operator=(User&& other);
-const char* getName() const;
-const char* getPassword() const;
-const Address& getAddress() const;
+    User(char *name, char *password, Address &address);
+    User(const User &other);
+    User(User &&move);
+    virtual ~User();
+    void setName(char *name);
+    void setPassword(char *password);
+    void setAddress(Address address);
+    virtual const User &operator=(const User &other);
+    virtual const User &operator=(User &&other);
+    const char *getName() const;
+    const char *getPassword() const;
+    virtual void printOptions() const;
+
+    const Address &getAddress() const;
 };
 
 #endif

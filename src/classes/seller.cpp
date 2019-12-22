@@ -1,11 +1,21 @@
 #include "../../include/system.h"
-Seller::Seller(const User &user, Product **stockArray, FeedBack **feedbacksArray,
-               unsigned int s_size, unsigned int f_size) : User(user)
+Seller::Seller(char *username, char *password, Address &address, Product **stockArray, FeedBack **feedbacksArray,
+               unsigned int s_size, unsigned int f_size) : User(username, password, address), stock_array_physical_length(s_size),
+                                                           feedbacks_array_physical_length(f_size)
 {
     setStockArray(stockArray);
     setFeedbacksArray(feedBack_array);
-    stock_array_physical_length = s_size;
-    feedbacks_array_physical_length = f_size;
+}
+Seller::Seller(const User &user, Product **stockArray,
+               FeedBack **feedbacksArray,
+               unsigned int s_size,
+               unsigned int f_size)
+    : User(user),
+      stock_array_physical_length(s_size),
+      feedbacks_array_physical_length(f_size)
+{
+    setStockArray(stockArray);
+    setFeedbacksArray(feedBack_array);
 }
 Seller::Seller(const Seller &other) : User(other)
 {

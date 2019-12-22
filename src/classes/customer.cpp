@@ -1,7 +1,21 @@
 #include "../..//include/system.h"
-Customer::Customer(const User &user, const Product **wishlist, const Order **orderHistory,
-                   unsigned int orderHistoryPhysicalSize, unsigned int orderHistoryLogicalSize,
-                   unsigned int wishlistPhysicalSize, unsigned int wishlistLogicalSize) : User(user)
+Customer::Customer(const User &user,
+                   const Product **wishlist,
+                   const Order **orderHistory,
+                   unsigned int orderHistoryPhysicalSize,
+                   unsigned int orderHistoryLogicalSize,
+                   unsigned int wishlistPhysicalSize,
+                   unsigned int wishlistLogicalSize) : User(user)
+{
+}
+
+Customer::Customer(char *username, char *password, Address &address,
+                   const Product **wishlist,
+                   const Order **orderHistory,
+                   unsigned int orderHistoryPhysicalSize,
+                   unsigned int orderHistoryLogicalSize,
+                   unsigned int wishlistPhysicalSize,
+                   unsigned int wishlistLogicalSize) : User(username, password, address)
 
 {
     setWishList(wishlist, wishlistLogicalSize);
@@ -12,7 +26,7 @@ Customer::Customer(const User &user, const Product **wishlist, const Order **ord
 
 Customer::Customer(const Customer &other) : User(other)
 {
-   *this=other;
+    *this = other;
 }
 
 Customer::Customer(Customer &&other) : User(std::move(other))

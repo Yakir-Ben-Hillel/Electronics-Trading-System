@@ -1,5 +1,5 @@
 #include "../../include/system.h"
-void System::printOpening()
+void System::printOpening() const
 {
     cout << "**********************************************" << endl;
     cout << "**********************************************" << endl;
@@ -14,7 +14,7 @@ void System::printOpening()
     cout << "**********************************************" << endl;
     cout << endl;
 }
-void System::printOptionsAsGuest()
+void System::printOptionsAsGuest() const
 {
     cout << "1) Login." << endl;
     cout << "2) SignUp." << endl;
@@ -24,7 +24,7 @@ void System::printOptionsAsGuest()
     cout << "Please insert the number of your chosen option: ";
 }
 
-void System::printOptionsAsCustomer()
+void System::printOptionsAsCustomer() const
 {
     cout << "1) Add Product to your Wishlist." << endl;
     cout << "2) Add Feedback to a Seller." << endl;
@@ -34,46 +34,40 @@ void System::printOptionsAsCustomer()
     cout << "6) Logout." << endl;
     cout << "7) Exit" << endl;
 }
-void System::printOptionsAsSeller()
+void System::printOptionsAsSeller() const
 {
     cout << "1) Add a Product." << endl;
     cout << "2) View your Feedbacks." << endl;
     cout << "3) Logout." << endl;
     cout << "4) Exit." << endl;
 }
-void System::printCustomersNames()
+void System::printCustomersNames() const
 {
-    unsigned int index = 1;
-    Customer **customer_array = this->getCostumeArray();
-    if (this->getCustomerArraySize() == 0)
-        cout << "there are no customers in the store" << endl;
-    else
-        cout << "the customers are: " << endl;
-    for (int i = 0; i < this->getCustomerArraySize(); i++)
+    unsigned int counter = 1;
+    Customer *customerTemp = nullptr;
+    for (int i = 0; i < this->users_array_logical_size; i++)
     {
-        char name[11];
-        strcpy(name, customer_array[i]->getName());
-        cout << index << ") " << name << endl;
-        index++;
+        customerTemp = dynamic_cast<Customer *>(this->users_array[i]);
+        if (customerTemp)
+        {
+            cout << counter << ") " << customerTemp->getName() << endl;
+            counter++;
+        }
     }
     cout << endl;
 }
-void System::printSellersNames()
+void System::printSellersNames() const
 {
-    unsigned int index = 1;
-    Seller **sellers_array = this->getSellersArray();
-    if (this->getSellersArraySize() == 0)
+    unsigned int counter = 1;
+    Seller *sellerTemp = nullptr;
+    for (int i = 0; i < users_array_logical_size; i++)
     {
-        cout << "There are no sellers available in the store now,please try again later." << endl;
-    }
-    else
-        cout << "the sellers are: " << endl;
-    for (int i = 0; i < this->getSellersArraySize(); i++)
-    {
-        char name[11];
-        strcpy(name, sellers_array[i]->getUserName());
-        cout << index << ") " << name << endl;
-        index++;
+        sellerTemp = dynamic_cast<Seller *>(this->users_array[i]);
+        if (sellerTemp)
+        {
+            cout << counter << ") " << sellerTemp->getName() << endl;
+            counter++;
+        }
     }
     cout << endl;
 }
@@ -92,13 +86,17 @@ void Seller::printSellerProducts()
 void System::printAllAvailableSellersToGiveFeedbacks(Customer *customer)
 {
     unsigned int counter = 0;
-    unsigned int length = this->seller_array_logical_size;
-    for (int i = 0; i < length; i++)
+    Seller *sellerTemp = nullptr;
+    for (int i = 0; i < users_array_logical_size; i++)
     {
-        if (customer->didCustomerOrderedFromSeller(this->s_sellers_array[i]) == true)
+        sellerTemp = dynamic_cast<Seller *>(this->users_array[i]);
+        if (sellerTemp)
         {
-            counter++;
-            cout << counter << ") " << this->s_sellers_array[i]->getUserName() << endl;
+            if (customer->didCustomerOrderedFromSeller(sellerTemp) == true)
+            {
+                counter++;
+                cout << counter << ") " << sellerTemp->getUserName() << endl;
+            }
         }
     }
 }

@@ -1,17 +1,17 @@
-#include "../../include/user.h"
+#include "../../include/system.h"
 
 User::User(char *name, char *password, Address &address) : m_address(address)
 {
     setName(name);
     setPassword(password);
 }
-User::User(const User &other) : m_address(other.m_address),m_username(NULL),m_password(NULL)
+User::User(const User &other) : m_address(other.m_address), m_username(other.m_username), m_password(other.m_password)
 {
-    *this=other;
+    *this = other;
 }
 User::User(User &&move) : m_address(std::move(move.m_address))
 {
-    *this=std::move(move);
+    *this = std::move(move);
 }
 User::~User()
 {
@@ -20,35 +20,35 @@ User::~User()
 }
 void User::setName(char *name)
 {
-    this->m_username=strdup(name);
+    this->m_username = strdup(name);
 }
 void User::setPassword(char *password)
 {
-    this->m_password=strdup(password);
+    this->m_password = strdup(password);
 }
 void User::setAddress(Address address)
 {
-    this->m_address=address;//to do operator= for address
+    this->m_address = address; //to do operator= for address
 }
 const User &User::operator=(const User &other)
 {
-    if(this!=&other)
+    if (this != &other)
     {
         delete[] m_username;
-        m_username=strdup(other.m_username);
+        m_username = strdup(other.m_username);
 
         delete m_password;
-        m_password=strdup(other.m_password);
+        m_password = strdup(other.m_password);
 
-        m_address=other.m_address;//to do operator= for address
+        m_address = other.m_address; //to do operator= for address
     }
     return *this;
 }
 const User &User::operator=(User &&other)
 {
-    std::swap(m_username,other.m_username);
-    std::swap(m_password,other.m_password);
-    m_address=std::move(other.m_address);//to do move operator=
+    std::swap(m_username, other.m_username);
+    std::swap(m_password, other.m_password);
+    m_address = std::move(other.m_address); //to do move operator=
 
     return *this;
 }

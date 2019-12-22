@@ -20,30 +20,6 @@ Address *System::makeAddress()
     new_address = new Address(apartment_number, city_name, street_name);
     return new_address;
 }
-void System::makeSeller()
-{
-    Seller *new_seller = nullptr;
-    Address *address = nullptr;
-    bool availabilty = true;
-    char username[11], password[11];
-    do
-    {
-        cout << "Please choose an username (10 chars max): ";
-        cin.getline(username, 10);
-        if (checkUsernameAvailability(username) == false)
-        {
-            availabilty = false;
-            cout << "Username is taken, please choose another name." << endl;
-        }
-        else
-            availabilty = true;
-    } while (availabilty == false);
-    cout << "Please choose a password (10 chars max): ";
-    cin.getline(password, 10);
-    address = makeAddress();
-    new_seller = new Seller(User(username, password, *address));
-    this->addSellerToArray(new_seller);
-}
 void Seller::makeProductForSale()
 {
     char x;
@@ -97,56 +73,43 @@ void Seller::makeProductForSale()
     new_product = new Product(product_name, category, this, price);
     this->addProductToStockArray(new_product);
 }
-void System::makeCustomer()
-{
-    int x;
-    Customer *new_customer;
-    Address *address;
-    bool availabilty = true;
-    char username[11], password[11];
-    do
-    {
-        cout << "Please choose an username (10 chars max): ";
-        cin.getline(username, 10);
-        if (checkUsernameAvailability(username) == false)
-        {
-            cout << "Username is not available, please choose another name." << endl;
-            availabilty = false;
-        }
-        else
-            availabilty = true;
-    } while (availabilty == false);
-    cout << "Please choose a password (10 chars max): ";
-    cin.getline(password, 10);
-    address = makeAddress();
-    new_customer = new Customer(User(username, password, *address));
-    this->addCustomerToArray(new_customer);
-}
 void System::chooseProductToAddToCustomerWishlist()
 {
-    if (this->logged_in_customer) //Double check.
+    Customer *customerTemp = dynamic_cast<Customer *>(this->logged_in_user);
+    User *sellerTemp = nullptr;
+    int seller_index, product_index;
+    if (customerTemp) //Double check.
     {
-        unsigned int customer_index, seller_index, product_index;
-        Seller **sellers_array = this->getSellersArray();
+        int indexes_array[this->users_array_logical_size];
+        int available_index_counter = 0;
         Product **product_array = nullptr;
+        for (int i = 0; i < users_array_logical_size; i++)
+        {
+            sellerTemp = dynamic_cast<Seller *>(this->users_array[i]);
+            if (sellerTemp)
+                indexes_array[available_index_counter] = i;
+        }
         do
         {
             printSellersNames();
             cout << "Please choose a seller in-order to view his products: ";
             cin >> seller_index;
             seller_index--;
-        } while (!(seller_index <= this->getSellersArraySize() && seller_index >= 0));
-        Seller *chosen_seller = sellers_array[seller_index];
-        do
+        } while (!(seller_index <= available_index_counter && seller_index >= 0));
+        Seller *chosen_seller = dynamic_cast<Seller *>(this->users_array[indexes_array[seller_index]]);
+        if (chosen_seller)
         {
-            chosen_seller->printSellerProducts();
-            cout << endl
-                 << "Please choose the product you want to add into your wishlist: ";
-            cin >> product_index;
-            product_index--;
-        } while (!(product_index <= chosen_seller->getStockArraySize() && product_index >= 0));
-        product_array = chosen_seller->getStock();
-        this->logged_in_customer->addProductToWishlistArray(product_array[product_index]);
+            do
+            {
+                chosen_seller->printSellerProducts();
+                cout << endl
+                     << "Please choose the product you want to add into your wishlist: ";
+                cin >> product_index;
+                product_index--;
+            } while (!(product_index <= chosen_seller->getStockArraySize() && product_index >= 0));
+            product_array = chosen_seller->getStock();
+            customerTemp->addProductToWishlistArray(product_array[product_index]);
+        }
     }
 }
 void System::makeOrder()
