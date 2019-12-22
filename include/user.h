@@ -12,7 +12,7 @@ char* m_password;
 Address m_address;
 
 public:
-User(char* name,char* password,Address address);
+User(char* name,char* password,Address &address);
 User(const User& other);
 User(User&& move);
 ~User();

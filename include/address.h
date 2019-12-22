@@ -13,7 +13,7 @@ public:
     bool setCityName(const char *cityName);
     bool setStreetName(const char *streetName);
     bool setApartmentNumber(unsigned int apartmentNumber);
-
+    const Address &operator=(const Address &other);
     const char *getCityName() const;
     const char *getStreetName() const;
     unsigned int getApartmentNumber() const;

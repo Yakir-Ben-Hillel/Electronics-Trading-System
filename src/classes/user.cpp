@@ -1,6 +1,6 @@
 #include "../../include/user.h"
 
-User::User(char *name, char *password, Address address) : m_address(address)
+User::User(char *name, char *password, Address &address) : m_address(address)
 {
     setName(name);
     setPassword(password);

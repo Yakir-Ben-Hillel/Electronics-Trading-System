@@ -1,6 +1,6 @@
 #include "../../include/system.h"
-Seller::Seller(const User &user, Product **stockArray = nullptr, FeedBack **feedbacksArray = nullptr,
-               unsigned int s_size = 0, unsigned int f_size = 0) : User(user)
+Seller::Seller(const User &user, Product **stockArray, FeedBack **feedbacksArray,
+               unsigned int s_size, unsigned int f_size) : User(user)
 {
     setStockArray(stockArray);
     setFeedbacksArray(feedBack_array);

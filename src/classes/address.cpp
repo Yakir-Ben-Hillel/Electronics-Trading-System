@@ -1,6 +1,6 @@
 #include "../../include/system.h"
 
-Address::Address(unsigned int apartmentNumber,const char* cityName ,const char *streetName)
+Address::Address(unsigned int apartmentNumber, const char *cityName, const char *streetName)
 {
     setCityName(cityName);
     setStreetName(streetName);
@@ -14,17 +14,26 @@ Address::Address(const Address &other)
 }
 Address::Address(Address &&other)
 {
-    cityName=other.cityName;
-    streetName=other.streetName;
-    apartmentNumber=other.apartmentNumber;
+    cityName = other.cityName;
+    streetName = other.streetName;
+    apartmentNumber = other.apartmentNumber;
 
-    other.cityName=nullptr;
-    other.streetName=nullptr;
+    other.cityName = nullptr;
+    other.streetName = nullptr;
 }
 Address::~Address()
 {
     delete[] cityName;
     delete[] streetName;
+}
+const Address &Address::operator=(const Address &other)
+{
+    if (this != &other)
+    {
+        this->setCityName(other.cityName);
+        this->setStreetName(other.streetName);
+        this->setApartmentNumber(other.apartmentNumber);
+    }
 }
 bool Address::setCityName(const char *givenCityName)
 {

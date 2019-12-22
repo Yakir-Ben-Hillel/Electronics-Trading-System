@@ -41,7 +41,7 @@ void System::makeSeller()
     cout << "Please choose a password (10 chars max): ";
     cin.getline(password, 10);
     address = makeAddress();
-    new_seller = new Seller(username, address, password);
+    new_seller = new Seller(User(username, password, *address));
     this->addSellerToArray(new_seller);
 }
 void Seller::makeProductForSale()
@@ -119,7 +119,7 @@ void System::makeCustomer()
     cout << "Please choose a password (10 chars max): ";
     cin.getline(password, 10);
     address = makeAddress();
-    new_customer = new Customer(username, password, address);
+    new_customer = new Customer(User(username, password, *address));
     this->addCustomerToArray(new_customer);
 }
 void System::chooseProductToAddToCustomerWishlist()
