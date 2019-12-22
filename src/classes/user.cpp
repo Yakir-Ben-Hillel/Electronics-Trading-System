@@ -5,7 +5,7 @@ User::User(char *name, char *password, Address &address) : m_address(address)
     setName(name);
     setPassword(password);
 }
-User::User(const User &other) : m_address(other.m_address), m_username(other.m_username), m_password(other.m_password)
+User::User(const User &other) : m_address(other.m_address)
 {
     *this = other;
 }
@@ -39,7 +39,6 @@ const User &User::operator=(const User &other)
 
         delete m_password;
         m_password = strdup(other.m_password);
-
         m_address = other.m_address; //to do operator= for address
     }
     return *this;

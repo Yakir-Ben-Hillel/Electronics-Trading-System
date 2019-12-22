@@ -1,5 +1,5 @@
 #include "../../include/system.h"
-System::System( User **users_array, User *logged_in_user,
+System::System(User **users_array, User *logged_in_user,
                unsigned int users_array_physical_size,
                unsigned int users_array_logical_size) : users_array_physical_size(users_array_physical_size),
                                                         users_array_logical_size(users_array_logical_size),
@@ -36,7 +36,13 @@ bool System::setUsersArray(User **given_users_array)
     }
     return true;
 }
-
+bool System::addUserToArray(User *new_user)
+{
+    if (this->users_array_logical_size == this->users_array_physical_size)
+        this->resizeUsersArray();
+    this->users_array[this->users_array_logical_size] = new_user;
+    this->users_array_logical_size++;
+}
 void System::resizeUsersArray()
 {
     int newSize = this->users_array_physical_size * 2 + 1;

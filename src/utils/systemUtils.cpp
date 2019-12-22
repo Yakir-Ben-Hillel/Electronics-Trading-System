@@ -17,6 +17,7 @@ void System::mainMenu()
         {
             printOptionsAsGuest();
             cin >> option;
+            cin.ignore(256, '\n');
             switch (option)
             {
             case '1':
@@ -192,6 +193,7 @@ void System::signup()
     default:
         break;
     }
+    this->addUserToArray(user);
 }
 void System::login()
 {

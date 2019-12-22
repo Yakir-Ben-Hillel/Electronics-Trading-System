@@ -4,7 +4,6 @@
 class Address
 {
 public:
-    Address() = default;
     Address(unsigned int ApartmentNumber = 0, const char *cityName = nullptr,
             const char *streetName = nullptr);
     Address(const Address &other);

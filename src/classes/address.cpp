@@ -8,7 +8,7 @@ Address::Address(unsigned int apartmentNumber, const char *cityName, const char 
 }
 Address::Address(const Address &other)
 {
-    setStreetName(other.streetName);
+    setCityName(other.cityName);
     setApartmentNumber(other.apartmentNumber);
     setStreetName(other.streetName);
 }
