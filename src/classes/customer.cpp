@@ -1,5 +1,5 @@
 #include "../..//include/system.h"
-Customer::Customer(const char *username,const char *password,const Address &address,
+Customer::Customer(const char *username, const char *password, const Address &address,
                    const Product **wishlist,
                    const Order **orderHistory,
                    unsigned int orderHistoryPhysicalSize,
@@ -340,8 +340,11 @@ bool operator<(const Customer &first, const Customer &second)
     return false;
 }
 
-void Customer::getSum(float& sum) const
+void Customer::getSum(float &sum) const
 {
-   for(int i=0;i<this->c_wish_logical_size;++i)
-     sum+=this->c_wishList[i]->getPrice();
+    for (int i = 0; i < this->c_wish_logical_size; ++i)
+        sum += this->c_wishList[i]->getPrice();
+}
+void Customer::toOs(ostream &out) const
+{
 }

@@ -79,7 +79,7 @@ void Seller::printSellerProducts()
     for (int i = 0; i < length; i++)
     {
         cout << "Product number #" << i + 1 << " ";
-        products_array[i]->printProduct();
+        cout << products_array[i];
         cout << endl;
     }
 }

@@ -14,6 +14,7 @@ using namespace std;
 #include "./FeedBack.h"
 #include "./Date.h"
 #include "CAS.h"
+class Address;
 class Customer;
 class Seller;
 class User;
@@ -31,7 +32,7 @@ public:
 	//Getters Functions.
 	const char *getSystemName() const;
 	unsigned int getCurrentID();
-	const System& operator+=(User* user);
+	const System &operator+=(User *user);
 	//other methoods
 	void mainMenu();
 	void makeSeller();

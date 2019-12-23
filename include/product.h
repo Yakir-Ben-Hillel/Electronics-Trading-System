@@ -13,10 +13,10 @@ public:
 		Office,
 		Clothing
 	};
-	static char* CategoryNames[4];
+	static char *CategoryNames[4];
 	//constructors&&distructors
 	Product() = default;
-	Product(const char *name, eCategory category, Seller *given_seller_name,float price = 0);
+	Product(const char *name, eCategory category, Seller *given_seller_name, float price = 0);
 	Product(const Product &other);
 	Product(Product &&other);
 	~Product();
@@ -32,7 +32,7 @@ public:
 	float getPrice() const;
 	eCategory getCategory() const;
 	unsigned int getSerialNumber() const;
-    friend ostream& operator<<(ostream& out,const Product& product);
+	friend ostream &operator<<(ostream &out, const Product &product);
 
 private:
 	eCategory p_category;
@@ -40,7 +40,7 @@ private:
 	float p_price;
 	unsigned int p_serialNumber;
 	const Seller *p_seller;
-	static unsigned int counter;//for the serial number
+	static unsigned int counter; //for the serial number
 };
 
 #endif

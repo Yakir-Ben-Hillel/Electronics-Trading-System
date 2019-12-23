@@ -3,8 +3,8 @@
 char *Product::CategoryNames[4] = {(char *)"Children", (char *)"Electricity", (char *)"Office", (char *)"Clothing"};
 unsigned int Product::counter = 0;
 
-Product::Product(const char *name, eCategory category, Seller *seller,float price)
-:p_serialNumber(++counter)
+Product::Product(const char *name, eCategory category, Seller *seller, float price)
+    : p_serialNumber(++counter)
 {
     setName(name);
     setCategory(category);
@@ -103,7 +103,7 @@ const Seller *Product::getSeller() const
 {
     return p_seller;
 }
-ostream& operator<<(ostream& out,const Product& product)
+ostream &operator<<(ostream &out, const Product &product)
 {
     out << "Product name: " << product.p_name << endl;
     out << "Product category: " << product.CategoryNames[product.getCategory()] << endl;

@@ -1,6 +1,6 @@
 #ifndef __ADDRESS_H
 #define __ADDRESS_H
-
+#include "system.h"
 class Address
 {
 public:
@@ -16,7 +16,7 @@ public:
     const char *getCityName() const;
     const char *getStreetName() const;
     unsigned int getApartmentNumber() const;
-    friend ostream& operator<<(ostream& out,const Address& address);
+    friend ostream &operator<<(ostream &out, const Address &address);
 
 private:
     char *cityName;
