@@ -87,28 +87,38 @@ void System::chooseProductToAddToCustomerWishlist()
         {
             sellerTemp = dynamic_cast<Seller *>(this->users_array[i]);
             if (sellerTemp)
+            {
                 indexes_array[available_index_counter] = i;
+                available_index_counter++;
+            }
         }
-        do
-        {
-            printSellersNames();
-            cout << "Please choose a seller in-order to view his products: ";
-            cin >> seller_index;
-            seller_index--;
-        } while (!(seller_index <= available_index_counter && seller_index >= 0));
-        Seller *chosen_seller = dynamic_cast<Seller *>(this->users_array[indexes_array[seller_index]]);
-        if (chosen_seller)
+        if (available_index_counter != 0)
         {
             do
             {
-                chosen_seller->printSellerProducts();
-                cout << endl
-                     << "Please choose the product you want to add into your wishlist: ";
-                cin >> product_index;
-                product_index--;
-            } while (!(product_index <= chosen_seller->getStockArraySize() && product_index >= 0));
-            product_array = chosen_seller->getStock();
-            customerTemp->addProductToWishlistArray(product_array[product_index]);
+                printSellersNames();
+                cout << "Please choose a seller in-order to view his products: ";
+                cin >> seller_index;
+                seller_index--;
+            } while (!(seller_index <= available_index_counter && seller_index >= 0));
+            Seller *chosen_seller = dynamic_cast<Seller *>(this->users_array[indexes_array[seller_index]]);
+            if (chosen_seller)
+            {
+                do
+                {
+                    chosen_seller->printSellerProducts();
+                    cout << endl
+                         << "Please choose the product you want to add into your wishlist: ";
+                    cin >> product_index;
+                    product_index--;
+                } while (!(product_index <= chosen_seller->getStockArraySize() && product_index >= 0));
+                product_array = chosen_seller->getStock();
+                customerTemp->addProductToWishlistArray(product_array[product_index]);
+            }
+        }
+        else
+        {
+            cout << "No Sellers to choose Products from." << endl;
         }
     }
 }
