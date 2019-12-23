@@ -152,3 +152,8 @@ const Seller &Seller::operator=(const Seller &other)
     }
     return *this;
 }
+
+void Seller::toOs(ostream& out) const
+{
+
+}

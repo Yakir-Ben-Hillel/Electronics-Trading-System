@@ -69,3 +69,9 @@ unsigned int Address::getApartmentNumber() const
 {
     return apartmentNumber;
 }
+
+ostream& operator<<(ostream& out,const Address& address)
+{
+    out<<address.cityName<<" "<<address.streetName<<" "<<address.apartmentNumber<<" "<<endl;
+    return out;
+}

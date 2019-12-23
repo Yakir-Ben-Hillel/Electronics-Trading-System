@@ -32,8 +32,7 @@ public:
 	float getPrice() const;
 	eCategory getCategory() const;
 	unsigned int getSerialNumber() const;
-
-	void printProduct();
+    friend ostream& operator<<(ostream& out,const Product& product);
 
 private:
 	eCategory p_category;

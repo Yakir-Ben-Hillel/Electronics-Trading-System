@@ -80,7 +80,7 @@ void System::chooseProductToAddToCustomerWishlist()
     int seller_index, product_index;
     if (customerTemp) //Double check.
     {
-        int indexes_array[this->users_array_logical_size];
+        int indexes_array[users_array_logical_size];
         int available_index_counter = 0;
         Product **product_array = nullptr;
         for (int i = 0; i < users_array_logical_size; i++)

@@ -63,3 +63,10 @@ const Address &User::getAddress() const
 {
     return this->m_address;
 }
+
+ostream &operator<<(ostream &out, const User &user)
+{
+    out<<user.m_username<<" "<<user.m_address;
+    user.toOs(out);
+    return out;
+}

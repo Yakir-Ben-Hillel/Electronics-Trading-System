@@ -6,11 +6,10 @@
 class CAS : public Customer, public Seller
 {
 public:
-   CAS(const User &user, const Customer &customer, const Seller &seller);
-   CAS(const User &user);
+   CAS(const Customer &customer, const Seller &seller);
    CAS(const CAS &other);
    ~CAS();
-
+   virtual void toOs(ostream& out) const override;
    //methoods
    void show(); //show the details of the customer&seller
 };

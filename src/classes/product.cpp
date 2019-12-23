@@ -103,11 +103,11 @@ const Seller *Product::getSeller() const
 {
     return p_seller;
 }
-
-void Product::printProduct()
+ostream& operator<<(ostream& out,const Product& product)
 {
-    cout << "Product name: " << this->p_name << endl;
-    cout << "Product category: " << CategoryNames[this->getCategory()] << endl;
-    cout << "Product Price: " << this->p_price << endl;
-    cout << "Product seller's name: " << this->p_seller->getUserName() << endl;
+    out << "Product name: " << product.p_name << endl;
+    out << "Product category: " << product.CategoryNames[product.getCategory()] << endl;
+    out << "Product Price: " << product.p_price << endl;
+    out << "Product seller's name: " << product.p_seller->getUserName() << endl;
+    return out;
 }

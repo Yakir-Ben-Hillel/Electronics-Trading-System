@@ -227,7 +227,7 @@ void Customer::makeOrder()
                 for (int j = 0; j < this->c_wish_logical_size; j++)
                 {
                     cout << "Product number #" << j + 1 << " " << endl;
-                    this->c_wishList[j]->printProduct();
+                    cout << (*c_wishList)[j];
                 }
 
                 cout << "please enter the number of product you would like to buy: " << endl;
@@ -271,7 +271,7 @@ void Customer::showOrder(Order *curr)
     cout << "the details of your order are: " << endl;
     for (int i = 0; i < size; i++)
     {
-        temp[i]->printProduct();
+        cout << *temp[i];
         cout << endl;
     }
 
@@ -338,4 +338,20 @@ const Customer &Customer::operator=(const Customer &other)
         setWishListLogicalSize(other.c_wish_logical_size);
     }
     return *this;
+}
+
+bool operator<(const Customer &first, const Customer &second)
+{
+    float first_sum, second_sum;
+    first.getSum(first_sum);
+    second.getSum(second_sum);
+    if (first_sum < second_sum)
+        return true;
+    return false;
+}
+
+void Customer::getSum(float& sum) const
+{
+   for(int i=0;i<this->c_wish_logical_size;++i)
+     sum+=this->c_wishList[i]->getPrice();
 }

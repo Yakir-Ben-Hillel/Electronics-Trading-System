@@ -122,7 +122,7 @@ void System::mainMenu()
 }
 bool System::addFeedback(Customer *customer)
 {
-    int indexes_array[this->users_array_logical_size];
+    int indexes_array[users_array_logical_size];
     int x;
     Seller *seller_temp = nullptr;
     int available_index_counter = 0;
@@ -191,13 +191,13 @@ void System::signup()
     switch (chosen_type)
     {
     case 1:
-        user = new Customer(User(username, password, *address));
+        user = new Customer(username, password, *address);
         break;
     case 2:
-        user = new Seller(User(username, password, *address));
+        user = new Seller(username, password, *address);
         break;
     case 3:
-        user = new CAS(User(username, password, *address));
+        user = new CAS(Customer(username, password, *address),Seller(username,password,*address));
         break;
     default:
         break;
@@ -264,7 +264,7 @@ void System::showProductsWithTheSameName(const char *name)
             {
                 if (strcmp(name, stock[j]->getName()) == 0)
                 {
-                    stock[j]->printProduct();
+                    cout<<*stock[j];
                     cout << endl;
                 }
             }
