@@ -35,6 +35,10 @@ const Address &Address::operator=(const Address &other)
         this->setApartmentNumber(other.apartmentNumber);
     }
 }
+ostream &operator<<(ostream &out,const Address &address)
+{
+    out << address.cityName << address.streetName << address.apartmentNumber;
+}
 bool Address::setCityName(const char *givenCityName)
 {
     cityName = new char[(strlen(givenCityName) + 1)];

@@ -13,6 +13,7 @@ public:
     bool setStreetName(const char *streetName);
     bool setApartmentNumber(unsigned int apartmentNumber);
     const Address &operator=(const Address &other);
+    friend ostream &operator<<(ostream &out, const Address &address);
     const char *getCityName() const;
     const char *getStreetName() const;
     unsigned int getApartmentNumber() const;

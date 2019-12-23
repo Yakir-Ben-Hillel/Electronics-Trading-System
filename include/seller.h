@@ -38,6 +38,8 @@ public:
 	void makeProductForSale();
 	/*Operators*/
 	const Seller &operator=(const Seller &other);
+	virtual void toOs(ostream &out);
+	friend ostream &operator<<(ostream &out, const Seller &seller);
 
 protected:
 	void resizeStockArray();

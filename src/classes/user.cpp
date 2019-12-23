@@ -51,6 +51,13 @@ const User &User::operator=(User &&other)
 
     return *this;
 }
+void User::toOs(ostream &out) const
+{
+}
+ostream &operator<<(ostream &out, const User &user)
+{
+    out << user.m_username << user.m_password << user.m_address;
+}
 const char *User::getName() const
 {
     return this->m_username;

@@ -152,3 +152,7 @@ const Seller &Seller::operator=(const Seller &other)
     }
     return *this;
 }
+ostream &operator<<(ostream&out,const Seller&seller)
+{
+    
+}
