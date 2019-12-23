@@ -101,7 +101,7 @@ void System::mainMenu()
                     cout << "your feedbacks are: " << endl;
                     for (int i = 0; i < size; i++)
                     {
-                        cout<<(*array_feedbacks)[i];
+                        cout << (*array_feedbacks)[i];
                         cout << endl;
                     }
                 }
@@ -122,7 +122,7 @@ void System::mainMenu()
 }
 bool System::addFeedback(Customer *customer)
 {
-    int* indexes_array=new int[users_array_logical_size];
+    int *indexes_array = new int[users_array_logical_size];
     int x;
     Seller *seller_temp = nullptr;
     int available_index_counter = 0;
@@ -167,6 +167,7 @@ bool System::checkUsernameAvailability(const char *username)
 }
 void System::signup()
 {
+    ofstream outFile("../../bin/test.txt");
     User *user = nullptr;
     Address *address = nullptr;
     bool availabilty = true;
@@ -207,12 +208,14 @@ void System::signup()
         user = new Seller(username, password, *address);
         break;
     case 3:
-        user = new CAS(Customer(username, password, *address),Seller(username,password,*address));
+        user = new CAS(Customer(username, password, *address), Seller(username, password, *address));
         break;
     default:
         break;
     }
-    *this+=user;
+    *this += user;
+    outFile << *user;
+    outFile.close();
 }
 void System::login()
 {
@@ -274,7 +277,7 @@ void System::showProductsWithTheSameName(const char *name)
             {
                 if (strcmp(name, stock[j]->getName()) == 0)
                 {
-                    cout<<*stock[j];
+                    cout << *stock[j];
                     cout << endl;
                 }
             }

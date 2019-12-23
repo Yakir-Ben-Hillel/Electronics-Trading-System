@@ -70,8 +70,18 @@ unsigned int Address::getApartmentNumber() const
     return apartmentNumber;
 }
 
-ostream& operator<<(ostream& out,const Address& address)
+ostream &operator<<(ostream &out, const Address &address)
 {
-    out<<address.cityName<<" "<<address.streetName<<" "<<address.apartmentNumber<<" "<<endl;
+    out << address.cityName << " " << address.streetName << " " << address.apartmentNumber << " " << endl;
     return out;
+}
+istream &operator<<(istream &in, Address &address)
+{
+    char cityname[11], streetname[21];
+    int number;
+    in >> cityname >> streetname >> number;
+    address.setCityName(cityname);
+    address.setStreetName(streetname);
+    address.setApartmentNumber(number);
+    return in;
 }

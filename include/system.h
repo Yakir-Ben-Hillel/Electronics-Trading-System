@@ -3,6 +3,8 @@
 #pragma once
 //this h file contains all the includes of the project,every cpp file calls to that h file.
 #include <iostream>
+#include <fstream>
+#include <ostream>
 #include <string.h>
 using namespace std;
 #include "./user.h"

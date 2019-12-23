@@ -2,6 +2,7 @@
 #define __USER_H
 
 #include "address.h"
+#include <fstream>
 class Address;
 class User
 {
@@ -9,9 +10,10 @@ protected:
     char *m_username;
     char *m_password;
     Address m_address;
-    User(const char *name,const char *password,const Address &address);
+    User(const char *name, const char *password, const Address &address);
     User(const User &other);
     User(User &&move);
+    User(ifstream &in);
     /*Abstract Data Type*/
 public:
     virtual ~User() = 0;
@@ -20,8 +22,10 @@ public:
     void setAddress(const Address address);
     virtual const User &operator=(const User &other);
     virtual const User &operator=(User &&other);
-    virtual void toOs(ostream& out) const=0;
-    friend ostream& operator<<(ostream& out,const User& user);
+    virtual void toOs(ostream &out) const = 0;
+    friend ostream &operator<<(ostream &out, const User &user);
+    friend ostream &operator>>(ostream &out, User &user);
+
     const char *getName() const;
     const char *getPassword() const;
     //virtual void printOptions() const;

@@ -17,6 +17,7 @@ public:
     const char *getStreetName() const;
     unsigned int getApartmentNumber() const;
     friend ostream &operator<<(ostream &out, const Address &address);
+    friend istream &operator>>(istream &out, Address &address);
 
 private:
     char *cityName;

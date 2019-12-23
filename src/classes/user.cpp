@@ -1,6 +1,6 @@
 #include "../../include/system.h"
 
-User::User(const char *name,const char *password,const Address &address) : m_address(address)
+User::User(const char *name, const char *password, const Address &address) : m_address(address)
 {
     setName(name);
     setPassword(password);
@@ -12,6 +12,10 @@ User::User(const User &other) : m_address(other.m_address)
 User::User(User &&move) : m_address(std::move(move.m_address))
 {
     *this = std::move(move);
+}
+User::User(ifstream &inFile)
+{
+    inFile >> *this;
 }
 User::~User()
 {
@@ -66,7 +70,24 @@ const Address &User::getAddress() const
 
 ostream &operator<<(ostream &out, const User &user)
 {
-    out<<user.m_username<<" "<<user.m_address;
+    if (typeid(out) == typeid(ofstream))
+    { //No +6 is needed when using Glibc.
+        out << typeid(user).name() << " " << user.m_username << " " << user.m_password << " " << user.m_address;
+    }
+    else
+    {
+        out << user.m_username << " " << user.m_address;
+    }
     user.toOs(out);
     return out;
+}
+istream &operator>>(istream &in, User &user)
+{
+    char username[11], password[11];
+    Address address;
+    in >> username >> password >> address;
+    user.setName(username);
+    user.setPassword(password);
+    user.setAddress(address);
+    return in;
 }
