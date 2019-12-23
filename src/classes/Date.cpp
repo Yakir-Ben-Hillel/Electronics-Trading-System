@@ -37,7 +37,10 @@ bool Date::setYear(unsigned int givenyear)
    m_year = givenyear;
    return true;
 }
-
+ostream&operator<<(ostream&out,const Date&date)
+{
+   
+}
 unsigned int Date::getDay() const
 {
    return m_day;

@@ -9,8 +9,8 @@ class Seller : virtual public User
 public:
 	//Constructors && Distructors
 	Seller() = default;
-	Seller(const char *username,const char *password,const Address &address, Product **stockArray = nullptr, 
-	FeedBack **feedbacksArray = nullptr, unsigned int s_size = 0, unsigned int f_size = 0);
+	Seller(const char *username, const char *password, const Address &address, Product **stockArray = nullptr,
+		   FeedBack **feedbacksArray = nullptr, unsigned int s_size = 0, unsigned int f_size = 0);
 	Seller(const Seller &other);
 	Seller(Seller &&other);
 	virtual ~Seller();
@@ -34,7 +34,8 @@ public:
 	void makeProductForSale();
 	/*Operators*/
 	const Seller &operator=(const Seller &other);
-	virtual void toOs(ostream& out) const override;
+	friend istream &operator>>(istream &in, Seller &seller);
+	virtual void toOs(ostream &out) const override;
 
 protected:
 	void resizeStockArray();

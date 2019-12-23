@@ -60,8 +60,22 @@ const Date *FeedBack::getDate()
 }
 ostream &operator<<(ostream &out, const FeedBack &feedback)
 {
-    out << "the customer who gave you the feedback: " << feedback.customer->getName() << endl;
-    out << "the date of the feedback is: " << feedback.date_of_feedback->getDay() << "/" << feedback.date_of_feedback->getMonth() << "/" << feedback.date_of_feedback->getYear() << endl;
-    out << "the notes are: " << feedback.notes << endl;
+    if (typeid(out) == typeid(ofstream))
+    {
+        out << feedback.customer << " " << feedback.date_of_feedback << " "
+            << feedback.notes;
+    }
+    else
+    {
+        out << "the customer who gave you the feedback: " << feedback.customer->getName() << endl;
+        out << "the date of the feedback is: " << feedback.date_of_feedback->getDay() << "/" << feedback.date_of_feedback->getMonth() << "/" << feedback.date_of_feedback->getYear() << endl;
+        out << "the notes are: " << feedback.notes << endl;
+    }
     return out;
+}
+istream &operator>>(istream &in, FeedBack &feedback)
+{
+    char letter[256];
+    
+    in>>feedback
 }

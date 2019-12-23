@@ -22,12 +22,13 @@ public:
     const char *getNotes() const;
     const Customer *getCustomer() const;
     const Date *getDate();
-    friend ostream& operator<<(ostream& out,const FeedBack& feedback);
+    friend ostream &operator<<(ostream &out, const FeedBack &feedback);
+    friend istream &operator>>(istream *in, FeedBack &feedback);
 
 private:
     const Customer *customer;
     char *notes;
-    const Date *date_of_feedback; 
+    const Date *date_of_feedback;
 };
 
 #endif

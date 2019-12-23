@@ -72,7 +72,7 @@ ostream &operator<<(ostream &out, const User &user)
 {
     if (typeid(out) == typeid(ofstream))
     { //No +6 is needed when using Glibc.
-        out << typeid(user).name() << " " << user.m_username << " " << user.m_password << " " << user.m_address;
+        out << typeid(user).name() + 1 << " " << user.m_username << " " << user.m_password << " " << user.m_address;
     }
     else
     {

@@ -1,5 +1,5 @@
 #include "../../include/system.h"
-Seller::Seller(const char *username,const char *password,const Address &address, Product **stockArray, FeedBack **feedbacksArray,
+Seller::Seller(const char *username, const char *password, const Address &address, Product **stockArray, FeedBack **feedbacksArray,
                unsigned int s_size, unsigned int f_size) : User(username, password, address), stock_array_physical_length(s_size),
                                                            feedbacks_array_physical_length(f_size)
 {
@@ -141,8 +141,23 @@ const Seller &Seller::operator=(const Seller &other)
     }
     return *this;
 }
-
-void Seller::toOs(ostream& out) const
+istream &operator>>(istream &in, Seller &seller)
 {
-
+    in >> seller.m_username >> seller.m_password;
+    in >> seller.m_address >> seller.stock_array_physical_length;
+    in >> seller.stock_array_logical_length;
+    for (int i = 0; seller.stock_array_logical_length; i++)
+    {
+        in >> *seller.s_stock[i];
+    }
+    in >> seller.feedbacks_array_physical_length;
+    in >> seller.feedbacks_array_logical_length;
+    for (int i = 0; i < seller.feedbacks_array_logical_length; i++)
+        in >> *seller.feedBack_array[i];
+}
+void Seller::toOs(ostream &out) const
+{
+    out << this->stock_array_physical_length << " " << this->stock_array_logical_length
+        << " " << this->s_stock << " " << this->feedbacks_array_physical_length << " "
+        << this->feedbacks_array_logical_length << " " << this->feedBack_array;
 }

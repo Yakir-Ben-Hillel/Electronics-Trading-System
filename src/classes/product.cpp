@@ -11,7 +11,10 @@ Product::Product(const char *name, eCategory category, Seller *seller, float pri
     setPrice(price);
     setSeller(seller);
 }
-
+Product::Product(istream &inFile)
+{
+    inFile >> *this;
+}
 Product::Product(const Product &other)
 {
     p_name = new char[strlen(other.p_name) + 1];
@@ -105,9 +108,38 @@ const Seller *Product::getSeller() const
 }
 ostream &operator<<(ostream &out, const Product &product)
 {
-    out << "Product name: " << product.p_name << endl;
-    out << "Product category: " << product.CategoryNames[product.getCategory()] << endl;
-    out << "Product Price: " << product.p_price << endl;
-    out << "Product seller's name: " << product.p_seller->getUserName() << endl;
+    if (typeid(out) == typeid(ofstream))
+    {
+        out << product.p_name << " " << product.CategoryNames[product.getCategory()]
+            << " " << product.p_price << " " << *product.p_seller;
+    }
+    else
+    {
+        out << "Product name: " << product.p_name << endl;
+        out << "Product category: " << product.CategoryNames[product.getCategory()] << endl;
+        out << "Product Price: " << product.p_price << endl;
+        out << "Product seller's name: " << product.p_seller->getUserName() << endl;
+    }
     return out;
 }
+istream &operator>>(istream &in, Product &product)
+{
+    char productName[21];
+    Seller *sellerTemp = new Seller(*product.p_seller);
+    char category[12];
+    Product::eCategory eCategory;
+    float price;
+    in >> productName >> category >> price >> *sellerTemp;
+    product.setName(productName);
+    if (strcmp(category, "Children") == 0)
+        eCategory = Product::Children;
+    else if (strcmp(category, "Electricity") == 0)
+        eCategory = Product::Electricity;
+    else if (strcmp(category, "Office") == 0)
+        eCategory = Product::Office;
+    else
+        eCategory = Product::Clothing;
+    product.setCategory(eCategory);
+    product.setPrice(price);
+    product.setSeller(sellerTemp);
+    return in;

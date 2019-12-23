@@ -75,7 +75,7 @@ ostream &operator<<(ostream &out, const Address &address)
     out << address.cityName << " " << address.streetName << " " << address.apartmentNumber << " " << endl;
     return out;
 }
-istream &operator<<(istream &in, Address &address)
+istream &operator>>(istream &in, Address &address)
 {
     char cityname[11], streetname[21];
     int number;

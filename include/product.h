@@ -18,6 +18,7 @@ public:
 	Product() = default;
 	Product(const char *name, eCategory category, Seller *given_seller_name, float price = 0);
 	Product(const Product &other);
+	Product(istream &inFile);
 	Product(Product &&other);
 	~Product();
 	//seters
@@ -33,6 +34,7 @@ public:
 	eCategory getCategory() const;
 	unsigned int getSerialNumber() const;
 	friend ostream &operator<<(ostream &out, const Product &product);
+	friend istream &operator>>(istream &out, Product &product);
 
 private:
 	eCategory p_category;

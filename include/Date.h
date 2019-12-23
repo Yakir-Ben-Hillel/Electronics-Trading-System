@@ -1,6 +1,6 @@
 #ifndef __DATE_H
 #define __DATE_H
-
+#include "system.h"
 class Date
 {
 public:
@@ -17,6 +17,8 @@ public:
     unsigned int getDay() const;
     unsigned int getMonth() const;
     unsigned int getYear() const;
+    friend ostream &operator<<(ostream &out, const Date &date);
+    friend istream &operator>>(istream &out, Date &date);
 
 private:
     unsigned int m_day;
