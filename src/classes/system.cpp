@@ -36,12 +36,14 @@ bool System::setUsersArray(User **given_users_array)
     }
     return true;
 }
-bool System::addUserToArray(User *new_user)
+
+const System& System::operator+=(User* user)
 {
     if (this->users_array_logical_size == this->users_array_physical_size)
         this->resizeUsersArray();
-    this->users_array[this->users_array_logical_size] = new_user;
+    this->users_array[this->users_array_logical_size] = user;
     this->users_array_logical_size++;
+    return *this;
 }
 void System::resizeUsersArray()
 {

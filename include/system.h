@@ -31,6 +31,7 @@ public:
 	//Getters Functions.
 	const char *getSystemName() const;
 	unsigned int getCurrentID();
+	const System& operator+=(User* user);
 	//other methoods
 	void mainMenu();
 	void makeSeller();

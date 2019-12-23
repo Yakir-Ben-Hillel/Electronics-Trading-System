@@ -58,10 +58,10 @@ const Date *FeedBack::getDate()
 {
     return date_of_feedback;
 }
-
-void FeedBack::show() const
+ostream &operator<<(ostream &out, const FeedBack &feedback)
 {
-    cout << "the customer who gave you the feedback: " << this->customer->getName() << endl;
-    cout << "the date of the feedback is: " << this->date_of_feedback->getDay() << "/" << this->date_of_feedback->getMonth() << "/" << this->date_of_feedback->getYear() << endl;
-    cout << "the notes are: " << this->notes << endl;
+    out << "the customer who gave you the feedback: " << feedback.customer->getName() << endl;
+    out << "the date of the feedback is: " << feedback.date_of_feedback->getDay() << "/" << feedback.date_of_feedback->getMonth() << "/" << feedback.date_of_feedback->getYear() << endl;
+    out << "the notes are: " << feedback.notes << endl;
+    return out;
 }

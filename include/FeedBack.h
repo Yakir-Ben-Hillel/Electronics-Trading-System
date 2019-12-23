@@ -22,8 +22,7 @@ public:
     const char *getNotes() const;
     const Customer *getCustomer() const;
     const Date *getDate();
-
-    void show() const;
+    friend ostream& operator<<(ostream& out,const FeedBack& feedback);
 
 private:
     const Customer *customer;

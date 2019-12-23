@@ -211,7 +211,7 @@ void System::signup()
     default:
         break;
     }
-    this->addUserToArray(user);
+    *this+=user;
 }
 void System::login()
 {

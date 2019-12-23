@@ -32,8 +32,7 @@ public:
 	bool setOrder(const Order *curr_order);
 	bool SetOrderArray(const Order **order_array, int size);
 	bool addProductToWishlistArray(Product *new_product);
-	virtual void toOs(ostream& out) const;
-
+	virtual void toOs(ostream& out) const override;
 	//geters
 	const char *getName() const;
 	const Address &getAddress() const;
