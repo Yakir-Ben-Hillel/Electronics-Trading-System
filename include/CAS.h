@@ -9,7 +9,7 @@ public:
    CAS(const User &user, const Customer &customer, const Seller &seller);
    CAS(const User &user);
    CAS(const CAS &other);
-   ~CAS();
+   virtual ~CAS();
 
    //methoods
    void show(); //show the details of the customer&seller

@@ -9,11 +9,15 @@ class Seller : virtual public User
 public:
 	//Constructors && Distructors
 	Seller() = default;
-	Seller(const User &user, Product **stockArray = nullptr, FeedBack **feedbacksArray = nullptr, unsigned int s_size = 0, unsigned int f_size = 0);
-	Seller(char *username, char *password, Address &address, Product **stockArray = nullptr, FeedBack **feedbacksArray = nullptr, unsigned int s_size = 0, unsigned int f_size = 0);
+	Seller(const User &user, Product **stockArray = nullptr,
+		   FeedBack **feedbacksArray = nullptr,
+		   unsigned int s_size = 0, unsigned int f_size = 0);
+	Seller(char *username, char *password, Address &address,
+		   Product **stockArray = nullptr, FeedBack **feedbacksArray = nullptr,
+		   unsigned int s_size = 0, unsigned int f_size = 0);
 	Seller(const Seller &other);
 	Seller(Seller &&other);
-	~Seller();
+	virtual ~Seller();
 	//Getters Functions.
 	const char *getUserName() const;
 	const char *getPassword() const;
@@ -32,7 +36,7 @@ public:
 	unsigned int getStockArraySize();
 	void printSellerProducts();
 	void makeProductForSale();
-
+	/*Operators*/
 	const Seller &operator=(const Seller &other);
 
 protected:
