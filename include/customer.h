@@ -20,7 +20,7 @@ public:
 			 unsigned int wishlistLogicalSize = 0);
 	Customer(const Customer &other);
 	Customer(Customer &&other);
-	~Customer();
+	virtual ~Customer();
 	//operator=
 	const Customer &operator=(const Customer &other);
 	friend bool operator<(const Customer& first,const Customer& second);

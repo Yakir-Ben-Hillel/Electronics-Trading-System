@@ -12,9 +12,9 @@ protected:
     User(char *name, char *password, Address &address);
     User(const User &other);
     User(User &&move);
-
+    /*Abstract Data Type*/
 public:
-    virtual ~User();
+    virtual ~User() = 0;
     void setName(char *name);
     void setPassword(char *password);
     void setAddress(Address address);

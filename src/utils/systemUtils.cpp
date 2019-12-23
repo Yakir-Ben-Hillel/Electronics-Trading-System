@@ -133,18 +133,27 @@ bool System::addFeedback(Customer *customer)
             if (customer->didCustomerOrderedFromSeller(seller_temp))
                 indexes_array[available_index_counter] = i;
     }
-    this->printAllAvailableSellersToGiveFeedbacks(customer);
-    cout << "Please insert the number of the seller you want to leave a feedback on: ";
-    cin >> x;
-    x--;
-    seller_temp = dynamic_cast<Seller *>(this->users_array[indexes_array[x]]);
-    if (seller_temp)
+    if (available_index_counter != 0)
     {
-        customer->addFeedBackToSeller(seller_temp);
-        return true;
+        this->printAllAvailableSellersToGiveFeedbacks(customer);
+        cout << "Please insert the number of the seller you want to leave a feedback on: ";
+        cin >> x;
+        x--;
+        seller_temp = dynamic_cast<Seller *>(this->users_array[indexes_array[x]]);
+        if (seller_temp)
+        {
+            customer->addFeedBackToSeller(seller_temp);
+            return true;
+        }
+        else
+            return false;
     }
     else
+    {
+        cout << "No sellers to add Feedbacks to." << endl;
+        cout << "Make an Order and checkback later." << endl;
         return false;
+    }
 }
 bool System::checkUsernameAvailability(const char *username)
 {
