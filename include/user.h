@@ -9,15 +9,15 @@ protected:
     char *m_username;
     char *m_password;
     Address m_address;
-    User(char *name, char *password, Address &address);
+    User(const char *name,const char *password,const Address &address);
     User(const User &other);
     User(User &&move);
     /*Abstract Data Type*/
 public:
     virtual ~User() = 0;
-    void setName(char *name);
-    void setPassword(char *password);
-    void setAddress(Address address);
+    void setName(const char *name);
+    void setPassword(const char *password);
+    void setAddress(const Address address);
     virtual const User &operator=(const User &other);
     virtual const User &operator=(User &&other);
     virtual void toOs(ostream& out) const=0;

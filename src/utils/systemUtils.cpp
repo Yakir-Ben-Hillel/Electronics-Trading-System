@@ -101,7 +101,7 @@ void System::mainMenu()
                     cout << "your feedbacks are: " << endl;
                     for (int i = 0; i < size; i++)
                     {
-                        array_feedbacks[i]->show();
+                        cout<<(*array_feedbacks)[i];
                         cout << endl;
                     }
                 }
@@ -122,7 +122,7 @@ void System::mainMenu()
 }
 bool System::addFeedback(Customer *customer)
 {
-    int indexes_array[users_array_logical_size];
+    int* indexes_array=new int[users_array_logical_size];
     int x;
     Seller *seller_temp = nullptr;
     int available_index_counter = 0;
@@ -154,6 +154,7 @@ bool System::addFeedback(Customer *customer)
         cout << "Make an Order and checkback later." << endl;
         return false;
     }
+    delete[] indexes_array;
 }
 bool System::checkUsernameAvailability(const char *username)
 {

@@ -9,7 +9,7 @@ class Seller : virtual public User
 public:
 	//Constructors && Distructors
 	Seller() = default;
-	Seller(char *username, char *password, Address &address, Product **stockArray = nullptr, 
+	Seller(const char *username,const char *password,const Address &address, Product **stockArray = nullptr, 
 	FeedBack **feedbacksArray = nullptr, unsigned int s_size = 0, unsigned int f_size = 0);
 	Seller(const Seller &other);
 	Seller(Seller &&other);

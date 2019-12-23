@@ -26,11 +26,11 @@ bool System::setUsersArray(User **given_users_array)
     for (int i = 0; i < users_array_logical_size; i++)
     {
         if (typeid(given_users_array[i]) == typeid(Customer))
-            users_array[i] = new Customer(*given_users_array[i]);
+            users_array[i] = new Customer(given_users_array[i]->getName(),given_users_array[i]->getPassword(),given_users_array[i]->getAddress());
         else if (typeid(given_users_array[i]) == typeid(Seller))
-            users_array[i] = new Seller(*given_users_array[i]);
+            users_array[i] = new Seller(given_users_array[i]->getName(),given_users_array[i]->getPassword(),given_users_array[i]->getAddress());
         else if (typeid(given_users_array[i]) == typeid(CAS))
-            users_array[i] = new CAS(*given_users_array[i]);
+            users_array[i] = new CAS();
         else
             return false; //Given users array is invalid.
     }

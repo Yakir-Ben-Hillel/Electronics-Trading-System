@@ -1,15 +1,5 @@
 #include "../..//include/system.h"
-Customer::Customer(const User &user,
-                   const Product **wishlist,
-                   const Order **orderHistory,
-                   unsigned int orderHistoryPhysicalSize,
-                   unsigned int orderHistoryLogicalSize,
-                   unsigned int wishlistPhysicalSize,
-                   unsigned int wishlistLogicalSize) : User(user)
-{
-}
-
-Customer::Customer(char *username, char *password, Address &address,
+Customer::Customer(const char *username,const char *password,const Address &address,
                    const Product **wishlist,
                    const Order **orderHistory,
                    unsigned int orderHistoryPhysicalSize,

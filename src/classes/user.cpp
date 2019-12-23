@@ -1,6 +1,6 @@
 #include "../../include/system.h"
 
-User::User(char *name, char *password, Address &address) : m_address(address)
+User::User(const char *name,const char *password,const Address &address) : m_address(address)
 {
     setName(name);
     setPassword(password);
@@ -18,15 +18,15 @@ User::~User()
     delete[] m_username;
     delete[] m_password;
 }
-void User::setName(char *name)
+void User::setName(const char *name)
 {
     this->m_username = strdup(name);
 }
-void User::setPassword(char *password)
+void User::setPassword(const char *password)
 {
     this->m_password = strdup(password);
 }
-void User::setAddress(Address address)
+void User::setAddress(const Address address)
 {
     this->m_address = address; //to do operator= for address
 }

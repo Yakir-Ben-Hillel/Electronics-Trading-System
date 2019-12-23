@@ -11,7 +11,7 @@ class Customer : virtual public User
 public:
 	//constructors && distructors
 	Customer() = default;
-	Customer(char *username, char *password, Address &address,
+	Customer(const char *username,const char *password,const Address &address,
 			 const Product **wishlist = nullptr,
 			 const Order **orderHistory = nullptr,
 			 unsigned int orderHistoryPhysicalSize = 0,
