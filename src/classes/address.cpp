@@ -1,10 +1,11 @@
 #include "../../include/system.h"
 
-Address::Address(unsigned int apartmentNumber, const char *cityName, const char *streetName)
+Address::Address(unsigned int apartmentNumber, const char *cityName, const char *streetName) : apartmentNumber(apartmentNumber)
 {
-    setCityName(cityName);
-    setStreetName(streetName);
-    setApartmentNumber(apartmentNumber);
+    if (cityName)
+        this->setCityName(cityName);
+    if (streetName)
+        this->setStreetName(streetName);
 }
 Address::Address(const Address &other)
 {
@@ -80,6 +81,9 @@ ostream &operator<<(ostream &out, const Address &address)
 }
 istream &operator>>(istream &in, Address &address)
 {
-    in >> address.cityName >> address.streetName >> address.apartmentNumber;
+    char cityName[11], streetName[21];
+    in >> cityName >> streetName >> address.apartmentNumber;
+    address.setCityName(cityName);
+    address.setStreetName(streetName);
     return in;
 }

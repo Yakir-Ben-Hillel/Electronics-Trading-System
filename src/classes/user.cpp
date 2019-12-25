@@ -15,7 +15,9 @@ User::User(User &&move) : m_address(std::move(move.m_address))
 }
 User::User(ifstream &inFile)
 {
-    inFile >> *this;
+    inFile >> *this->m_username;
+    inFile >> *this->m_password;
+    inFile >> this->m_address;
 }
 User::~User()
 {
@@ -83,6 +85,11 @@ ostream &operator<<(ostream &out, const User &user)
 }
 istream &operator>>(istream &in, User &user)
 {
-    in >> user.m_username >> user.m_password >> user.m_address;
+    char username[11], password[11];
+    in >> username;
+    in >> password;
+    user.setName(username);
+    user.setPassword(password);
+    in >> user.m_address;
     return in;
 }

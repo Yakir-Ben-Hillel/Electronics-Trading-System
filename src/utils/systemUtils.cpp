@@ -2,6 +2,7 @@
 
 void System::mainMenu()
 {
+    this->loadUsersFromFile();
     bool isFinished = false;
     char option;
     cout << "Welcome to"
@@ -73,7 +74,7 @@ void System::mainMenu()
                 this->showProductsWithTheSameName(name);
                 break;
             case '6':
-                this->compare();//need to finish it!!!!
+                this->compare(); //need to finish it!!!!
                 break;
             case '7':
                 this->logged_in_user = nullptr;
@@ -125,6 +126,7 @@ void System::mainMenu()
             }
         }
     }
+    this->writeUsersToFile();
 }
 bool System::addFeedback(Customer *customer)
 {
@@ -173,7 +175,6 @@ bool System::checkUsernameAvailability(const char *username)
 }
 void System::signup()
 {
-    ofstream outFile("../../bin/test.txt");
     User *user = nullptr;
     Address *address = nullptr;
     bool availabilty = true;
@@ -220,8 +221,6 @@ void System::signup()
         break;
     }
     *this += user;
-    outFile << *user;
-    outFile.close();
 }
 void System::login()
 {
@@ -271,12 +270,12 @@ void System::login()
 void System::showProductsWithTheSameName(const char *name)
 {
     Seller *seller_temp = nullptr;
-    CAS *cas_temp=nullptr;
+    CAS *cas_temp = nullptr;
     cout << "The Products you have searched for ,show to you below: " << endl;
     for (int i = 0; i < this->users_array_logical_size; i++)
     {
         seller_temp = dynamic_cast<Seller *>(users_array[i]);
-        cas_temp=dynamic_cast<CAS*>(users_array[i]);
+        cas_temp = dynamic_cast<CAS *>(users_array[i]);
         if (seller_temp)
         {
             int size = seller_temp->getStockArraySize();
@@ -290,16 +289,16 @@ void System::showProductsWithTheSameName(const char *name)
                 }
             }
         }
-        if(cas_temp)
+        if (cas_temp)
         {
-            int size=cas_temp->getStockArraySize();
-            Product** stock=cas_temp->getStock();
-            for(int j=0;j<size;++j)
+            int size = cas_temp->getStockArraySize();
+            Product **stock = cas_temp->getStock();
+            for (int j = 0; j < size; ++j)
             {
-                if(strcmp(name,stock[j]->getName())==0)
+                if (strcmp(name, stock[j]->getName()) == 0)
                 {
-                    cout<<*stock[j];
-                    cout<<endl;
+                    cout << *stock[j];
+                    cout << endl;
                 }
             }
         }

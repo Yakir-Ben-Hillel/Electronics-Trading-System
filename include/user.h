@@ -10,6 +10,7 @@ protected:
     char *m_username;
     char *m_password;
     Address m_address;
+    User() = default;
     User(const char *name, const char *password, const Address &address);
     User(const User &other);
     User(User &&move);

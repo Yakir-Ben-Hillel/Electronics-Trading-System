@@ -108,12 +108,12 @@ const Seller *Product::getSeller() const
 }
 ostream &operator<<(ostream &out, const Product &product)
 {
-    if (typeid(out) == typeid(ofstream))
-    {
-        out << product.p_name << " " << product.CategoryNames[product.getCategory()]
-            << " " << product.p_price << " " << *product.p_seller;
-    }
-    else
+    // if (typeid(out) == typeid(ofstream))
+    // {
+    //     out << product.p_name << " " << product.CategoryNames[product.getCategory()]
+    //         << " " << product.p_price << " " << *product.p_seller;
+    // }
+    if (typeid(out) != typeid(ofstream))
     {
         out << "Product name: " << product.p_name << endl;
         out << "Product category: " << product.CategoryNames[product.getCategory()] << endl;

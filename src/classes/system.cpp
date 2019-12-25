@@ -70,6 +70,56 @@ const System &System::operator+=(User *user)
     }
     return *this;
 }
+void System::loadUsersFromFile()
+{
+    ifstream inFile("test.txt", ios::in);
+    bool fEof = false;
+    if (inFile)
+    {
+        char type[10];
+        int amount;
+        inFile >> amount;
+        inFile >> type;
+        for (int i = 0; i < amount; i++)
+        {
+            if (strcmp(type, "Customer") == 0)
+            {
+                *this += new Customer(inFile);
+            }
+            else if (strcmp(type, "Seller") == 0)
+            {
+                *this += new Seller(inFile);
+            }
+            else if (strcmp(type, "CAS") == 0)
+            {
+                *this += new CAS(inFile);
+            }
+            else
+            {
+                std::cout << "INVALID INPUT INSIDE FILE!!! ABORTED." << endl;
+                exit(1);
+            }
+            if (inFile.eof())
+            {
+                fEof = true;
+                continue;
+            }
+        }
+    }
+
+    inFile.close();
+}
+void System::writeUsersToFile()
+{
+    ofstream outFile("test.txt", ios::trunc);
+    outFile << this->users_array_logical_size << endl;
+    for (int i = 0; i < this->users_array_logical_size; i++)
+    {
+        outFile << *this->users_array[i] << endl;
+    }
+    outFile.close();
+}
+
 void System::resizeUsersArray()
 {
     int newSize = this->users_array_physical_size * 2 + 1;
@@ -94,20 +144,20 @@ void System::compare() const
         customerTemp = dynamic_cast<Customer *>(this->users_array[i]);
         if (customerTemp)
         {
-            cout << i + 1 << ") " << customerTemp->getName() << endl;
+            std::cout << i + 1 << ") " << customerTemp->getName() << endl;
             temp_counter++;
         }
     }
-    cout << endl;
+    std::cout << endl;
     int op1, op2;
     do
     {
-        cout << "Please choose the customers you would like to compare: (option1 option2) ";
+        std::cout << "Please choose the customers you would like to compare: (option1 option2) ";
         cin >> op1 >> op2;
         if ((op1 == op2) || (op1 < 0) || (op2 < 0))
         {
-            cout << endl;
-            cout << "wrong input,please try again!" << endl;
+            std::cout << endl;
+            std::cout << "wrong input,please try again!" << endl;
             isValid = false;
         }
         Customer *temp1, *temp2;
@@ -115,19 +165,19 @@ void System::compare() const
         temp2 = dynamic_cast<Customer *>(this->users_array[op2]);
         if (!temp1 || !temp2)
         {
-            cout << endl;
-            cout << "wrong input,please try again!" << endl;
+            std::cout << endl;
+            std::cout << "wrong input,please try again!" << endl;
             isValid = false;
         }
         else
         {
             if (*temp1 < *temp2)
             {
-                cout << temp2->getName() << "'s wishlist is bigger than " << temp1->getName() << "'s wishlist" << endl;
+                std::cout << temp2->getName() << "'s wishlist is bigger than " << temp1->getName() << "'s wishlist" << endl;
             }
             else
             {
-                cout << temp1->getName() << "'s wishlist is bigger than " << temp2->getName() << "'s wishlist" << endl;
+                std::cout << temp1->getName() << "'s wishlist is bigger than " << temp2->getName() << "'s wishlist" << endl;
             }
         }
 

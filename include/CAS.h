@@ -8,8 +8,10 @@ class CAS : public Customer, public Seller
 public:
    CAS(const Customer &customer, const Seller &seller);
    CAS(const CAS &other);
+   CAS(ifstream &inFile);
    ~CAS();
-   virtual void toOs(ostream& out) const override;
+   // friend istream &operator>>(istream &in, CAS &cas);
+   virtual void toOs(ostream &out) const override;
    //methoods
    void show(); //show the details of the customer&seller
 };

@@ -19,12 +19,13 @@ public:
 			 unsigned int wishlistPhysicalSize = 0,
 			 unsigned int wishlistLogicalSize = 0);
 	Customer(const Customer &other);
+	Customer(ifstream &inFile);
 	Customer(Customer &&other);
 	virtual ~Customer();
 	//operator=
 	const Customer &operator=(const Customer &other);
 	friend bool operator<(const Customer &first, const Customer &second);
-	friend istream &operator>>(istream &in, Customer &customer);
+	// friend istream &operator>>(istream &in, Customer &customer);
 	//seters
 	bool setName(char *userName);
 	bool setAddress(Address address);

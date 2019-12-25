@@ -48,6 +48,8 @@ public:
 	void printCASNames() const;
 	void printOptionsAsSeller() const;
 	void printOptionAsCAS() const;
+	void loadUsersFromFile();
+	void writeUsersToFile();
 	bool addFeedback(Customer *customer);
 	void printOptionsAsCustomer() const;
 	void makeProductForSale();

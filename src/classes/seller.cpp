@@ -10,6 +10,10 @@ Seller::Seller(const Seller &other) : User(other)
 {
     *this = other;
 }
+Seller::Seller(ifstream &inFile)
+{
+    inFile >> *this;
+}
 Seller::Seller(Seller &&other) : User(std::move(other))
 {
     this->s_stock = other.s_stock;
@@ -141,29 +145,23 @@ const Seller &Seller::operator=(const Seller &other)
     }
     return *this;
 }
-istream &operator>>(istream &in, Seller &seller)
-{
-    in >> seller.m_username >> seller.m_password;
-    in >> seller.m_address >> seller.stock_array_physical_length;
-    in >> seller.stock_array_logical_length;
-    for (int i = 0; seller.stock_array_logical_length; i++)
-    {
-        in >> *seller.s_stock[i];
-    }
-    in >> seller.feedbacks_array_physical_length;
-    in >> seller.feedbacks_array_logical_length;
-    for (int i = 0; i < seller.feedbacks_array_logical_length; i++)
-        in >> *seller.feedBack_array[i];
-    return in;
-}
+// istream &operator>>(istream &in, Seller &seller)
+// {
+//     in >> (User &)seller;
+//     in >> seller.stock_array_physical_length;
+//     in >> seller.stock_array_logical_length;
+//     seller.s_stock = new Product *[seller.stock_array_logical_length];
+//     for (int i = 0; seller.stock_array_logical_length; i++)
+//     {
+//         in >> *seller.s_stock[i];
+//     }
+//     in >> seller.feedbacks_array_physical_length;
+//     in >> seller.feedbacks_array_logical_length;
+//     seller.feedBack_array = new FeedBack *[seller.feedbacks_array_logical_length];
+//     for (int i = 0; i < seller.feedbacks_array_logical_length; i++)
+//         in >> *seller.feedBack_array[i];
+//     return in;
+// }
 void Seller::toOs(ostream &out) const
 {
-    out << this->stock_array_physical_length << " " << this->stock_array_logical_length
-        << " ";
-    for (int i = 0; i < this->stock_array_logical_length; i++)
-        out << *this->s_stock[i] << " ";
-    out << this->feedbacks_array_physical_length << " "
-        << this->feedbacks_array_logical_length << " ";
-    for (int i = 0; i < this->feedbacks_array_logical_length; i++)
-        out << *this->feedBack_array[i] << " ";
 }

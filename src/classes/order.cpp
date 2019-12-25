@@ -106,14 +106,14 @@ void Order::resizeOrderList()
 }
 ostream &operator<<(ostream &out, const Order &order)
 {
-    if (typeid(ostream) == typeid(ofstream))
-    {
-        out << order.o_list_physical_size << " " << order.o_list_logical_size << " ";
-        for (int i = 0; i < order.o_list_logical_size; i++)
-            out << *order.order_products[i] << " ";
-        out << order.price_of_order;
-    }
-    else
+    // if (typeid(ostream) == typeid(ofstream))
+    // {
+    //     out << order.o_list_physical_size << " " << order.o_list_logical_size << " ";
+    //     for (int i = 0; i < order.o_list_logical_size; i++)
+    //         out << *order.order_products[i] << " ";
+    //     out << order.price_of_order;
+    // }
+    if (typeid(out) != typeid(ofstream))
     {
         out << "Order Products are:" << endl;
         for (int i = 0; i < order.o_list_logical_size; i++)

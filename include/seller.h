@@ -12,6 +12,7 @@ public:
 	Seller(const char *username, const char *password, const Address &address, Product **stockArray = nullptr,
 		   FeedBack **feedbacksArray = nullptr, unsigned int s_size = 0, unsigned int f_size = 0);
 	Seller(const Seller &other);
+	Seller(ifstream&inFile);
 	Seller(Seller &&other);
 	virtual ~Seller();
 	//Getters Functions.
@@ -34,7 +35,7 @@ public:
 	void makeProductForSale();
 	/*Operators*/
 	const Seller &operator=(const Seller &other);
-	friend istream &operator>>(istream &in, Seller &seller);
+	// friend istream &operator>>(istream &in, Seller &seller);
 	virtual void toOs(ostream &out) const override;
 
 protected:
