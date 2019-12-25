@@ -32,7 +32,7 @@ void System::printOptionsAsCustomer() const
     cout << "3) Make an Order." << endl;
     cout << "4) Print all Sellers names." << endl;
     cout << "5) Search for a Product" << endl;
-    cout << "6) compare between to customers by their sum of wish list" << endl;
+    cout << "6) Print your user's info" << endl;
     cout << "7) Logout." << endl;
     cout << "8) Exit" << endl;
 }
@@ -40,8 +40,9 @@ void System::printOptionsAsSeller() const
 {
     cout << "1) Add a Product." << endl;
     cout << "2) View your Feedbacks." << endl;
-    cout << "3) Logout." << endl;
-    cout << "4) Exit." << endl;
+    cout << "3) Print your user's info" << endl;
+    cout << "4) Logout." << endl;
+    cout << "5) Exit." << endl;
 }
 void System::printOptionAsCAS() const
 {

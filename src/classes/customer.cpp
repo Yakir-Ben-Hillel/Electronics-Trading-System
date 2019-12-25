@@ -362,10 +362,20 @@ void Customer::toOs(ostream &out) const
 {
     if (typeid(out) != typeid(ofstream))
     {
-        for (int i = 0; i < this->c_wish_logical_size; i++)
-            out << *this->c_wishList[i] << " ";
-        out << this->order_physical_size << " " << this->order_logical_size << " ";
-        for (int i = 0; i < this->order_logical_size; i++)
-            out << *this->orders_history[i] << " ";
+        out << "Wishlist: " << endl;
+        if (this->c_wish_logical_size != 0)
+        {
+            for (int i = 0; i < this->c_wish_logical_size; i++)
+                out << *this->c_wishList[i] << endl;
+        }
+        else
+            out << "Wishlist is Empty." << endl;
+        if (this->order_logical_size != 0)
+        {
+            for (int i = 0; i < this->order_logical_size; i++)
+                out << *this->orders_history[i] << endl;
+        }
+        else
+            out << "The user didn't made any Order" << endl;
     }
 }

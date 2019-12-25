@@ -164,4 +164,18 @@ const Seller &Seller::operator=(const Seller &other)
 // }
 void Seller::toOs(ostream &out) const
 {
+    if (typeid(out) != typeid(ofstream))
+    {
+        out << "Products: " << endl;
+        if (this->stock_array_logical_length != 0)
+            for (int i = 0; i < this->stock_array_logical_length; i++)
+                out << *this->s_stock[i];
+        else
+            out << "Has no Products" << endl;
+        if (this->feedbacks_array_logical_length != 0)
+            for (int i = 0; i < this->feedbacks_array_logical_length; i++)
+                out << *this->feedBack_array[i];
+        else
+            out << "Has no Feedbacks" << endl;
+    }
 }

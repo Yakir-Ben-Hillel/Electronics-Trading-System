@@ -78,9 +78,10 @@ ostream &operator<<(ostream &out, const User &user)
     }
     else
     {
-        out << user.m_username << " " << user.m_address;
+        out << "Username: " << user.m_username << endl;
+        out << user.m_address;
+        user.toOs(out);
     }
-    user.toOs(out);
     return out;
 }
 istream &operator>>(istream &in, User &user)

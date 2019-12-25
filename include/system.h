@@ -74,5 +74,5 @@ private:
 	//private methoods
 	bool checkUsernameAvailability(const char *username);
 };
-
+bool isSubstring(const char *s1, const char *s2);
 #endif // !__System_H

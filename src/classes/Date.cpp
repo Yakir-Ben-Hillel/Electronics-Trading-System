@@ -46,7 +46,7 @@ ostream &operator<<(ostream &out, const Date &date)
    }
    else
    {
-      out << "Day: " << date.m_day << " Month: " << date.m_month << " Year: " << date.m_year << endl;
+      out << date.m_day << "/" << date.m_month << "/" << date.m_year << endl;
    }
    return out;
 }

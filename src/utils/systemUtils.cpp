@@ -4,7 +4,7 @@ void System::mainMenu()
 {
     this->loadUsersFromFile();
     bool isFinished = false;
-    char option;
+    int option;
     cout << "Welcome to"
          << " " << this->getSystemName() << endl;
     printOpening();
@@ -24,22 +24,22 @@ void System::mainMenu()
             cin.ignore(256, '\n');
             switch (option)
             {
-            case '1':
+            case 1:
                 this->login();
                 break;
-            case '2':
+            case 2:
                 this->signup();
                 break;
-            case '3':
+            case 3:
                 this->printCustomersNames();
                 break;
-            case '4':
+            case 4:
                 this->printSellersNames();
                 break;
-            case '5':
+            case 5:
                 this->printCASNames();
                 break;
-            case '6':
+            case 6:
                 isFinished = true;
                 break;
             default:
@@ -55,31 +55,31 @@ void System::mainMenu()
             cin >> option;
             switch (option)
             {
-            case '1':
+            case 1:
                 this->chooseProductToAddToCustomerWishlist();
                 break;
-            case '2':
+            case 2:
                 this->addFeedback(customer_temp);
                 break;
-            case '3':
+            case 3:
                 customer_temp->makeOrder();
                 break;
-            case '4':
+            case 4:
                 this->printSellersNames();
                 break;
-            case '5':
+            case 5:
                 cout << "Please insert the name of the product you want to search for: ";
                 char name[30];
                 cin.getline(name, 29);
                 this->showProductsWithTheSameName(name);
                 break;
-            case '6':
-                this->compare(); //need to finish it!!!!
+            case 6:
+                cout << *customer_temp;
                 break;
-            case '7':
+            case 7:
                 this->logged_in_user = nullptr;
                 break;
-            case '8':
+            case 8:
                 isFinished = true;
                 break;
             default:
@@ -95,32 +95,10 @@ void System::mainMenu()
             cin >> option;
             switch (option)
             {
-            case '1':
-                this->chooseProductToAddToCustomerWishlist();
-                break;
-            case '2':
-                this->addFeedback(customer_temp);
-                break;
-            case '3':
-                customer_temp->makeOrder();
-                break;
-            case '4':
-                this->printSellersNames();
-                break;
-            case '5':
-                cout << "Please insert the name of the product you want to search for: ";
-                char name[30];
-                cin.getline(name, 29);
-                this->showProductsWithTheSameName(name);
-                break;
-            case '6':
-                this->compare(); //need to finish it!!!!
-                break;
-
-            case '7':
+            case 1:
                 seller_temp->makeProductForSale();
                 break;
-            case '8':
+            case 2:
                 int size;
                 array_feedbacks = seller_temp->getfeedBacksArray(size);
                 if (size == 0)
@@ -135,10 +113,14 @@ void System::mainMenu()
                     }
                 }
                 break;
-            case '9':
+            case 3:
+                cout << *seller_temp;
+                break;
+
+            case 4:
                 this->logged_in_user = nullptr;
                 break;
-            case '10':
+            case 5:
                 isFinished = true;
                 break;
             default:
@@ -153,10 +135,29 @@ void System::mainMenu()
             cin >> option;
             switch (option)
             {
-            case '1':
+            case 1:
+                this->chooseProductToAddToCustomerWishlist();
+                break;
+            case 2:
+                this->addFeedback(customer_temp);
+                break;
+            case 3:
+                customer_temp->makeOrder();
+                break;
+            case 4:
+                this->printSellersNames();
+                break;
+            case 5:
+                cout << "Please insert the name of the product you want to search for: ";
+                char name[30];
+                cin.getline(name, 29);
+                this->showProductsWithTheSameName(name);
+                break;
+
+            case 6:
                 cas_temp->makeProductForSale();
                 break;
-            case '2':
+            case 7:
                 int size;
                 array_feedbacks = cas_temp->getfeedBacksArray(size);
                 if (size == 0)
@@ -171,10 +172,10 @@ void System::mainMenu()
                     }
                 }
                 break;
-            case '3':
+            case 8:
                 this->logged_in_user = nullptr;
                 break;
-            case '4':
+            case 9:
                 isFinished = true;
                 break;
             }
@@ -336,7 +337,7 @@ void System::showProductsWithTheSameName(const char *name)
             Product **stock = seller_temp->getStock();
             for (int j = 0; j < size; j++)
             {
-                if (strcmp(name, stock[j]->getName()) == 0)
+                if (isSubstring(name, stock[j]->getName()))
                 {
                     cout << *stock[j];
                     cout << endl;
@@ -349,7 +350,7 @@ void System::showProductsWithTheSameName(const char *name)
             Product **stock = cas_temp->getStock();
             for (int j = 0; j < size; ++j)
             {
-                if (strcmp(name, stock[j]->getName()) == 0)
+                if (isSubstring(name, stock[j]->getName()))
                 {
                     cout << *stock[j];
                     cout << endl;
@@ -357,4 +358,21 @@ void System::showProductsWithTheSameName(const char *name)
             }
         }
     }
+}
+bool isSubstring(const char *s1, const char *s2)
+{
+    int M = strlen(s1);
+    int N = strlen(s2);
+    /* A loop to slide pat[] one by one */
+    for (int i = 0; i <= N - M; i++)
+    {
+        int j;
+        /* For current index i, check for pattern match */
+        for (j = 0; j < M; j++)
+            if (s2[i + j] != s1[j])
+                break;
+        if (j == M)
+            return true;
+    }
+    return false;
 }
