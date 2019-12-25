@@ -69,7 +69,7 @@ void System::printOptionAsCAS() const
         }
     } while (!isValid);
 }
-void System::printCustomersNames(int* counter) const
+void System::printCustomersNames() const
 {
     unsigned int temp_counter=0;
     Customer *customerTemp = nullptr;
@@ -82,7 +82,6 @@ void System::printCustomersNames(int* counter) const
             temp_counter++;
         }
     }
-    *counter=temp_counter;
     cout << endl;
 }
 void System::printSellersNames() const

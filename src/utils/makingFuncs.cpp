@@ -122,16 +122,4 @@ void System::chooseProductToAddToCustomerWishlist()
         }
     }
 }
-void System::makeOrder()
-{
-    unsigned int customer_index;
-    Order *new_order = new Order();
-    Product **product_array = nullptr;
-    do
-    {
-        printCustomersNames();
-        cout << "Please choose yourself from the list" << endl;
-        cin >> customer_index;
-        customer_index--;
-    } while (!(customer_index <= this->users_array_logical_size && customer_index >= 0));
-}
+

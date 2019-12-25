@@ -42,7 +42,7 @@ public:
 	Address *makeAddress();
 	void makeCustomer();
 	bool addUserToArray(User *new_user);
-	void printCustomersNames(int* counter=nullptr) const;
+	void printCustomersNames() const;
 	void printOptionsAsGuest() const;
 	void printSellersNames() const;
 	void printCASNames() const;

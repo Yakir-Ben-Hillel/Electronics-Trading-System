@@ -67,21 +67,53 @@ const char *System::getSystemName() const
 {
     return system_name;
 }
-//not done yet
 void System::compare() const
 {
     int counter = 0;
-    bool isValid=true;
-    this->printCustomersNames(&counter);
+    bool isValid = true;
+    unsigned int temp_counter = 0;
+    Customer *customerTemp = nullptr;
+    for (int i = 0; i < this->users_array_logical_size; i++)
+    {
+        customerTemp = dynamic_cast<Customer *>(this->users_array[i]);
+        if (customerTemp)
+        {
+            cout << i + 1 << ") " << customerTemp->getName() << endl;
+            temp_counter++;
+        }
+    }
+    cout << endl;
     int op1, op2;
     do
     {
         cout << "Please choose the customers you would like to compare: (option1 option2) ";
         cin >> op1 >> op2;
-        if((op1==op2)||(op1>counter)||(op2>counter)||(op1<0)||(op2<0))
+        if ((op1 == op2) || (op1 < 0) || (op2 < 0))
         {
-            cout<<endl<<"wrong input,please try again!"<<endl;
-            isValid=false;
+            cout << endl;
+            cout << "wrong input,please try again!" << endl;
+            isValid = false;
         }
+        Customer *temp1, *temp2;
+        temp1 = dynamic_cast<Customer *>(this->users_array[op1]);
+        temp2 = dynamic_cast<Customer *>(this->users_array[op2]);
+        if (!temp1 || !temp2)
+        {
+            cout << endl;
+            cout << "wrong input,please try again!" << endl;
+            isValid = false;
+        }
+        else
+        {
+            if (*temp1 < *temp2)
+            {
+                cout << temp2->getName() << "'s wishlist is bigger than " << temp1->getName() << "'s wishlist" << endl;
+            }
+            else
+            {
+                cout << temp1->getName() << "'s wishlist is bigger than " << temp2->getName() << "'s wishlist" << endl;
+            }
+        }
+
     } while (!isValid);
 }
