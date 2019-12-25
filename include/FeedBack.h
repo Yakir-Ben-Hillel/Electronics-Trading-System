@@ -23,7 +23,7 @@ public:
     const Customer *getCustomer() const;
     const Date *getDate();
     friend ostream &operator<<(ostream &out, const FeedBack &feedback);
-    friend istream &operator>>(istream *in, FeedBack &feedback);
+    friend istream &operator>>(istream &in, FeedBack &feedback);
 
 private:
     const Customer *customer;

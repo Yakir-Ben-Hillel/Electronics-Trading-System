@@ -38,17 +38,21 @@ bool Date::setYear(unsigned int givenyear)
    m_year = givenyear;
    return true;
 }
-ostream&operator<<(ostream&out,const Date&date)
+ostream &operator<<(ostream &out, const Date &date)
 {
-   if(typeid(out)==typeid(ofstream))
+   if (typeid(out) == typeid(ofstream))
    {
-      out<<date.m_day<<" "<<date.m_month<<" "<<date.m_year<<" ";
+      out << date.m_day << " " << date.m_month << " " << date.m_year << " ";
    }
    else
    {
-      out<<"Day: "<<date.m_day<<" Month: "<<date.m_month<<" Year: "<<date.m_year<<endl;
+      out << "Day: " << date.m_day << " Month: " << date.m_month << " Year: " << date.m_year << endl;
    }
    return out;
+}
+istream &operator>>(istream &in, Date &date)
+{
+   in >> date.m_year >> date.m_month >> date.m_day;
 }
 unsigned int Date::getDay() const
 {
