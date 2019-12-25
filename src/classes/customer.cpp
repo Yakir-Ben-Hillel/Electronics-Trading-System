@@ -339,7 +339,16 @@ bool operator<(const Customer &first, const Customer &second)
         return true;
     return false;
 }
-
+istream &operator>>(istream &in, Customer &customer)
+{
+    in >> customer.c_wish_physical_size >> customer.c_wish_logical_size;
+    for (int i = 0; i < customer.c_wish_logical_size; i++)
+        in >> *customer.c_wishList[i];
+    in >> customer.order_physical_size >> customer.order_logical_size;
+    for (int i = 0; i < customer.order_logical_size; i++)
+        in >> *customer.orders_history[i];
+    return in;
+}
 void Customer::getSum(float &sum) const
 {
     for (int i = 0; i < this->c_wish_logical_size; ++i)
@@ -347,4 +356,10 @@ void Customer::getSum(float &sum) const
 }
 void Customer::toOs(ostream &out) const
 {
+    out << this->c_wish_physical_size << " " << this->c_wish_logical_size << " ";
+    for (int i = 0; i < this->c_wish_logical_size; i++)
+        out << *this->c_wishList[i] << " ";
+    out << this->order_physical_size << " " << this->order_logical_size << " ";
+    for (int i = 0; i < this->order_logical_size; i++)
+        out << *this->orders_history[i] << " ";
 }

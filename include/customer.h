@@ -11,7 +11,7 @@ class Customer : virtual public User
 public:
 	//constructors && distructors
 	Customer() = default;
-	Customer(const char *username,const char *password,const Address &address,
+	Customer(const char *username, const char *password, const Address &address,
 			 const Product **wishlist = nullptr,
 			 const Order **orderHistory = nullptr,
 			 unsigned int orderHistoryPhysicalSize = 0,
@@ -23,7 +23,8 @@ public:
 	virtual ~Customer();
 	//operator=
 	const Customer &operator=(const Customer &other);
-	friend bool operator<(const Customer& first,const Customer& second);
+	friend bool operator<(const Customer &first, const Customer &second);
+	friend istream &operator>>(istream &in, Customer &customer);
 	//seters
 	bool setName(char *userName);
 	bool setAddress(Address address);
@@ -32,7 +33,7 @@ public:
 	bool setOrder(const Order *curr_order);
 	bool SetOrderArray(const Order **order_array, int size);
 	bool addProductToWishlistArray(Product *new_product);
-	virtual void toOs(ostream& out) const override;
+	virtual void toOs(ostream &out) const override;
 	//geters
 	const char *getName() const;
 	const Address &getAddress() const;
@@ -60,8 +61,8 @@ protected:
 	bool setOrderListPhySize(unsigned int PhySize);
 	bool setOrderListLogicSize(unsigned int LogicSize);
 	void resizeOrderlistArray();
-    
-	void getSum(float& sum) const;
+
+	void getSum(float &sum) const;
 	Product **c_wishList; //pointer array for product wish list
 	int c_wish_physical_size = 1;
 	unsigned int c_wish_logical_size = 0;

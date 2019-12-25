@@ -80,11 +80,6 @@ ostream &operator<<(ostream &out, const Address &address)
 }
 istream &operator>>(istream &in, Address &address)
 {
-    char cityname[11], streetname[21];
-    int number;
-    in >> cityname >> streetname >> number;
-    address.setCityName(cityname);
-    address.setStreetName(streetname);
-    address.setApartmentNumber(number);
+    in >> address.cityName >> address.streetName >> address.apartmentNumber;
     return in;
 }

@@ -159,6 +159,11 @@ istream &operator>>(istream &in, Seller &seller)
 void Seller::toOs(ostream &out) const
 {
     out << this->stock_array_physical_length << " " << this->stock_array_logical_length
-        << " " << this->s_stock << " " << this->feedbacks_array_physical_length << " "
-        << this->feedbacks_array_logical_length << " " << this->feedBack_array;
+        << " ";
+    for (int i = 0; i < this->stock_array_logical_length; i++)
+        out << *this->s_stock[i] << " ";
+    out << this->feedbacks_array_physical_length << " "
+        << this->feedbacks_array_logical_length << " ";
+    for (int i = 0; i < this->feedbacks_array_logical_length; i++)
+        out << *this->feedBack_array[i] << " ";
 }

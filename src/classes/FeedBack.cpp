@@ -60,7 +60,7 @@ ostream &operator<<(ostream &out, const FeedBack &feedback)
 {
     if (typeid(out) == typeid(ofstream))
     {
-        out << feedback.customer << " " << feedback.date_of_feedback << " "
+        out << *feedback.customer << " " << feedback.date_of_feedback << " "
             << feedback.notes;
     }
     else
@@ -73,6 +73,8 @@ ostream &operator<<(ostream &out, const FeedBack &feedback)
 }
 istream &operator>>(istream &in, FeedBack &feedback)
 {
-    in >> *feedback.customer >> feedback.date_of_feedback >> feedback.notes;
+    Customer *customerTemp = new Customer(*feedback.customer);
+    Date *dateTemp = new Date(*feedback.date_of_feedback);
+    in >> *customerTemp >> *dateTemp >> feedback.notes;
     return in;
 }

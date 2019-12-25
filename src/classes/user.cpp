@@ -83,11 +83,6 @@ ostream &operator<<(ostream &out, const User &user)
 }
 istream &operator>>(istream &in, User &user)
 {
-    char username[11], password[11];
-    Address address;
-    in >> username >> password >> address;
-    user.setName(username);
-    user.setPassword(password);
-    user.setAddress(address);
+    in >> user.m_username >> user.m_password >> user.m_address;
     return in;
 }
