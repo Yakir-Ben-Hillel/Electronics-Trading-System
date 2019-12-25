@@ -50,8 +50,24 @@ const System &System::operator+=(User *user)
 {
     if (this->users_array_logical_size == this->users_array_physical_size)
         this->resizeUsersArray();
-    this->users_array[this->users_array_logical_size] = user;
-    this->users_array_logical_size++;
+    Customer *temp_c = dynamic_cast<Customer *>(user);
+    Seller *temp_s = dynamic_cast<Seller *>(user);
+    CAS *temp_cas = dynamic_cast<CAS *>(user);
+    if (temp_c)
+    {
+        this->users_array[this->users_array_logical_size] = temp_c;
+        this->users_array_logical_size++;
+    }
+    if (temp_s)
+    {
+        this->users_array[this->users_array_logical_size] = temp_s;
+        this->users_array_logical_size++;
+    }
+    if (temp_cas)
+    {
+        this->users_array[this->users_array_logical_size] = temp_cas;
+        this->users_array_logical_size++;
+    }
     return *this;
 }
 void System::resizeUsersArray()
