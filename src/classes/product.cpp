@@ -143,3 +143,4 @@ istream &operator>>(istream &in, Product &product)
     product.setPrice(price);
     product.setSeller(sellerTemp);
     return in;
+}

@@ -103,7 +103,7 @@ void System::printSellersNames() const
 void System::printCASNames() const
 {
   CAS* temp;
-  for(int i=0,int counter=0;i<this->users_array_logical_size;++i)
+  for(int i=0,counter=0;i<this->users_array_logical_size;++i)
   {
       temp=dynamic_cast<CAS*>(this->users_array[i]);
       if(temp)

@@ -30,10 +30,13 @@ const Address &Address::operator=(const Address &other)
 {
     if (this != &other)
     {
+        delete[] cityName;
         this->setCityName(other.cityName);
+        delete[] streetName;
         this->setStreetName(other.streetName);
         this->setApartmentNumber(other.apartmentNumber);
     }
+    return *this;
 }
 bool Address::setCityName(const char *givenCityName)
 {

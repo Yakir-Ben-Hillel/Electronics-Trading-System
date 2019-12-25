@@ -16,6 +16,7 @@ using namespace std;
 #include "./FeedBack.h"
 #include "./Date.h"
 #include "CAS.h"
+#include <typeinfo>
 class Address;
 class Customer;
 class Seller;

@@ -154,6 +154,7 @@ istream &operator>>(istream &in, Seller &seller)
     in >> seller.feedbacks_array_logical_length;
     for (int i = 0; i < seller.feedbacks_array_logical_length; i++)
         in >> *seller.feedBack_array[i];
+    return in;
 }
 void Seller::toOs(ostream &out) const
 {

@@ -1,4 +1,5 @@
 #include "../../include/system.h"
+#include <typeinfo>
 
 Date::Date(unsigned int day, unsigned int month, unsigned int year)
 {
@@ -39,7 +40,15 @@ bool Date::setYear(unsigned int givenyear)
 }
 ostream&operator<<(ostream&out,const Date&date)
 {
-   
+   if(typeid(out)==typeid(ofstream))
+   {
+      out<<date.m_day<<" "<<date.m_month<<" "<<date.m_year<<" ";
+   }
+   else
+   {
+      out<<"Day: "<<date.m_day<<" Month: "<<date.m_month<<" Year: "<<date.m_year<<endl;
+   }
+   return out;
 }
 unsigned int Date::getDay() const
 {
