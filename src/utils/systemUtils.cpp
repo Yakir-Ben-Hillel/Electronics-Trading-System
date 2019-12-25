@@ -36,6 +36,9 @@ void System::mainMenu()
                 this->printSellersNames();
                 break;
             case '5':
+                this->printCASNames();
+                break;
+            case '6':
                 isFinished = true;
                 break;
             default:
@@ -65,14 +68,17 @@ void System::mainMenu()
                 break;
             case '5':
                 cout << "Please insert the name of the product you want to search for: ";
-                char name[11];
-                cin.getline(name, 10);
+                char name[30];
+                cin.getline(name, 29);
                 this->showProductsWithTheSameName(name);
                 break;
             case '6':
-                this->logged_in_user = nullptr;
+                this->compare();//need to finish it!!!!
                 break;
             case '7':
+                this->logged_in_user = nullptr;
+                break;
+            case '8':
                 isFinished = true;
                 break;
             default:

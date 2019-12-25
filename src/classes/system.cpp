@@ -67,3 +67,21 @@ const char *System::getSystemName() const
 {
     return system_name;
 }
+//not done yet
+void System::compare() const
+{
+    int counter = 0;
+    bool isValid=true;
+    this->printCustomersNames(&counter);
+    int op1, op2;
+    do
+    {
+        cout << "Please choose the customers you would like to compare: (option1 option2) ";
+        cin >> op1 >> op2;
+        if((op1==op2)||(op1>counter)||(op2>counter)||(op1<0)||(op2<0))
+        {
+            cout<<endl<<"wrong input,please try again!"<<endl;
+            isValid=false;
+        }
+    } while (!isValid);
+}

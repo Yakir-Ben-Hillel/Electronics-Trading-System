@@ -3,8 +3,6 @@
 FeedBack::FeedBack(char *note, Customer *customer_data, Date *curr_date)
     : customer(customer_data), date_of_feedback(curr_date)
 {
-    //setCustomer(customer_data);
-    //setDateOfFeedBack(curr_date);
     setNotes(note);
 }
 FeedBack::FeedBack(const FeedBack &other)
@@ -77,5 +75,6 @@ istream &operator>>(istream &in, FeedBack &feedback)
 {
     char letter[256];
     
-    in>>feedback
+    in>>feedback;
+    return in;
 }
