@@ -124,13 +124,10 @@ ostream &operator<<(ostream &out, const Product &product)
 }
 istream &operator>>(istream &in, Product &product)
 {
-    char productName[21];
     Seller *sellerTemp = new Seller(*product.p_seller);
     char category[12];
     Product::eCategory eCategory;
-    float price;
-    in >> productName >> category >> price >> *sellerTemp;
-    product.setName(productName);
+    in >> product.p_name >> category >> product.p_price >> *sellerTemp;
     if (strcmp(category, "Children") == 0)
         eCategory = Product::Children;
     else if (strcmp(category, "Electricity") == 0)
@@ -140,7 +137,6 @@ istream &operator>>(istream &in, Product &product)
     else
         eCategory = Product::Clothing;
     product.setCategory(eCategory);
-    product.setPrice(price);
     product.setSeller(sellerTemp);
     return in;
 }

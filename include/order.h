@@ -22,6 +22,8 @@ public:
     Product **getList() const;
     unsigned int getPhysicalSize() const;
     unsigned int getLogicalSize() const;
+    friend ostream &operator<<(ostream &out, const Order &order);
+    friend istream &operator>>(istream &in, Order &order);
 
 private:
     void resizeOrderList();

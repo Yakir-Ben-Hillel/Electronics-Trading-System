@@ -104,3 +104,28 @@ void Order::resizeOrderList()
     this->o_list_physical_size = newSize;
     this->order_products = newArray;
 }
+ostream &operator<<(ostream &out, const Order &order)
+{
+    if (typeid(ostream) == typeid(ofstream))
+    {
+        out << order.o_list_physical_size << " " << order.o_list_logical_size << " ";
+        for (int i = 0; i < order.o_list_logical_size; i++)
+            out << *order.order_products[i] << " ";
+        out << order.price_of_order;
+    }
+    else
+    {
+        out << "Order Products are:" << endl;
+        for (int i = 0; i < order.o_list_logical_size; i++)
+            out << *order.order_products[i] << endl;
+        out << "Order Price is: " << order.price_of_order << endl;
+    }
+    return out;
+}
+istream &operator>>(istream &in, Order &order)
+{
+    in >> order.o_list_physical_size >> order.o_list_logical_size;
+    for (int i = 0; i < order.o_list_logical_size; i++)
+        in >> *order.order_products[i];
+    in >> order.price_of_order;
+}

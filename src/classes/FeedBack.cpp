@@ -73,8 +73,6 @@ ostream &operator<<(ostream &out, const FeedBack &feedback)
 }
 istream &operator>>(istream &in, FeedBack &feedback)
 {
-    char letter[256];
-    
-    in>>feedback;
+    in >> *feedback.customer >> feedback.date_of_feedback >> feedback.notes;
     return in;
 }
