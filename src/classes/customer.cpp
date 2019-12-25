@@ -18,7 +18,7 @@ Customer::Customer(const Customer &other) : User(other)
 {
     *this = other;
 }
-Customer::Customer(ifstream &inFile) : User(inFile)
+Customer::Customer(ifstream &inFile)
 {
     inFile >> *this;
 }
@@ -38,7 +38,7 @@ Customer::~Customer()
     for (int i = 0; i < c_wish_logical_size; i++)
         delete c_wishList[i];
     delete[] c_wishList;
-    for (int i = 0; i < order_physical_size; i++)
+    for (int i = 0; i < order_logical_size; i++)
         delete orders_history[i];
     delete[] orders_history;
     c_wish_physical_size = c_wish_logical_size = 0;
@@ -360,10 +360,12 @@ void Customer::getSum(float &sum) const
 }
 void Customer::toOs(ostream &out) const
 {
-    //     out << this->c_wish_physical_size << " " << this->c_wish_logical_size << " ";
-    //     for (int i = 0; i < this->c_wish_logical_size; i++)
-    //         out << *this->c_wishList[i] << " ";
-    //     out << this->order_physical_size << " " << this->order_logical_size << " ";
-    //     for (int i = 0; i < this->order_logical_size; i++)
-    //         out << *this->orders_history[i] << " ";
+    if (typeid(out) != typeid(ofstream))
+    {
+        for (int i = 0; i < this->c_wish_logical_size; i++)
+            out << *this->c_wishList[i] << " ";
+        out << this->order_physical_size << " " << this->order_logical_size << " ";
+        for (int i = 0; i < this->order_logical_size; i++)
+            out << *this->orders_history[i] << " ";
+    }
 }

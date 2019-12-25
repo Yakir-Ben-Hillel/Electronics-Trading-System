@@ -53,12 +53,12 @@ const System &System::operator+=(User *user)
     Customer *temp_c = dynamic_cast<Customer *>(user);
     Seller *temp_s = dynamic_cast<Seller *>(user);
     CAS *temp_cas = dynamic_cast<CAS *>(user);
-    if (temp_c)
+    if (temp_c && !temp_cas)
     {
         this->users_array[this->users_array_logical_size] = temp_c;
         this->users_array_logical_size++;
     }
-    if (temp_s)
+    if (temp_s && !temp_cas)
     {
         this->users_array[this->users_array_logical_size] = temp_s;
         this->users_array_logical_size++;
@@ -72,16 +72,16 @@ const System &System::operator+=(User *user)
 }
 void System::loadUsersFromFile()
 {
-    ifstream inFile("test.txt", ios::in);
+    ifstream inFile("Users.txt", ios::in);
     bool fEof = false;
     if (inFile)
     {
         char type[10];
         int amount;
         inFile >> amount;
-        inFile >> type;
         for (int i = 0; i < amount; i++)
         {
+            inFile >> type;
             if (strcmp(type, "Customer") == 0)
             {
                 *this += new Customer(inFile);
@@ -111,11 +111,11 @@ void System::loadUsersFromFile()
 }
 void System::writeUsersToFile()
 {
-    ofstream outFile("test.txt", ios::trunc);
+    ofstream outFile("Users.txt", ios::trunc);
     outFile << this->users_array_logical_size << endl;
     for (int i = 0; i < this->users_array_logical_size; i++)
     {
-        outFile << *this->users_array[i] << endl;
+        outFile << *this->users_array[i];
     }
     outFile.close();
 }

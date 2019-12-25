@@ -1,5 +1,7 @@
 #include "../../include/CAS.h"
-
+CAS::CAS(char *username, char *password, Address &address) : User(username, password, address)
+{
+}
 CAS::CAS(const Customer &customer, const Seller &seller)
     : User(customer), Customer(customer), Seller(seller)
 {
@@ -7,8 +9,9 @@ CAS::CAS(const Customer &customer, const Seller &seller)
 CAS::CAS(const CAS &other) : User(other), Customer(other), Seller(other)
 {
 }
-CAS::CAS(ifstream &inFile) : User(inFile), Customer(inFile), Seller(inFile)
+CAS::CAS(ifstream &inFile)
 {
+    inFile >> *this;
 }
 CAS::~CAS()
 {

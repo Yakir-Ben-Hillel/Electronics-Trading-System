@@ -45,40 +45,27 @@ void System::printOptionsAsSeller() const
 }
 void System::printOptionAsCAS() const
 {
-    int x;
-    bool isValid = true;
-    cout << "Would you like to Enter your seller or customer zone?" << endl;
-    cout << "Seller-1 Customer-2 :";
-    cin >> x;
-    cout << endl;
-    //if the user is customer and seller he has to choose what zone he want to enter.
-    do
-    {
-        switch (x)
-        {
-        case 1:
-            System::printOptionsAsSeller();
-            break;
-        case 2:
-            System::printOptionsAsCustomer();
-            break;
-        default:
-            cout << "you enter wrong choice please try again." << endl;
-            isValid = false;
-            break;
-        }
-    } while (!isValid);
+    cout << "1) Add Product to your Wishlist." << endl;
+    cout << "2) Add Feedback to a Seller." << endl;
+    cout << "3) Make an Order." << endl;
+    cout << "4) Print all Sellers names." << endl;
+    cout << "5) Search for a Product" << endl;
+    cout << "6) Compare two Customers by their Wishlist Sum" << endl;
+    cout << "7) Add a Product." << endl;
+    cout << "8) View your Feedbacks." << endl;
+    cout << "9) Logout." << endl;
+    cout << "10) Exit." << endl;
 }
 void System::printCustomersNames() const
 {
-    unsigned int temp_counter=0;
+    unsigned int temp_counter = 0;
     Customer *customerTemp = nullptr;
     for (int i = 0; i < this->users_array_logical_size; i++)
     {
         customerTemp = dynamic_cast<Customer *>(this->users_array[i]);
         if (customerTemp)
         {
-            cout << temp_counter+1 << ") " << customerTemp->getName() << endl;
+            cout << temp_counter + 1 << ") " << customerTemp->getName() << endl;
             temp_counter++;
         }
     }
@@ -101,17 +88,17 @@ void System::printSellersNames() const
 }
 void System::printCASNames() const
 {
-  CAS* temp;
-  for(int i=0,counter=0;i<this->users_array_logical_size;++i)
-  {
-      temp=dynamic_cast<CAS*>(this->users_array[i]);
-      if(temp)
-      {
-          cout<<counter+1<<") "<<temp->getName()<<endl;
-          ++counter;
-      }
-  }
-  cout<<endl;
+    CAS *temp;
+    for (int i = 0, counter = 0; i < this->users_array_logical_size; ++i)
+    {
+        temp = dynamic_cast<CAS *>(this->users_array[i]);
+        if (temp)
+        {
+            cout << counter + 1 << ") " << temp->getName() << endl;
+            ++counter;
+        }
+    }
+    cout << endl;
 }
 void Seller::printSellerProducts()
 {

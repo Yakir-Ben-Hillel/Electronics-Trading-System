@@ -96,11 +96,69 @@ void System::mainMenu()
             switch (option)
             {
             case '1':
+                this->chooseProductToAddToCustomerWishlist();
+                break;
+            case '2':
+                this->addFeedback(customer_temp);
+                break;
+            case '3':
+                customer_temp->makeOrder();
+                break;
+            case '4':
+                this->printSellersNames();
+                break;
+            case '5':
+                cout << "Please insert the name of the product you want to search for: ";
+                char name[30];
+                cin.getline(name, 29);
+                this->showProductsWithTheSameName(name);
+                break;
+            case '6':
+                this->compare(); //need to finish it!!!!
+                break;
+
+            case '7':
                 seller_temp->makeProductForSale();
+                break;
+            case '8':
+                int size;
+                array_feedbacks = seller_temp->getfeedBacksArray(size);
+                if (size == 0)
+                    cout << "there are no feedback availables please try again later" << endl;
+                else
+                {
+                    cout << "your feedbacks are: " << endl;
+                    for (int i = 0; i < size; i++)
+                    {
+                        cout << (*array_feedbacks)[i];
+                        cout << endl;
+                    }
+                }
+                break;
+            case '9':
+                this->logged_in_user = nullptr;
+                break;
+            case '10':
+                isFinished = true;
+                break;
+            default:
+                cout << "Chosen option is not valid,try again." << endl;
+                isValid = false;
+                break;
+            }
+        }
+        else if (cas_temp)
+        {
+            FeedBack **array_feedbacks = nullptr;
+            cin >> option;
+            switch (option)
+            {
+            case '1':
+                cas_temp->makeProductForSale();
                 break;
             case '2':
                 int size;
-                array_feedbacks = seller_temp->getfeedBacksArray(size);
+                array_feedbacks = cas_temp->getfeedBacksArray(size);
                 if (size == 0)
                     cout << "there are no feedback availables please try again later" << endl;
                 else
@@ -118,10 +176,6 @@ void System::mainMenu()
                 break;
             case '4':
                 isFinished = true;
-                break;
-            default:
-                cout << "Chosen option is not valid,try again." << endl;
-                isValid = false;
                 break;
             }
         }
@@ -215,7 +269,7 @@ void System::signup()
         user = new Seller(username, password, *address);
         break;
     case 3:
-        user = new CAS(Customer(username, password, *address), Seller(username, password, *address));
+        user = new CAS(username, password, *address);
         break;
     default:
         break;

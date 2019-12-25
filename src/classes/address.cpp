@@ -76,7 +76,17 @@ unsigned int Address::getApartmentNumber() const
 
 ostream &operator<<(ostream &out, const Address &address)
 {
-    out << address.cityName << " " << address.streetName << " " << address.apartmentNumber << " " << endl;
+    if (typeid(out) == typeid(ofstream))
+    {
+        out << address.cityName << " " << address.streetName << endl
+            << address.apartmentNumber << " " << endl;
+    }
+    else
+    {
+        out << "City Name: " << address.cityName << endl;
+        out << "Street Name: " << address.streetName << endl;
+        out << "Apartment Number: " << address.apartmentNumber << endl;
+    }
     return out;
 }
 istream &operator>>(istream &in, Address &address)
