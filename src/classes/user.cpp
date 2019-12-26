@@ -26,10 +26,14 @@ User::~User()
 }
 void User::setName(const char *name)
 {
+    if (this->m_username)
+        delete[] this->m_username;
     this->m_username = strdup(name);
 }
 void User::setPassword(const char *password)
 {
+    if (this->m_password)
+        delete[] this->m_password;
     this->m_password = strdup(password);
 }
 void User::setAddress(const Address address)
@@ -43,7 +47,7 @@ const User &User::operator=(const User &other)
         delete[] m_username;
         m_username = strdup(other.m_username);
 
-        delete m_password;
+        delete[] m_password;
         m_password = strdup(other.m_password);
         m_address = other.m_address; //to do operator= for address
     }

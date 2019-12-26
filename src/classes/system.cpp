@@ -144,7 +144,7 @@ void System::compare() const
         customerTemp = dynamic_cast<Customer *>(this->users_array[i]);
         if (customerTemp)
         {
-            std::cout << i + 1 << ") " << customerTemp << endl;
+            std::cout << i + 1 << ") " << *customerTemp->getName() << endl;
             temp_counter++;
         }
     }

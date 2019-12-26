@@ -20,8 +20,9 @@ void System::printOptionsAsGuest() const
     cout << "2) SignUp." << endl;
     cout << "3) Print all Customers names." << endl;
     cout << "4) Print all Sellers names." << endl;
-    cout << "5) print all CAS users." << endl;
-    cout << "6) Exit." << endl;
+    cout << "5) Print all CAS users." << endl;
+    cout << "6) Compare two Customers by their Wishlist price." << endl;
+    cout << "7) Exit." << endl;
     cout << "Please insert the number of your chosen option: ";
 }
 
@@ -31,16 +32,16 @@ void System::printOptionsAsCustomer() const
     cout << "2) Add Feedback to a Seller." << endl;
     cout << "3) Make an Order." << endl;
     cout << "4) Print all Sellers names." << endl;
-    cout << "5) Search for a Product" << endl;
-    cout << "6) Print your user's info" << endl;
+    cout << "5) Search for a Product." << endl;
+    cout << "6) Print your user's info." << endl;
     cout << "7) Logout." << endl;
-    cout << "8) Exit" << endl;
+    cout << "8) Exit." << endl;
 }
 void System::printOptionsAsSeller() const
 {
     cout << "1) Add a Product." << endl;
     cout << "2) View your Feedbacks." << endl;
-    cout << "3) Print your user's info" << endl;
+    cout << "3) Print your user's info." << endl;
     cout << "4) Logout." << endl;
     cout << "5) Exit." << endl;
 }
@@ -51,9 +52,9 @@ void System::printOptionAsCAS() const
     cout << "3) Make an Order." << endl;
     cout << "4) Print all Sellers names." << endl;
     cout << "5) Search for a Product" << endl;
-    cout << "6) Compare two Customers by their Wishlist Sum" << endl;
-    cout << "7) Add a Product." << endl;
-    cout << "8) View your Feedbacks." << endl;
+    cout << "6) Add a Product." << endl;
+    cout << "7) View your Feedbacks." << endl;
+    cout << "8) Print your user's info." << endl;
     cout << "9) Logout." << endl;
     cout << "10) Exit." << endl;
 }

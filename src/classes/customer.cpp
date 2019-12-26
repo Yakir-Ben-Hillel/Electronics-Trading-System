@@ -105,7 +105,7 @@ bool Customer::SetOrderArray(const Order **order_array, int size)
 
 const char *Customer::getName() const
 {
-    return User::getName();
+    return this->m_username;
 }
 
 const Address &Customer::getAddress() const

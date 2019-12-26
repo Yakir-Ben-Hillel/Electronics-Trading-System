@@ -40,6 +40,9 @@ void System::mainMenu()
                 this->printCASNames();
                 break;
             case 6:
+                this->compare();
+                break;
+            case 7:
                 isFinished = true;
                 break;
             default:
@@ -49,7 +52,7 @@ void System::mainMenu()
                 break;
             }
         }
-        else if (customer_temp)
+        else if (customer_temp && !cas_temp)
         {
             printOptionsAsCustomer();
             cin >> option;
@@ -88,7 +91,7 @@ void System::mainMenu()
                 break;
             }
         }
-        else if (seller_temp)
+        else if (seller_temp && !cas_temp)
         {
             FeedBack **array_feedbacks = nullptr;
             printOptionsAsSeller();
@@ -131,6 +134,7 @@ void System::mainMenu()
         }
         else if (cas_temp)
         {
+            printOptionAsCAS();
             FeedBack **array_feedbacks = nullptr;
             cin >> option;
             switch (option)
@@ -173,9 +177,12 @@ void System::mainMenu()
                 }
                 break;
             case 8:
-                this->logged_in_user = nullptr;
+                cout << *cas_temp;
                 break;
             case 9:
+                this->logged_in_user = nullptr;
+                break;
+            case 10:
                 isFinished = true;
                 break;
             }

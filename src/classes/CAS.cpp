@@ -40,4 +40,6 @@ CAS::~CAS()
 // }
 void CAS::toOs(ostream &out) const
 {
+    Seller::toOs(out);
+    Customer::toOs(out);
 }

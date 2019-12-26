@@ -172,6 +172,7 @@ void Seller::toOs(ostream &out) const
                 out << *this->s_stock[i];
         else
             out << "Has no Products" << endl;
+        out << "Feedbacks: " << endl;
         if (this->feedbacks_array_logical_length != 0)
             for (int i = 0; i < this->feedbacks_array_logical_length; i++)
                 out << *this->feedBack_array[i];
