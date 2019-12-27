@@ -7,16 +7,15 @@
 #include <ostream>
 #include <string.h>
 using namespace std;
-#include "./user.h"
-#include "./order.h"
-#include "./address.h"
-#include "./product.h"
-#include "./customer.h"
-#include "./seller.h"
-#include "./FeedBack.h"
-#include "./Date.h"
+#include "user.h"
+#include "order.h"
+#include "address.h"
+#include "product.h"
+#include "customer.h"
+#include "seller.h"
+#include "FeedBack.h"
+#include "Date.h"
 #include "CAS.h"
-#include <typeinfo>
 class Address;
 class Customer;
 class Seller;
@@ -66,7 +65,7 @@ public:
 	void showProductsWithTheSameName(const char *name);
 
 private:
-	const char system_name[24] = "Electronic Trade System";
+	const char system_name[24] = "The Trading System";
 	User **users_array = nullptr;
 	User *logged_in_user = nullptr;
 	int users_array_physical_size = 0;

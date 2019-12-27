@@ -80,7 +80,7 @@ void System::chooseProductToAddToCustomerWishlist()
     int seller_index, product_index;
     if (customerTemp) //Double check.
     {
-        int* indexes_array=new int[users_array_logical_size];
+        int *indexes_array = new int[users_array_logical_size];
         int available_index_counter = 0;
         Product **product_array = nullptr;
         for (int i = 0; i < users_array_logical_size; i++)
@@ -122,4 +122,88 @@ void System::chooseProductToAddToCustomerWishlist()
         }
     }
 }
-
+bool System::addFeedback(Customer *customer)
+{
+    int *indexes_array = new int[users_array_logical_size];
+    int x;
+    Seller *seller_temp = nullptr;
+    int available_index_counter = 0;
+    for (int i = 0; i < users_array_logical_size; i++)
+    {
+        seller_temp = dynamic_cast<Seller *>(this->users_array[i]);
+        if (seller_temp)
+            if (customer->didCustomerOrderedFromSeller(seller_temp))
+                indexes_array[available_index_counter] = i;
+    }
+    if (available_index_counter != 0)
+    {
+        this->printAllAvailableSellersToGiveFeedbacks(customer);
+        cout << "Please insert the number of the seller you want to leave a feedback on: ";
+        cin >> x;
+        x--;
+        seller_temp = dynamic_cast<Seller *>(this->users_array[indexes_array[x]]);
+        if (seller_temp)
+        {
+            customer->addFeedBackToSeller(seller_temp);
+            return true;
+        }
+        else
+            return false;
+    }
+    else
+    {
+        cout << "No sellers to add Feedbacks to." << endl;
+        cout << "Make an Order and checkback later." << endl;
+        return false;
+    }
+    delete[] indexes_array;
+}
+void System::signup()
+{
+    User *user = nullptr;
+    Address *address = nullptr;
+    bool availabilty = true;
+    char username[11], password[11];
+    do
+    {
+        cout << "Please choose an username (10 chars max): ";
+        cin.getline(username, 10);
+        if (checkUsernameAvailability(username) == false)
+        {
+            cout << "Username is not available, please choose another name." << endl;
+            availabilty = false;
+        }
+        else
+            availabilty = true;
+    } while (availabilty == false);
+    cout << "Please choose a password (10 chars max): ";
+    cin.getline(password, 10);
+    address = makeAddress();
+    unsigned int chosen_type;
+    do
+    {
+        cout << "What do you want to signup as?" << endl;
+        cout << "1) Customer" << endl;
+        cout << "2) Seller" << endl;
+        cout << "3) Customer And Seller" << endl;
+        cin >> chosen_type;
+        cin.ignore(256, '\n');
+        if (chosen_type < 1 || chosen_type > 3)
+            cout << "Input invalid please try again." << endl;
+    } while (chosen_type < 1 || chosen_type > 3);
+    switch (chosen_type)
+    {
+    case 1:
+        user = new Customer(username, password, *address);
+        break;
+    case 2:
+        user = new Seller(username, password, *address);
+        break;
+    case 3:
+        user = new CAS(username, password, *address);
+        break;
+    default:
+        break;
+    }
+    *this += user;
+}
