@@ -25,6 +25,8 @@ public:
 	//operator=
 	const Customer &operator=(const Customer &other);
 	friend bool operator<(const Customer &first, const Customer &second);
+	friend bool operator>(const Customer &first, const Customer &second);
+
 	// friend istream &operator>>(istream &in, Customer &customer);
 	//seters
 	bool setName(char *userName);

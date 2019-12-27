@@ -340,7 +340,18 @@ bool operator<(const Customer &first, const Customer &second)
     second.getSum(second_sum);
     if (first_sum < second_sum)
         return true;
-    return false;
+    else
+        return false;
+}
+bool operator>(const Customer &first, const Customer &second)
+{
+    float first_sum, second_sum;
+    first.getSum(first_sum);
+    second.getSum(second_sum);
+    if (first_sum > second_sum)
+        return true;
+    else
+        return false;
 }
 // istream &operator>>(istream &in, Customer &customer)
 // {

@@ -55,7 +55,7 @@ public:
 	void makeProductForSale();
 	void chooseProductToAddToCustomerWishlist();
 	void makeOrder();
-	void compare() const;
+	void compareCustomers() const;
 	void login();
 	void signup();
 	bool setUsersArray(User **given_users_array);

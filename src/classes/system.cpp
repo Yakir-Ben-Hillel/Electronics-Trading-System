@@ -133,19 +133,21 @@ const char *System::getSystemName() const
 {
     return system_name;
 }
-void System::compare() const
+void System::compareCustomers() const
 {
     int counter = 0;
     bool isValid = true;
     unsigned int temp_counter = 0;
     Customer *customerTemp = nullptr;
+    int indexes_array[users_array_logical_size];
     for (int i = 0; i < this->users_array_logical_size; i++)
     {
         customerTemp = dynamic_cast<Customer *>(this->users_array[i]);
         if (customerTemp)
         {
-            std::cout << i + 1 << ") " << *customerTemp->getName() << endl;
+            indexes_array[temp_counter] = i;
             temp_counter++;
+            std::cout << temp_counter << ") " << customerTemp->getName() << endl;
         }
     }
     std::cout << endl;
@@ -161,8 +163,8 @@ void System::compare() const
             isValid = false;
         }
         Customer *temp1, *temp2;
-        temp1 = dynamic_cast<Customer *>(this->users_array[op1]);
-        temp2 = dynamic_cast<Customer *>(this->users_array[op2]);
+        temp1 = dynamic_cast<Customer *>(this->users_array[indexes_array[op1 - 1]]);
+        temp2 = dynamic_cast<Customer *>(this->users_array[indexes_array[op2 - 1]]);
         if (!temp1 || !temp2)
         {
             std::cout << endl;
@@ -175,9 +177,13 @@ void System::compare() const
             {
                 std::cout << temp2->getName() << "'s wishlist is bigger than " << temp1->getName() << "'s wishlist" << endl;
             }
-            else
+            else if (*temp1 > *temp2)
             {
                 std::cout << temp1->getName() << "'s wishlist is bigger than " << temp2->getName() << "'s wishlist" << endl;
+            }
+            else
+            {
+                std::cout << "The Customers Wishlists Prices are identical!" << endl;
             }
         }
 

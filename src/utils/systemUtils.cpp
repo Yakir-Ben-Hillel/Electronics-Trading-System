@@ -40,7 +40,7 @@ void System::mainMenu()
                 this->printCASNames();
                 break;
             case 6:
-                this->compare();
+                this->compareCustomers();
                 break;
             case 7:
                 isFinished = true;

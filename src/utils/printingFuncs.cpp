@@ -20,7 +20,7 @@ void System::printOptionsAsGuest() const
     cout << "2) SignUp." << endl;
     cout << "3) Print all Customers names." << endl;
     cout << "4) Print all Sellers names." << endl;
-    cout << "5) Print all CAS users." << endl;
+    cout << "5) Print all users that are Customers and Sellers." << endl;
     cout << "6) Compare two Customers by their Wishlist price." << endl;
     cout << "7) Exit." << endl;
     cout << "Please insert the number of your chosen option: ";
