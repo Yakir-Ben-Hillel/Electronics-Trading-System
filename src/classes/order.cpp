@@ -128,4 +128,5 @@ istream &operator>>(istream &in, Order &order)
     for (int i = 0; i < order.o_list_logical_size; i++)
         in >> *order.order_products[i];
     in >> order.price_of_order;
+    return in;
 }

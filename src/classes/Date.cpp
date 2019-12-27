@@ -53,6 +53,7 @@ ostream &operator<<(ostream &out, const Date &date)
 istream &operator>>(istream &in, Date &date)
 {
    in >> date.m_year >> date.m_month >> date.m_day;
+   return in;
 }
 unsigned int Date::getDay() const
 {
