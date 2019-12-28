@@ -139,7 +139,7 @@ void System::compareCustomers() const
     bool isValid = true;
     unsigned int temp_counter = 0;
     Customer *customerTemp = nullptr;
-    int indexes_array[users_array_logical_size];
+    int* indexes_array=new int[users_array_logical_size];
     for (int i = 0; i < this->users_array_logical_size; i++)
     {
         customerTemp = dynamic_cast<Customer *>(this->users_array[i]);
@@ -188,4 +188,5 @@ void System::compareCustomers() const
         }
 
     } while (!isValid);
+    delete[] indexes_array;
 }
