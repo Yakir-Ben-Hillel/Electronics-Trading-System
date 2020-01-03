@@ -43,3 +43,8 @@ void CAS::toOs(ostream &out) const
     Seller::toOs(out);
     Customer::toOs(out);
 }
+
+User* CAS::clone() const
+{
+    return new CAS(*this);
+}

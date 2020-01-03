@@ -26,7 +26,7 @@ public:
 	const Customer &operator=(const Customer &other);
 	friend bool operator<(const Customer &first, const Customer &second);
 	friend bool operator>(const Customer &first, const Customer &second);
-
+    virtual User* clone() const override;
 	// friend istream &operator>>(istream &in, Customer &customer);
 	//seters
 	bool setName(char *userName);

@@ -180,3 +180,8 @@ void Seller::toOs(ostream &out) const
             out << "Has no Feedbacks" << endl;
     }
 }
+
+User* Seller::clone() const
+{
+    return new Seller(*this);
+}

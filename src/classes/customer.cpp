@@ -390,3 +390,8 @@ void Customer::toOs(ostream &out) const
             out << "The user didn't made any Order" << endl;
     }
 }
+
+User *Customer::clone() const
+{
+    return new Customer(*this);
+}

@@ -13,6 +13,7 @@ public:
    ~CAS();
    // friend istream &operator>>(istream &in, CAS &cas);
    virtual void toOs(ostream &out) const override;
+   virtual User* clone() const override final;
    //methoods
    void show(); //show the details of the customer&seller
 };

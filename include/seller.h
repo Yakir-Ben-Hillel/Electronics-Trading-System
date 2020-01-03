@@ -15,6 +15,7 @@ public:
 	Seller(ifstream&inFile);
 	Seller(Seller &&other);
 	virtual ~Seller();
+	virtual User* clone() const override;
 	//Getters Functions.
 	const char *getUserName() const;
 	const char *getPassword() const;
