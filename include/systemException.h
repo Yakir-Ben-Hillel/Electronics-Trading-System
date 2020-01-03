@@ -7,42 +7,33 @@
 class SystemException
 {
 public:
-   virtual void show() const = 0 {cout<<"some error as occurred, please call support!"<<endl;};
+    virtual void show() const = 0 { cout << "some error as occurred, please call support!" << endl; };
 };
-class UserException:public SystemException
+class UserException : public SystemException
 {
-   
+protected:
+char* name;
+char* password;
+Address address;
+public:
+UserException(char* name,char* password,Address& address) {this->name=strdup(name); 
+this->password=strdup(password); this->address=address;};
+virtual ~UserException() {delete[] name; delete[] password;};
+virtual void show() const override;
 };
-class CustomerException:virtual public UserException
+class ProductException : public SystemException
 {
-
 };
-class SellerException:virtual public UserException
+class DateException : public SystemException
 {
-
 };
-class CASException:public CustomerException,public SellerException
+class FeedBackException : public SystemException
 {
-
 };
-class ProductException: public SystemException
+class AddressException : public SystemException
 {
-
 };
-class DateException :public SystemException
+class OrderException : public SystemException
 {
-
-};
-class FeedBackException:public SystemException
-{
-
-};
-class AddressException:public SystemException
-{
-
-};
-class OrderException:public SystemException
-{
-
 };
 #endif
