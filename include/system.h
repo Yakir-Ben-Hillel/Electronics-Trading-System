@@ -17,6 +17,7 @@ using namespace std;
 #include "Date.h"
 #include "CAS.h"
 #include "systemException.h"
+#include <exception>
 class Address;
 class Customer;
 class Seller;

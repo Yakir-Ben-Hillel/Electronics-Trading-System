@@ -5,7 +5,7 @@ class Address
 {
 public:
     Address(unsigned int ApartmentNumber = 0, const char *cityName = nullptr,
-            const char *streetName = nullptr);
+            const char *streetName = nullptr) noexcept(false);
     Address(const Address &other);
     Address(Address &&other);
     ~Address();

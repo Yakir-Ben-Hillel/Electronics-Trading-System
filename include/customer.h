@@ -17,7 +17,7 @@ public:
 			 unsigned int orderHistoryPhysicalSize = 0,
 			 unsigned int orderHistoryLogicalSize = 0,
 			 unsigned int wishlistPhysicalSize = 0,
-			 unsigned int wishlistLogicalSize = 0);
+			 unsigned int wishlistLogicalSize = 0) noexcept(false);
 	Customer(const Customer &other);
 	Customer(ifstream &inFile);
 	Customer(Customer &&other);

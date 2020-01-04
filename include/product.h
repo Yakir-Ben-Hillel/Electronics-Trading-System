@@ -16,7 +16,7 @@ public:
 	static char *CategoryNames[4];
 	//constructors&&distructors
 	Product() = default;
-	Product(const char *name, eCategory category, Seller *given_seller_name, float price = 0);
+	Product(const char *name, eCategory category, Seller *given_seller_name, float price = 0) noexcept(false);
 	Product(const Product &other);
 	Product(istream &inFile);
 	Product(Product &&other);

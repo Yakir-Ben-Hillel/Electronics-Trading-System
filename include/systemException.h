@@ -18,7 +18,7 @@ protected:
     Address address;
 
 public:
-    UserException(char *name, char *password, Address &address)
+    UserException(const char *name,const char *password,const Address &address)
     {
         this->name = strdup(name);
         this->password = strdup(password);

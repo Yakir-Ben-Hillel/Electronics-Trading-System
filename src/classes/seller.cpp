@@ -1,6 +1,7 @@
 #include "../../include/system.h"
 Seller::Seller(const char *username, const char *password, const Address &address, Product **stockArray, FeedBack **feedbacksArray,
-               unsigned int s_size, unsigned int f_size) : User(username, password, address), stock_array_physical_length(s_size),
+               unsigned int s_size, unsigned int f_size) noexcept(false)
+                : User(username, password, address), stock_array_physical_length(s_size),
                                                            feedbacks_array_physical_length(f_size)
 {
     setStockArray(stockArray);

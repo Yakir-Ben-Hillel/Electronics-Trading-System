@@ -10,7 +10,7 @@ public:
 	//Constructors && Distructors
 	Seller() = default;
 	Seller(const char *username, const char *password, const Address &address, Product **stockArray = nullptr,
-		   FeedBack **feedbacksArray = nullptr, unsigned int s_size = 0, unsigned int f_size = 0);
+		   FeedBack **feedbacksArray = nullptr, unsigned int s_size = 0, unsigned int f_size = 0) noexcept(false);
 	Seller(const Seller &other);
 	Seller(ifstream&inFile);
 	Seller(Seller &&other);

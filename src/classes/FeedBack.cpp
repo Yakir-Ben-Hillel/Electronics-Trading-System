@@ -1,8 +1,10 @@
 #include "../../include/system.h"
 
-FeedBack::FeedBack(char *note, Customer *customer_data, Date *curr_date)
+FeedBack::FeedBack(char *note, Customer *customer_data, Date *curr_date) noexcept(false)
     : customer(customer_data), date_of_feedback(curr_date)
 {
+    if (strcmp(note, "") == 0)
+        throw FeedBackException(*curr_date, note); //if date has an exception the function that called this constractor will catch it.
     setNotes(note);
 }
 FeedBack::FeedBack(const FeedBack &other)

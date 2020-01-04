@@ -1,8 +1,10 @@
 #include "../../include/system.h"
 #include <typeinfo>
 
-Date::Date(unsigned int day, unsigned int month, unsigned int year)
+Date::Date(unsigned int day, unsigned int month, unsigned int year) noexcept(false)
 {
+   if (month <= 0 || month > 12 || day <= 0 || day > 31)
+      throw DateException(day, month, year);
    setDay(day);
    setMonth(month);
    setYear(year);

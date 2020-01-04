@@ -1,7 +1,9 @@
 #include "../../include/system.h"
 
-Address::Address(unsigned int apartmentNumber, const char *cityName, const char *streetName) : apartmentNumber(apartmentNumber)
+Address::Address(unsigned int apartmentNumber, const char *cityName, const char *streetName) noexcept(false) : apartmentNumber(apartmentNumber)
 {
+    if (apartmentNumber <= 0 || strcmp(cityName, "") == 0 || strcmp(streetName, "") == 0)
+        throw AddressException(Address(apartmentNumber, cityName, streetName));
     if (cityName)
         this->setCityName(cityName);
     if (streetName)

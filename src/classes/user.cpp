@@ -1,7 +1,9 @@
 #include "../../include/system.h"
 
-User::User(const char *name, const char *password, const Address &address) : m_address(address)
+User::User(const char *name, const char *password, const Address &address) noexcept(false) : m_address(address) 
 {
+    if(strcmp(name,"")==0||strcmp(password,"")==0||strlen(password)>10)
+       throw UserException(name,password,address);//address has its own exception class, so if the address constractor will throw the function that called this user constractor will catch the throw
     setName(name);
     setPassword(password);
 }
@@ -38,7 +40,7 @@ void User::setPassword(const char *password)
 }
 void User::setAddress(const Address address)
 {
-    this->m_address = address; //to do operator= for address
+    this->m_address = address; 
 }
 const User &User::operator=(const User &other)
 {

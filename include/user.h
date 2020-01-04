@@ -2,6 +2,7 @@
 #define __USER_H
 
 #include "address.h"
+#include "system.h"
 #include <fstream>
 class Address;
 class User
@@ -11,7 +12,7 @@ protected:
     char *m_password;
     Address m_address;
     User() = default;
-    User(const char *name, const char *password, const Address &address);
+    User(const char *name, const char *password, const Address &address) noexcept(false);
     User(const User &other);
     User(User &&move);
     User(ifstream &in);

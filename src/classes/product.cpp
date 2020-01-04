@@ -3,9 +3,11 @@
 char *Product::CategoryNames[4] = {(char *)"Children", (char *)"Electricity", (char *)"Office", (char *)"Clothing"};
 unsigned int Product::counter = 0;
 
-Product::Product(const char *name, eCategory category, Seller *seller, float price)
+Product::Product(const char *name, eCategory category, Seller *seller, float price) noexcept(false)
     : p_serialNumber(++counter)
 {
+    if (strcmp(name, "") == 0 || price < 0)
+        throw ProductException(name, price);
     setName(name);
     setCategory(category);
     setPrice(price);
