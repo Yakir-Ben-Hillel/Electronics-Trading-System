@@ -17,7 +17,7 @@ protected:
     User(ifstream &in);
     /*Abstract Data Type*/
 public:
-    virtual ~User() = 0;
+    virtual ~User();
     virtual User *clone() const = 0;
     void setName(const char *name);
     void setPassword(const char *password);

@@ -10,7 +10,7 @@ public:
    CAS(const Customer &customer, const Seller &seller);
    CAS(const CAS &other);
    CAS(ifstream &inFile);
-   ~CAS();
+   virtual ~CAS();
    // friend istream &operator>>(istream &in, CAS &cas);
    virtual void toOs(ostream &out) const override;
    virtual User* clone() const override final;
