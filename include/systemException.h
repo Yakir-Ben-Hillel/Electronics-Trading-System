@@ -87,7 +87,7 @@ public:
     {
         if (strcmp(note, "") == 0)
             cout << "Error, feedback must contain at least one letter! " << endl;
-        DateException e((int)date.getDay(), (int)date.getMonth(), (int)data.getYear());
+        DateException e((int)date.getDay(), (int)date.getMonth(), (int)date.getYear());
         e.show();
     };
 };
