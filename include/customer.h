@@ -50,10 +50,10 @@ public:
 	Order **getOrderHistory() const;
 
 	//other methoods
-	void makeOrder();
-	void showOrder(Order *curr);
+	void makeOrder() noexcept(false);
+	void showOrder(Order *curr) const;
 	void deleteFromWishList(int location);
-	void addFeedBackToSeller(Seller *seller);
+	void addFeedBackToSeller(Seller *seller) noexcept(false);
 	bool didCustomerOrderedFromSeller(Seller *seller);
 
 protected:

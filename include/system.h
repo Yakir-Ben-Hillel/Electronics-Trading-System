@@ -40,7 +40,7 @@ public:
 	//other methoods
 	void mainMenu();
 	void makeSeller();
-	Address *makeAddress();
+	Address *makeAddress() noexcept(false);
 	void makeCustomer();
 	bool addUserToArray(User *new_user);
 	void printCustomersNames() const;
@@ -51,14 +51,14 @@ public:
 	void printOptionAsCAS() const;
 	void loadUsersFromFile();
 	void writeUsersToFile();
-	bool addFeedback(Customer *customer);
+	bool addFeedback(Customer *customer) noexcept(false);
 	void printOptionsAsCustomer() const;
 	void makeProductForSale();
 	void chooseProductToAddToCustomerWishlist();
 	void makeOrder();
 	void compareCustomers() const;
 	void login();
-	void signup();
+	void signup() noexcept(false);
 	bool setUsersArray(User **given_users_array);
 	void resizeUsersArray();
 	void printOpening() const;

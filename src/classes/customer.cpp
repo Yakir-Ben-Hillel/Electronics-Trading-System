@@ -202,7 +202,7 @@ void Customer::resizeOrderlistArray()
     this->order_physical_size = newSize;
     this->orders_history = newArray;
 }
-void Customer::makeOrder()
+void Customer::makeOrder() noexcept(false)
 {
     if (this->c_wish_logical_size != 0)
     {
@@ -257,7 +257,7 @@ void Customer::makeOrder()
         cout << "Wishlist is Empty." << endl;
     }
 }
-void Customer::showOrder(Order *curr)
+void Customer::showOrder(Order *curr) const
 {
     Product **temp = curr->getList();
     unsigned int size = curr->getPhysicalSize();
@@ -299,7 +299,7 @@ bool Customer::didCustomerOrderedFromSeller(Seller *seller)
         return false;
     }
 }
-void Customer::addFeedBackToSeller(Seller *seller)
+void Customer::addFeedBackToSeller(Seller *seller) noexcept(false)
 {
     bool can_give_a_feedback;
     can_give_a_feedback = didCustomerOrderedFromSeller(seller);

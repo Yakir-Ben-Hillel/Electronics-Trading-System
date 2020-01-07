@@ -33,7 +33,7 @@ public:
 	bool addFeedbackToArray(FeedBack *new_feedback);
 	unsigned int getStockArraySize();
 	void printSellerProducts();
-	void makeProductForSale();
+	void makeProductForSale() noexcept(false);
 	/*Operators*/
 	const Seller &operator=(const Seller &other);
 	// friend istream &operator>>(istream &in, Seller &seller);

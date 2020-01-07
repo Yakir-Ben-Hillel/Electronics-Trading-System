@@ -56,16 +56,41 @@ void System::mainMenu()
         {
             printOptionsAsCustomer();
             cin >> option;
+            bool check;
             switch (option)
             {
             case 1:
                 this->chooseProductToAddToCustomerWishlist();
                 break;
             case 2:
-                this->addFeedback(customer_temp);
+                check = true;
+                do
+                {
+                    try
+                    {
+                        this->addFeedback(customer_temp);
+                    }
+                    catch (const SystemException &e)
+                    {
+                        check = true;
+                        e.show();
+                    }
+                } while (!check);
                 break;
             case 3:
-                customer_temp->makeOrder();
+                check = true;
+                do
+                {
+                    try
+                    {
+                        customer_temp->makeOrder();
+                    }
+                    catch (const SystemException &e)
+                    {
+                        check = false;
+                        e.show();
+                    }
+                } while (!check);
                 break;
             case 4:
                 this->printSellersNames();
@@ -96,10 +121,23 @@ void System::mainMenu()
             FeedBack **array_feedbacks = nullptr;
             printOptionsAsSeller();
             cin >> option;
+            bool check;
             switch (option)
             {
             case 1:
-                seller_temp->makeProductForSale();
+                check = true;
+                do
+                {
+                    try
+                    {
+                        seller_temp->makeProductForSale();
+                    }
+                    catch (const SystemException &e)
+                    {
+                        check = false;
+                        e.show();
+                    }
+                } while (!check);
                 break;
             case 2:
                 int size;
@@ -137,16 +175,44 @@ void System::mainMenu()
             printOptionAsCAS();
             FeedBack **array_feedbacks = nullptr;
             cin >> option;
+            bool check;
             switch (option)
             {
             case 1:
                 this->chooseProductToAddToCustomerWishlist();
                 break;
             case 2:
-                this->addFeedback(customer_temp);
+                check = true;
+                do
+                {
+                    try
+                    {
+                        this->addFeedback(customer_temp);
+                    }
+                    catch (const SystemException &e)
+                    {
+                        check = false;
+                        e.show();
+                    }
+
+                } while (!check);
                 break;
             case 3:
-                customer_temp->makeOrder();
+                check = true;
+                do
+                {
+                    try
+                    {
+                        customer_temp->makeOrder();
+                    }
+                    catch (const SystemException &e)
+                    {
+                        check = false;
+                        e.show();
+                    }
+
+                } while (!check);
+
                 break;
             case 4:
                 this->printSellersNames();
@@ -159,7 +225,21 @@ void System::mainMenu()
                 break;
 
             case 6:
-                cas_temp->makeProductForSale();
+                check = true;
+                do
+                {
+                    try
+                    {
+                        cas_temp->makeProductForSale();
+                    }
+                    catch (const SystemException &e)
+                    {
+                        check = false;
+                        e.show();
+                    }
+
+                } while (!check);
+
                 break;
             case 7:
                 int size;

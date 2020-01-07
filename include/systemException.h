@@ -7,7 +7,7 @@
 class SystemException
 {
 public:
-    virtual ~SystemException(){};
+    virtual ~SystemException(){}
     virtual void show() const = 0;
 };
 class UserException : public SystemException
@@ -110,4 +110,9 @@ public:
         return;
     }
 };
+
+void Terminate()
+{
+    cout<<"Something went wrong, please call support for further information!"<<endl;
+}
 #endif

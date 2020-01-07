@@ -5,5 +5,6 @@
 int main()
 {
     System store;
+    set_terminate(Terminate);
     store.mainMenu();
 }

@@ -1,7 +1,7 @@
 #include "../../include/system.h"
 
 Order::Order(Product **order_list, float price,
-             unsigned int physical_size, unsigned int logical_size)
+             unsigned int physical_size, unsigned int logical_size) noexcept(false)
 {
     setPhysicalSize(physical_size);
     setProductList(order_list);
@@ -39,7 +39,7 @@ bool Order::setPrice(float price_of_order)
     this->price_of_order = price_of_order;
     return true;
 }
-bool Order::setProductList(Product **order_list)
+bool Order::setProductList(Product **order_list)noexcept(false)
 {
     this->order_products = new Product *[o_list_physical_size];
     for (int i = 0; i < this->o_list_physical_size; i++)

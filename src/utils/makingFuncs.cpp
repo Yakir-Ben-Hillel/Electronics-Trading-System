@@ -1,5 +1,5 @@
 #include "../../include/system.h"
-Address *System::makeAddress()
+Address *System::makeAddress() noexcept(false)
 {
     Address *new_address = nullptr;
     char city_name[11], street_name[21];
@@ -16,11 +16,10 @@ Address *System::makeAddress()
         apartment_number < 0 && cout << ("invalid number, please try again") << endl;
 
     } while (apartment_number < 0);
-
     new_address = new Address(apartment_number, city_name, street_name);
     return new_address;
 }
-void Seller::makeProductForSale()
+void Seller::makeProductForSale() noexcept(false)
 {
     char x;
     Product *new_product;
@@ -122,7 +121,7 @@ void System::chooseProductToAddToCustomerWishlist()
         }
     }
 }
-bool System::addFeedback(Customer *customer)
+bool System::addFeedback(Customer *customer) noexcept(false)
 {
     int *indexes_array = new int[users_array_logical_size];
     int x;
@@ -158,7 +157,7 @@ bool System::addFeedback(Customer *customer)
     }
     delete[] indexes_array;
 }
-void System::signup()
+void System::signup() noexcept(false)
 {
     User *user = nullptr;
     Address *address = nullptr;
@@ -191,19 +190,47 @@ void System::signup()
         if (chosen_type < 1 || chosen_type > 3)
             cout << "Input invalid please try again." << endl;
     } while (chosen_type < 1 || chosen_type > 3);
-    switch (chosen_type)
+    bool check = true;
+    do
     {
-    case 1:
-        user = new Customer(username, password, *address);
-        break;
-    case 2:
-        user = new Seller(username, password, *address);
-        break;
-    case 3:
-        user = new CAS(username, password, *address);
-        break;
-    default:
-        break;
-    }
+        switch (chosen_type)
+        {
+        case 1:
+            try
+            {
+                user = new Customer(username, password, *address);
+            }
+            catch (const SystemException &e)
+            {
+                check = false;
+                e.show();
+            }
+            break;
+        case 2:
+            try
+            {
+                user = new Seller(username, password, *address);
+            }
+            catch (const SystemException &e)
+            {
+                check = false;
+                e.show();
+            }
+            break;
+        case 3:
+            try
+            {
+                user = new CAS(username, password, *address);
+            }
+            catch (const SystemException &e)
+            {
+                check = false;
+                e.show();
+            }
+            break;
+        default:
+            break;
+        }
+    } while (!check);
     *this += user;
 }
