@@ -152,27 +152,10 @@ bool System::addFeedback(Customer *customer) noexcept(false)
     }
     delete[] indexes_array;
 }
-void System::signup() noexcept(false)
+void System::signup()
 {
     User *user = nullptr;
     Address *address = nullptr;
-    bool availabilty = true;
-    char username[11], password[11];
-    do
-    {
-        cout << "Please choose an username (10 chars max): ";
-        cin.getline(username, 10);
-        if (checkUsernameAvailability(username) == false)
-        {
-            cout << "Username is not available, please choose another name." << endl;
-            availabilty = false;
-        }
-        else
-            availabilty = true;
-    } while (availabilty == false);
-    cout << "Please choose a password (10 chars max): ";
-    cin.getline(password, 10);
-    address = makeAddress();
     unsigned int chosen_type;
     do
     {
@@ -185,46 +168,79 @@ void System::signup() noexcept(false)
         if (chosen_type < 1 || chosen_type > 3)
             cout << "Input invalid please try again." << endl;
     } while (chosen_type < 1 || chosen_type > 3);
+    bool availabilty = true;
     bool check = true;
     do
     {
-        switch (chosen_type)
+        char username[11], password[11];
+        do
         {
-        case 1:
-            try
+            cout << "Please choose an username (10 chars max): ";
+            cin.getline(username, 10);
+            if (checkUsernameAvailability(username) == false)
             {
-                user = new Customer(username, password, *address);
+                cout << "Username is not available, please choose another name." << endl;
+                availabilty = false;
             }
-            catch (const SystemException &e)
+            else
+                availabilty = true;
+        } while (availabilty == false);
+        cout << "Please choose a password (10 chars max): ";
+        cin.getline(password, 10);
+        check = true;
+        try
+        {
+            address = makeAddress();
+        }
+        catch (const AddressException &a)
+        {
+            check = false;
+            a.show();
+        }
+        if (check != false) //if check==false we want that the loop to end so the yser will try to put the address from the start
+        {
+            //we dont have to delete the username and password because they are statics and not allocated
+            switch (chosen_type)
             {
-                check = false;
-                e.show();
+            case 1:
+                try
+                {
+                    user = new Customer(username, password, *address);
+                }
+                catch (const UserException &e)
+                {
+                    check = false;
+                    delete address; //we should delete the allocated address cause there was a problem with the user allocation
+                    e.show();
+                }
+                break;
+            case 2:
+                try
+                {
+                    user = new Seller(username, password, *address);
+                }
+                catch (const UserException &e)
+                {
+                    check = false;
+                    delete address; //we should delete the allocated address cause there was a problem with the user allocation
+                    e.show();
+                }
+                break;
+            case 3:
+                try
+                {
+                    user = new CAS(username, password, *address);
+                }
+                catch (const UserException &e)
+                {
+                    check = false;
+                    delete address; //we should delete the allocated address cause there was a problem with the user allocation
+                    e.show();
+                }
+                break;
+            default:
+                break;
             }
-            break;
-        case 2:
-            try
-            {
-                user = new Seller(username, password, *address);
-            }
-            catch (const SystemException &e)
-            {
-                check = false;
-                e.show();
-            }
-            break;
-        case 3:
-            try
-            {
-                user = new CAS(username, password, *address);
-            }
-            catch (const SystemException &e)
-            {
-                check = false;
-                e.show();
-            }
-            break;
-        default:
-            break;
         }
     } while (!check);
     *this += user;

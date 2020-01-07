@@ -58,7 +58,7 @@ public:
 	void makeOrder();
 	void compareCustomers() const;
 	void login();
-	void signup() noexcept(false);
+	void signup();
 	bool setUsersArray(User **given_users_array);
 	void resizeUsersArray();
 	void printOpening() const;
