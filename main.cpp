@@ -5,6 +5,6 @@
 int main()
 {
     System store;
-    set_terminate(Terminate);
+    set_terminate(Terminate);//if there is any problem with the input we set the function terminate to explain the user.
     store.mainMenu();
 }

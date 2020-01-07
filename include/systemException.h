@@ -2,7 +2,13 @@
 #ifndef __SystemException_H
 #define __SystemException_H
 
-#include "system.h"
+#include <iostream>
+using namespace std;
+#include <string.h>
+
+//forward declarations
+class Address;
+class Date;
 
 class SystemException
 {
@@ -16,7 +22,6 @@ protected:
     char *name;
     char *password;
     Address address;
-
 public:
     UserException(const char *name,const char *password,const Address &address)
     {
