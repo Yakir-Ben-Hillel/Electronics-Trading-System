@@ -17,21 +17,11 @@ Date::Date(const Date &other)
 }
 bool Date::setDay(unsigned int givenday)
 {
-   if (givenday > 31 || givenday < 1)
-   {
-      cout << "day has to be between the values 1-31(depends on the month)" << endl;
-      return false;
-   }
    m_day = givenday;
    return true;
 }
 bool Date::setMonth(unsigned int givenmonth)
 {
-   if (givenmonth > 12 || givenmonth < 1)
-   {
-      cout << "month has to be between the values 1-12" << endl;
-      return false;
-   }
    m_month = givenmonth;
    return true;
 }

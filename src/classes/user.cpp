@@ -38,7 +38,7 @@ void User::setPassword(const char *password)
         delete[] this->m_password;
     this->m_password = strdup(password);
 }
-void User::setAddress(const Address address)
+void User::setAddress(const Address& address)
 {
     this->m_address = address; 
 }

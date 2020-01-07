@@ -53,11 +53,6 @@ bool Product::setName(const char *name)
 
 bool Product::setPrice(float price)
 {
-    if (price < 0)
-    {
-        cout << "price are not able to be negative!" << endl;
-        return false;
-    }
     p_price = price;
     return true;
 }

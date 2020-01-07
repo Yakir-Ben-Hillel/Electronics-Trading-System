@@ -8,14 +8,9 @@ Address *System::makeAddress() noexcept(false)
     cin.getline(city_name, 10);
     cout << "Please insert your street name (20 chars max): ";
     cin.getline(street_name, 20);
-    do
-    {
-        cout << "Please insert your apartment number :";
-        cin >> apartment_number;
-        cin.ignore(256, '\n');
-        apartment_number < 0 && cout << ("invalid number, please try again") << endl;
+    cout << "Please insert your apartment number :";
+    cin >> apartment_number;
 
-    } while (apartment_number < 0);
     new_address = new Address(apartment_number, city_name, street_name);
     return new_address;
 }
