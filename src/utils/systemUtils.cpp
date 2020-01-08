@@ -63,24 +63,24 @@ void System::mainMenu()
                 this->chooseProductToAddToCustomerWishlist();
                 break;
             case 2:
-                check = true;
                 do
                 {
+                    check = true;
                     try
                     {
                         this->addFeedback(customer_temp);
                     }
                     catch (const SystemException &e)
                     {
-                        check = true;
+                        check = false;
                         e.show();
                     }
                 } while (!check);
                 break;
             case 3:
-                check = true;
                 do
                 {
+                    check = true;
                     try
                     {
                         customer_temp->makeOrder();
@@ -125,9 +125,9 @@ void System::mainMenu()
             switch (option)
             {
             case 1:
-                check = true;
                 do
                 {
+                    check = true;
                     try
                     {
                         seller_temp->makeProductForSale();
@@ -182,9 +182,9 @@ void System::mainMenu()
                 this->chooseProductToAddToCustomerWishlist();
                 break;
             case 2:
-                check = true;
                 do
                 {
+                    check = true;
                     try
                     {
                         this->addFeedback(customer_temp);
@@ -198,9 +198,9 @@ void System::mainMenu()
                 } while (!check);
                 break;
             case 3:
-                check = true;
                 do
                 {
+                    check = true;
                     try
                     {
                         customer_temp->makeOrder();
@@ -220,14 +220,15 @@ void System::mainMenu()
             case 5:
                 cout << "Please insert the name of the product you want to search for: ";
                 char name[30];
+                cin.ignore(256, '\n');
                 cin.getline(name, 29);
                 this->showProductsWithTheSameName(name);
                 break;
 
             case 6:
-                check = true;
                 do
                 {
+                    check = true;
                     try
                     {
                         cas_temp->makeProductForSale();

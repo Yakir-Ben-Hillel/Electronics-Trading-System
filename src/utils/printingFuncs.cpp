@@ -110,7 +110,7 @@ void Seller::printSellerProducts()
     for (int i = 0; i < length; i++)
     {
         cout << "Product number #" << i + 1 << " ";
-        cout << products_array[i];
+        cout << *products_array[i];
         cout << endl;
     }
 }
@@ -134,30 +134,15 @@ void System::printAllAvailableSellersToGiveFeedbacks(Customer *customer)
 void System::showProductsWithTheSameName(const char *name)
 {
     Seller *seller_temp = nullptr;
-    CAS *cas_temp = nullptr;
     cout << "The Products you have searched for ,show to you below: " << endl;
     for (int i = 0; i < this->users_array_logical_size; i++)
     {
         seller_temp = dynamic_cast<Seller *>(users_array[i]);
-        cas_temp = dynamic_cast<CAS *>(users_array[i]);
         if (seller_temp)
         {
             int size = seller_temp->getStockArraySize();
             Product **stock = seller_temp->getStock();
             for (int j = 0; j < size; j++)
-            {
-                if (isSubstring(name, stock[j]->getName()))
-                {
-                    cout << *stock[j];
-                    cout << endl;
-                }
-            }
-        }
-        if (cas_temp)
-        {
-            int size = cas_temp->getStockArraySize();
-            Product **stock = cas_temp->getStock();
-            for (int j = 0; j < size; ++j)
             {
                 if (isSubstring(name, stock[j]->getName()))
                 {

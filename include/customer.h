@@ -67,10 +67,10 @@ protected:
 
 	void getSum(float &sum) const;
 	Product **c_wishList; //pointer array for product wish list
-	int c_wish_physical_size = 1;
+	int c_wish_physical_size = 0;
 	unsigned int c_wish_logical_size = 0;
 	Order **orders_history; //array of all orders we have ever done,every part of the array contains a order we made.
-	unsigned int order_physical_size = 1;
+	unsigned int order_physical_size = 0;
 	unsigned int order_logical_size = 0;
 };
 

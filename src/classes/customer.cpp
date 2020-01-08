@@ -155,8 +155,8 @@ bool Customer::addProductToWishlistArray(Product *new_product)
 {
     if (c_wish_logical_size == c_wish_physical_size)
         resizeWishlistArray();
-    c_wishList[c_wish_logical_size] = new Product(*new_product);
-    c_wish_logical_size++;
+    this->c_wishList[c_wish_logical_size] = new Product(*new_product);
+    this->c_wish_logical_size++;
     return true;
 }
 bool Customer::setOrder(const Order *curr_order)

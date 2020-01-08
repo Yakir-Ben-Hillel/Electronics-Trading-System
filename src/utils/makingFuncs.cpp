@@ -70,7 +70,7 @@ void Seller::makeProductForSale() noexcept(false)
 void System::chooseProductToAddToCustomerWishlist()
 {
     Customer *customerTemp = dynamic_cast<Customer *>(this->logged_in_user);
-    User *sellerTemp = nullptr;
+    Seller *sellerTemp = nullptr;
     int seller_index, product_index;
     if (customerTemp) //Double check.
     {
@@ -82,15 +82,21 @@ void System::chooseProductToAddToCustomerWishlist()
             sellerTemp = dynamic_cast<Seller *>(this->users_array[i]);
             if (sellerTemp)
             {
-                indexes_array[available_index_counter] = i;
-                available_index_counter++;
+                if (sellerTemp->getStockArraySize())
+                {
+                    indexes_array[available_index_counter] = i;
+                    available_index_counter++;
+                }
             }
         }
         if (available_index_counter != 0)
         {
             do
             {
-                printSellersNames();
+                for (int i = 0; i < available_index_counter; i++)
+                {
+                    cout << i + 1 << ")" << this->users_array[indexes_array[i]]->getName() << endl;
+                }
                 cout << "Please choose a seller in-order to view his products: ";
                 cin >> seller_index;
                 seller_index--;

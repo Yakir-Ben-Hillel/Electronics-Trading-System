@@ -82,21 +82,29 @@ void System::loadUsersFromFile()
         for (int i = 0; i < amount; i++)
         {
             inFile >> type;
-            if (strcmp(type, "Customer") == 0)
+            try
             {
-                *this += new Customer(inFile);
+                if (strcmp(type, "Customer") == 0)
+                {
+                    *this += new Customer(inFile);
+                }
+                else if (strcmp(type, "Seller") == 0)
+                {
+                    *this += new Seller(inFile);
+                }
+                else if (strcmp(type, "CAS") == 0)
+                {
+                    *this += new CAS(inFile);
+                }
+                else
+                {
+                    std::cout << "INVALID INPUT INSIDE FILE!!! ABORTED." << endl;
+                    exit(1);
+                }
             }
-            else if (strcmp(type, "Seller") == 0)
+            catch (SystemException &e)
             {
-                *this += new Seller(inFile);
-            }
-            else if (strcmp(type, "CAS") == 0)
-            {
-                *this += new CAS(inFile);
-            }
-            else
-            {
-                std::cout << "INVALID INPUT INSIDE FILE!!! ABORTED." << endl;
+                cout << "FILE IS CURROPTED!!! ABORTED." << endl;
                 exit(1);
             }
             if (inFile.eof())
@@ -106,7 +114,6 @@ void System::loadUsersFromFile()
             }
         }
     }
-
     inFile.close();
 }
 void System::writeUsersToFile()
@@ -139,7 +146,7 @@ void System::compareCustomers() const
     bool isValid = true;
     unsigned int temp_counter = 0;
     Customer *customerTemp = nullptr;
-    int* indexes_array=new int[users_array_logical_size];
+    int *indexes_array = new int[users_array_logical_size];
     for (int i = 0; i < this->users_array_logical_size; i++)
     {
         customerTemp = dynamic_cast<Customer *>(this->users_array[i]);
@@ -150,43 +157,48 @@ void System::compareCustomers() const
             std::cout << temp_counter << ") " << customerTemp->getName() << endl;
         }
     }
-    std::cout << endl;
-    int op1, op2;
-    do
+    if (temp_counter > 1)
     {
-        std::cout << "Please choose the customers you would like to compare: (option1 option2) ";
-        cin >> op1 >> op2;
-        if ((op1 == op2) || (op1 < 0) || (op2 < 0))
+        std::cout << endl;
+        int op1, op2;
+        do
         {
-            std::cout << endl;
-            std::cout << "wrong input,please try again!" << endl;
-            isValid = false;
-        }
-        Customer *temp1, *temp2;
-        temp1 = dynamic_cast<Customer *>(this->users_array[indexes_array[op1 - 1]]);
-        temp2 = dynamic_cast<Customer *>(this->users_array[indexes_array[op2 - 1]]);
-        if (!temp1 || !temp2)
-        {
-            std::cout << endl;
-            std::cout << "wrong input,please try again!" << endl;
-            isValid = false;
-        }
-        else
-        {
-            if (*temp1 < *temp2)
+            std::cout << "Please choose the customers you would like to compare: (option1 option2) ";
+            cin >> op1 >> op2;
+            if ((op1 == op2) || (op1 < 0) || (op2 < 0))
             {
-                std::cout << temp2->getName() << "'s wishlist is bigger than " << temp1->getName() << "'s wishlist" << endl;
+                std::cout << endl;
+                std::cout << "wrong input,please try again!" << endl;
+                isValid = false;
             }
-            else if (*temp1 > *temp2)
+            Customer *temp1, *temp2;
+            temp1 = dynamic_cast<Customer *>(this->users_array[indexes_array[op1 - 1]]);
+            temp2 = dynamic_cast<Customer *>(this->users_array[indexes_array[op2 - 1]]);
+            if (!temp1 || !temp2)
             {
-                std::cout << temp1->getName() << "'s wishlist is bigger than " << temp2->getName() << "'s wishlist" << endl;
+                std::cout << endl;
+                std::cout << "wrong input,please try again!" << endl;
+                isValid = false;
             }
             else
             {
-                std::cout << "The Customers Wishlists Prices are identical!" << endl;
+                if (*temp1 < *temp2)
+                {
+                    std::cout << temp2->getName() << "'s wishlist is bigger than " << temp1->getName() << "'s wishlist" << endl;
+                }
+                else if (*temp1 > *temp2)
+                {
+                    std::cout << temp1->getName() << "'s wishlist is bigger than " << temp2->getName() << "'s wishlist" << endl;
+                }
+                else
+                {
+                    std::cout << "The Customers Wishlists Prices are identical!" << endl;
+                }
             }
-        }
 
-    } while (!isValid);
+        } while (!isValid);
+    }
+    else
+        cout << "Not enough Customers Available." << endl;
     delete[] indexes_array;
 }
