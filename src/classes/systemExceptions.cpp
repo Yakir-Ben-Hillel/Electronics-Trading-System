@@ -51,22 +51,28 @@ FeedBackException::~FeedBackException()
 {
     delete[] note;
 }
-
-AddressException::AddressException(const Address &other)
+AddressException::AddressException(unsigned int apartmentNumber, const char *streetName, const char *cityName) : apartmentNumber(apartmentNumber)
 {
-    address = &other;
+    this->cityName = strdup(cityName);
+    this->streetName = strdup(streetName);
+}
+AddressException::AddressException(const Address &other) : apartmentNumber(other.getApartmentNumber())
+{
+    this->cityName = strdup(other.getCityName());
+    this->streetName = strdup(other.getStreetName());
 }
 AddressException::~AddressException()
 {
-    this->address = nullptr;
+    delete[] this->cityName;
+    delete[] this->streetName;
 }
 void AddressException::show() const
 {
-    if (address->getApartmentNumber() <= 0)
+    if (apartmentNumber <= 0)
         cout << "Error, apartment number is wrong!" << endl;
-    if (strcmp(address->getCityName(), "") == 0)
+    if (strcmp(cityName, "") == 0)
         cout << "Error, city name cannot be blank!" << endl;
-    if (strcmp(address->getStreetName(), "") == 0)
+    if (strcmp(streetName, "") == 0)
         cout << "Error, street name cannot be blank!" << endl;
     return;
 }

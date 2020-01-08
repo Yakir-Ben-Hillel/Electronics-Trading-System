@@ -15,14 +15,14 @@ protected:
     User(const char *name, const char *password, const Address &address) noexcept(false);
     User(const User &other);
     User(User &&move);
-    User(ifstream &in);
+    User(ifstream &inFile);
     /*Abstract Data Type*/
 public:
     virtual ~User();
     virtual User *clone() const = 0;
     void setName(const char *name);
     void setPassword(const char *password);
-    void setAddress(const Address& address);
+    void setAddress(const Address &address);
     virtual const User &operator=(const User &other);
     virtual const User &operator=(User &&other);
     virtual void toOs(ostream &out) const = 0;

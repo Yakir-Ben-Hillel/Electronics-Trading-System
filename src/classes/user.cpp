@@ -1,9 +1,9 @@
 #include "../../include/system.h"
 
-User::User(const char *name, const char *password, const Address &address) noexcept(false) : m_address(address) 
+User::User(const char *name, const char *password, const Address &address) noexcept(false) : m_address(address)
 {
-    if(strcmp(name,"")==0||strcmp(password,"")==0||strlen(password)>10)
-       throw UserException(name,password,address);//address has its own exception class, so if the address constractor will throw the function that called this user constractor will catch the throw
+    if (strcmp(name, "") == 0 || strcmp(password, "") == 0 || strlen(password) > 10)
+        throw UserException(name, password, address); //address has its own exception class, so if the address constractor will throw the function that called this user constractor will catch the throw
     setName(name);
     setPassword(password);
 }
@@ -17,9 +17,7 @@ User::User(User &&move) : m_address(std::move(move.m_address))
 }
 User::User(ifstream &inFile)
 {
-    inFile >> *this->m_username;
-    inFile >> *this->m_password;
-    inFile >> this->m_address;
+    inFile >> *this;
 }
 User::~User()
 {
@@ -38,9 +36,9 @@ void User::setPassword(const char *password)
         delete[] this->m_password;
     this->m_password = strdup(password);
 }
-void User::setAddress(const Address& address)
+void User::setAddress(const Address &address)
 {
-    this->m_address = address; 
+    this->m_address = address;
 }
 const User &User::operator=(const User &other)
 {

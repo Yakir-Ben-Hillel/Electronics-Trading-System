@@ -37,7 +37,7 @@ protected:
 
 public:
     DateException(int day, int month, int year);
-    virtual ~DateException(){}
+    virtual ~DateException() {}
     virtual void show() const override;
 };
 class FeedBackException : public SystemException
@@ -54,9 +54,12 @@ public:
 class AddressException : public SystemException
 {
 protected:
-    const Address *address;
+    unsigned int apartmentNumber;
+    char *streetName;
+    char *cityName;
 
 public:
+    AddressException(unsigned int apartmentNumber,const char *streetName,const char *cityName);
     AddressException(const Address &other);
     virtual ~AddressException();
     virtual void show() const override final;

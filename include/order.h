@@ -6,7 +6,6 @@ class Product;
 class Order
 {
 public:
-    Order() = default;
     Order(Product **order_list, float price = 0,
           unsigned int o_list_physical_size = 0, unsigned int o_list_logical_size = 0) noexcept(false);
     Order(const Order &other);

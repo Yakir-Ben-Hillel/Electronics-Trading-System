@@ -5,7 +5,7 @@ Customer::Customer(const char *username, const char *password, const Address &ad
                    unsigned int orderHistoryPhysicalSize,
                    unsigned int orderHistoryLogicalSize,
                    unsigned int wishlistPhysicalSize,
-                   unsigned int wishlistLogicalSize)noexcept(false) : User(username, password, address) 
+                   unsigned int wishlistLogicalSize) noexcept(false) : User(username, password, address)
 
 {
     setWishList(wishlist, wishlistLogicalSize);
@@ -18,9 +18,9 @@ Customer::Customer(const Customer &other) : User(other)
 {
     *this = other;
 }
-Customer::Customer(ifstream &inFile)
+Customer::Customer(ifstream &inFile) : User(inFile)
 {
-    inFile >> *this;
+    // inFile >> *this;
 }
 Customer::Customer(Customer &&other) : User(std::move(other))
 {

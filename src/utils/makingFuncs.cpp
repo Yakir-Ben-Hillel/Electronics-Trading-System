@@ -196,6 +196,7 @@ void System::signup()
         {
             check = false;
             a.show();
+            cin.ignore(256, '\n');
         }
         if (check != false) //if check==false we want that the loop to end so the yser will try to put the address from the start
         {
@@ -212,6 +213,7 @@ void System::signup()
                     check = false;
                     delete address; //we should delete the allocated address cause there was a problem with the user allocation
                     e.show();
+                    cin.ignore(256, '\n');
                 }
                 break;
             case 2:
@@ -224,6 +226,7 @@ void System::signup()
                     check = false;
                     delete address; //we should delete the allocated address cause there was a problem with the user allocation
                     e.show();
+                    cin.ignore(256, '\n');
                 }
                 break;
             case 3:
@@ -236,6 +239,7 @@ void System::signup()
                     check = false;
                     delete address; //we should delete the allocated address cause there was a problem with the user allocation
                     e.show();
+                    cin.ignore(256, '\n');
                 }
                 break;
             default:

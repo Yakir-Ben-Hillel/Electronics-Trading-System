@@ -4,8 +4,8 @@ Address::Address(unsigned int apartmentNumber, const char *cityName, const char 
 {
     if (apartmentNumber <= 0 || strcmp(cityName, "") == 0 || strcmp(streetName, "") == 0)
     {
-        this->apartmentNumber=0;//in case that the updated apartment number was negative.
-        throw AddressException(Address(apartmentNumber, cityName, streetName));
+        this->apartmentNumber = 0; //in case that the updated apartment number was negative.
+        throw AddressException(apartmentNumber, streetName, cityName);
     }
     if (cityName)
         this->setCityName(cityName);

@@ -1,8 +1,8 @@
 #include "../../include/system.h"
 Seller::Seller(const char *username, const char *password, const Address &address, Product **stockArray, FeedBack **feedbacksArray,
                unsigned int s_size, unsigned int f_size) noexcept(false)
-                : User(username, password, address), stock_array_physical_length(s_size),
-                                                           feedbacks_array_physical_length(f_size)
+    : User(username, password, address), stock_array_physical_length(s_size),
+      feedbacks_array_physical_length(f_size)
 {
     setStockArray(stockArray);
     setFeedbacksArray(feedBack_array);
@@ -11,9 +11,9 @@ Seller::Seller(const Seller &other) : User(other)
 {
     *this = other;
 }
-Seller::Seller(ifstream &inFile)
+Seller::Seller(ifstream &inFile) : User(inFile)
 {
-    inFile >> *this;
+    //inFile >> *this;
 }
 Seller::Seller(Seller &&other) : User(std::move(other))
 {
@@ -182,7 +182,7 @@ void Seller::toOs(ostream &out) const
     }
 }
 
-User* Seller::clone() const
+User *Seller::clone() const
 {
     return new Seller(*this);
 }
