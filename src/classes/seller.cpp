@@ -175,9 +175,9 @@ User *Seller::clone() const
     return new Seller(*this);
 }
 
-bool Seller::operator==(const Seller &other) const
+bool Seller::operator==(const User &other) const
 {
-    if (strcmp(this->m_username, other.m_username) == 0)
-        return true;
-    return false;
+    if(!User::operator==(other))
+       return false;
+    return true;
 }

@@ -36,7 +36,7 @@ public:
 	void makeProductForSale() noexcept(false);
 	/*Operators*/
 	const Seller &operator=(const Seller &other);
-	bool operator==(const Seller& other) const;
+	bool operator==(const User& other) const;
 	// friend istream &operator>>(istream &in, Seller &seller);
 	virtual void toOs(ostream &out) const override;
 

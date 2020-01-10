@@ -12,6 +12,7 @@ public:
    CAS(ifstream &inFile);
    virtual ~CAS();
    // friend istream &operator>>(istream &in, CAS &cas);
+   virtual bool operator==(const User& other) const;
    virtual void toOs(ostream &out) const override;
    virtual User* clone() const override final;
    //methoods

@@ -1,5 +1,5 @@
 #include "../../include/CAS.h"
-CAS::CAS(char *username, char *password, Address &address)noexcept(false) : User(username, password, address)
+CAS::CAS(char *username, char *password, Address &address) noexcept(false) : User(username, password, address)
 {
 }
 CAS::CAS(const Customer &customer, const Seller &seller)
@@ -44,7 +44,14 @@ void CAS::toOs(ostream &out) const
     Customer::toOs(out);
 }
 
-User* CAS::clone() const
+User *CAS::clone() const
 {
     return new CAS(*this);
+}
+
+bool CAS::operator==(const User &other) const
+{
+    if (!User::operator==(other))
+        return false;
+    return true;
 }

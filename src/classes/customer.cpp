@@ -246,7 +246,7 @@ void Customer::makeOrder() noexcept(false)
         } while (fContinue != false);
         Order *temp_order = new Order(temp_list, price_of_order, temp_index, temp_index);
         this->setOrder(temp_order);
-        cout<<*temp_order;
+        cout << *temp_order;
         delete temp_order;
         for (int i = 0; i < temp_index; i++)
             delete temp_list[i];
@@ -301,7 +301,7 @@ void Customer::addFeedBackToSeller(Seller *seller) noexcept(false)
         int day, month, year;
         cout << "what date is it? (format: dd/mm/yyyy)" << endl;
         cin >> day >> month >> year;
-        FeedBack *curr_feedback = new FeedBack(temp, this,Date(day,month,year));
+        FeedBack *curr_feedback = new FeedBack(temp, this, Date(day, month, year));
         seller->addFeedbackToArray(curr_feedback);
     }
 }
@@ -379,4 +379,11 @@ void Customer::toOs(ostream &out) const
 User *Customer::clone() const
 {
     return new Customer(*this);
+}
+
+bool Customer::operator==(const User &other) const
+{
+    if (!User::operator==(other))
+        return false;
+    return true;
 }

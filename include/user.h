@@ -28,6 +28,7 @@ public:
     virtual void toOs(ostream &out) const = 0;
     friend ostream &operator<<(ostream &out, const User &user);
     friend istream &operator>>(istream &out, User &user);
+    virtual bool operator==(const User& other) const;
 
     const char *getName() const;
     const char *getPassword() const;

@@ -98,3 +98,10 @@ istream &operator>>(istream &in, User &user)
     in >> user.m_address;
     return in;
 }
+
+bool User::operator==(const User &other) const
+{
+    if (strcmp(m_username, other.m_username) == 0)
+        return true;
+    return false;
+}
