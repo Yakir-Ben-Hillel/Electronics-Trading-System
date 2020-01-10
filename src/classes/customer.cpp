@@ -315,8 +315,7 @@ void Customer::addFeedBackToSeller(Seller *seller) noexcept(false)
         int day, month, year;
         cout << "what date is it? (format: dd/mm/yyyy)" << endl;
         cin >> day >> month >> year;
-        Date *date = new Date(day, month, year);
-        FeedBack *curr_feedback = new FeedBack(temp, this, date);
+        FeedBack *curr_feedback = new FeedBack(temp, this,Date(day,month,year));
         seller->addFeedbackToArray(curr_feedback);
     }
 }

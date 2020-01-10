@@ -47,7 +47,7 @@ protected:
     char *note;
 
 public:
-    FeedBackException(Date date, char *note);
+    FeedBackException(const Date& date, char *note);
     virtual ~FeedBackException();
     virtual void show() const override final;
 };

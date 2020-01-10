@@ -3,7 +3,7 @@
 char *Product::CategoryNames[4] = {(char *)"Children", (char *)"Electricity", (char *)"Office", (char *)"Clothing"};
 unsigned int Product::counter = 0;
 
-Product::Product(const char *name, eCategory category, Seller *seller, float price) noexcept(false)
+Product::Product(const char *name, eCategory category,const Seller &seller, float price) noexcept(false)
     : p_serialNumber(++counter)
 {
     if (strcmp(name, "") == 0 || price < 0)
@@ -11,11 +11,7 @@ Product::Product(const char *name, eCategory category, Seller *seller, float pri
     setName(name);
     setCategory(category);
     setPrice(price);
-    setSeller(seller);
-}
-Product::Product(istream &inFile)
-{
-    inFile >> *this;
+    setSeller(&seller);
 }
 Product::Product(const Product &other)
 {
@@ -41,6 +37,7 @@ Product::Product(Product &&other)
 
 Product::~Product()
 {
+    this->p_seller=nullptr;
     delete[] p_name;
 }
 
@@ -99,41 +96,15 @@ unsigned int Product::getSerialNumber() const
 {
     return p_serialNumber;
 }
-const Seller *Product::getSeller() const
+const Seller& Product::getSeller() const
 {
-    return p_seller;
+    return *p_seller;
 }
 ostream &operator<<(ostream &out, const Product &product)
 {
-    // if (typeid(out) == typeid(ofstream))
-    // {
-    //     out << product.p_name << " " << product.CategoryNames[product.getCategory()]
-    //         << " " << product.p_price << " " << *product.p_seller;
-    // }
-    if (typeid(out) != typeid(ofstream))
-    {
-        out << "Product name: " << product.p_name << endl;
-        out << "Product category: " << product.CategoryNames[product.getCategory()] << endl;
-        out << "Product Price: " << product.p_price << endl;
-        out << "Product seller's name: " << product.p_seller->getUserName() << endl;
-    }
+    out << "Product name: " << product.p_name << endl;
+    out << "Product category: " << product.CategoryNames[product.getCategory()] << endl;
+    out << "Product Price: " << product.p_price << endl;
+    out << "Product seller's name: " << product.p_seller->getUserName() << endl;
     return out;
-}
-istream &operator>>(istream &in, Product &product)
-{
-    Seller *sellerTemp = new Seller(*product.p_seller);
-    char category[12];
-    Product::eCategory eCategory;
-    in >> product.p_name >> category >> product.p_price >> *sellerTemp;
-    if (strcmp(category, "Children") == 0)
-        eCategory = Product::Children;
-    else if (strcmp(category, "Electricity") == 0)
-        eCategory = Product::Electricity;
-    else if (strcmp(category, "Office") == 0)
-        eCategory = Product::Office;
-    else
-        eCategory = Product::Clothing;
-    product.setCategory(eCategory);
-    product.setSeller(sellerTemp);
-    return in;
 }

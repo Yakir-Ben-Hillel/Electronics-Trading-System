@@ -8,8 +8,7 @@ class FeedBack
 {
 public:
     //constructors and distructors
-    FeedBack() = default;
-    FeedBack(char *note, Customer *customer_data, Date *curr_date) noexcept(false);
+    FeedBack(char *note,const Customer *customer_data,const Date &curr_date) noexcept(false);
     FeedBack(const FeedBack &other);
     FeedBack(FeedBack &&other);
     ~FeedBack();
@@ -17,18 +16,16 @@ public:
     //seters and geters
     bool setNotes(const char *givenNote);
     bool setCustomer(const Customer *other_customer);
-    bool setDateOfFeedBack(const Date *date);
 
     const char *getNotes() const;
     const Customer *getCustomer() const;
     const Date& getDate() const;
     friend ostream &operator<<(ostream &out, const FeedBack &feedback);
-    friend istream &operator>>(istream &in, FeedBack &feedback);
 
 private:
     const Customer *customer;
     char *notes;
-    const Date *date_of_feedback;
+    const Date& date_of_feedback;
 };
 
 #endif

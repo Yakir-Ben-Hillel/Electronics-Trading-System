@@ -15,9 +15,8 @@ public:
 	};
 	static char *CategoryNames[4];
 	//constructors&&distructors
-	Product(const char *name, eCategory category, Seller *given_seller_name, float price = 0) noexcept(false);
+	Product(const char *name, eCategory category,const Seller &given_seller_name, float price) noexcept(false);
 	Product(const Product &other);
-	Product(istream &inFile);
 	Product(Product &&other);
 	~Product();
 	//seters
@@ -28,12 +27,11 @@ public:
 	bool setSeller(const Seller *seller);
 	//geters
 	const char *getName() const;
-	const Seller *getSeller() const;
+	const Seller& getSeller() const;
 	float getPrice() const;
 	eCategory getCategory() const;
 	unsigned int getSerialNumber() const;
 	friend ostream &operator<<(ostream &out, const Product &product);
-	friend istream &operator>>(istream &out, Product &product);
 
 private:
 	eCategory p_category;

@@ -36,7 +36,7 @@ DateException::DateException(int day, int month, int year) : day(day), month(mon
 {
 }
 
-FeedBackException::FeedBackException(Date date, char *note) : date(date)
+FeedBackException::FeedBackException(const Date& date, char *note) : date(date)
 {
     this->note = strdup(note);
 }
