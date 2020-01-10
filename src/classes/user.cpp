@@ -7,7 +7,7 @@ User::User(const char *name, const char *password, const Address &address) noexc
     setName(name);
     setPassword(password);
 }
-User::User(const User &other) : m_address(other.m_address)
+User::User(const User &other) : m_address(other.m_address),m_password(nullptr),m_username(nullptr)
 {
     *this = other;
 }
