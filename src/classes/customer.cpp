@@ -244,9 +244,9 @@ void Customer::makeOrder() noexcept(false)
                 cout << "Wishlist is Empty." << endl;
             }
         } while (fContinue != false);
-        Order *temp_order = new Order(temp_list, price_of_order, temp_index, c_wish_logical_size);
+        Order *temp_order = new Order(temp_list, price_of_order, temp_index, temp_index);
         this->setOrder(temp_order);
-        showOrder(temp_order);
+        cout<<*temp_order;
         delete temp_order;
         for (int i = 0; i < temp_index; i++)
             delete temp_list[i];
@@ -256,20 +256,6 @@ void Customer::makeOrder() noexcept(false)
     {
         cout << "Wishlist is Empty." << endl;
     }
-}
-void Customer::showOrder(Order *curr) const
-{
-    Product **temp = curr->getList();
-    unsigned int size = curr->getPhysicalSize();
-    cout << "the details of your order are: " << endl;
-    for (int i = 0; i < size; i++)
-    {
-        cout << *temp[i];
-        cout << endl;
-    }
-
-    cout << "the final price of your order is: " << curr->getPrice() << endl;
-    cout << "thank you for buying from us,have a nice day." << endl;
 }
 
 void Customer::deleteFromWishList(int location)

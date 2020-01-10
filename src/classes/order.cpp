@@ -106,12 +106,16 @@ void Order::resizeOrderList()
 }
 ostream &operator<<(ostream &out, const Order &order)
 {
-    if (typeid(out) != typeid(ofstream))
+   Product **temp = order.order_products;
+    unsigned int size = order.o_list_physical_size;
+    out << "the details of your order are: " << endl;
+    for (int i = 0; i < size; i++)
     {
-        out << "Order Products are:" << endl;
-        for (int i = 0; i < order.o_list_logical_size; i++)
-            out << *order.order_products[i] << endl;
-        out << "Order Price is: " << order.price_of_order << endl;
+        out << *temp[i];
+        out << endl;
     }
+
+    out << "the final price of your order is: " << order.price_of_order << endl;
+    out << "thank you for buying from us,have a nice day." << endl;
     return out;
 }

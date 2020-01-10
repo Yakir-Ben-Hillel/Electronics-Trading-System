@@ -7,7 +7,7 @@ class Order
 {
 public:
     Order(Product **order_list, float price ,
-          unsigned int o_list_physical_size = 0, unsigned int o_list_logical_size = 0) noexcept(false);
+          unsigned int o_list_physical_size, unsigned int o_list_logical_size) noexcept(false);
     Order(const Order &other);
     Order(Order &&other); //
     ~Order();

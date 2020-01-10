@@ -51,7 +51,6 @@ public:
 
 	//other methoods
 	void makeOrder() noexcept(false);
-	void showOrder(Order *curr) const;
 	void deleteFromWishList(int location);
 	void addFeedBackToSeller(Seller *seller) noexcept(false);
 	bool didCustomerOrderedFromSeller(Seller *seller);
