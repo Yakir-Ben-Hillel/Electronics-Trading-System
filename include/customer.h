@@ -10,7 +10,6 @@ class Customer : virtual public User
 {
 public:
 	//constructors && distructors
-	Customer() = default;
 	Customer(const char *username, const char *password, const Address &address,
 			 const Product **wishlist = nullptr,
 			 const Order **orderHistory = nullptr,
@@ -26,8 +25,8 @@ public:
 	const Customer &operator=(const Customer &other);
 	friend bool operator<(const Customer &first, const Customer &second);
 	friend bool operator>(const Customer &first, const Customer &second);
-	virtual bool operator==(const User& other) const;
-    virtual User* clone() const override;
+	virtual bool operator==(const User &other) const;
+	virtual User *clone() const override;
 	// friend istream &operator>>(istream &in, Customer &customer);
 	//seters
 	bool setWishList(const Product **wishList, int size);
@@ -41,7 +40,7 @@ public:
 	unsigned int getWishListLogicalSize() const;
 	unsigned int getLogicSizeOfOrder() const;
 	unsigned int getPhySizeOfOrder() const;
-	const Order& getOrder(int location) const;
+	const Order &getOrder(int location) const;
 	Order **getOrderHistory() const;
 
 	//other methoods
@@ -51,6 +50,7 @@ public:
 	bool didCustomerOrderedFromSeller(Seller *seller);
 
 protected:
+	Customer() = default;
 	bool setWishListPhysicalSize(unsigned int physicalSize);
 	bool setWishListLogicalSize(unsigned int logicallSize);
 	void resizeWishlistArray();
