@@ -21,7 +21,7 @@ public:
 
     const char *getNotes() const;
     const Customer *getCustomer() const;
-    const Date *getDate();
+    const Date& getDate() const;
     friend ostream &operator<<(ostream &out, const FeedBack &feedback);
     friend istream &operator>>(istream &in, FeedBack &feedback);
 

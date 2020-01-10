@@ -54,9 +54,9 @@ const Customer *FeedBack::getCustomer() const
 {
     return customer;
 }
-const Date *FeedBack::getDate()
+const Date& FeedBack::getDate() const
 {
-    return date_of_feedback;
+    return *date_of_feedback;
 }
 ostream &operator<<(ostream &out, const FeedBack &feedback)
 {
