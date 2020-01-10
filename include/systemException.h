@@ -47,7 +47,7 @@ protected:
     char *note;
 
 public:
-    FeedBackException(const Date& date, char *note);
+    FeedBackException(const Date& date,const char *note);
     virtual ~FeedBackException();
     virtual void show() const override final;
 };
@@ -60,7 +60,6 @@ protected:
 
 public:
     AddressException(unsigned int apartmentNumber,const char *streetName,const char *cityName);
-    AddressException(const Address &other);
     virtual ~AddressException();
     virtual void show() const override final;
 };

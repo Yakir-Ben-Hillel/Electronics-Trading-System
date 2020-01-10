@@ -36,7 +36,7 @@ DateException::DateException(int day, int month, int year) : day(day), month(mon
 {
 }
 
-FeedBackException::FeedBackException(const Date& date, char *note) : date(date)
+FeedBackException::FeedBackException(const Date& date,const char *note) : date(date)
 {
     this->note = strdup(note);
 }
@@ -55,11 +55,6 @@ AddressException::AddressException(unsigned int apartmentNumber, const char *str
 {
     this->cityName = strdup(cityName);
     this->streetName = strdup(streetName);
-}
-AddressException::AddressException(const Address &other) : apartmentNumber(other.getApartmentNumber())
-{
-    this->cityName = strdup(other.getCityName());
-    this->streetName = strdup(other.getStreetName());
 }
 AddressException::~AddressException()
 {
@@ -95,7 +90,7 @@ void UserException::show() const
         cout << "Error chosen name cannot be blank!" << endl;
     if (strcmp(password, "") == 0 || strlen(password) > 11)
         cout << "Error chosen password is wrong!" << endl;
-    AddressException Ae(*address);
+    AddressException Ae(address->getApartmentNumber(),address->getStreetName(),address->getCityName());
     Ae.show();
 }
 //our terminate function in case of unknown problem

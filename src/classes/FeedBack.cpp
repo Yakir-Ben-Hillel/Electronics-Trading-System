@@ -1,11 +1,12 @@
 #include "../../include/system.h"
 
-FeedBack::FeedBack(char *note,const Customer *customer_data,const Date& curr_date) noexcept(false)
-    : customer(customer_data), date_of_feedback(curr_date)
+FeedBack::FeedBack(char *note,const Customer& customer_data,const Date& curr_date) noexcept(false)
+    :date_of_feedback(curr_date)
 {
     if (strcmp(note, "") == 0)
         throw FeedBackException(curr_date, note); //if date has an exception the function that called this constractor will catch it.
     setNotes(note);
+    setCustomer(&customer_data);
 }
 FeedBack::FeedBack(const FeedBack &other):date_of_feedback(other.date_of_feedback)
 {
@@ -41,9 +42,9 @@ const char *FeedBack::getNotes() const
 {
     return notes;
 }
-const Customer *FeedBack::getCustomer() const
+const Customer& FeedBack::getCustomer() const
 {
-    return customer;
+    return *customer;
 }
 const Date& FeedBack::getDate() const
 {

@@ -65,24 +65,6 @@ bool Customer::setWishListLogicalSize(unsigned int size)
     return true;
 }
 
-bool Customer::setName(char *userName)
-{
-    this->User::setName(userName);
-    return true;
-}
-
-bool Customer::setAddress(Address address)
-{
-    this->User::setAddress(address);
-    return true;
-}
-
-bool Customer::setPassword(char *password)
-{
-    this->User::setPassword(password);
-    return true;
-}
-
 bool Customer::setWishList(const Product **wishList, int size)
 {
     c_wishList = new Product *[size];
@@ -103,29 +85,14 @@ bool Customer::SetOrderArray(const Order **order_array, int size)
     return true;
 }
 
-const char *Customer::getName() const
-{
-    return this->m_username;
-}
-
-const Address &Customer::getAddress() const
-{
-    return User::getAddress();
-}
-
-const char *Customer::getPassWord() const
-{
-    return User::getPassword();
-}
-
 Order **Customer::getOrderHistory() const
 {
     return this->orders_history;
 }
 
-Order *Customer::getOrder(int location) const
+const Order& Customer::getOrder(int location) const
 {
-    return this->orders_history[location];
+    return *orders_history[location];
 }
 
 unsigned int Customer::getLogicSizeOfOrder() const
@@ -301,7 +268,7 @@ void Customer::addFeedBackToSeller(Seller *seller) noexcept(false)
         int day, month, year;
         cout << "what date is it? (format: dd/mm/yyyy)" << endl;
         cin >> day >> month >> year;
-        FeedBack *curr_feedback = new FeedBack(temp, this, Date(day, month, year));
+        FeedBack *curr_feedback = new FeedBack(temp,*this, Date(day, month, year));
         seller->addFeedbackToArray(curr_feedback);
     }
 }
@@ -338,17 +305,6 @@ bool operator>(const Customer &first, const Customer &second)
     else
         return false;
 }
-// istream &operator>>(istream &in, Customer &customer)
-// {
-//     in >> (User &)customer;
-//     in >> customer.c_wish_physical_size >> customer.c_wish_logical_size;
-//     for (int i = 0; i < customer.c_wish_logical_size; i++)
-//         in >> *customer.c_wishList[i];
-//     in >> customer.order_physical_size >> customer.order_logical_size;
-//     for (int i = 0; i < customer.order_logical_size; i++)
-//         in >> *customer.orders_history[i];
-//     return in;
-// }
 void Customer::getSum(float &sum) const
 {
     for (int i = 0; i < this->c_wish_logical_size; ++i)

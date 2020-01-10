@@ -126,7 +126,7 @@ void System::printAllAvailableSellersToGiveFeedbacks(Customer *customer)
             if (customer->didCustomerOrderedFromSeller(sellerTemp) == true)
             {
                 counter++;
-                cout << counter << ") " << sellerTemp->getUserName() << endl;
+                cout << counter << ") " << sellerTemp->getName() << endl;
             }
         }
     }

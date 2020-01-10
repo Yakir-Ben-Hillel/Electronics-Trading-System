@@ -10,7 +10,7 @@ class User
 protected:
     char *m_username;
     char *m_password;
-    Address m_address;
+    Address  m_address;
     User() = default;
     User(const char *name, const char *password, const Address &address) noexcept(false);
     User(const User &other);
@@ -32,8 +32,6 @@ public:
 
     const char *getName() const;
     const char *getPassword() const;
-    //virtual void printOptions() const;
-
     const Address &getAddress() const;
 };
 

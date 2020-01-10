@@ -6,7 +6,7 @@
 class CAS : public Customer, public Seller
 {
 public:
-   CAS(char *username, char *password, Address &address) noexcept(false);
+   CAS(const char *username,const char *password, Address &address) noexcept(false);
    CAS(const Customer &customer, const Seller &seller);
    CAS(const CAS &other);
    CAS(ifstream &inFile);

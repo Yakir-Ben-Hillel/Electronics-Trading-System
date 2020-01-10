@@ -30,24 +30,18 @@ public:
     virtual User* clone() const override;
 	// friend istream &operator>>(istream &in, Customer &customer);
 	//seters
-	bool setName(char *userName);
-	bool setAddress(Address address);
-	bool setPassword(char *password);
 	bool setWishList(const Product **wishList, int size);
 	bool setOrder(const Order *curr_order);
 	bool SetOrderArray(const Order **order_array, int size);
 	bool addProductToWishlistArray(Product *new_product);
 	virtual void toOs(ostream &out) const override;
 	//geters
-	const char *getName() const;
-	const Address &getAddress() const;
-	const char *getPassWord() const;
 	Product **getWishList() const;
 	unsigned int getWishListPhysicalSize() const;
 	unsigned int getWishListLogicalSize() const;
 	unsigned int getLogicSizeOfOrder() const;
 	unsigned int getPhySizeOfOrder() const;
-	Order *getOrder(int location) const;
+	const Order& getOrder(int location) const;
 	Order **getOrderHistory() const;
 
 	//other methoods

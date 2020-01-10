@@ -35,13 +35,10 @@ public:
 	//Setters Functions.
 	//Getters Functions.
 	const char *getSystemName() const;
-	unsigned int getCurrentID();
 	const System &operator+=(User *user);
 	//other methoods
 	void mainMenu();
-	void makeSeller();
 	Address *makeAddress() noexcept(false);
-	void makeCustomer();
 	bool addUserToArray(User *new_user);
 	void printCustomersNames() const;
 	void printOptionsAsGuest() const;

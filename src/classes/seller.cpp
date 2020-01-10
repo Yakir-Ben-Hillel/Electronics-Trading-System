@@ -42,21 +42,6 @@ Seller::~Seller()
         delete s_stock[i];
     delete[] s_stock;
 }
-bool Seller::setUserName(char *givenUserName)
-{
-    this->User::setName(givenUserName);
-    return true;
-}
-bool Seller::setAddress(Address givenAddress)
-{
-    User::setAddress(givenAddress);
-    return true;
-}
-bool Seller::setPassword(char *givenPassword)
-{
-    User::setPassword(givenPassword);
-    return true;
-}
 bool Seller::setStockArray(Product **given_product_array)
 {
     s_stock = new Product *[stock_array_physical_length];
@@ -66,8 +51,7 @@ bool Seller::setStockArray(Product **given_product_array)
 }
 FeedBack Seller::setFeedback(FeedBack *given_feedBack)
 {
-    FeedBack feedback(*given_feedBack);
-    return feedback;
+    return FeedBack(*given_feedBack);
 }
 bool Seller::setFeedbacksArray(FeedBack **given_feedBacks_array)
 {
@@ -117,18 +101,6 @@ void Seller::resizeFeedbackArray()
     delete[] feedBack_array;
     this->feedbacks_array_physical_length = newSize;
     this->feedBack_array = newArray;
-}
-const char *Seller::getUserName() const
-{
-    return User::getName();
-}
-const char *Seller::getPassword() const
-{
-    return User::getPassword();
-}
-const Address &Seller::getAddress() const
-{
-    return User::getAddress();
 }
 
 FeedBack **Seller::getfeedBacksArray(int &size) const

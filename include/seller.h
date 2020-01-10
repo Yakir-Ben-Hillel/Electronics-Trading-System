@@ -8,7 +8,6 @@ class Seller : virtual public User
 {
 public:
 	//Constructors && Distructors
-	Seller() = default;
 	Seller(const char *username, const char *password, const Address &address, Product **stockArray = nullptr,
 		   FeedBack **feedbacksArray = nullptr, unsigned int s_size = 0, unsigned int f_size = 0) noexcept(false);
 	Seller(const Seller &other);
@@ -17,17 +16,10 @@ public:
 	virtual ~Seller();
 	virtual User *clone() const override;
 	//Getters Functions.
-	const char *getUserName() const;
-	const char *getPassword() const;
-	const Address &getAddress() const;
 	Product **getStock() const;
 	FeedBack **getfeedBacksArray(int &size) const;
 	//Setters Functions.
-	bool setUserName(char *userName);
-	bool setPassword(char *password);
-	bool setAddress(Address address);
 	bool setStockArray(Product **given_stock_array);
-	FeedBack setFeedback(FeedBack *given_feedBack);
 	bool setFeedbacksArray(FeedBack **given_feedBacks_array);
 	bool addProductToStockArray(Product *new_product);
 	bool addFeedbackToArray(FeedBack *new_feedback);
@@ -36,13 +28,15 @@ public:
 	void makeProductForSale() noexcept(false);
 	/*Operators*/
 	const Seller &operator=(const Seller &other);
-	bool operator==(const User& other) const;
+	bool operator==(const User &other) const;
 	// friend istream &operator>>(istream &in, Seller &seller);
 	virtual void toOs(ostream &out) const override;
 
 protected:
+	Seller() = default;
 	void resizeStockArray();
 	void resizeFeedbackArray();
+	FeedBack setFeedback(FeedBack *given_feedBack);
 	Product **s_stock; //array of all product this seller sells.
 	unsigned int stock_array_physical_length = 0;
 	unsigned int stock_array_logical_length = 0;

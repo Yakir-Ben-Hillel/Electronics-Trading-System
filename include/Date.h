@@ -5,7 +5,6 @@ class Date
 {
 public:
     //constructors and distructors
-    Date() = default;
     Date(unsigned int day, unsigned int month, unsigned int year) noexcept(false);
     Date(const Date &other);
     ~Date() = default;
