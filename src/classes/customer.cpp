@@ -292,7 +292,7 @@ bool Customer::didCustomerOrderedFromSeller(Seller *seller)
             unsigned int order_length = this->orders_history[i]->getPhysicalSize();
             for (int j = 0; j < order_length; j++)
             {
-                if (products_list[j]->getSeller() == seller)
+                if (products_list[j]->getSeller() == *seller)
                     return true;
             }
         }

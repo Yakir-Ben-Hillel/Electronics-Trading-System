@@ -6,7 +6,7 @@ class Product;
 class Order
 {
 public:
-    Order(Product **order_list, float price = 0,
+    Order(Product **order_list, float price ,
           unsigned int o_list_physical_size = 0, unsigned int o_list_logical_size = 0) noexcept(false);
     Order(const Order &other);
     Order(Order &&other); //
@@ -22,7 +22,6 @@ public:
     unsigned int getPhysicalSize() const;
     unsigned int getLogicalSize() const;
     friend ostream &operator<<(ostream &out, const Order &order);
-    friend istream &operator>>(istream &in, Order &order);
 
 private:
     void resizeOrderList();

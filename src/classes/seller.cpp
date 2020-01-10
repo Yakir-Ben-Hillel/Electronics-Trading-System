@@ -13,7 +13,12 @@ Seller::Seller(const Seller &other) : User(other)
 }
 Seller::Seller(ifstream &inFile) : User(inFile)
 {
-    //inFile >> *this;
+    this->s_stock=nullptr;
+    this->feedBack_array=nullptr;
+    this->feedbacks_array_logical_length=0;
+    this->feedbacks_array_physical_length=0;
+    this->stock_array_logical_length=0;
+    this->stock_array_physical_length=0;
 }
 Seller::Seller(Seller &&other) : User(std::move(other))
 {
@@ -146,23 +151,6 @@ const Seller &Seller::operator=(const Seller &other)
     }
     return *this;
 }
-// istream &operator>>(istream &in, Seller &seller)
-// {
-//     in >> (User &)seller;
-//     in >> seller.stock_array_physical_length;
-//     in >> seller.stock_array_logical_length;
-//     seller.s_stock = new Product *[seller.stock_array_logical_length];
-//     for (int i = 0; seller.stock_array_logical_length; i++)
-//     {
-//         in >> *seller.s_stock[i];
-//     }
-//     in >> seller.feedbacks_array_physical_length;
-//     in >> seller.feedbacks_array_logical_length;
-//     seller.feedBack_array = new FeedBack *[seller.feedbacks_array_logical_length];
-//     for (int i = 0; i < seller.feedbacks_array_logical_length; i++)
-//         in >> *seller.feedBack_array[i];
-//     return in;
-// }
 void Seller::toOs(ostream &out) const
 {
     if (typeid(out) != typeid(ofstream))
@@ -185,4 +173,11 @@ void Seller::toOs(ostream &out) const
 User *Seller::clone() const
 {
     return new Seller(*this);
+}
+
+bool Seller::operator==(const Seller &other) const
+{
+    if (strcmp(this->m_username, other.m_username) == 0)
+        return true;
+    return false;
 }
