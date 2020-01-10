@@ -254,4 +254,5 @@ void System::signup()
         }
     } while (!check);
     *this += user;
+    cout<<"User added successfully, please enjoy your using on our trade system!"<<endl;
 }

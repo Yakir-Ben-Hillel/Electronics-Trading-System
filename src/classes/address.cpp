@@ -83,8 +83,7 @@ ostream &operator<<(ostream &out, const Address &address)
 {
     if (typeid(out) == typeid(ofstream))
     {
-        out << address.cityName << " " << address.streetName << endl
-            << address.apartmentNumber << " " << endl;
+        out << address.cityName << " " << address.streetName << " "<<address.apartmentNumber << " " << endl;
     }
     else
     {
