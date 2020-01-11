@@ -15,7 +15,7 @@ public:
 	};
 	static char *CategoryNames[4];
 	//constructors&&distructors
-	Product(const char *name, eCategory category,const Seller &given_seller_name, float price) noexcept(false);
+	Product(const char *name, eCategory category,const Seller &seller, float price) noexcept(false);
 	Product(const Product &other);
 	Product(Product &&other);
 	~Product();
