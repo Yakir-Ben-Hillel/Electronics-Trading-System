@@ -32,9 +32,8 @@ public:
 
 	//other methoods
 	void makeOrder() noexcept(false);
-	void deleteFromWishList(int location);
-	void addFeedBackToSeller(Seller *seller) noexcept(false);
-	bool didCustomerOrderedFromSeller(Seller *seller);
+	void addFeedBackToSeller(Seller &seller) noexcept(false);
+	bool didCustomerOrderedFromSeller(Seller &seller);
 
 protected:
 	vector<Product> c_wishList;   //pointer array for product wish list

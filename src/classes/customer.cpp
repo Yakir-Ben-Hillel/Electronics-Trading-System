@@ -19,22 +19,19 @@ Customer::Customer(const string &username, const string &password,
 {
 }
 
-bool Customer::setWishList(const vector<Product *> wishList)
+bool Customer::setWishList(const vector<Product> &wishList)
 {
+    this->c_wishList = wishList;
 }
-bool Customer::SetOrderArray(const vector<Order *> orders_array)
+bool Customer::SetOrderArray(const vector<Order> &orders_array)
 {
+    this->orders_history = orders_array;
 }
 
 std::vector<Order> Customer::getOrderHistory() const
 {
     return this->orders_history;
 }
-
-// const Order &Customer::getOrder(int location) const
-// {
-//     return orders_history[location];
-// }
 
 vector<Product> Customer::getWishList() const
 {
@@ -100,13 +97,9 @@ void Customer::makeOrder() noexcept(false)
                 cout << "Wishlist is Empty." << endl;
             }
         } while (fContinue != false);
-        Order temp_order(temp_list, price_of_order, temp_index, temp_index);
-        this->setOrder(temp_order);
-        cout << *temp_order;
-        delete temp_order;
-        for (int i = 0; i < temp_index; i++)
-            delete temp_list[i];
-        delete[] temp_list;
+        Order temp_order(temp_list, price_of_order);
+        this->orders_history.push_back(temp_order);
+        cout << temp_order;
     }
     else
     {
@@ -114,52 +107,51 @@ void Customer::makeOrder() noexcept(false)
     }
 }
 
-void Customer::deleteFromWishList(int location)
-{
-    this->c_wishList.erase()
-        //all the parts of the array are pointers, because of that we just put the address in the right pointer and free the wanted memory.
-        this->c_wishList[location] = this->c_wishList[this->c_wish_logical_size - 1];
-    this->c_wish_logical_size--;
-}
-bool Customer::didCustomerOrderedFromSeller(Seller *seller)
+bool Customer::didCustomerOrderedFromSeller(Seller &seller)
 {
 
-    unsigned int orders_array_length = this->getLogicSizeOfOrder();
+    unsigned int orders_array_length = this->orders_history.size();
     if (orders_array_length == 0)
         return false;
     else
     {
-        for (int i = 0; i < orders_array_length; i++)
+        vector<Order>::iterator itrOrder = this->orders_history.begin();
+        vector<Order>::iterator itrOrderEnd = this->orders_history.end();
+        vector<Product> temp;
+        for (; itrOrder != itrOrderEnd; ++itrOrder)
         {
-            Product **products_list = this->orders_history[i]->getList();
-            unsigned int order_length = this->orders_history[i]->getPhysicalSize();
-            for (int j = 0; j < order_length; j++)
+            temp = (*itrOrder).getList();
+            vector<Product>::iterator itrProduct = temp.begin();
+            vector<Product>::iterator itrProductEnd = temp.end();
+            for (; itrProduct != itrProductEnd; ++itrProduct)
             {
-                if (products_list[j]->getSeller() == *seller)
+                if ((*itrProduct).getSeller() == seller)
                     return true;
             }
         }
         return false;
     }
 }
-void Customer::addFeedBackToSeller(Seller *seller) noexcept(false)
+void Customer::addFeedBackToSeller(Seller &seller) noexcept(false)
 {
     bool can_give_a_feedback;
     can_give_a_feedback = didCustomerOrderedFromSeller(seller);
-    if (can_give_a_feedback == false)
-        cout << "you can't give a feedback to a seller you didn't bought from" << endl;
-    else
+    if (can_give_a_feedback)
     {
         bool isDateValid = true;
         cin.ignore(256, '\n');
         cout << "please enter your notes about the seller: " << endl;
-        char temp[256];
-        cin.getline(temp, 255);
+        string temp;
+        getline(cin, temp);
         int day, month, year;
         cout << "what date is it? (format: dd/mm/yyyy)" << endl;
         cin >> day >> month >> year;
-        FeedBack *curr_feedback = new FeedBack(temp, *this, Date(day, month, year));
-        seller->addFeedbackToArray(curr_feedback);
+        FeedBack curr_feedback(temp, *this, Date(day, month, year));
+        seller.addFeedbackToArray(curr_feedback);
+    }
+    else
+    {
+        cout << "you can't give a feedback to a seller you didn't bought from" << endl;
     }
 }
 
@@ -168,9 +160,7 @@ const Customer &Customer::operator=(const Customer &other)
     if (this != &other)
     {
         (User &)*this = other;
-        setWishList((const Product **)other.c_wishList, other.c_wish_logical_size);
-        setWishListPhysicalSize(other.c_wish_physical_size);
-        setWishListLogicalSize(other.c_wish_logical_size);
+        setWishList(other.c_wishList);
     }
     return *this;
 }
@@ -197,25 +187,33 @@ bool operator>(const Customer &first, const Customer &second)
 }
 void Customer::getSum(float &sum) const
 {
-    for (int i = 0; i < this->c_wish_logical_size; ++i)
-        sum += this->c_wishList[i]->getPrice();
+    vector<Product>::const_iterator itr = this->c_wishList.begin();
+    vector<Product>::const_iterator itrEnd = this->c_wishList.end();
+    int size = this->c_wishList.size();
+    for (; itr != itrEnd; ++itr)
+        sum += (*itr).getPrice();
 }
 void Customer::toOs(ostream &out) const
 {
     if (typeid(out) != typeid(ofstream))
     {
         out << "Wishlist: " << endl;
-        if (this->c_wish_logical_size != 0)
+
+        if (!this->c_wishList.empty())
         {
-            for (int i = 0; i < this->c_wish_logical_size; i++)
-                out << *this->c_wishList[i] << endl;
+            vector<Product>::const_iterator itrProduct = this->c_wishList.begin();
+            vector<Product>::const_iterator itrProductEnd = this->c_wishList.end();
+            for (; itrProduct != itrProductEnd; ++itrProduct)
+                out << *itrProduct << endl;
         }
         else
             out << "Wishlist is Empty." << endl;
-        if (this->order_logical_size != 0)
+        if (!this->orders_history.empty())
         {
-            for (int i = 0; i < this->order_logical_size; i++)
-                out << *this->orders_history[i] << endl;
+            vector<Order>::const_iterator itrOrder = this->orders_history.begin();
+            vector<Order>::const_iterator itrOrderEnd = this->orders_history.end();
+            for (; itrOrder != itrOrderEnd; ++itrOrder)
+                out << *itrOrder << endl;
         }
         else
             out << "The user didn't made any Order" << endl;
