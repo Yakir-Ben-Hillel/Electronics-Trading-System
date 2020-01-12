@@ -20,15 +20,13 @@ using namespace std;
 #include <exception>
 #include <string>
 #include <vector>
-class Address;
-class Customer;
-class Seller;
 class User;
 class System
 {
 public:
 	//Constructors && Distructors
 	//In my option the user should not set arrays sizes by himself.-Yakir
+	System() = default;
 	System(vector<User *> users_array, User *logged_in_user = nullptr);
 	System(const System &other);
 	~System();

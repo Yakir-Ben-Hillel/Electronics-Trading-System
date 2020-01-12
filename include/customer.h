@@ -2,9 +2,6 @@
 #define __Customer_H
 //#include "seller.h"
 #include "system.h"
-class Address;
-class Product;
-class Order;
 
 class Customer : virtual public User
 {
@@ -50,9 +47,7 @@ protected:
 	vector<Order *> orders_history; //array of all orders we have ever done,every part of the array contains a order we made.
 	Customer() = default;
 	void resizeWishlistArray();
-
 	void resizeOrderlistArray();
-
 	void getSum(float &sum) const;
 };
 

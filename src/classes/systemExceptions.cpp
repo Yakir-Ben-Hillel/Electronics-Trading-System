@@ -73,10 +73,10 @@ void AddressException::show() const
 }
 
 UserException::UserException(const char *name, const char *password, const Address &address)
+:address(address)
 {
     this->name = strdup(name);
     this->password = strdup(password);
-    this->address = &address;
 }
 UserException::~UserException()
 {
