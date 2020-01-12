@@ -43,7 +43,7 @@ public:
 class FeedBackException : public SystemException
 {
 protected:
-    Date date;
+    const Date& date;
     char *note;
 
 public:
@@ -68,7 +68,7 @@ class UserException : public SystemException
 protected:
     string name;
     string password;
-    const Address *address;
+    const Address &address;
 
 public:
     UserException(const string &name, const string &password, const Address &address);

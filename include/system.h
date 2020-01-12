@@ -20,9 +20,6 @@ using namespace std;
 #include <exception>
 #include <string>
 #include <vector>
-class Address;
-class Customer;
-class Seller;
 class User;
 class System
 {
