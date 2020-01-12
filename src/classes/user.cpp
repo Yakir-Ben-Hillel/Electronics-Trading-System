@@ -77,9 +77,9 @@ ostream &operator<<(ostream &out, const User &user)
 }
 istream &operator>>(istream &in, User &user)
 {
-    char username[11], password[11];
-    in >> username;
-    in >> password;
+    string username, password;
+    getline(in, username);
+    getline(in, password);
     user.setName(username);
     user.setPassword(password);
     in >> user.m_address;

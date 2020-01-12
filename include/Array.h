@@ -62,9 +62,9 @@ const Array<T> &Array<T>::operator+=(const T &val)
     {
         this->array[this->logicSize++] = val;
     }
-    else//we have to allocate new space for the new val
+    else //we have to allocate new space for the new val
     {
-        Array<T> temp(this->physicSize * 2);
+        Array<T> temp(this->physicSize * 2, this->delimiter);
         for (int i = 0; i < this->logicSize; i++)
             temp += this->array[i];
         temp += val;

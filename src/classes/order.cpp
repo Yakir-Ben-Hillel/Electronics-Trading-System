@@ -1,34 +1,17 @@
 #include "../../include/system.h"
 
-Order::Order(Product **order_list, float price,
-             unsigned int physical_size, unsigned int logical_size) noexcept(false)
+Order::Order(vector<Product> order_list, float price) noexcept(false)
+    : order_products(order_list), price_of_order(price)
 {
-    setPhysicalSize(physical_size);
-    setProductList(order_list);
-    setPrice(price);
 }
 Order::Order(const Order &other)
+    : order_products(other.order_products), price_of_order(other.price_of_order)
 {
-    setPrice(other.price_of_order);
-    setPhysicalSize(other.o_list_physical_size);
-    setProductList(other.order_products);
 }
-Order::Order(Order &&other)
+Order::Order(const Order &&other)
+    : order_products(other.order_products), price_of_order(other.price_of_order)
 {
-    this->price_of_order = other.price_of_order;
-    this->o_list_physical_size = other.o_list_physical_size;
-    this->order_products = other.order_products;
-    other.order_products = nullptr;
 }
-Order::~Order()
-{
-    for (int i = 0; i < this->o_list_physical_size; i++)
-    {
-        delete (order_products)[i];
-    }
-    delete[] order_products;
-}
-
 bool Order::setPrice(float price_of_order)
 {
     if (price_of_order < 0)
@@ -39,82 +22,35 @@ bool Order::setPrice(float price_of_order)
     this->price_of_order = price_of_order;
     return true;
 }
-bool Order::setProductList(Product **order_list)noexcept(false)
+bool Order::setProductList(const vector<Product> order_list) noexcept(false)
 {
-    this->order_products = new Product *[o_list_physical_size];
-    for (int i = 0; i < this->o_list_physical_size; i++)
-    {
-        this->order_products[i] = new Product(*order_list[i]);
-    }
+    this->order_products = order_list;
     return true;
 }
-bool Order::setPhysicalSize(unsigned int physical_size)
-{
-    if (physical_size < 0)
-    {
-        cout << "error! size cannot be negative!" << endl;
-        return false;
-    }
-    this->o_list_physical_size = physical_size;
-    return true;
-}
-bool Order::setLogicalSize(unsigned int logical_size)
-{
-    if (logical_size < this->o_list_physical_size)
-    {
-        cout << "error! size cannot be negative!" << endl;
-        return false;
-    }
-    this->o_list_logical_size = logical_size;
-    return true;
-}
-
 float Order::getPrice() const
 {
     return price_of_order;
 }
-Product **Order::getList() const
+vector<Product> Order::getList() const
 {
     return order_products;
 }
-unsigned int Order::getPhysicalSize() const
-{
-    return o_list_physical_size;
-}
-unsigned int Order::getLogicalSize() const
-{
-    return o_list_logical_size;
-}
 
-bool Order::addProductToOrderList(Product *new_product)
+bool Order::addProductToOrderList(Product &new_product)
 {
-    if (o_list_logical_size == o_list_physical_size)
-        resizeOrderList();
-    order_products[o_list_logical_size] = new_product;
-    o_list_logical_size++;
+    this->order_products.push_back(new_product);
     return true;
-}
-void Order::resizeOrderList()
-{
-    int newSize = this->o_list_physical_size * 2 + 1;
-    Product **newArray = new Product *[newSize];
-    memcpy(newArray, this->order_products,
-           this->o_list_logical_size * sizeof(Product *));
-    delete[] this->order_products;
-    this->o_list_physical_size = newSize;
-    this->order_products = newArray;
 }
 ostream &operator<<(ostream &out, const Order &order)
 {
-   Product **temp = order.order_products;
-    unsigned int size = order.o_list_physical_size;
+    vector<Product>::const_iterator itr = order.getList().begin();
+    vector<Product>::const_iterator itrEnd = order.getList().end();
     out << "the details of your order are: " << endl;
-    for (int i = 0; i < size; i++)
+    for (; itr != itrEnd; ++itr)
     {
-        out << *temp[i];
+        out << *itr;
         out << endl;
     }
-
     out << "the final price of your order is: " << order.price_of_order << endl;
     out << "thank you for buying from us,have a nice day." << endl;
     return out;

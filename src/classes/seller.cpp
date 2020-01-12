@@ -22,9 +22,9 @@ bool Seller::setStockArray(vector<Product> given_product_array)
 {
     this->s_stock = given_product_array;
 }
-FeedBack Seller::setFeedback(FeedBack *given_feedBack)
+FeedBack Seller::setFeedback(FeedBack &given_feedBack)
 {
-    return FeedBack(*given_feedBack);
+    return FeedBack(given_feedBack);
 }
 bool Seller::setFeedbacksArray(vector<FeedBack> given_feedBacks_array)
 {
@@ -44,9 +44,8 @@ bool Seller::addFeedbackToArray(FeedBack &new_feedback)
     this->feedBack_array.push_back(new_feedback);
     return true;
 }
-FeedBack **Seller::getfeedBacksArray() const
+vector<FeedBack> Seller::getfeedBacksArray() const
 {
-    size = this->feedbacks_array_logical_length;
     return this->feedBack_array;
 }
 
@@ -57,10 +56,6 @@ const Seller &Seller::operator=(const Seller &other)
         (User &)*this = other;
         setStockArray(other.s_stock);
         setFeedbacksArray(other.feedBack_array);
-        stock_array_physical_length = other.stock_array_physical_length;
-        stock_array_logical_length = other.stock_array_logical_length;
-        feedbacks_array_physical_length = other.feedbacks_array_physical_length;
-        feedbacks_array_logical_length = other.feedbacks_array_logical_length;
     }
     return *this;
 }
@@ -68,16 +63,25 @@ void Seller::toOs(ostream &out) const
 {
     if (typeid(out) != typeid(ofstream))
     {
-        out << "Products: " << endl;
-        if (this->stock_array_logical_length != 0)
-            for (int i = 0; i < this->stock_array_logical_length; i++)
-                out << *this->s_stock[i];
+        if (this->s_stock.size() != 0)
+        {
+            out << "Products: " << endl;
+            vector<Product>::const_iterator itr = s_stock.begin();
+            vector<Product>::const_iterator itrEnd = s_stock.end();
+            for (; itr != itrEnd; ++itr)
+                out << *itr;
+        }
         else
             out << "Has no Products" << endl;
-        out << "Feedbacks: " << endl;
-        if (this->feedbacks_array_logical_length != 0)
-            for (int i = 0; i < this->feedbacks_array_logical_length; i++)
-                out << *this->feedBack_array[i];
+        if (this->feedBack_array.size() != 0)
+        {
+            out << "Feedbacks: " << endl;
+            vector<FeedBack>::const_iterator itr = feedBack_array.begin();
+            vector<FeedBack>::const_iterator itrEnd = feedBack_array.end();
+
+            for (; itr != itrEnd; ++itr)
+                out << *itr;
+        }
         else
             out << "Has no Feedbacks" << endl;
     }

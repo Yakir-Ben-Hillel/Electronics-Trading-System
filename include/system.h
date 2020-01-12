@@ -6,6 +6,9 @@
 #include <fstream>
 #include <ostream>
 #include <string.h>
+#include <exception>
+#include <string>
+#include <vector>
 using namespace std;
 #include "user.h"
 #include "order.h"
@@ -17,9 +20,6 @@ using namespace std;
 #include "Date.h"
 #include "CAS.h"
 #include "systemException.h"
-#include <exception>
-#include <string>
-#include <vector>
 class User;
 class System
 {
