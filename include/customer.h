@@ -1,6 +1,6 @@
 #ifndef __Customer_H
 #define __Customer_H
-#include "seller.h"
+//#include "seller.h"
 #include "system.h"
 class Address;
 class Product;
@@ -11,8 +11,8 @@ class Customer : virtual public User
 public:
 	//constructors && distructors
 	Customer(const string &username, const string &password, const Address &address,
-			 const vector<Product *> &wishlist,
-			 const vector<Order *> &orderHistory) noexcept(false);
+			 const vector<Product *> wishlist,
+			 const vector<Order *> orderHistory) noexcept(false);
 	Customer(const Customer &other);
 	Customer(ifstream &inFile);
 	Customer(Customer &&other);

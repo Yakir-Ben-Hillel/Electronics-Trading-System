@@ -1,11 +1,9 @@
 #include "../../include/system.h"
-Seller::Seller(const char *username, const char *password, const Address &address, Product **stockArray, FeedBack **feedbacksArray,
-               unsigned int s_size, unsigned int f_size) noexcept(false)
-    : User(username, password, address), stock_array_physical_length(s_size),
-      feedbacks_array_physical_length(f_size)
+Seller::Seller(const string &username, const string &password, const Address &address,
+               vector<Product> &stockArray,
+               vector<FeedBack> &feedbacksArray) noexcept(false)
+    : User(username, password, address), s_stock(stockArray), feedBack_array(feedBack_array)
 {
-    setStockArray(stockArray);
-    setFeedbacksArray(feedBack_array);
 }
 Seller::Seller(const Seller &other) : User(other)
 {
@@ -13,97 +11,40 @@ Seller::Seller(const Seller &other) : User(other)
 }
 Seller::Seller(ifstream &inFile) : User(inFile)
 {
-    this->s_stock=nullptr;
-    this->feedBack_array=nullptr;
-    this->feedbacks_array_logical_length=0;
-    this->feedbacks_array_physical_length=0;
-    this->stock_array_logical_length=0;
-    this->stock_array_physical_length=0;
 }
 Seller::Seller(Seller &&other) : User(std::move(other))
 {
     this->s_stock = other.s_stock;
     this->feedBack_array = other.feedBack_array;
-    this->stock_array_physical_length = other.stock_array_physical_length;
-    this->stock_array_logical_length = other.stock_array_logical_length;
-    this->feedbacks_array_physical_length = other.feedbacks_array_physical_length;
-    this->feedbacks_array_logical_length = other.feedbacks_array_logical_length;
-
-    other.s_stock = nullptr;
-    other.feedBack_array = nullptr;
 }
 
-Seller::~Seller()
+bool Seller::setStockArray(vector<Product> given_product_array)
 {
-    for (int i = 0; i < feedbacks_array_physical_length; i++)
-        delete feedBack_array[i];
-    delete[] feedBack_array;
-    for (int i = 0; i < stock_array_physical_length; i++)
-        delete s_stock[i];
-    delete[] s_stock;
-}
-bool Seller::setStockArray(Product **given_product_array)
-{
-    s_stock = new Product *[stock_array_physical_length];
-    for (int i = 0; i < stock_array_physical_length; i++)
-        s_stock[i] = new Product(*given_product_array[i]);
-    return true;
+    this->s_stock = given_product_array;
 }
 FeedBack Seller::setFeedback(FeedBack *given_feedBack)
 {
     return FeedBack(*given_feedBack);
 }
-bool Seller::setFeedbacksArray(FeedBack **given_feedBacks_array)
+bool Seller::setFeedbacksArray(vector<FeedBack> given_feedBacks_array)
 {
-    feedBack_array = new FeedBack *[feedbacks_array_physical_length];
-    for (int i = 0; i < feedbacks_array_physical_length; i++)
-        feedBack_array[i] = new FeedBack(*given_feedBacks_array[i]);
-    return true;
+    this->feedBack_array = given_feedBacks_array;
 }
-Product **Seller::getStock() const
+vector<Product> Seller::getStock() const
 {
     return s_stock;
 }
-unsigned int Seller::getStockArraySize()
+bool Seller::addProductToStockArray(Product &new_product)
 {
-    return stock_array_logical_length;
-}
-bool Seller::addProductToStockArray(Product *new_product)
-{
-    if (stock_array_logical_length == stock_array_physical_length)
-        resizeStockArray();
-    s_stock[stock_array_logical_length] = new_product;
-    stock_array_logical_length++;
+    this->s_stock.push_back(new_product);
     return true;
 }
-void Seller::resizeStockArray()
+bool Seller::addFeedbackToArray(FeedBack &new_feedback)
 {
-    int newSize = this->stock_array_physical_length * 2 + 1;
-    Product **newArray = new Product *[newSize];
-    memcpy(newArray, this->s_stock, this->stock_array_logical_length * sizeof(Product *));
-    delete[] this->s_stock;
-    this->stock_array_physical_length = newSize;
-    this->s_stock = newArray;
-}
-bool Seller::addFeedbackToArray(FeedBack *new_feedback)
-{
-    if (this->feedbacks_array_logical_length == this->feedbacks_array_physical_length)
-        resizeFeedbackArray();
-    feedBack_array[this->feedbacks_array_logical_length] = new_feedback;
-    this->feedbacks_array_logical_length++;
+    this->feedBack_array.push_back(new_feedback);
     return true;
 }
-void Seller::resizeFeedbackArray()
-{
-    int newSize = this->feedbacks_array_physical_length * 2 + 1;
-    FeedBack **newArray = new FeedBack *[newSize];
-    memcpy(newArray, this->feedBack_array, this->feedbacks_array_logical_length * sizeof(FeedBack *));
-    delete[] feedBack_array;
-    this->feedbacks_array_physical_length = newSize;
-    this->feedBack_array = newArray;
-}
-
-FeedBack **Seller::getfeedBacksArray(int &size) const
+FeedBack **Seller::getfeedBacksArray() const
 {
     size = this->feedbacks_array_logical_length;
     return this->feedBack_array;
@@ -149,7 +90,7 @@ User *Seller::clone() const
 
 bool Seller::operator==(const User &other) const
 {
-    if(!User::operator==(other))
-       return false;
+    if (!User::operator==(other))
+        return false;
     return true;
 }

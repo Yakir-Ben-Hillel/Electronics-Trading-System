@@ -112,12 +112,7 @@ void System::writeUsersToFile()
 
 void System::resizeUsersArray()
 {
-    int newSize = this->users_array_physical_size * 2 + 1;
-    User **newArray = new User *[newSize];
-    memcpy(newArray, this->users_array, this->users_array_logical_size * sizeof(User *));
-    delete[] this->users_array;
-    this->users_array_physical_size = newSize;
-    this->users_array = newArray;
+    this->users_array.reserve(this->users_array.size() * 5);
 }
 const string &System::getSystemName() const
 {
@@ -129,8 +124,9 @@ void System::compareCustomers() const
     bool isValid = true;
     unsigned int temp_counter = 0;
     Customer *customerTemp = nullptr;
-    int *indexes_array = new int[users_array_logical_size];
-    for (int i = 0; i < this->users_array_logical_size; i++)
+    int *indexes_array = new int[this->users_array.size()];
+
+    for (int i = 0; i < this->users_array.size(); i++)
     {
         customerTemp = dynamic_cast<Customer *>(this->users_array[i]);
         if (customerTemp)

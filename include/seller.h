@@ -8,21 +8,21 @@ class Seller : virtual public User
 {
 public:
 	//Constructors && Distructors
-	Seller(const string &username, const string &password, const Address &address, vector<Product *> stockArray,
-		   vector<FeedBack *> feedbacksArray) noexcept(false);
+	Seller(const string &username, const string &password, const Address &address, vector<Product> &stockArray,
+		   vector<FeedBack> &feedbacksArray) noexcept(false);
 	Seller(const Seller &other);
 	Seller(ifstream &inFile);
 	Seller(Seller &&other);
 	virtual ~Seller();
 	virtual User *clone() const override;
 	//Getters Functions.
-	Product **getStock() const;
-	FeedBack **getfeedBacksArray(int &size) const;
+	vector<Product> getStock() const;
+	vector<FeedBack> getfeedBacksArray(int &size) const;
 	//Setters Functions.
-	bool setStockArray(Product **given_stock_array);
-	bool setFeedbacksArray(FeedBack **given_feedBacks_array);
-	bool addProductToStockArray(Product *new_product);
-	bool addFeedbackToArray(FeedBack *new_feedback);
+	bool setStockArray(vector<Product> given_stock_array);
+	bool setFeedbacksArray(vector<FeedBack> given_feedBacks_array);
+	bool addProductToStockArray(Product &new_product);
+	bool addFeedbackToArray(FeedBack &new_feedback);
 	unsigned int getStockArraySize();
 	void printSellerProducts();
 	void makeProductForSale() noexcept(false);
@@ -37,9 +37,9 @@ protected:
 	void resizeStockArray();
 	void resizeFeedbackArray();
 	FeedBack setFeedback(FeedBack *given_feedBack);
-	vector<Product *> s_stock; //array of all product this seller sells.
+	vector<Product> s_stock; //array of all product this seller sells.
 
-	vector<FeedBack *> feedBack_array; //array of feedback from all of his buyers.
+	vector<FeedBack> feedBack_array; //array of feedback from all of his buyers.
 };
 
 #endif // !__Seller_H

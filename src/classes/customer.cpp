@@ -1,15 +1,15 @@
 #include "../..//include/system.h"
-Customer::Customer(const string &username, const string &password, const Address &address,
-                   const std::vector<Product *> &wishlist,
-                   const std::vector<Order *> &orderHistory) noexcept(false) : User(username, password, address)
-
-{
-}
-
 Customer::Customer(const Customer &other) : User(other)
 {
     *this = other;
 }
+Customer::Customer(const string &username, const string &password, const Address &address,
+                   const vector<Product *> wishlist,
+                   const vector<Order *> orderHistory) noexcept(false)
+
+{
+}
+
 Customer::Customer(ifstream &inFile) : User(inFile)
 {
     // inFile >> *this;

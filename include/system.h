@@ -34,7 +34,7 @@ public:
 	~System();
 	//Setters Functions.
 	//Getters Functions.
-	const char *getSystemName() const;
+	const string &getSystemName() const;
 	const System &operator+=(User *user);
 	//other methoods
 	void mainMenu();
