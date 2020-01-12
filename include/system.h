@@ -18,6 +18,8 @@ using namespace std;
 #include "CAS.h"
 #include "systemException.h"
 #include <exception>
+#include <string>
+#include <vector>
 class Address;
 class Customer;
 class Seller;
@@ -27,9 +29,7 @@ class System
 public:
 	//Constructors && Distructors
 	//In my option the user should not set arrays sizes by himself.-Yakir
-	System(User **users_array = nullptr, User *logged_in_user = nullptr,
-		   unsigned int users_array_physical_size = 0,
-		   unsigned int users_array_logical_size = 0);
+	System(vector<User *> users_array, User *logged_in_user = nullptr);
 	System(const System &other);
 	~System();
 	//Setters Functions.
@@ -56,19 +56,17 @@ public:
 	void compareCustomers() const;
 	void login();
 	void signup();
-	bool setUsersArray(User **given_users_array);
+	bool setUsersArray(vector<User *> given_users_array);
 	void resizeUsersArray();
 	void printOpening() const;
 	void printAllAvailableSellersToGiveFeedbacks(Customer *customer);
 	void printOptionsWhenAnonymous() const;
-	void showProductsWithTheSameName(const char *name);
+	void showProductsWithTheSameName(const string &name);
 
 private:
-	const char system_name[24] = "The Trading System";
-	User **users_array = nullptr;
+	const string system_name = "The Trading System";
+	vector<User *> users_array;
 	User *logged_in_user = nullptr;
-	int users_array_physical_size = 0;
-	int users_array_logical_size = 0;
 	//private methoods
 	bool checkUsernameAvailability(const char *username);
 };

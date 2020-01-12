@@ -6,7 +6,7 @@
 class Address;
 class Date;
 void Terminate();
-
+#include <string>
 /*
 this file includes all the exception classes, all exceptions inheritance from the 
 abstract SystemException class.
@@ -26,7 +26,7 @@ protected:
     float price;
 
 public:
-    ProductException(const char *name, float price);
+    ProductException(const string &name, float price);
     virtual ~ProductException();
     virtual void show() const override final;
 };
@@ -47,7 +47,7 @@ protected:
     char *note;
 
 public:
-    FeedBackException(const Date& date,const char *note);
+    FeedBackException(const Date &date, const string &note);
     virtual ~FeedBackException();
     virtual void show() const override final;
 };
@@ -55,23 +55,23 @@ class AddressException : public SystemException
 {
 protected:
     unsigned int apartmentNumber;
-    char *streetName;
-    char *cityName;
+    string streetName;
+    string cityName;
 
 public:
-    AddressException(unsigned int apartmentNumber,const char *streetName,const char *cityName);
+    AddressException(unsigned int apartmentNumber, const string &streetName, const string &cityName);
     virtual ~AddressException();
     virtual void show() const override final;
 };
 class UserException : public SystemException
 {
 protected:
-    char *name;
-    char *password;
+    string name;
+    string password;
     const Address *address;
 
 public:
-    UserException(const char *name, const char *password, const Address &address);
+    UserException(const string &name, const string &password, const Address &address);
     virtual ~UserException();
     virtual void show() const override final;
 };

@@ -1,5 +1,5 @@
 #include "../../include/CAS.h"
-CAS::CAS(const char *username,const char *password, Address &address) noexcept(false) 
+CAS::CAS(const string &username,const string &password, Address &address) noexcept(false) 
 : User(username, password, address)
 {
 }

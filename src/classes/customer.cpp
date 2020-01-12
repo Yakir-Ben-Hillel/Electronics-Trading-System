@@ -1,17 +1,9 @@
 #include "../..//include/system.h"
-Customer::Customer(const char *username, const char *password, const Address &address,
-                   const Product **wishlist,
-                   const Order **orderHistory,
-                   unsigned int orderHistoryPhysicalSize,
-                   unsigned int orderHistoryLogicalSize,
-                   unsigned int wishlistPhysicalSize,
-                   unsigned int wishlistLogicalSize) noexcept(false) : User(username, password, address)
+Customer::Customer(const string &username, const string &password, const Address &address,
+                   const std::vector<Product *> &wishlist,
+                   const std::vector<Order *> &orderHistory) noexcept(false) : User(username, password, address)
 
 {
-    setWishList(wishlist, wishlistLogicalSize);
-    SetOrderArray(orderHistory, orderHistoryLogicalSize);
-    setWishListPhysicalSize(wishlistPhysicalSize);
-    setWishListLogicalSize(wishlistLogicalSize);
 }
 
 Customer::Customer(const Customer &other) : User(other)
@@ -24,85 +16,25 @@ Customer::Customer(ifstream &inFile) : User(inFile)
 }
 Customer::Customer(Customer &&other) : User(std::move(other))
 {
-    this->c_wish_physical_size = other.c_wish_physical_size;
-    this->c_wish_logical_size = other.c_wish_logical_size;
     this->c_wishList = other.c_wishList;
     this->orders_history = other.orders_history;
-
-    other.orders_history = nullptr;
-    other.c_wishList = nullptr;
 }
-
-Customer::~Customer()
+bool Customer::setWishList(const vector<Product *> wishList)
 {
-    for (int i = 0; i < c_wish_logical_size; i++)
-        delete c_wishList[i];
-    delete[] c_wishList;
-    for (int i = 0; i < order_logical_size; i++)
-        delete orders_history[i];
-    delete[] orders_history;
-    c_wish_physical_size = c_wish_logical_size = 0;
 }
 
-bool Customer::setWishListPhysicalSize(unsigned int size)
+bool Customer::SetOrderArray(const vector<Order *> orders_array)
 {
-    if (size < 0)
-    {
-        cout << "size cannot be negative" << endl;
-        return false;
-    }
-    c_wish_physical_size = size;
-    return true;
-}
-bool Customer::setWishListLogicalSize(unsigned int size)
-{
-    if (size < c_wish_physical_size)
-    {
-        cout << "logical size cannot be below his physical one" << endl;
-        return false;
-    }
-    c_wish_logical_size = size;
-    return true;
 }
 
-bool Customer::setWishList(const Product **wishList, int size)
-{
-    c_wishList = new Product *[size];
-    for (int i = 0; i < size; i++)
-    {
-        c_wishList[i] = new Product(*wishList[i]);
-    }
-    return true;
-}
-
-bool Customer::SetOrderArray(const Order **order_array, int size)
-{
-    orders_history = new Order *[size];
-    for (int i = 0; i < size; i++)
-    {
-        setOrder(order_array[i]);
-    }
-    return true;
-}
-
-Order **Customer::getOrderHistory() const
+std::vector<Order *> Customer::getOrderHistory() const
 {
     return this->orders_history;
 }
 
-const Order& Customer::getOrder(int location) const
+const Order &Customer::getOrder(int location) const
 {
-    return *orders_history[location];
-}
-
-unsigned int Customer::getLogicSizeOfOrder() const
-{
-    return order_logical_size;
-}
-
-unsigned int Customer::getPhySizeOfOrder() const
-{
-    return this->order_physical_size;
+    return orders_history[location];
 }
 
 Product **Customer::getWishList() const
@@ -110,25 +42,14 @@ Product **Customer::getWishList() const
     return c_wishList;
 }
 
-unsigned int Customer::getWishListPhysicalSize() const
-{
-    return c_wish_physical_size;
-}
-unsigned int Customer::getWishListLogicalSize() const
-{
-    return c_wish_logical_size;
-}
 bool Customer::addProductToWishlistArray(Product *new_product)
 {
-    if (c_wish_logical_size == c_wish_physical_size)
-        resizeWishlistArray();
-    this->c_wishList[c_wish_logical_size] = new Product(*new_product);
-    this->c_wish_logical_size++;
+
     return true;
 }
 bool Customer::setOrder(const Order *curr_order)
 {
-    if (this->order_logical_size == this->order_physical_size)
+    if (this == this->order_physical_size)
         resizeOrderlistArray();
     orders_history[this->order_logical_size] = new Order(*curr_order);
     this->order_logical_size++;
@@ -268,7 +189,7 @@ void Customer::addFeedBackToSeller(Seller *seller) noexcept(false)
         int day, month, year;
         cout << "what date is it? (format: dd/mm/yyyy)" << endl;
         cin >> day >> month >> year;
-        FeedBack *curr_feedback = new FeedBack(temp,*this, Date(day, month, year));
+        FeedBack *curr_feedback = new FeedBack(temp, *this, Date(day, month, year));
         seller->addFeedbackToArray(curr_feedback);
     }
 }

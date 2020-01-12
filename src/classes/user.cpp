@@ -1,15 +1,14 @@
 #include "../../include/system.h"
 
-User::User(const char *name, const char *password, const Address &address) noexcept(false) : m_address(address)
+User::User(const string &name, const string &password, const Address &address) noexcept(false) : m_address(address)
 {
-    if (strcmp(name, "") == 0 || strcmp(password, "") == 0 || strlen(password) > 10)
+    if (name.empty() || password.empty() || password.length > 10)
         throw UserException(name, password, address); //address has its own exception class, so if the address constractor will throw the function that called this user constractor will catch the throw
     setName(name);
     setPassword(password);
 }
-User::User(const User &other) : m_address(other.m_address),m_password(nullptr),m_username(nullptr)
+User::User(const User &other) : m_address(other.m_address), m_password(other.m_password), m_username(other.m_username)
 {
-    *this = other;
 }
 User::User(User &&move) : m_address(std::move(move.m_address))
 {
@@ -19,22 +18,13 @@ User::User(ifstream &inFile)
 {
     inFile >> *this;
 }
-User::~User()
+void User::setName(const string &name)
 {
-    delete[] m_username;
-    delete[] m_password;
+    this->m_username = name;
 }
-void User::setName(const char *name)
+void User::setPassword(const string &password)
 {
-    if (this->m_username)
-        delete[] this->m_username;
-    this->m_username = strdup(name);
-}
-void User::setPassword(const char *password)
-{
-    if (this->m_password)
-        delete[] this->m_password;
-    this->m_password = strdup(password);
+    this->m_password = password;
 }
 void User::setAddress(const Address &address)
 {
@@ -44,11 +34,8 @@ const User &User::operator=(const User &other)
 {
     if (this != &other)
     {
-        delete[] m_username;
-        m_username = strdup(other.m_username);
-
-        delete[] m_password;
-        m_password = strdup(other.m_password);
+        this->m_username = other.m_username;
+        this->m_password = other.m_password;
         m_address = other.m_address; //to do operator= for address
     }
     return *this;
@@ -61,11 +48,11 @@ const User &User::operator=(User &&other)
 
     return *this;
 }
-const char *User::getName() const
+const string &User::getName() const
 {
     return this->m_username;
 }
-const char *User::getPassword() const
+const string &User::getPassword() const
 {
     return this->m_password;
 }
@@ -101,7 +88,7 @@ istream &operator>>(istream &in, User &user)
 
 bool User::operator==(const User &other) const
 {
-    if (strcmp(m_username, other.m_username) == 0)
+    if (this->m_username.compare(other.m_username))
         return true;
     return false;
 }

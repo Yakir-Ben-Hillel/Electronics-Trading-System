@@ -1,15 +1,15 @@
 #ifndef __Seller_H
 #define __Seller_H
 
-#include "user.h"
+#include "system.h"
 class FeedBack;
 class Product;
 class Seller : virtual public User
 {
 public:
 	//Constructors && Distructors
-	Seller(const char *username, const char *password, const Address &address, Product **stockArray = nullptr,
-		   FeedBack **feedbacksArray = nullptr, unsigned int s_size = 0, unsigned int f_size = 0) noexcept(false);
+	Seller(const string &username, const string &password, const Address &address, vector<Product *> stockArray,
+		   vector<FeedBack *> feedbacksArray) noexcept(false);
 	Seller(const Seller &other);
 	Seller(ifstream &inFile);
 	Seller(Seller &&other);
@@ -37,13 +37,9 @@ protected:
 	void resizeStockArray();
 	void resizeFeedbackArray();
 	FeedBack setFeedback(FeedBack *given_feedBack);
-	Product **s_stock; //array of all product this seller sells.
-	unsigned int stock_array_physical_length = 0;
-	unsigned int stock_array_logical_length = 0;
+	vector<Product *> s_stock; //array of all product this seller sells.
 
-	FeedBack **feedBack_array; //array of feedback from all of his buyers.
-	unsigned int feedbacks_array_physical_length = 0;
-	unsigned int feedbacks_array_logical_length = 0;
+	vector<FeedBack *> feedBack_array; //array of feedback from all of his buyers.
 };
 
 #endif // !__Seller_H

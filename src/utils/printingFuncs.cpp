@@ -51,12 +51,13 @@ void System::printOptionAsCAS() const
     cout << "2) Add Feedback to a Seller." << endl;
     cout << "3) Make an Order." << endl;
     cout << "4) Print all Sellers names." << endl;
-    cout << "5) Search for a Product" << endl;
-    cout << "6) Add a Product." << endl;
-    cout << "7) View your Feedbacks." << endl;
-    cout << "8) Print your user's info." << endl;
-    cout << "9) Logout." << endl;
-    cout << "10) Exit." << endl;
+    cout << "5) Add Feedback to Seller" << endl;
+    cout << "6) Search for a Product" << endl;
+    cout << "7) Add a Product." << endl;
+    cout << "8) View your Feedbacks." << endl;
+    cout << "9) Print your user's info." << endl;
+    cout << "10) Logout." << endl;
+    cout << "11) Exit." << endl;
 }
 void System::printCustomersNames() const
 {
@@ -134,7 +135,7 @@ void System::printAllAvailableSellersToGiveFeedbacks(Customer *customer)
 void System::showProductsWithTheSameName(const char *name)
 {
     Seller *seller_temp = nullptr;
-    cout << "The Products you have searched for ,show to you below: " << endl;
+    bool isFound = false;
     for (int i = 0; i < this->users_array_logical_size; i++)
     {
         seller_temp = dynamic_cast<Seller *>(users_array[i]);
@@ -146,10 +147,12 @@ void System::showProductsWithTheSameName(const char *name)
             {
                 if (isSubstring(name, stock[j]->getName()))
                 {
+                    isFound = true;
                     cout << *stock[j];
                     cout << endl;
                 }
             }
+            isFound ? cout << "The Products you have searched for ,is shown to you above: " << endl : cout << "No similar Products as been found." << endl;
         }
     }
 }

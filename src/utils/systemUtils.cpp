@@ -217,7 +217,23 @@ void System::mainMenu()
             case 4:
                 this->printSellersNames();
                 break;
-            case 5:
+                case 5:
+                do
+                {
+                    check = true;
+                    try
+                    {
+                        this->addFeedback(cas_temp);
+                    }
+                    catch (const SystemException &e)
+                    {
+                        check = false;
+                        e.show();
+                    }
+                } while (!check);
+                break;
+
+            case 6:
                 cout << "Please insert the name of the product you want to search for: ";
                 char name[30];
                 cin.ignore(256, '\n');
@@ -225,7 +241,7 @@ void System::mainMenu()
                 this->showProductsWithTheSameName(name);
                 break;
 
-            case 6:
+            case 7:
                 do
                 {
                     check = true;
@@ -242,7 +258,7 @@ void System::mainMenu()
                 } while (!check);
 
                 break;
-            case 7:
+            case 8:
                 int size;
                 array_feedbacks = cas_temp->getfeedBacksArray(size);
                 if (size == 0)
@@ -257,13 +273,13 @@ void System::mainMenu()
                     }
                 }
                 break;
-            case 8:
+            case 9:
                 cout << *cas_temp;
                 break;
-            case 9:
+            case 10:
                 this->logged_in_user = nullptr;
                 break;
-            case 10:
+            case 11:
                 isFinished = true;
                 break;
             }

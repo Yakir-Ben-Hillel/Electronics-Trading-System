@@ -1,16 +1,14 @@
 #include "../../include/system.h"
 
-Address::Address(unsigned int apartmentNumber, const char *cityName, const char *streetName) noexcept(false) : apartmentNumber(apartmentNumber)
+Address::Address(unsigned int apartmentNumber, const string &cityName, const string &streetName) noexcept(false) : apartmentNumber(apartmentNumber)
 {
-    if (apartmentNumber <= 0 || strcmp(cityName, "") == 0 || strcmp(streetName, "") == 0)
+    if (apartmentNumber <= 0 || cityName.empty() || streetName.empty())
     {
         this->apartmentNumber = 0; //in case that the updated apartment number was negative.
         throw AddressException(apartmentNumber, streetName, cityName);
     }
-    if (cityName)
-        this->setCityName(cityName);
-    if (streetName)
-        this->setStreetName(streetName);
+    this->setCityName(cityName);
+    this->setStreetName(streetName);
 }
 Address::Address(const Address &other)
 {
@@ -27,34 +25,23 @@ Address::Address(Address &&other)
     other.cityName = nullptr;
     other.streetName = nullptr;
 }
-Address::~Address()
-{
-    delete[] cityName;
-    delete[] streetName;
-}
 const Address &Address::operator=(const Address &other)
 {
     if (this != &other)
     {
-        delete[] cityName;
         this->setCityName(other.cityName);
-        delete[] streetName;
         this->setStreetName(other.streetName);
         this->setApartmentNumber(other.apartmentNumber);
     }
     return *this;
 }
-bool Address::setCityName(const char *givenCityName)
+bool Address::setCityName(const string &givenCityName)
 {
-    cityName = new char[(strlen(givenCityName) + 1)];
-    strcpy(cityName, givenCityName);
-    return true;
+    this->cityName = givenCityName;
 }
-bool Address::setStreetName(const char *givenStreetName)
+bool Address::setStreetName(const string &givenStreetName)
 {
-    streetName = new char[(strlen(givenStreetName) + 1)];
-    strcpy(streetName, givenStreetName);
-    return true;
+    this->streetName = givenStreetName;
 }
 bool Address::setApartmentNumber(unsigned int givenApartmentNumber)
 {
@@ -66,11 +53,11 @@ bool Address::setApartmentNumber(unsigned int givenApartmentNumber)
     cout << "apartment number must be positive" << endl;
     return false;
 }
-const char *Address::getCityName() const
+const string &Address::getCityName() const
 {
     return cityName;
 }
-const char *Address::getStreetName() const
+const string &Address::getStreetName() const
 {
     return streetName;
 }
@@ -83,7 +70,7 @@ ostream &operator<<(ostream &out, const Address &address)
 {
     if (typeid(out) == typeid(ofstream))
     {
-        out << address.cityName << " " << address.streetName << " "<<address.apartmentNumber << " " << endl;
+        out << address.cityName << " " << address.streetName << " " << address.apartmentNumber << " " << endl;
     }
     else
     {

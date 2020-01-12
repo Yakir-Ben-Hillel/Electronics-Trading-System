@@ -1,44 +1,32 @@
 #include "../../include/system.h"
-System::System(User **users_array, User *logged_in_user,
-               unsigned int users_array_physical_size,
-               unsigned int users_array_logical_size) : users_array_physical_size(users_array_physical_size),
-                                                        users_array_logical_size(users_array_logical_size),
-                                                        logged_in_user(logged_in_user)
+System::System(vector<User *> users_array, User *logged_in_user) : users_array(move(users_array)),
+                                                                   logged_in_user(logged_in_user)
 {
-    setUsersArray(users_array);
 }
-System::System(const System &other) : users_array_physical_size(other.users_array_physical_size),
-                                      users_array_logical_size(other.users_array_logical_size),
-                                      logged_in_user(other.logged_in_user)
+System::System(const System &other) : users_array(move(other.users_array)), logged_in_user(other.logged_in_user)
 {
-    setUsersArray(other.users_array);
 }
-System::~System()
+bool System::setUsersArray(vector<User *> given_users_array)
 {
-    for (int i = 0; i < users_array_logical_size; i++)
-        delete users_array[i];
-    delete[] users_array;
-    logged_in_user = nullptr;
-}
-bool System::setUsersArray(User **given_users_array)
-{
-    users_array = new User *[users_array_logical_size];
-    for (int i = 0; i < users_array_logical_size; i++)
+    vector<User *>::iterator itr = given_users_array.begin();
+    vector<User *>::iterator itrEnd = given_users_array.end();
+
+    for (; itr != itrEnd; ++itr)
     {
-        if (typeid(given_users_array[i]) == typeid(Customer))
+        if (typeid(*itr) == typeid(Customer))
         {
-            Customer *customerTemp = dynamic_cast<Customer *>(given_users_array[i]);
-            users_array[i] = new Customer(*customerTemp);
+            Customer *customerTemp = dynamic_cast<Customer *>(*itr);
+            users_array.push_back(customerTemp);
         }
-        else if (typeid(given_users_array[i]) == typeid(Seller))
+        else if (typeid(*itr) == typeid(Seller))
         {
-            Seller *sellerTemp = dynamic_cast<Seller *>(given_users_array[i]);
-            users_array[i] = new Seller(*sellerTemp);
+            Seller *sellerTemp = dynamic_cast<Seller *>(*itr);
+            users_array.push_back(sellerTemp);
         }
-        else if (typeid(given_users_array[i]) == typeid(CAS))
+        else if (typeid(*itr) == typeid(CAS))
         {
-            CAS *casTemp = dynamic_cast<CAS *>(given_users_array[i]);
-            users_array[i] = new CAS(*casTemp);
+            CAS *casTemp = dynamic_cast<CAS *>(*itr);
+            users_array.push_back(*itr);
         }
         else
             return false; //Given users array is invalid.
@@ -48,25 +36,20 @@ bool System::setUsersArray(User **given_users_array)
 
 const System &System::operator+=(User *user)
 {
-    if (this->users_array_logical_size == this->users_array_physical_size)
-        this->resizeUsersArray();
     Customer *temp_c = dynamic_cast<Customer *>(user);
     Seller *temp_s = dynamic_cast<Seller *>(user);
     CAS *temp_cas = dynamic_cast<CAS *>(user);
     if (temp_c && !temp_cas)
     {
-        this->users_array[this->users_array_logical_size] = temp_c;
-        this->users_array_logical_size++;
+        this->users_array.push_back(temp_c);
     }
     if (temp_s && !temp_cas)
     {
-        this->users_array[this->users_array_logical_size] = temp_s;
-        this->users_array_logical_size++;
+        this->users_array.push_back(temp_s);
     }
     if (temp_cas)
     {
-        this->users_array[this->users_array_logical_size] = temp_cas;
-        this->users_array_logical_size++;
+        this->users_array.push_back(temp_cas);
     }
     return *this;
 }
@@ -119,8 +102,8 @@ void System::loadUsersFromFile()
 void System::writeUsersToFile()
 {
     ofstream outFile("Users.txt", ios::trunc);
-    outFile << this->users_array_logical_size << endl;
-    for (int i = 0; i < this->users_array_logical_size; i++)
+    outFile << this->users_array.size() << endl;
+    for (int i = 0; this->users_array.size(); i++)
     {
         outFile << *this->users_array[i];
     }
@@ -136,7 +119,7 @@ void System::resizeUsersArray()
     this->users_array_physical_size = newSize;
     this->users_array = newArray;
 }
-const char *System::getSystemName() const
+const string &System::getSystemName() const
 {
     return system_name;
 }
