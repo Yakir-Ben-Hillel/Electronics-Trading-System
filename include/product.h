@@ -15,7 +15,7 @@ public:
 	};
 	static char *CategoryNames[4];
 	//constructors&&distructors
-	Product(const char *name, eCategory category, const Seller &seller, float price) noexcept(false);
+	Product(string &name, eCategory category,Seller &seller, float price) noexcept(false);
 	Product(const Product &other);
 	Product(Product &&other);
 	~Product();
@@ -24,7 +24,7 @@ public:
 	bool setPrice(float price);
 	bool setSerialNumber(unsigned int serial);
 	bool setCategory(eCategory category);
-	bool setSeller(const Seller &seller);
+	bool setSeller(Seller &seller);
 	//geters
 	const string &getName() const;
 	const Seller &getSeller() const;
@@ -38,7 +38,7 @@ private:
 	string p_name;
 	float p_price;
 	unsigned int p_serialNumber;
-	const Seller *p_seller;
+	Seller &p_seller;
 	static unsigned int counter; //for the serial number
 };
 

@@ -2,13 +2,13 @@
 Address *System::makeAddress() noexcept(false)
 {
     Address *new_address = nullptr;
-    char city_name[11], street_name[21];
+    string city_name, street_name;
     int apartment_number;
-    cout << "Please insert your city name (10 chars max): ";
-    cin.getline(city_name, 10);
-    cout << "Please insert your street name (20 chars max): ";
-    cin.getline(street_name, 20);
-    cout << "Please insert your apartment number :";
+    cout << "Please insert your city name: ";
+    getline(cin, city_name);
+    cout << "Please insert your street name: ";
+    getline(cin, street_name);
+    cout << "Please insert your apartment number:";
     cin >> apartment_number;
 
     new_address = new Address(apartment_number, city_name, street_name);
@@ -19,14 +19,14 @@ void Seller::makeProductForSale() noexcept(false)
     char x;
     Product *new_product;
     Product::eCategory category;
-    char product_name[21];
+    string product_name;
     float price;
     Seller *seller_of_product;
     unsigned int seller_index;
     bool isCategoryValid = false;
-    cout << "Please choose a name: (20 chars max)";
+    cout << "Please choose a name:";
     cin.ignore(256, '\n');
-    cin.getline(product_name, 20);
+    getline(cin, product_name);
     while (!isCategoryValid)
     {
         isCategoryValid = true;
@@ -64,8 +64,8 @@ void Seller::makeProductForSale() noexcept(false)
     }
     cout << "Please choose a price for your product: ";
     cin >> price;
-    new_product = new Product(product_name, category, *this, price);
-    this->addProductToStockArray(new_product);
+    Product new_product(product_name, category, *this, price);
+    this->addProductToStockArray(*new_product);
 }
 void System::chooseProductToAddToCustomerWishlist()
 {
@@ -74,12 +74,14 @@ void System::chooseProductToAddToCustomerWishlist()
     int seller_index, product_index;
     if (customerTemp) //Double check.
     {
-        int *indexes_array = new int[users_array_logical_size];
+        vector<int> indexes_array;
         int available_index_counter = 0;
         Product **product_array = nullptr;
-        for (int i = 0; i < users_array_logical_size; i++)
+        vector<User *>::iterator itr = this->users_array.begin();
+        vector<User *>::iterator itrEnd = this->users_array.end();
+        for (int i = 0; itr != itrEnd; ++itr, i++)
         {
-            sellerTemp = dynamic_cast<Seller *>(this->users_array[i]);
+            sellerTemp = dynamic_cast<Seller *>(*itr);
             if (sellerTemp)
             {
                 if (sellerTemp->getStockArraySize())
@@ -95,7 +97,7 @@ void System::chooseProductToAddToCustomerWishlist()
             {
                 for (int i = 0; i < available_index_counter; i++)
                 {
-                    cout << i + 1 << ")" << this->users_array[indexes_array[i]]->getName() << endl;
+                    cout << i + 1 << ")" << (*(this->users_array.begin() + *(indexes_array.begin() + i)))->getName() << endl;
                 }
                 cout << "Please choose a seller in-order to view his products: ";
                 cin >> seller_index;
@@ -254,5 +256,5 @@ void System::signup()
         }
     } while (!check);
     *this += user;
-    cout<<"User added successfully, please enjoy your using on our trade system!"<<endl;
+    cout << "User added successfully, please enjoy your using on our trade system!" << endl;
 }

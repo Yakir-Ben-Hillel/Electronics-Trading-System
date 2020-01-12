@@ -8,7 +8,7 @@ class FeedBack
 {
 public:
     //constructors and distructors
-    FeedBack(string &note, const Customer &customer_data, const Date &curr_date) noexcept(false);
+    FeedBack(const string &note, const Customer &customer_data, const Date &curr_date) noexcept(false);
     FeedBack(const FeedBack &other);
     FeedBack(FeedBack &&other);
     ~FeedBack();

@@ -1,36 +1,25 @@
 #include "../../include/system.h"
 
-FeedBack::FeedBack(char *note,const Customer& customer_data,const Date& curr_date) noexcept(false)
-    :date_of_feedback(curr_date)
+FeedBack::FeedBack(const string &note, const Customer &customer_data, const Date &curr_date) noexcept(false)
+    : date_of_feedback(curr_date)
 {
-    if (strcmp(note, "") == 0)
+    if (note.empty())
         throw FeedBackException(curr_date, note); //if date has an exception the function that called this constractor will catch it.
     setNotes(note);
     setCustomer(&customer_data);
 }
-FeedBack::FeedBack(const FeedBack &other):date_of_feedback(other.date_of_feedback)
+FeedBack::FeedBack(const FeedBack &other)
+    : notes(other.notes), date_of_feedback(other.date_of_feedback), customer(other.customer)
 {
-    setNotes(other.notes);
-    setCustomer(other.customer);
 }
-FeedBack::FeedBack(FeedBack &&other):date_of_feedback(other.date_of_feedback)
+FeedBack::FeedBack(FeedBack &&other)
+    : notes(other.notes), date_of_feedback(other.date_of_feedback), customer(other.customer)
 {
-    this->customer = other.customer;
-    this->notes = other.notes;
-
-    other.notes = nullptr;
-    other.customer = nullptr;
-}
-FeedBack::~FeedBack()
-{
-    delete[] notes;
-    customer = nullptr;
 }
 
-bool FeedBack::setNotes(const char *givenNote)
+bool FeedBack::setNotes(const string &givenNote)
 {
-    notes = new char[strlen(givenNote) + 1];
-    strcpy(notes, givenNote);
+    this->notes = givenNote;
     return true;
 }
 bool FeedBack::setCustomer(const Customer *other_customer)
@@ -38,15 +27,15 @@ bool FeedBack::setCustomer(const Customer *other_customer)
     customer = other_customer;
     return true;
 }
-const char *FeedBack::getNotes() const
+const string &FeedBack::getNotes() const
 {
     return notes;
 }
-const Customer& FeedBack::getCustomer() const
+const Customer &FeedBack::getCustomer() const
 {
     return *customer;
 }
-const Date& FeedBack::getDate() const
+const Date &FeedBack::getDate() const
 {
     return date_of_feedback;
 }
