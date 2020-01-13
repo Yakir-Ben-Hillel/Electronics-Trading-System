@@ -22,7 +22,7 @@ public:
 class ProductException : public SystemException
 {
 protected:
-    char *p_name;
+    string p_name;
     float price;
 
 public:
@@ -44,7 +44,7 @@ class FeedBackException : public SystemException
 {
 protected:
     const Date& date;
-    char *note;
+    string note;
 
 public:
     FeedBackException(const Date &date, const string &note);

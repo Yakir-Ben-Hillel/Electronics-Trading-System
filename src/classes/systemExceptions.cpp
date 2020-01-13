@@ -7,19 +7,18 @@ to the current problem.
 also,in this file has the implemantion of the function terminate in case of unknown problem.
 */
 
-ProductException::ProductException(const char *name, float price) : price(price)
+ProductException::ProductException(const string& name, float price) 
+: price(price),p_name(name)
 {
-    this->p_name = strdup(name);
 }
 ProductException::~ProductException()
 {
-    delete[] p_name;
 }
 void ProductException::show() const
 {
     if (price < 0)
         cout << "price cannot be negative!" << endl;
-    if (strcmp(p_name, "") == 0 || strlen(p_name) > 21)
+    if (p_name.compare(" ") == 0 || p_name.length() > 21)
         cout << "Error, product name cannot be blank!" << endl;
 }
 
@@ -36,61 +35,52 @@ DateException::DateException(int day, int month, int year) : day(day), month(mon
 {
 }
 
-FeedBackException::FeedBackException(const Date& date,const char *note) : date(date)
+FeedBackException::FeedBackException(const Date& date,const string& note) 
+: date(date),note(note)
 {
-    this->note = strdup(note);
 }
 void FeedBackException::show() const
 {
-    if (strcmp(note, "") == 0 || strlen(note) > 256)
+    if (note.compare(" ") == 0 || note.length() > 256)
         cout << "Error, feedback must contain at least one letter! " << endl;
     DateException e((int)date.getDay(), (int)date.getMonth(), (int)date.getYear());
     e.show();
 }
 FeedBackException::~FeedBackException()
 {
-    delete[] note;
 }
-AddressException::AddressException(unsigned int apartmentNumber, const char *streetName, const char *cityName) : apartmentNumber(apartmentNumber)
+AddressException::AddressException(unsigned int apartmentNumber, const string& streetName, const string& cityName) 
+: apartmentNumber(apartmentNumber),streetName(streetName),cityName(cityName)
 {
-    this->cityName = strdup(cityName);
-    this->streetName = strdup(streetName);
 }
 AddressException::~AddressException()
 {
-    delete[] this->cityName;
-    delete[] this->streetName;
 }
 void AddressException::show() const
 {
     if (apartmentNumber <= 0)
         cout << "Error, apartment number is wrong!" << endl;
-    if (strcmp(cityName, "") == 0)
+    if (cityName.compare(" ") == 0)
         cout << "Error, city name cannot be blank!" << endl;
-    if (strcmp(streetName, "") == 0)
+    if (streetName.compare(" ") == 0)
         cout << "Error, street name cannot be blank!" << endl;
     return;
 }
 
-UserException::UserException(const char *name, const char *password, const Address &address)
-:address(address)
+UserException::UserException(const string& name, const string& password, const Address &address)
+:address(address),name(name),password(password)
 {
-    this->name = strdup(name);
-    this->password = strdup(password);
 }
 UserException::~UserException()
 {
-    delete[] name;
-    delete[] password;
-    this->address = nullptr;
 }
 void UserException::show() const
 {
-    if (strcmp(name, "") == 0 || strlen(name) > 11)
+    if (name.compare(" ") == 0 || name.length() > 11)
         cout << "Error chosen name cannot be blank!" << endl;
-    if (strcmp(password, "") == 0 || strlen(password) > 11)
+    if (password.compare(" ") == 0 || password.length() > 11)
         cout << "Error chosen password is wrong!" << endl;
-    AddressException Ae(address->getApartmentNumber(),address->getStreetName(),address->getCityName());
+    AddressException Ae(address.getApartmentNumber(),address.getStreetName(),address.getCityName());
     Ae.show();
 }
 //our terminate function in case of unknown problem
