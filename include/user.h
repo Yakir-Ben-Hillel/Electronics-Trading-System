@@ -4,7 +4,6 @@
 #include "address.h"
 #include "system.h"
 #include <fstream>
-class Address;
 class User
 {
 protected:
@@ -16,11 +15,12 @@ protected:
     User(const User &other);
     User(User &&move);
     User(ifstream &inFile);
-    /*Abstract Data Type*/
+    //protected methoods
+    void setName(const string &name);//the user cannot change its name but he can change password or change the address
+
 public:
     virtual ~User();
-    virtual User *clone() const = 0;
-    void setName(const string &name);
+    virtual User *clone() const = 0;/*Abstract Data Type*/
     void setPassword(const string &password);
     void setAddress(const Address &address);
     virtual const User &operator=(const User &other);

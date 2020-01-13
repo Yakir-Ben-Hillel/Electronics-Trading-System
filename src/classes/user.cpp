@@ -1,8 +1,9 @@
 #include "../../include/system.h"
 
-User::User(const string &name, const string &password, const Address &address) noexcept(false) : m_address(address)
+User::User(const string &name, const string &password, const Address &address) noexcept(false)
+ : m_address(address)
 {
-    if (name.empty() || password.empty() || password.length > 10)
+    if (name.empty() || password.empty())
         throw UserException(name, password, address); //address has its own exception class, so if the address constractor will throw the function that called this user constractor will catch the throw
     setName(name);
     setPassword(password);
