@@ -18,7 +18,7 @@ public:
 	Product(const string &name, eCategory category,const Seller &seller, float price) noexcept(false);
 	Product(const Product &other);
 	Product(Product &&other);
-	~Product();
+	~Product() {this->p_seller=nullptr;}
 	//seters
 	bool setName(const string &name);
 	bool setPrice(float price);
@@ -30,6 +30,7 @@ public:
 	float getPrice() const;
 	eCategory getCategory() const;
 	unsigned int getSerialNumber() const;
+	const Product& operator=(const Product& other);
 	friend ostream &operator<<(ostream &out, const Product &product);
 
 private:
@@ -37,7 +38,7 @@ private:
 	string p_name;
 	float p_price;
 	unsigned int p_serialNumber;
-	const Seller &p_seller;
+	const Seller *p_seller;
 	static unsigned int counter; //for the serial number
 };
 

@@ -150,7 +150,7 @@ void Customer::addFeedBackToSeller(Seller &seller) noexcept(false)
     }
     else
     {
-        cout << "you can't give a feedback to a seller you didn't bought from" << endl;
+        cout << "you can't give a feedback to a seller you didn't buy from" << endl;
     }
 }
 

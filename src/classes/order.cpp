@@ -55,3 +55,13 @@ ostream &operator<<(ostream &out, const Order &order)
     out << "thank you for buying from us,have a nice day." << endl;
     return out;
 }
+
+const Order& Order::operator=(const Order& other)
+{
+    if(this!=&other)
+    {
+        this->order_products=other.order_products;
+        this->price_of_order=other.price_of_order;
+    }
+    return *this;
+}

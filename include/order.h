@@ -16,6 +16,7 @@ public:
     bool addProductToOrderList(Product &new_product);
     float getPrice() const;
     vector<Product> getList() const;
+    const Order& operator=(const Order& other);
     friend ostream &operator<<(ostream &out, const Order &order);
 
 private:

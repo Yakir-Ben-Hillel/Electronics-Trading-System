@@ -2,8 +2,6 @@
 #define __Seller_H
 
 #include "user.h"
-#include "product.h"
-#include "FeedBack.h"
 class Address;
 class FeedBack;
 class Product;
