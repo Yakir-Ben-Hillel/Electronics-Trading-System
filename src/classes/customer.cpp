@@ -13,8 +13,8 @@ Customer::Customer(Customer &&other) : User(std::move(other))
     this->orders_history = other.orders_history;
 }
 Customer::Customer(const string &username, const string &password,
-                   const Address &address, vector<Product> &wishlist,
-                   vector<Order> &orderHistory) noexcept(false)
+                   const Address &address, const vector<Product> &wishlist,
+                   const vector<Order> &orderHistory) noexcept(false)
     : User(username, password, address), c_wishList(wishlist), orders_history(orderHistory)
 {
 }

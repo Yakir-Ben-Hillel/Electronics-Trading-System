@@ -63,9 +63,12 @@ void System::printCustomersNames() const
 {
     unsigned int temp_counter = 0;
     Customer *customerTemp = nullptr;
-    for (int i = 0; i < this->users_array_logical_size; i++)
+    vector<User *>::const_iterator itr = this->users_array.begin();
+    vector<User *>::const_iterator itrEnd = this->users_array.end();
+
+    for (; itr != itrEnd; ++itr)
     {
-        customerTemp = dynamic_cast<Customer *>(this->users_array[i]);
+        customerTemp = dynamic_cast<Customer *>(*itr);
         if (customerTemp)
         {
             cout << temp_counter + 1 << ") " << customerTemp->getName() << endl;
@@ -78,9 +81,12 @@ void System::printSellersNames() const
 {
     unsigned int counter = 1;
     Seller *sellerTemp = nullptr;
-    for (int i = 0; i < users_array_logical_size; i++)
+    vector<User *>::const_iterator itr = this->users_array.begin();
+    vector<User *>::const_iterator itrEnd = this->users_array.end();
+
+    for (; itr != itrEnd; ++itr)
     {
-        sellerTemp = dynamic_cast<Seller *>(this->users_array[i]);
+        sellerTemp = dynamic_cast<Seller *>(*itr);
         if (sellerTemp)
         {
             cout << counter << ") " << sellerTemp->getName() << endl;
@@ -91,10 +97,14 @@ void System::printSellersNames() const
 }
 void System::printCASNames() const
 {
-    CAS *temp;
-    for (int i = 0, counter = 0; i < this->users_array_logical_size; ++i)
+    unsigned int counter = 0;
+    CAS *temp = nullptr;
+    vector<User *>::const_iterator itr = this->users_array.begin();
+    vector<User *>::const_iterator itrEnd = this->users_array.end();
+
+    for (; itr != itrEnd; ++itr)
     {
-        temp = dynamic_cast<CAS *>(this->users_array[i]);
+        temp = dynamic_cast<CAS *>(*itr);
         if (temp)
         {
             cout << counter + 1 << ") " << temp->getName() << endl;
@@ -105,26 +115,30 @@ void System::printCASNames() const
 }
 void Seller::printSellerProducts()
 {
-    int length = this->getStockArraySize();
-    Product **products_array = this->getStock();
+    vector<Product> products_array = this->getStock();
+    vector<Product>::const_iterator itr = products_array.begin();
+    vector<Product>::const_iterator itrEnd = products_array.end();
     Product *product = nullptr;
-    for (int i = 0; i < length; i++)
+    for (int i = 0; itr != itrEnd; ++itr)
     {
         cout << "Product number #" << i + 1 << " ";
-        cout << *products_array[i];
+        cout << *itr;
         cout << endl;
     }
 }
-void System::printAllAvailableSellersToGiveFeedbacks(Customer *customer)
+void System::printAllAvailableSellersToGiveFeedbacks(Customer &customer)
 {
     unsigned int counter = 0;
     Seller *sellerTemp = nullptr;
-    for (int i = 0; i < users_array_logical_size; i++)
+    vector<User *>::const_iterator itr = this->users_array.begin();
+    vector<User *>::const_iterator itrEnd = this->users_array.end();
+
+    for (; itr != itrEnd; ++itr)
     {
-        sellerTemp = dynamic_cast<Seller *>(this->users_array[i]);
+        sellerTemp = dynamic_cast<Seller *>(*itr);
         if (sellerTemp)
         {
-            if (customer->didCustomerOrderedFromSeller(sellerTemp) == true)
+            if (customer.didCustomerOrderedFromSeller(*sellerTemp) == true)
             {
                 counter++;
                 cout << counter << ") " << sellerTemp->getName() << endl;
@@ -132,23 +146,27 @@ void System::printAllAvailableSellersToGiveFeedbacks(Customer *customer)
         }
     }
 }
-void System::showProductsWithTheSameName(const char *name)
+void System::showProductsWithTheSameName(const string &name)
 {
     Seller *seller_temp = nullptr;
     bool isFound = false;
-    for (int i = 0; i < this->users_array_logical_size; i++)
+    vector<User *>::const_iterator itr = this->users_array.begin();
+    vector<User *>::const_iterator itrEnd = this->users_array.end();
+    for (; itr != itrEnd; ++itr)
     {
-        seller_temp = dynamic_cast<Seller *>(users_array[i]);
+        seller_temp = dynamic_cast<Seller *>(*itr);
         if (seller_temp)
         {
-            int size = seller_temp->getStockArraySize();
-            Product **stock = seller_temp->getStock();
-            for (int j = 0; j < size; j++)
+            vector<Product> stock = seller_temp->getStock();
+            vector<Product>::const_iterator itrP = stock.begin();
+            vector<Product>::const_iterator itrPEnd = stock.end();
+
+            for (; itrP != itrPEnd; ++itrP)
             {
-                if (isSubstring(name, stock[j]->getName()))
+                if (isSubstring(name, itrP->getName()))
                 {
                     isFound = true;
-                    cout << *stock[j];
+                    cout << *itrP;
                     cout << endl;
                 }
             }

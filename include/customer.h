@@ -10,9 +10,9 @@ public:
 	Customer(const Customer &other);
 	Customer(ifstream &inFile);
 	Customer(Customer &&other);
-	Customer(const string &username, const string &password, const Address &address, vector<Product> &wishlist, vector<Order> &orderHistory) noexcept(false);
+	Customer(const string &username, const string &password, const Address &address,
+			 const vector<Product> &wishlist = vector<Product>(),const vector<Order> &orderHistory = vector<Order>()) noexcept(false);
 	virtual ~Customer();
-	//operator=
 	const Customer &operator=(const Customer &other);
 	friend bool operator<(const Customer &first, const Customer &second);
 	friend bool operator>(const Customer &first, const Customer &second);
