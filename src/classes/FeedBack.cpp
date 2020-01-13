@@ -18,8 +18,6 @@ FeedBack::FeedBack(FeedBack &&other)
 
 bool FeedBack::setNotes(const string &givenNote)
 {
-    if(givenNote.size()>this->notes.capacity())
-       this->notes.reserve(givenNote.capacity()*2);
     this->notes = givenNote;
     return true;
 }
