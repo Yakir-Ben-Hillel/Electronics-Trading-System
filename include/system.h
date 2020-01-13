@@ -7,6 +7,7 @@ using namespace std;
 #include <fstream>
 #include <ostream>
 #include <exception>
+#include <string.h>
 #include <string>
 #include <vector>
 #include "address.h"
@@ -45,7 +46,7 @@ public:
 	void printOptionAsCAS() const;
 	void loadUsersFromFile();
 	void writeUsersToFile();
-	bool addFeedback(const Customer &customer) noexcept(false);
+	bool addFeedback(Customer &customer) noexcept(false);
 	void printOptionsAsCustomer() const;
 	void makeProductForSale();
 	void chooseProductToAddToCustomerWishlist();

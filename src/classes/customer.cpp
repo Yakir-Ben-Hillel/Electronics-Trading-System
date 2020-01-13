@@ -27,7 +27,6 @@ bool Customer::SetOrderArray(const vector<Order> &orders_array)
 {
     this->orders_history = orders_array;
 }
-
 std::vector<Order> Customer::getOrderHistory() const
 {
     return this->orders_history;

@@ -17,7 +17,6 @@ Address *System::makeAddress() noexcept(false)
 void Seller::makeProductForSale() noexcept(false)
 {
     char x;
-    Product *new_product;
     Product::eCategory category;
     string product_name;
     float price;
@@ -65,7 +64,7 @@ void Seller::makeProductForSale() noexcept(false)
     cout << "Please choose a price for your product: ";
     cin >> price;
     Product new_product(product_name, category, *this, price);
-    this->addProductToStockArray(*new_product);
+    this->addProductToStockArray(new_product);
 }
 void System::chooseProductToAddToCustomerWishlist()
 {
@@ -125,7 +124,7 @@ void System::chooseProductToAddToCustomerWishlist()
         }
     }
 }
-bool System::addFeedback(const Customer &customer) noexcept(false)
+bool System::addFeedback(Customer &customer) noexcept(false)
 {
     vector<int> indexes_array;
     int x;
