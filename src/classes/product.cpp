@@ -3,7 +3,7 @@
 char *Product::CategoryNames[4] = {(char *)"Children", (char *)"Electricity", (char *)"Office", (char *)"Clothing"};
 unsigned int Product::counter = 0;
 
-Product::Product(string &name, eCategory category, Seller &seller, float price) noexcept(false)
+Product::Product(const string &name, eCategory category,const Seller &seller, float price) noexcept(false)
     : p_serialNumber(++counter), p_seller(seller)
 {
     if (name.empty() || price < 0)
@@ -11,7 +11,6 @@ Product::Product(string &name, eCategory category, Seller &seller, float price) 
     setName(name);
     setCategory(category);
     setPrice(price);
-    setSeller(seller);
 }
 Product::Product(const Product &other) : p_seller(other.p_seller)
 {
@@ -57,11 +56,6 @@ bool Product::setCategory(eCategory category)
     cout << "the section you have chosen is not allowed" << endl;
     cout << "please choose one of the available sections" << endl;
     return false;
-}
-bool Product::setSeller(Seller &seller)
-{
-    p_seller = seller;
-    return true;
 }
 
 const string &Product::getName() const

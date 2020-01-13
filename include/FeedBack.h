@@ -15,7 +15,6 @@ public:
 
     //seters and geters
     bool setNotes(const string &givenNote);
-    bool setCustomer(const Customer *other_customer);
 
     const string &getNotes() const;
     const Customer &getCustomer() const;
@@ -23,7 +22,7 @@ public:
     friend ostream &operator<<(ostream &out, const FeedBack &feedback);
 
 private:
-    const Customer *customer;
+    const Customer &customer;
     string notes;
     const Date &date_of_feedback;
 };

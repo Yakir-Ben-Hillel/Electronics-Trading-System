@@ -10,6 +10,9 @@ CAS::CAS(const Customer &customer, const Seller &seller)
 CAS::CAS(const CAS &other) : User(other), Customer(other), Seller(other)
 {
 }
+CAS::CAS(const CAS &&other):User(other),Customer(other),Seller(other)
+{
+}
 CAS::CAS(ifstream &inFile)
 {
     inFile >> *this;

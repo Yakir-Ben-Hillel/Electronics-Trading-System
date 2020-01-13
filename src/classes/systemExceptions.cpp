@@ -18,7 +18,7 @@ void ProductException::show() const
 {
     if (price < 0)
         cout << "price cannot be negative!" << endl;
-    if (p_name.compare(" ") == 0 || p_name.length() > 21)
+    if (p_name.compare(" ") == 0)
         cout << "Error, product name cannot be blank!" << endl;
 }
 
@@ -41,7 +41,7 @@ FeedBackException::FeedBackException(const Date& date,const string& note)
 }
 void FeedBackException::show() const
 {
-    if (note.compare(" ") == 0 || note.length() > 256)
+    if (note.compare(" ") == 0)
         cout << "Error, feedback must contain at least one letter! " << endl;
     DateException e((int)date.getDay(), (int)date.getMonth(), (int)date.getYear());
     e.show();
@@ -76,9 +76,9 @@ UserException::~UserException()
 }
 void UserException::show() const
 {
-    if (name.compare(" ") == 0 || name.length() > 11)
+    if (name.compare(" ") == 0)
         cout << "Error chosen name cannot be blank!" << endl;
-    if (password.compare(" ") == 0 || password.length() > 11)
+    if (password.compare(" ") == 0)
         cout << "Error chosen password is wrong!" << endl;
     AddressException Ae(address.getApartmentNumber(),address.getStreetName(),address.getCityName());
     Ae.show();

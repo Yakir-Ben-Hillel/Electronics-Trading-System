@@ -80,6 +80,7 @@ ostream &operator<<(ostream &out, const Address &address)
     }
     return out;
 }
+
 istream &operator>>(istream &in, Address &address)
 {
     string cityName, streetName;
