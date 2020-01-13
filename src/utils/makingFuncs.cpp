@@ -76,7 +76,7 @@ void System::chooseProductToAddToCustomerWishlist()
     {
         vector<int> indexes_array;
         int available_index_counter = 0;
-        Product **product_array = nullptr;
+        vector<Product> product_array;
         vector<User *>::iterator itr = this->users_array.begin();
         vector<User *>::iterator itrEnd = this->users_array.end();
         for (int i = 0; itr != itrEnd; ++itr, i++)
@@ -115,7 +115,8 @@ void System::chooseProductToAddToCustomerWishlist()
                     product_index--;
                 } while (!(product_index <= chosen_seller->getStockArraySize() && product_index >= 0));
                 product_array = chosen_seller->getStock();
-                customerTemp->addProductToWishlistArray(product_array[product_index]);
+                vector<Product>::iterator itr = ((product_array.begin()) + product_index);
+                customerTemp->addProductToWishlistArray(*itr);
             }
         }
         else
@@ -124,18 +125,23 @@ void System::chooseProductToAddToCustomerWishlist()
         }
     }
 }
-bool System::addFeedback(Customer *customer) noexcept(false)
+bool System::addFeedback(Customer &customer) noexcept(false)
 {
-    int *indexes_array = new int[users_array_logical_size];
+    vector<int> indexes_array;
     int x;
     Seller *seller_temp = nullptr;
     int available_index_counter = 0;
-    for (int i = 0; i < users_array_logical_size; i++)
+    vector<User *>::iterator itr = this->users_array.begin();
+    vector<User *>::iterator itrEnd = this->users_array.end();
+    for (int i = 0; itr != itrEnd; ++itr, i++)
     {
-        seller_temp = dynamic_cast<Seller *>(this->users_array[i]);
+        seller_temp = dynamic_cast<Seller *>(*itr + i);
         if (seller_temp)
-            if (customer->didCustomerOrderedFromSeller(seller_temp))
+            if (customer.didCustomerOrderedFromSeller(*seller_temp))
+            {
                 indexes_array[available_index_counter] = i;
+                available_index_counter++;
+            }
     }
     if (available_index_counter != 0)
     {
@@ -146,7 +152,7 @@ bool System::addFeedback(Customer *customer) noexcept(false)
         seller_temp = dynamic_cast<Seller *>(this->users_array[indexes_array[x]]);
         if (seller_temp)
         {
-            customer->addFeedBackToSeller(seller_temp);
+            customer.addFeedBackToSeller(*seller_temp);
             return true;
         }
         else
@@ -158,7 +164,6 @@ bool System::addFeedback(Customer *customer) noexcept(false)
         cout << "Make an Order and checkback later." << endl;
         return false;
     }
-    delete[] indexes_array;
 }
 void System::signup()
 {
@@ -180,11 +185,11 @@ void System::signup()
     bool check = true;
     do
     {
-        char username[11], password[11];
+        string username, password;
         do
         {
             cout << "Please choose an username (10 chars max): ";
-            cin.getline(username, 10);
+            getline(cin,username);
             if (checkUsernameAvailability(username) == false)
             {
                 cout << "Username is not available, please choose another name." << endl;
@@ -194,7 +199,7 @@ void System::signup()
                 availabilty = true;
         } while (availabilty == false);
         cout << "Please choose a password (10 chars max): ";
-        cin.getline(password, 10);
+        getline(cin,password);
         check = true;
         try
         {

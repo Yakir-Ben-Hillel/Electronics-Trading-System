@@ -46,7 +46,7 @@ public:
 	void printOptionAsCAS() const;
 	void loadUsersFromFile();
 	void writeUsersToFile();
-	bool addFeedback(Customer *customer) noexcept(false);
+	bool addFeedback(Customer &customer) noexcept(false);
 	void printOptionsAsCustomer() const;
 	void makeProductForSale();
 	void chooseProductToAddToCustomerWishlist();
