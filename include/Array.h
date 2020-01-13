@@ -8,7 +8,7 @@ template <class T>
 class Array
 {
 private:
-    int logicSize, physicSize;
+    int logicSize, physicSize; //by default if the physicSize is full we increase the size multiplied by two
     char delimiter;
     T *array;
 
@@ -29,6 +29,11 @@ public:
         out << endl;
         return out;
     }
+    inline int getSize() const { return logicSize; }
+    inline int getFullSize() const { return physicSize; }
+    inline char getDelimiter() const { return delimiter; }
+    inline void setDelimiter(char ch) { this->delimiter = ch; }
+    bool Empty() const;
 };
 
 template <class T>
@@ -71,6 +76,14 @@ const Array<T> &Array<T>::operator+=(const T &val)
         *this = temp;
     }
     return *this;
+}
+
+template <class T>
+bool Array<T>::Empty() const
+{
+    if (logicSize == 0)
+        return true;
+    return false;
 }
 
 #endif
