@@ -2,7 +2,8 @@
 #define __Customer_H
 //#include "seller.h"
 #include "user.h"
-
+class Seller;
+class Order;
 class Customer : virtual public User
 {
 public:

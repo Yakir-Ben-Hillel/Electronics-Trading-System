@@ -1,6 +1,8 @@
 #ifndef __USER_H
 #define __USER_H
 #include "address.h"
+class Product;
+class FeedBack;
 class User
 {
 protected:

@@ -1,6 +1,12 @@
 #ifndef __ADDRESS_H
 #define __ADDRESS_H
-#include "system.h"
+
+#include <iostream>
+using namespace std;
+#include <string>
+#include <exception>
+#include <fstream>
+#include <vector>
 class Address
 {
 public:

@@ -22,10 +22,6 @@ void Seller::setStockArray(vector<Product> given_product_array)
 {
     this->s_stock = given_product_array;
 }
-FeedBack Seller::setFeedback(FeedBack &given_feedBack)
-{
-    return FeedBack(given_feedBack);
-}
 void Seller::setFeedbacksArray(vector<FeedBack> given_feedBacks_array)
 {
     this->feedBack_array = given_feedBacks_array;

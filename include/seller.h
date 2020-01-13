@@ -3,8 +3,7 @@
 
 #include "user.h"
 class Address;
-class FeedBack;
-class Product;
+class User;
 class Seller : virtual public User
 {
 public:
@@ -37,7 +36,6 @@ protected:
 	Seller() = default;
 	void resizeStockArray();
 	void resizeFeedbackArray();
-	FeedBack setFeedback(FeedBack &given_feedBack);
 	vector<Product> s_stock;		 //array of all product this seller sells.
 	vector<FeedBack> feedBack_array; //array of feedback from all of his buyers.
 };
