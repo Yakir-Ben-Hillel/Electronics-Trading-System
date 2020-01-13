@@ -56,6 +56,7 @@ void System::mainMenu()
         {
             printOptionsAsCustomer();
             cin >> option;
+            string name;
             bool check;
             switch (option)
             {
@@ -97,8 +98,7 @@ void System::mainMenu()
                 break;
             case 5:
                 cout << "Please insert the name of the product you want to search for: ";
-                char name[30];
-                cin.getline(name, 29);
+                getline(cin, name);
                 this->showProductsWithTheSameName(name);
                 break;
             case 6:
@@ -121,10 +121,10 @@ void System::mainMenu()
         }
         else if (seller_temp && !cas_temp)
         {
-            FeedBack **array_feedbacks = nullptr;
             printOptionsAsSeller();
             cin >> option;
             bool check;
+            vector<FeedBack> array_feedbacks;
             switch (option)
             {
             case 1:
@@ -143,16 +143,17 @@ void System::mainMenu()
                 } while (!check);
                 break;
             case 2:
-                int size;
-                array_feedbacks = seller_temp->getfeedBacksArray(size);
-                if (size == 0)
+                array_feedbacks = seller_temp->getfeedBacksArray();
+                if (array_feedbacks.empty())
                     cout << "there are no feedback availables please try again later" << endl;
                 else
                 {
+                    vector<FeedBack>::iterator fItr = array_feedbacks.begin();
+                    vector<FeedBack>::iterator fItrEnd = array_feedbacks.end();
                     cout << "your feedbacks are: " << endl;
-                    for (int i = 0; i < size; i++)
+                    for (; fItr != fItrEnd; ++fItr)
                     {
-                        cout << (*array_feedbacks)[i];
+                        cout << *fItr;
                         cout << endl;
                     }
                 }
@@ -178,7 +179,8 @@ void System::mainMenu()
         else if (cas_temp)
         {
             printOptionAsCAS();
-            FeedBack **array_feedbacks = nullptr;
+            vector<FeedBack> array_feedbacks;
+            string name;
             cin >> option;
             bool check;
             switch (option)
@@ -223,14 +225,29 @@ void System::mainMenu()
                 this->printSellersNames();
                 break;
             case 5:
-                cout << "Please insert the name of the product you want to search for: ";
-                char name[30];
-                cin.ignore(256, '\n');
-                cin.getline(name, 29);
-                this->showProductsWithTheSameName(name);
+                do
+                {
+                    check = true;
+                    try
+                    {
+                        this->addFeedback(*cas_temp);
+                    }
+                    catch (const SystemException &e)
+                    {
+                        check = false;
+                        e.show();
+                    }
+                } while (!check);
                 break;
 
             case 6:
+                cout << "Please insert the name of the product you want to search for: ";
+                cin.ignore(256, '\n');
+                getline(cin, name);
+                this->showProductsWithTheSameName(name);
+                break;
+
+            case 7:
                 do
                 {
                     check = true;
@@ -247,31 +264,32 @@ void System::mainMenu()
                 } while (!check);
 
                 break;
-            case 7:
-                int size;
-                array_feedbacks = cas_temp->getfeedBacksArray(size);
-                if (size == 0)
+            case 8:
+                array_feedbacks = cas_temp->getfeedBacksArray();
+                if (array_feedbacks.empty())
                     cout << "there are no feedback availables please try again later" << endl;
                 else
                 {
+                    vector<FeedBack>::iterator fItr = array_feedbacks.begin();
+                    vector<FeedBack>::iterator fItrEnd = array_feedbacks.end();
                     cout << "your feedbacks are: " << endl;
-                    for (int i = 0; i < size; i++)
+                    for (; fItr != fItrEnd; ++fItr)
                     {
-                        cout << (*array_feedbacks)[i];
+                        cout << *fItr;
                         cout << endl;
                     }
                 }
                 break;
-            case 8:
+            case 9:
                 cout << *cas_temp;
                 break;
-            case 9:
+            case 10:
                 this->changePassWord();
                 break;
-            case 10:
+            case 11:
                 this->logged_in_user = nullptr;
                 break;
-            case 11:
+            case 12:
                 isFinished = true;
                 break;
             }
@@ -279,40 +297,44 @@ void System::mainMenu()
     }
     this->writeUsersToFile();
 }
-bool System::checkUsernameAvailability(const char *username)
+bool System::checkUsernameAvailability(const string &username)
 {
-    for (int i = 0; i < this->users_array_logical_size; i++)
+    vector<User *>::const_iterator itr = this->users_array.begin();
+    vector<User *>::const_iterator itrEnd = this->users_array.end();
+    for (; itr != itrEnd; ++itr)
     {
-        if (strcmp(this->users_array[i]->getName(), username) == 0)
+        if ((*itr)->getName().compare(username) == 0)
             return false;
     }
     return true;
 }
 void System::login()
 {
-    if (this->users_array_logical_size)
+
+    if (!this->users_array.empty())
     {
-        char username[11], password[11];
+        string username, password;
         cout << "Please enter your Username" << endl;
-        cin.getline(username, 10);
-        int i = 0;
+        getline(cin, username);
+        vector<User *>::const_iterator itr = this->users_array.begin();
+        vector<User *>::const_iterator itrEnd = this->users_array.end();
         bool isFinishedSearch = false;
         bool isMatch = false;
         bool isExitedByWill = false;
-        while (isFinishedSearch == false && i != this->users_array_logical_size)
+        while (isFinishedSearch == false && itr != itrEnd)
         {
-            if (strcmp(users_array[i]->getName(), username) == 0)
+            if ((*itr)->getName().compare(username) == 0)
             {
                 isFinishedSearch = true;
                 do
                 {
                     cout << "Please insert your Password, write 'back' in any given time to go main menu." << endl;
-                    cin.getline(password, 10);
-                    if (strcmp(password, "back") == 0)
+                    getline(cin, password);
+                    if (password.compare("back") == 0)
                         isExitedByWill = true;
-                    else if (strcmp(password, users_array[i]->getPassword()) == 0)
+                    else if (password.compare((*itr)->getPassword()) == 0)
                     {
-                        this->logged_in_user = users_array[i];
+                        this->logged_in_user = *itr;
                         isMatch = true;
                     }
                     else
@@ -323,7 +345,7 @@ void System::login()
                 } while (isMatch == false && isExitedByWill == false);
             }
             else
-                i++;
+                ++itr;
         }
         if (isFinishedSearch == false)
             cout << "Username did not found, returning to main menu." << endl;
@@ -333,10 +355,10 @@ void System::login()
         cout << "There are no Users Available" << endl;
     }
 }
-bool isSubstring(const char *s1, const char *s2)
+bool isSubstring(const string &s1, const string &s2)
 {
-    int M = strlen(s1);
-    int N = strlen(s2);
+    int M = s1.size();
+    int N = s2.size();
     /* A loop to slide pat[] one by one */
     for (int i = 0; i <= N - M; i++)
     {

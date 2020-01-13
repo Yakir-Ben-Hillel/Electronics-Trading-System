@@ -1,6 +1,7 @@
 #include "../../include/system.h"
-System::System(vector<User *> users_array, User *logged_in_user) : users_array(move(users_array)),
-                                                                   logged_in_user(logged_in_user)
+System::System(vector<User *> users_array,
+               User *logged_in_user) : users_array(move(users_array)),
+                                       logged_in_user(logged_in_user)
 {
 }
 System::System(const System &other) : users_array(move(other.users_array)), logged_in_user(other.logged_in_user)

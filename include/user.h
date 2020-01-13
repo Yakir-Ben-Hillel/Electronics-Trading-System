@@ -1,9 +1,6 @@
 #ifndef __USER_H
 #define __USER_H
-
 #include "address.h"
-#include "system.h"
-#include <fstream>
 class User
 {
 protected:

@@ -2,22 +2,22 @@
 #define __System_H
 #pragma once
 //this h file contains all the includes of the project,every cpp file calls to that h file.
+using namespace std;
 #include <iostream>
 #include <fstream>
 #include <ostream>
-#include <string.h>
 #include <exception>
+#include <string.h>
 #include <string>
 #include <vector>
-using namespace std;
-#include "user.h"
-#include "order.h"
 #include "address.h"
+#include "order.h"
 #include "product.h"
-#include "customer.h"
-#include "seller.h"
 #include "FeedBack.h"
 #include "Date.h"
+#include "user.h"
+#include "customer.h"
+#include "seller.h"
 #include "CAS.h"
 #include "systemException.h"
 
@@ -47,7 +47,7 @@ public:
 	void printOptionAsCAS() const;
 	void loadUsersFromFile();
 	void writeUsersToFile();
-	bool addFeedback(const Customer &customer) noexcept(false);
+	bool addFeedback(Customer &customer) noexcept(false);
 	void printOptionsAsCustomer() const;
 	void makeProductForSale();
 	void chooseProductToAddToCustomerWishlist();
@@ -59,7 +59,7 @@ public:
 	bool setUsersArray(vector<User *> given_users_array);
 	void resizeUsersArray();
 	void printOpening() const;
-	void printAllAvailableSellersToGiveFeedbacks(Customer *customer);
+	void printAllAvailableSellersToGiveFeedbacks(Customer &customer);
 	void printOptionsWhenAnonymous() const;
 	void showProductsWithTheSameName(const string &name);
 
@@ -68,8 +68,7 @@ private:
 	vector<User *> users_array;
 	User *logged_in_user = nullptr;
 	//private methoods
-	bool checkUsernameAvailability(const char *username);
+	bool checkUsernameAvailability(const string &username);
 };
-bool isSubstring(const char *s1, const char *s2);
-
+bool isSubstring(const string &s1, const string &s2);
 #endif // !__System_H
