@@ -20,6 +20,7 @@ using namespace std;
 #include "Date.h"
 #include "CAS.h"
 #include "systemException.h"
+
 class User;
 class System
 {
@@ -70,4 +71,5 @@ private:
 	bool checkUsernameAvailability(const char *username);
 };
 bool isSubstring(const char *s1, const char *s2);
+
 #endif // !__System_H

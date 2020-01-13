@@ -18,6 +18,7 @@ public:
         array = new T[physicSize];
     }
     Array(const Array &other);
+    Array(const Array &&other);
     ~Array() { delete[] array; }
 
     const Array &operator=(const Array &other);
@@ -40,6 +41,11 @@ template <class T>
 Array<T>::Array(const Array &other) : array(nullptr)
 {
     *this = other;
+}
+
+template <class T>
+Array<T>::Array(const Array &&other)
+{
 }
 
 template <class T>
