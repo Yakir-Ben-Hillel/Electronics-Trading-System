@@ -68,7 +68,7 @@ void System::mainMenu()
                     check = true;
                     try
                     {
-                        this->addFeedback(customer_temp);
+                        this->addFeedback(*customer_temp);
                     }
                     catch (const SystemException &e)
                     {
@@ -105,9 +105,12 @@ void System::mainMenu()
                 cout << *customer_temp;
                 break;
             case 7:
-                this->logged_in_user = nullptr;
+                this->changePassWord();
                 break;
             case 8:
+                this->logged_in_user = nullptr;
+                break;
+            case 9:
                 isFinished = true;
                 break;
             default:
@@ -157,11 +160,13 @@ void System::mainMenu()
             case 3:
                 cout << *seller_temp;
                 break;
-
             case 4:
-                this->logged_in_user = nullptr;
+                this->changePassWord();
                 break;
             case 5:
+                this->logged_in_user = nullptr;
+                break;
+            case 6:
                 isFinished = true;
                 break;
             default:
@@ -187,7 +192,7 @@ void System::mainMenu()
                     check = true;
                     try
                     {
-                        this->addFeedback(customer_temp);
+                        this->addFeedback(*customer_temp);
                     }
                     catch (const SystemException &e)
                     {
@@ -217,23 +222,7 @@ void System::mainMenu()
             case 4:
                 this->printSellersNames();
                 break;
-                case 5:
-                do
-                {
-                    check = true;
-                    try
-                    {
-                        this->addFeedback(cas_temp);
-                    }
-                    catch (const SystemException &e)
-                    {
-                        check = false;
-                        e.show();
-                    }
-                } while (!check);
-                break;
-
-            case 6:
+            case 5:
                 cout << "Please insert the name of the product you want to search for: ";
                 char name[30];
                 cin.ignore(256, '\n');
@@ -241,7 +230,7 @@ void System::mainMenu()
                 this->showProductsWithTheSameName(name);
                 break;
 
-            case 7:
+            case 6:
                 do
                 {
                     check = true;
@@ -258,7 +247,7 @@ void System::mainMenu()
                 } while (!check);
 
                 break;
-            case 8:
+            case 7:
                 int size;
                 array_feedbacks = cas_temp->getfeedBacksArray(size);
                 if (size == 0)
@@ -273,8 +262,11 @@ void System::mainMenu()
                     }
                 }
                 break;
-            case 9:
+            case 8:
                 cout << *cas_temp;
+                break;
+            case 9:
+                this->changePassWord();
                 break;
             case 10:
                 this->logged_in_user = nullptr;

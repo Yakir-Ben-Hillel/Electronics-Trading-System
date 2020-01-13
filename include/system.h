@@ -46,7 +46,7 @@ public:
 	void printOptionAsCAS() const;
 	void loadUsersFromFile();
 	void writeUsersToFile();
-	bool addFeedback(Customer &customer) noexcept(false);
+	bool addFeedback(const Customer &customer) noexcept(false);
 	void printOptionsAsCustomer() const;
 	void makeProductForSale();
 	void chooseProductToAddToCustomerWishlist();
@@ -54,6 +54,7 @@ public:
 	void compareCustomers() const;
 	void login();
 	void signup();
+	void changePassWord();
 	bool setUsersArray(vector<User *> given_users_array);
 	void resizeUsersArray();
 	void printOpening() const;

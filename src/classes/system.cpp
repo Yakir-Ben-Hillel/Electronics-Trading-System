@@ -181,3 +181,27 @@ void System::compareCustomers() const
         cout << "Not enough Customers Available." << endl;
     delete[] indexes_array;
 }
+
+void System::changePassWord()
+{
+    char temp[256];
+    bool isSucceeded ;
+    do
+    {
+        isSucceeded = true;
+        cout << "Please insert your current password: ";
+        cin.ignore(1,'\n');
+        cin.getline(temp, 256, '\n');
+
+        if (this->logged_in_user->getPassword() == temp)
+        {
+            this->logged_in_user->setPassword(string(temp));
+            cout << endl;
+            cout << "your password has changed!" << endl;
+        }
+        isSucceeded = false;
+        cout <<"the password you entered is incorrect, please try again!"<<endl;
+    } while (isSucceeded);
+
+    return;
+}

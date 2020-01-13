@@ -125,7 +125,7 @@ void System::chooseProductToAddToCustomerWishlist()
         }
     }
 }
-bool System::addFeedback(Customer &customer) noexcept(false)
+bool System::addFeedback(const Customer &customer) noexcept(false)
 {
     vector<int> indexes_array;
     int x;
