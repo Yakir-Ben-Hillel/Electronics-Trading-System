@@ -117,9 +117,9 @@ void System::printCASNames() const
 }
 void Seller::printSellerProducts()
 {
-    vector<Product> products_array = this->getStock();
-    vector<Product>::const_iterator itr = products_array.begin();
-    vector<Product>::const_iterator itrEnd = products_array.end();
+    vector<Product*> products_array = this->getStock();
+    vector<Product*>::const_iterator itr = products_array.begin();
+    vector<Product*>::const_iterator itrEnd = products_array.end();
     Product *product = nullptr;
     for (int i = 0; itr != itrEnd; ++itr)
     {
@@ -159,16 +159,16 @@ void System::showProductsWithTheSameName(const string &name)
         seller_temp = dynamic_cast<Seller *>(*itr);
         if (seller_temp)
         {
-            vector<Product> stock = seller_temp->getStock();
-            vector<Product>::const_iterator itrP = stock.begin();
-            vector<Product>::const_iterator itrPEnd = stock.end();
+            vector<Product*> stock = seller_temp->getStock();
+            vector<Product*>::const_iterator itrP = stock.begin();
+            vector<Product*>::const_iterator itrPEnd = stock.end();
 
             for (; itrP != itrPEnd; ++itrP)
             {
-                if (isSubstring(name, itrP->getName()))
+                if (isSubstring(name, (*itrP)->getName()))
                 {
                     isFound = true;
-                    cout << *itrP;
+                    cout << *(*itrP);
                     cout << endl;
                 }
             }

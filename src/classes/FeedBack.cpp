@@ -1,7 +1,7 @@
 #include "../../include/system.h"
 
 FeedBack::FeedBack(const string &note,const Customer &customer_data,const Date &curr_date) noexcept(false)
-:customer(&customer_data),date_of_feedback(&curr_date)
+:customer(customer_data),date_of_feedback(curr_date)
 {
     if (note.empty())
         throw FeedBackException(curr_date, note); //if date has an exception the function that called this constractor will catch it.
@@ -29,28 +29,17 @@ const string &FeedBack::getNotes() const
 }
 const Customer &FeedBack::getCustomer() const
 {
-    return *customer;
+    return customer;
 }
 const Date &FeedBack::getDate() const
 {
-    return *date_of_feedback;
+    return date_of_feedback;
 }
 ostream &operator<<(ostream &out, const FeedBack &feedback)
 {
 
-    out << "the customer who gave you the feedback: " << feedback.customer->getName() << endl;
-    out << "the date of the feedback is: " << *feedback.date_of_feedback << endl;
+    out << "the customer who gave you the feedback: " << feedback.customer.getName() << endl;
+    out << "the date of the feedback is: " << feedback.date_of_feedback << endl;
     out << "the notes are: " << feedback.notes << endl;
     return out;
-}
-
-const FeedBack& FeedBack::operator=(const FeedBack& other)
-{
-    if(this!=&other)
-    {
-       this->notes=other.notes;
-       this->date_of_feedback=other.date_of_feedback;
-       this->customer=other.customer;
-    }
-    return *this;
 }

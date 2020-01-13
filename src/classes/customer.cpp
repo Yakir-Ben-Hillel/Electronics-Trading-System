@@ -13,38 +13,38 @@ Customer::Customer(Customer &&other) : User(std::move(other))
     this->orders_history = other.orders_history;
 }
 Customer::Customer(const string &username, const string &password,
-                   const Address &address, const vector<Product> &wishlist,
-                   const vector<Order> &orderHistory) noexcept(false)
+                   const Address &address, const vector<Product*> &wishlist,
+                   const vector<Order*> &orderHistory) noexcept(false)
     : User(username, password, address), c_wishList(wishlist), orders_history(orderHistory)
 {
 }
 
-void Customer::setWishList(const vector<Product> &wishList)
+void Customer::setWishList(const vector<Product*> &wishList)
 {
     this->c_wishList = wishList;
 }
-void Customer::SetOrderArray(const vector<Order> &orders_array)
+void Customer::SetOrderArray(const vector<Order*> &orders_array)
 {
     this->orders_history = orders_array;
 }
-std::vector<Order> Customer::getOrderHistory() const
+std::vector<Order*> Customer::getOrderHistory() const
 {
     return this->orders_history;
 }
 
-vector<Product> Customer::getWishList() const
+vector<Product*> Customer::getWishList() const
 {
     return c_wishList;
 }
 
-bool Customer::addProductToWishlistArray(const Product &new_product)
+bool Customer::addProductToWishlistArray(Product &new_product)
 {
-    this->c_wishList.push_back(new_product);
+    this->c_wishList.push_back(&new_product);
     return true;
 }
-bool Customer::AddOrderToArray(const Order &given_order)
+bool Customer::AddOrderToArray(Order &given_order)
 {
-    this->orders_history.push_back(given_order);
+    this->orders_history.push_back(&given_order);
     return true;
 }
 
@@ -54,9 +54,9 @@ void Customer::makeOrder() noexcept(false)
     {
 
         bool fContinue = true;
-        vector<Product> temp_list;
-        vector<Product>::iterator itr = temp_list.begin();
-        vector<Product>::iterator itrEnd = temp_list.end();
+        vector<Product*> temp_list;
+        vector<Product*>::iterator itr = temp_list.begin();
+        vector<Product*>::iterator itrEnd = temp_list.end();
 
         int index, temp_index = 0;
         float price_of_order = 0;
@@ -77,9 +77,9 @@ void Customer::makeOrder() noexcept(false)
                 cout << "please enter the number of product you would like to buy: " << endl;
                 cin >> index;
                 temp_list.push_back(this->c_wishList[index - 1]);
-                price_of_order += temp_list[temp_index].getPrice();
+                price_of_order += temp_list[temp_index]->getPrice();
                 temp_index++;
-                vector<Product>::iterator toDelete = this->c_wishList.begin() + (index - 1);
+                auto toDelete = this->c_wishList.begin() + (index - 1);
                 this->c_wishList.erase(toDelete);
                 if (this->c_wishList.size() != 0)
                 {
@@ -96,7 +96,7 @@ void Customer::makeOrder() noexcept(false)
                 cout << "Wishlist is Empty." << endl;
             }
         } while (fContinue != false);
-        Order temp_order(temp_list, price_of_order);
+        Order* temp_order=new Order(temp_list, price_of_order);
         this->orders_history.push_back(temp_order);
         cout << temp_order;
     }
@@ -114,17 +114,17 @@ bool Customer::didCustomerOrderedFromSeller(Seller &seller)
         return false;
     else
     {
-        vector<Order>::iterator itrOrder = this->orders_history.begin();
-        vector<Order>::iterator itrOrderEnd = this->orders_history.end();
-        vector<Product> temp;
+        vector<Order*>::iterator itrOrder = this->orders_history.begin();
+        vector<Order*>::iterator itrOrderEnd = this->orders_history.end();
+        vector<Product*> temp;
         for (; itrOrder != itrOrderEnd; ++itrOrder)
         {
-            temp = (*itrOrder).getList();
-            vector<Product>::iterator itrProduct = temp.begin();
-            vector<Product>::iterator itrProductEnd = temp.end();
+            temp = (*itrOrder)->getList();
+            vector<Product*>::iterator itrProduct = temp.begin();
+            vector<Product*>::iterator itrProductEnd = temp.end();
             for (; itrProduct != itrProductEnd; ++itrProduct)
             {
-                if ((*itrProduct).getSeller() == seller)
+                if ((*itrProduct)->getSeller() == seller)
                     return true;
             }
         }
@@ -186,11 +186,11 @@ bool operator>(const Customer &first, const Customer &second)
 }
 void Customer::getSum(float &sum) const
 {
-    vector<Product>::const_iterator itr = this->c_wishList.begin();
-    vector<Product>::const_iterator itrEnd = this->c_wishList.end();
+    vector<Product*>::const_iterator itr = this->c_wishList.begin();
+    vector<Product*>::const_iterator itrEnd = this->c_wishList.end();
     int size = this->c_wishList.size();
     for (; itr != itrEnd; ++itr)
-        sum += (*itr).getPrice();
+        sum += (*itr)->getPrice();
 }
 void Customer::toOs(ostream &out) const
 {
@@ -200,8 +200,8 @@ void Customer::toOs(ostream &out) const
 
         if (!this->c_wishList.empty())
         {
-            vector<Product>::const_iterator itrProduct = this->c_wishList.begin();
-            vector<Product>::const_iterator itrProductEnd = this->c_wishList.end();
+            vector<Product*>::const_iterator itrProduct = this->c_wishList.begin();
+            vector<Product*>::const_iterator itrProductEnd = this->c_wishList.end();
             for (; itrProduct != itrProductEnd; ++itrProduct)
                 out << *itrProduct << endl;
         }
@@ -209,8 +209,8 @@ void Customer::toOs(ostream &out) const
             out << "Wishlist is Empty." << endl;
         if (!this->orders_history.empty())
         {
-            vector<Order>::const_iterator itrOrder = this->orders_history.begin();
-            vector<Order>::const_iterator itrOrderEnd = this->orders_history.end();
+            vector<Order*>::const_iterator itrOrder = this->orders_history.begin();
+            vector<Order*>::const_iterator itrOrderEnd = this->orders_history.end();
             for (; itrOrder != itrOrderEnd; ++itrOrder)
                 out << *itrOrder << endl;
         }

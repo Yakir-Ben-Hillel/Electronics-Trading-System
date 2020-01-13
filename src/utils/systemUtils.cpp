@@ -124,7 +124,7 @@ void System::mainMenu()
             printOptionsAsSeller();
             cin >> option;
             bool check;
-            vector<FeedBack> array_feedbacks;
+            vector<FeedBack*> array_feedbacks;
             switch (option)
             {
             case 1:
@@ -148,12 +148,12 @@ void System::mainMenu()
                     cout << "there are no feedback availables please try again later" << endl;
                 else
                 {
-                    vector<FeedBack>::iterator fItr = array_feedbacks.begin();
-                    vector<FeedBack>::iterator fItrEnd = array_feedbacks.end();
+                    vector<FeedBack*>::iterator fItr = array_feedbacks.begin();
+                    vector<FeedBack*>::iterator fItrEnd = array_feedbacks.end();
                     cout << "your feedbacks are: " << endl;
                     for (; fItr != fItrEnd; ++fItr)
                     {
-                        cout << *fItr;
+                        cout << *(*fItr);
                         cout << endl;
                     }
                 }
@@ -179,7 +179,7 @@ void System::mainMenu()
         else if (cas_temp)
         {
             printOptionAsCAS();
-            vector<FeedBack> array_feedbacks;
+            vector<FeedBack*> array_feedbacks;
             string name;
             cin >> option;
             bool check;
@@ -270,12 +270,12 @@ void System::mainMenu()
                     cout << "there are no feedback availables please try again later" << endl;
                 else
                 {
-                    vector<FeedBack>::iterator fItr = array_feedbacks.begin();
-                    vector<FeedBack>::iterator fItrEnd = array_feedbacks.end();
+                    vector<FeedBack*>::iterator fItr = array_feedbacks.begin();
+                    vector<FeedBack*>::iterator fItrEnd = array_feedbacks.end();
                     cout << "your feedbacks are: " << endl;
                     for (; fItr != fItrEnd; ++fItr)
                     {
-                        cout << *fItr;
+                        cout << *(*fItr);
                         cout << endl;
                     }
                 }

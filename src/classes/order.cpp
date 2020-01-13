@@ -1,6 +1,6 @@
 #include "../../include/system.h"
 
-Order::Order(vector<Product> order_list, float price) noexcept(false)
+Order::Order(vector<Product*> order_list, float price) noexcept(false)
     : order_products(order_list), price_of_order(price)
 {
 }
@@ -22,7 +22,7 @@ bool Order::setPrice(float price_of_order)
     this->price_of_order = price_of_order;
     return true;
 }
-bool Order::setProductList(const vector<Product> order_list) noexcept(false)
+bool Order::setProductList(const vector<Product*> order_list) noexcept(false)
 {
     this->order_products = order_list;
     return true;
@@ -31,20 +31,20 @@ float Order::getPrice() const
 {
     return price_of_order;
 }
-vector<Product> Order::getList() const
+vector<Product*> Order::getList() const
 {
     return order_products;
 }
 
 bool Order::addProductToOrderList(Product &new_product)
 {
-    this->order_products.push_back(new_product);
+    this->order_products.push_back(&new_product);
     return true;
 }
 ostream &operator<<(ostream &out, const Order &order)
 {
-    vector<Product>::const_iterator itr = order.getList().begin();
-    vector<Product>::const_iterator itrEnd = order.getList().end();
+    auto itr = order.getList().begin();
+    auto itrEnd = order.getList().end();
     out << "the details of your order are: " << endl;
     for (; itr != itrEnd; ++itr)
     {
