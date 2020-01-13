@@ -2,6 +2,8 @@
 #define __Seller_H
 
 #include "user.h"
+#include "product.h"
+#include "FeedBack.h"
 class Address;
 class FeedBack;
 class Product;
@@ -21,8 +23,8 @@ public:
 	vector<Product> getStock() const;
 	vector<FeedBack> getfeedBacksArray() const;
 	//Setters Functions.
-	bool setStockArray(vector<Product> given_stock_array);
-	bool setFeedbacksArray(vector<FeedBack> given_feedBacks_array);
+	void setStockArray(vector<Product> given_stock_array);
+	void setFeedbacksArray(vector<FeedBack> given_feedBacks_array);
 	bool addProductToStockArray(Product &new_product);
 	bool addFeedbackToArray(FeedBack &new_feedback);
 	unsigned int getStockArraySize();

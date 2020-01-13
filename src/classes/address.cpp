@@ -35,11 +35,11 @@ const Address &Address::operator=(const Address &other)
     }
     return *this;
 }
-bool Address::setCityName(const string &givenCityName)
+void Address::setCityName(const string &givenCityName)
 {
     this->cityName = givenCityName;
 }
-bool Address::setStreetName(const string &givenStreetName)
+void Address::setStreetName(const string &givenStreetName)
 {
     this->streetName = givenStreetName;
 }

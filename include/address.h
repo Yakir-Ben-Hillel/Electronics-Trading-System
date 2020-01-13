@@ -10,8 +10,8 @@ public:
     Address(const Address &other);
     Address(Address &&other);
     ~Address();
-    bool setCityName(const string &cityName);
-    bool setStreetName(const string &streetName);
+    void setCityName(const string &cityName);
+    void setStreetName(const string &streetName);
     bool setApartmentNumber(unsigned int apartmentNumber);
     const Address &operator=(const Address &other);
     const string &getCityName() const;

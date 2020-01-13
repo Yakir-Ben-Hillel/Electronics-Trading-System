@@ -19,11 +19,11 @@ Customer::Customer(const string &username, const string &password,
 {
 }
 
-bool Customer::setWishList(const vector<Product> &wishList)
+void Customer::setWishList(const vector<Product> &wishList)
 {
     this->c_wishList = wishList;
 }
-bool Customer::SetOrderArray(const vector<Order> &orders_array)
+void Customer::SetOrderArray(const vector<Order> &orders_array)
 {
     this->orders_history = orders_array;
 }

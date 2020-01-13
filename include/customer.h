@@ -20,9 +20,9 @@ public:
 	virtual User *clone() const override;
 	// friend istream &operator>>(istream &in, Customer &customer);
 	//seters
-	bool setWishList(const vector<Product> &wishList);
+	void setWishList(const vector<Product> &wishList);
 	bool AddOrderToArray(const Order &given_order);
-	bool SetOrderArray(const vector<Order> &order_array);
+	void SetOrderArray(const vector<Order> &order_array);
 	bool addProductToWishlistArray(const Product &new_product);
 	virtual void toOs(ostream &out) const override;
 	//geters

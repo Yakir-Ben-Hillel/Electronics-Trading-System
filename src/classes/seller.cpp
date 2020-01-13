@@ -18,7 +18,7 @@ Seller::Seller(Seller &&other) : User(std::move(other))
     this->feedBack_array = other.feedBack_array;
 }
 
-bool Seller::setStockArray(vector<Product> given_product_array)
+void Seller::setStockArray(vector<Product> given_product_array)
 {
     this->s_stock = given_product_array;
 }
@@ -26,7 +26,7 @@ FeedBack Seller::setFeedback(FeedBack &given_feedBack)
 {
     return FeedBack(given_feedBack);
 }
-bool Seller::setFeedbacksArray(vector<FeedBack> given_feedBacks_array)
+void Seller::setFeedbacksArray(vector<FeedBack> given_feedBacks_array)
 {
     this->feedBack_array = given_feedBacks_array;
 }
