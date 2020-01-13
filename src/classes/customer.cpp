@@ -54,9 +54,7 @@ void Customer::makeOrder() noexcept(false)
     {
 
         bool fContinue = true;
-        vector<Product*> temp_list;
-        vector<Product*>::iterator itr = temp_list.begin();
-        vector<Product*>::iterator itrEnd = temp_list.end();
+        Array<Product*> temp_list;
 
         int index, temp_index = 0;
         float price_of_order = 0;
@@ -66,17 +64,18 @@ void Customer::makeOrder() noexcept(false)
             if (this->c_wishList.size() != 0)
             {
                 int counter = 1;
+                int tempList_size=temp_list.getSize();
                 cout << "please pick from the following products the product you want to buy: " << endl;
-                for (; itr != itrEnd; ++itr)
+                for (int i=0;i<tempList_size; ++i)
                 {
                     cout << "Product number #" << counter << " " << endl;
-                    cout << *itr;
+                    cout << *temp_list[i];
                     counter++;
                 }
 
                 cout << "please enter the number of product you would like to buy: " << endl;
                 cin >> index;
-                temp_list.push_back(this->c_wishList[index - 1]);
+                temp_list+=this->c_wishList[index - 1];
                 price_of_order += temp_list[temp_index]->getPrice();
                 temp_index++;
                 auto toDelete = this->c_wishList.begin() + (index - 1);
@@ -116,15 +115,15 @@ bool Customer::didCustomerOrderedFromSeller(Seller &seller)
     {
         vector<Order*>::iterator itrOrder = this->orders_history.begin();
         vector<Order*>::iterator itrOrderEnd = this->orders_history.end();
-        vector<Product*> temp;
+        Array<Product*> temp;
         for (; itrOrder != itrOrderEnd; ++itrOrder)
         {
             temp = (*itrOrder)->getList();
-            vector<Product*>::iterator itrProduct = temp.begin();
-            vector<Product*>::iterator itrProductEnd = temp.end();
-            for (; itrProduct != itrProductEnd; ++itrProduct)
+            int size=temp.getSize();
+            for (int i=0; i<size; ++i)
             {
-                if ((*itrProduct)->getSeller() == seller)
+                Product* t_product=temp.getVal(i);
+                if (t_product->getSeller() == seller)
                     return true;
             }
         }

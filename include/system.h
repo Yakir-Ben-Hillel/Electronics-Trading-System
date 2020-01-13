@@ -20,6 +20,7 @@ using namespace std;
 #include "seller.h"
 #include "CAS.h"
 #include "systemException.h"
+#include "Array.h"
 
 class User;
 class System

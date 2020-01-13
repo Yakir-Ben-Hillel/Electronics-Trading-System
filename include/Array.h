@@ -23,6 +23,8 @@ public:
 
     const Array &operator=(const Array &other);
     const Array &operator+=(const T &val);
+    T& operator[](int index);
+    const T& getVal(int location);
     friend ostream &operator<<(ostream &out, const Array &arr)
     {
         for (const auto &x : arr)
@@ -51,7 +53,7 @@ Array<T>::Array(const Array &&other)
 template <class T>
 const Array<T> &Array<T>::operator=(const Array<T> &other)
 {
-    if (this != other)
+    if (this != &other)
     {
         delete[] array;
         this->logicSize = other.logicSize;
@@ -90,6 +92,18 @@ bool Array<T>::Empty() const
     if (logicSize == 0)
         return true;
     return false;
+}
+
+template <class T>
+const T& Array<T>::getVal(int location)
+{
+    return this->array[location];
+}
+
+template <class T>
+T& Array<T>::operator[](int index)
+{
+    return this->array[index];
 }
 
 #endif
