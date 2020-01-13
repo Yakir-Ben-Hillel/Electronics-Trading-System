@@ -105,9 +105,12 @@ void System::mainMenu()
                 cout << *customer_temp;
                 break;
             case 7:
-                this->logged_in_user = nullptr;
+                this->changePassWord();
                 break;
             case 8:
+                this->logged_in_user = nullptr;
+                break;
+            case 9:
                 isFinished = true;
                 break;
             default:
@@ -158,11 +161,13 @@ void System::mainMenu()
             case 3:
                 cout << *seller_temp;
                 break;
-
             case 4:
-                this->logged_in_user = nullptr;
+                this->changePassWord();
                 break;
             case 5:
+                this->logged_in_user = nullptr;
+                break;
+            case 6:
                 isFinished = true;
                 break;
             default:
@@ -279,9 +284,12 @@ void System::mainMenu()
                 cout << *cas_temp;
                 break;
             case 10:
-                this->logged_in_user = nullptr;
+                this->changePassWord();
                 break;
             case 11:
+                this->logged_in_user = nullptr;
+                break;
+            case 12:
                 isFinished = true;
                 break;
             }

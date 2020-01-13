@@ -34,16 +34,18 @@ void System::printOptionsAsCustomer() const
     cout << "4) Print all Sellers names." << endl;
     cout << "5) Search for a Product." << endl;
     cout << "6) Print your user's info." << endl;
-    cout << "7) Logout." << endl;
-    cout << "8) Exit." << endl;
+    cout << "7) change PassWord." << endl;
+    cout << "8) Logout." << endl;
+    cout << "9) Exit." << endl;
 }
 void System::printOptionsAsSeller() const
 {
     cout << "1) Add a Product." << endl;
     cout << "2) View your Feedbacks." << endl;
     cout << "3) Print your user's info." << endl;
-    cout << "4) Logout." << endl;
-    cout << "5) Exit." << endl;
+    cout << "4) change PassWord." << endl;
+    cout << "5) Logout." << endl;
+    cout << "6) Exit." << endl;
 }
 void System::printOptionAsCAS() const
 {
@@ -51,11 +53,11 @@ void System::printOptionAsCAS() const
     cout << "2) Add Feedback to a Seller." << endl;
     cout << "3) Make an Order." << endl;
     cout << "4) Print all Sellers names." << endl;
-    cout << "5) Add Feedback to Seller" << endl;
-    cout << "6) Search for a Product" << endl;
-    cout << "7) Add a Product." << endl;
-    cout << "8) View your Feedbacks." << endl;
-    cout << "9) Print your user's info." << endl;
+    cout << "5) Search for a Product" << endl;
+    cout << "6) Add a Product." << endl;
+    cout << "7) View your Feedbacks." << endl;
+    cout << "8) Print your user's info." << endl;
+    cout << "9) change PassWord." << endl;
     cout << "10) Logout." << endl;
     cout << "11) Exit." << endl;
 }
