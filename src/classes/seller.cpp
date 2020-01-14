@@ -2,8 +2,8 @@
 #include "../../include/seller.h"
 
 Seller::Seller(const string &username, const string &password, const Address &address,
-               const vector<Product*> &stockArray,
-               const vector<FeedBack*> &feedbacksArray) noexcept(false)
+               const vector<Product *> &stockArray,
+               const vector<FeedBack *> &feedbacksArray) noexcept(false)
     : User(username, password, address), s_stock(stockArray), feedBack_array(feedBack_array)
 {
 }
@@ -20,15 +20,15 @@ Seller::Seller(Seller &&other) : User(std::move(other))
     this->feedBack_array = other.feedBack_array;
 }
 
-void Seller::setStockArray(vector<Product*> given_product_array)
+void Seller::setStockArray(vector<Product *> given_product_array)
 {
     this->s_stock = given_product_array;
 }
-void Seller::setFeedbacksArray(vector<FeedBack*> given_feedBacks_array)
+void Seller::setFeedbacksArray(vector<FeedBack *> given_feedBacks_array)
 {
     this->feedBack_array = given_feedBacks_array;
 }
-vector<Product*> Seller::getStock() const
+vector<Product *> Seller::getStock() const
 {
     return s_stock;
 }
@@ -39,12 +39,12 @@ bool Seller::addProductToStockArray(Product &new_product)
 }
 bool Seller::addFeedbackToArray(FeedBack &new_feedback)
 {
-    if(feedBack_array.capacity()==feedBack_array.size())
-       feedBack_array.reserve(feedBack_array.capacity()*2+1);
+    if (feedBack_array.capacity() == feedBack_array.size())
+        feedBack_array.reserve(feedBack_array.capacity() * 2 + 1);
     this->feedBack_array.push_back(&new_feedback);
     return true;
 }
-vector<FeedBack*> Seller::getfeedBacksArray() const
+vector<FeedBack *> Seller::getfeedBacksArray() const
 {
     return this->feedBack_array;
 }
@@ -66,21 +66,21 @@ void Seller::toOs(ostream &out) const
         if (this->s_stock.size() != 0)
         {
             out << "Products: " << endl;
-            vector<Product*>::const_iterator itr = s_stock.begin();
-            vector<Product*>::const_iterator itrEnd = s_stock.end();
+            vector<Product *>::const_iterator itr = s_stock.begin();
+            vector<Product *>::const_iterator itrEnd = s_stock.end();
             for (; itr != itrEnd; ++itr)
-                out << *itr;
+                out << *(*itr) << endl;
         }
         else
             out << "Has no Products" << endl;
         if (this->feedBack_array.size() != 0)
         {
             out << "Feedbacks: " << endl;
-            vector<FeedBack*>::const_iterator itr = feedBack_array.begin();
-            vector<FeedBack*>::const_iterator itrEnd = feedBack_array.end();
+            vector<FeedBack *>::const_iterator itr = feedBack_array.begin();
+            vector<FeedBack *>::const_iterator itrEnd = feedBack_array.end();
 
             for (; itr != itrEnd; ++itr)
-                out << *itr;
+                out << *(*itr) << endl;
         }
         else
             out << "Has no Feedbacks" << endl;

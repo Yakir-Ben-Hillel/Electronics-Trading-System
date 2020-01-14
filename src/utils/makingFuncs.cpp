@@ -32,7 +32,7 @@ void Seller::makeProductForSale() noexcept(false)
         cout << "1) Children" << endl
              << "2) Electricity" << endl
              << "3) Office" << endl
-             << "4)Clothing" << endl;
+             << "4) Clothing" << endl;
         cout << "Please insert the number of your product category: ";
         int chosen;
         cin >> chosen;
@@ -75,17 +75,17 @@ void System::chooseProductToAddToCustomerWishlist()
     {
         vector<int> indexes_array;
         int available_index_counter = 0;
-        vector<Product*> product_array;
+        vector<Product *> product_array;
         vector<User *>::iterator itr = this->users_array.begin();
         vector<User *>::iterator itrEnd = this->users_array.end();
         for (int i = 0; itr != itrEnd; ++itr, i++)
         {
             sellerTemp = dynamic_cast<Seller *>(*itr);
-            if (sellerTemp)
+            if (sellerTemp && (customerTemp->getName().compare(sellerTemp->getName())) != 0)
             {
                 if (!sellerTemp->getStock().empty())
                 {
-                    indexes_array[available_index_counter] = i;
+                    indexes_array.push_back(i);
                     available_index_counter++;
                 }
             }
@@ -114,7 +114,7 @@ void System::chooseProductToAddToCustomerWishlist()
                     product_index--;
                 } while (!(product_index <= !(chosen_seller->getStock().empty()) && product_index >= 0));
                 product_array = chosen_seller->getStock();
-                vector<Product*>::iterator itr = ((product_array.begin()) + product_index);
+                vector<Product *>::iterator itr = ((product_array.begin()) + product_index);
                 customerTemp->addProductToWishlistArray(*(*itr));
             }
         }
@@ -134,7 +134,7 @@ bool System::addFeedback(Customer &customer) noexcept(false)
     vector<User *>::iterator itrEnd = this->users_array.end();
     for (int i = 0; itr != itrEnd; ++itr, i++)
     {
-        seller_temp = dynamic_cast<Seller *>(*itr + i);
+        seller_temp = dynamic_cast<Seller *>(*itr);
         if (seller_temp)
             if (customer.didCustomerOrderedFromSeller(*seller_temp))
             {
@@ -188,7 +188,7 @@ void System::signup()
         do
         {
             cout << "Please choose an username (10 chars max): ";
-            getline(cin,username);
+            getline(cin, username);
             if (checkUsernameAvailability(username) == false)
             {
                 cout << "Username is not available, please choose another name." << endl;
@@ -198,7 +198,7 @@ void System::signup()
                 availabilty = true;
         } while (availabilty == false);
         cout << "Please choose a password (10 chars max): ";
-        getline(cin,password);
+        getline(cin, password);
         check = true;
         try
         {

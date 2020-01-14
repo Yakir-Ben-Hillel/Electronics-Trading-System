@@ -128,14 +128,16 @@ void System::compareCustomers() const
     bool isValid = true;
     unsigned int temp_counter = 0;
     Customer *customerTemp = nullptr;
-    int *indexes_array = new int[this->users_array.size()];
+    vector<int> indexes_array;
+    vector<User *>::const_iterator itr = this->users_array.begin();
+    vector<User *>::const_iterator itrEnd = this->users_array.end();
 
-    for (int i = 0; i < this->users_array.size(); i++)
+    for (int i = 0; itr != itrEnd; ++itr, i++)
     {
-        customerTemp = dynamic_cast<Customer *>(this->users_array[i]);
+        customerTemp = dynamic_cast<Customer *>(*itr);
         if (customerTemp)
         {
-            indexes_array[temp_counter] = i;
+            indexes_array.push_back(i);
             temp_counter++;
             std::cout << temp_counter << ") " << customerTemp->getName() << endl;
         }
@@ -146,7 +148,7 @@ void System::compareCustomers() const
         int op1, op2;
         do
         {
-            std::cout << "Please choose the customers you would like to compare: (option1 option2) ";
+            std::cout << "Please choose the customers you would like to compare: (option1,option2) ";
             cin >> op1 >> op2;
             if ((op1 == op2) || (op1 < 0) || (op2 < 0))
             {
@@ -155,8 +157,9 @@ void System::compareCustomers() const
                 isValid = false;
             }
             Customer *temp1, *temp2;
-            temp1 = dynamic_cast<Customer *>(this->users_array[indexes_array[op1 - 1]]);
-            temp2 = dynamic_cast<Customer *>(this->users_array[indexes_array[op2 - 1]]);
+            itr = this->users_array.begin();
+            temp1 = dynamic_cast<Customer *>(*(itr) + *(indexes_array.begin() + (op1 - 1)));
+            temp2 = dynamic_cast<Customer *>(*(itr) + *(indexes_array.begin() + (op2 - 1)));
             if (!temp1 || !temp2)
             {
                 std::cout << endl;
@@ -183,29 +186,28 @@ void System::compareCustomers() const
     }
     else
         cout << "Not enough Customers Available." << endl;
-    delete[] indexes_array;
 }
 
 void System::changePassWord()
 {
-    char temp[256];
+    string temp;
     bool isSucceeded;
     do
     {
         isSucceeded = true;
         cout << "Please insert your current password: ";
         cin.ignore(1, '\n');
-        cin.getline(temp, 256, '\n');
+        getline(cin, temp);
 
         if (this->logged_in_user->getPassword() == temp)
         {
-            this->logged_in_user->setPassword(string(temp));
+            cout << "Please insert your new password: ";
+            getline(cin, temp);
+            this->logged_in_user->setPassword(temp);
             cout << endl;
             cout << "your password has changed!" << endl;
         }
         isSucceeded = false;
         cout << "the password you entered is incorrect, please try again!" << endl;
     } while (isSucceeded);
-
-    return;
 }

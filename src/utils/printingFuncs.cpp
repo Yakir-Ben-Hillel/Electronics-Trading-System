@@ -53,13 +53,14 @@ void System::printOptionAsCAS() const
     cout << "2) Add Feedback to a Seller." << endl;
     cout << "3) Make an Order." << endl;
     cout << "4) Print all Sellers names." << endl;
-    cout << "5) Search for a Product" << endl;
-    cout << "6) Add a Product." << endl;
-    cout << "7) View your Feedbacks." << endl;
-    cout << "8) Print your user's info." << endl;
-    cout << "9) change PassWord." << endl;
-    cout << "10) Logout." << endl;
-    cout << "11) Exit." << endl;
+    cout << "5) Add a Feedback to a Seller." << endl;
+    cout << "6) Search for a Product" << endl;
+    cout << "7) Add a Product." << endl;
+    cout << "8) View your Feedbacks." << endl;
+    cout << "9) Print your user's info." << endl;
+    cout << "10) change PassWord." << endl;
+    cout << "11) Logout." << endl;
+    cout << "12) Exit." << endl;
 }
 void System::printCustomersNames() const
 {
@@ -117,14 +118,14 @@ void System::printCASNames() const
 }
 void Seller::printSellerProducts()
 {
-    vector<Product*> products_array = this->getStock();
-    vector<Product*>::const_iterator itr = products_array.begin();
-    vector<Product*>::const_iterator itrEnd = products_array.end();
+    vector<Product *> products_array = this->getStock();
+    vector<Product *>::const_iterator itr = products_array.begin();
+    vector<Product *>::const_iterator itrEnd = products_array.end();
     Product *product = nullptr;
     for (int i = 0; itr != itrEnd; ++itr)
     {
         cout << "Product number #" << i + 1 << " ";
-        cout << *itr;
+        cout << *(*itr);
         cout << endl;
     }
 }
@@ -159,9 +160,9 @@ void System::showProductsWithTheSameName(const string &name)
         seller_temp = dynamic_cast<Seller *>(*itr);
         if (seller_temp)
         {
-            vector<Product*> stock = seller_temp->getStock();
-            vector<Product*>::const_iterator itrP = stock.begin();
-            vector<Product*>::const_iterator itrPEnd = stock.end();
+            vector<Product *> stock = seller_temp->getStock();
+            vector<Product *>::const_iterator itrP = stock.begin();
+            vector<Product *>::const_iterator itrPEnd = stock.end();
 
             for (; itrP != itrPEnd; ++itrP)
             {
