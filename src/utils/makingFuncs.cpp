@@ -187,7 +187,7 @@ void System::signup()
         string username, password;
         do
         {
-            cout << "Please choose an username (10 chars max): ";
+            cout << "Please choose an username: ";
             getline(cin, username);
             if (checkUsernameAvailability(username) == false)
             {
@@ -197,7 +197,7 @@ void System::signup()
             else
                 availabilty = true;
         } while (availabilty == false);
-        cout << "Please choose a password (10 chars max): ";
+        cout << "Please choose a password: ";
         getline(cin, password);
         check = true;
         try
