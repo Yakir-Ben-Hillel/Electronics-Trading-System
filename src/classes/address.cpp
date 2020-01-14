@@ -70,7 +70,9 @@ ostream &operator<<(ostream &out, const Address &address)
 {
     if (typeid(out) == typeid(ofstream))
     {
-        out << address.cityName << " " << address.streetName << " " << address.apartmentNumber << " " << endl;
+        out << address.cityName << endl
+            << address.streetName << endl
+            << address.apartmentNumber << endl;
     }
     else
     {
@@ -84,7 +86,9 @@ ostream &operator<<(ostream &out, const Address &address)
 istream &operator>>(istream &in, Address &address)
 {
     string cityName, streetName;
-    in >> cityName >> streetName >> address.apartmentNumber;
+    getline(in, cityName);
+    getline(in, streetName);
+    in >> address.apartmentNumber;
     address.setCityName(cityName);
     address.setStreetName(streetName);
     return in;

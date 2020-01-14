@@ -15,7 +15,7 @@ public:
             const string &streetName) noexcept(false);
     Address(const Address &other);
     Address(Address &&other);
-    ~Address();
+    ~Address(){};
     void setCityName(const string &cityName);
     void setStreetName(const string &streetName);
     bool setApartmentNumber(unsigned int apartmentNumber);

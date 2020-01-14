@@ -14,7 +14,7 @@ public:
 	Seller(const Seller &other);
 	Seller(ifstream &inFile);
 	Seller(Seller &&other);
-	virtual ~Seller();
+	virtual ~Seller(){}
 	virtual User *clone() const override;
 	//Getters Functions.
 	vector<Product*> getStock() const;

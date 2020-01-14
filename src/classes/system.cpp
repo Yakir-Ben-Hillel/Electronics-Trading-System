@@ -60,7 +60,7 @@ void System::loadUsersFromFile()
     bool fEof = false;
     if (inFile)
     {
-        char type[10];
+        string type;
         int amount;
         inFile >> amount;
         for (int i = 0; i < amount; i++)
@@ -68,15 +68,15 @@ void System::loadUsersFromFile()
             inFile >> type;
             try
             {
-                if (strcmp(type, "Customer") == 0)
+                if (type.compare("Customer") == 0)
                 {
                     *this += new Customer(inFile);
                 }
-                else if (strcmp(type, "Seller") == 0)
+                else if (type.compare("Seller") == 0)
                 {
                     *this += new Seller(inFile);
                 }
-                else if (strcmp(type, "CAS") == 0)
+                else if (type.compare("CAS") == 0)
                 {
                     *this += new CAS(inFile);
                 }
@@ -104,9 +104,12 @@ void System::writeUsersToFile()
 {
     ofstream outFile("Users.txt", ios::trunc);
     outFile << this->users_array.size() << endl;
-    for (int i = 0; this->users_array.size(); i++)
+    vector<User *>::iterator itr = this->users_array.begin();
+    vector<User *>::iterator itrEnd = this->users_array.end();
+
+    for (; itr != itrEnd; ++itr)
     {
-        outFile << *this->users_array[i];
+        outFile << *(*itr);
     }
     outFile.close();
 }
@@ -186,12 +189,12 @@ void System::compareCustomers() const
 void System::changePassWord()
 {
     char temp[256];
-    bool isSucceeded ;
+    bool isSucceeded;
     do
     {
         isSucceeded = true;
         cout << "Please insert your current password: ";
-        cin.ignore(1,'\n');
+        cin.ignore(1, '\n');
         cin.getline(temp, 256, '\n');
 
         if (this->logged_in_user->getPassword() == temp)
@@ -201,7 +204,7 @@ void System::changePassWord()
             cout << "your password has changed!" << endl;
         }
         isSucceeded = false;
-        cout <<"the password you entered is incorrect, please try again!"<<endl;
+        cout << "the password you entered is incorrect, please try again!" << endl;
     } while (isSucceeded);
 
     return;

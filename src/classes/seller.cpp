@@ -1,4 +1,6 @@
 #include "../../include/system.h"
+#include "../../include/seller.h"
+
 Seller::Seller(const string &username, const string &password, const Address &address,
                const vector<Product*> &stockArray,
                const vector<FeedBack*> &feedbacksArray) noexcept(false)

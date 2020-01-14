@@ -1,4 +1,6 @@
 #include "../../include/system.h"
+#include "../../include/customer.h"
+
 Customer::Customer(const Customer &other) : User(other)
 {
     *this = other;

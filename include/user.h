@@ -18,7 +18,7 @@ protected:
     void setName(const string &name);//the user cannot change its name but he can change password or change the address
 
 public:
-    virtual ~User();
+    virtual ~User(){};
     virtual User *clone() const = 0;/*Abstract Data Type*/
     void setPassword(const string &password);
     void setAddress(const Address &address);

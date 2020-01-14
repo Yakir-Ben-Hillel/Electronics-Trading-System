@@ -31,7 +31,7 @@ public:
 	System() = default;
 	System(vector<User *> users_array, User *logged_in_user = nullptr);
 	System(const System &other);
-	~System();
+	~System(){}
 	//Setters Functions.
 	//Getters Functions.
 	const string &getSystemName() const;
