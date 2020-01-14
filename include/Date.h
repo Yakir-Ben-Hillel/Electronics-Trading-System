@@ -1,3 +1,4 @@
+#pragma once
 #ifndef __DATE_H
 #define __DATE_H
 #include "system.h"

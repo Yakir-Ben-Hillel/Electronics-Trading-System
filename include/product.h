@@ -1,6 +1,8 @@
+#pragma once
 #ifndef __Product_H
 #define __Product_H
 
+#include <string>
 class Seller;
 
 class Product

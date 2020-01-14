@@ -1,3 +1,4 @@
+#pragma once
 #ifndef __Customer_H
 #define __Customer_H
 //#include "seller.h"

@@ -1,6 +1,8 @@
+#pragma once
 #ifndef __FEEDBACK_H
 #define __FEEDBACK_H
 
+#include <string>
 class Date;
 class Customer;
 

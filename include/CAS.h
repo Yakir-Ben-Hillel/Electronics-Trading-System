@@ -1,3 +1,4 @@
+#pragma once
 #ifndef __CAS
 #define __CAS
 #include "customer.h"
