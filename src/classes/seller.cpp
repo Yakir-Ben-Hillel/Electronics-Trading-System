@@ -19,7 +19,17 @@ Seller::Seller(Seller &&other) : User(std::move(other))
     this->s_stock = other.s_stock;
     this->feedBack_array = other.feedBack_array;
 }
-
+Seller::~Seller()
+{
+    vector<Product *>::iterator itrProd = this->s_stock.begin();
+    vector<Product *>::iterator itrProdEnd = this->s_stock.end();
+    vector<FeedBack *>::iterator itrFeed = this->feedBack_array.begin();
+    vector<FeedBack *>::iterator itrFeedEnd = this->feedBack_array.end();
+    for (; itrProd != itrProdEnd; ++itrProdEnd)
+        delete *(itrProd);
+    for (; itrFeed != itrFeedEnd; ++itrFeed)
+        delete *(itrFeed);
+}
 void Seller::setStockArray(vector<Product *> given_product_array)
 {
     this->s_stock = given_product_array;

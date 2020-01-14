@@ -13,7 +13,7 @@ public:
 	Customer(Customer &&other);
 	Customer(const string &username, const string &password, const Address &address,
 			 const vector<Product *> &wishlist = vector<Product *>(), const vector<Order *> &orderHistory = vector<Order *>()) noexcept(false);
-	virtual ~Customer(){}
+	virtual ~Customer();
 	const Customer &operator=(const Customer &other);
 	friend bool operator<(const Customer &first, const Customer &second);
 	friend bool operator>(const Customer &first, const Customer &second);

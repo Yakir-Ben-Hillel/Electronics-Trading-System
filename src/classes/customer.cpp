@@ -20,7 +20,17 @@ Customer::Customer(const string &username, const string &password,
     : User(username, password, address), c_wishList(wishlist), orders_history(orderHistory)
 {
 }
-
+Customer::~Customer()
+{
+    vector<Product *>::iterator itrProd = this->c_wishList.begin();
+    vector<Product *>::iterator itrProdEnd = this->c_wishList.end();
+    vector<Order *>::iterator itrOrder = this->orders_history.begin();
+    vector<Order *>::iterator itrOrderEnd = this->orders_history.end();
+    for (; itrProd != itrProdEnd; ++itrProdEnd)
+        delete *(itrProd);
+    for (; itrOrder != itrOrderEnd; ++itrOrder)
+        delete *(itrOrder);
+}
 void Customer::setWishList(const vector<Product *> &wishList)
 {
     this->c_wishList = wishList;

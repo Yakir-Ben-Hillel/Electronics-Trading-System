@@ -12,6 +12,12 @@ Order::Order(const Order &&other)
     : order_products(other.order_products), price_of_order(other.price_of_order)
 {
 }
+Order::~Order()
+{
+    int size = this->order_products.getSize();
+    for (int i = 0; i < size; i++)
+        delete this->order_products[i];
+}
 bool Order::setPrice(float price_of_order)
 {
     if (price_of_order < 0)

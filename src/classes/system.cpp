@@ -7,6 +7,30 @@ System::System(vector<User *> users_array,
 System::System(const System &other) : users_array(move(other.users_array)), logged_in_user(other.logged_in_user)
 {
 }
+System::~System()
+{
+    vector<User *>::iterator itr = this->users_array.begin();
+    vector<User *>::iterator itrEnd = this->users_array.end();
+
+    for (; itr != itrEnd; ++itr)
+    {
+        if (typeid(*itr) == typeid(Customer))
+        {
+            Customer *customerTemp = dynamic_cast<Customer *>(*itr);
+            delete customerTemp;
+        }
+        else if (typeid(*itr) == typeid(Seller))
+        {
+            Seller *sellerTemp = dynamic_cast<Seller *>(*itr);
+            delete sellerTemp;
+        }
+        else if (typeid(*itr) == typeid(CAS))
+        {
+            CAS *casTemp = dynamic_cast<CAS *>(*itr);
+            delete casTemp;
+        }
+    }
+}
 bool System::setUsersArray(vector<User *> given_users_array)
 {
     vector<User *>::iterator itr = given_users_array.begin();
