@@ -140,7 +140,7 @@ void System::writeUsersToFile()
 
 void System::resizeUsersArray()
 {
-    this->users_array.reserve(this->users_array.size() * 5);
+    this->users_array.reserve(this->users_array.size() * 2);
 }
 const string &System::getSystemName() const
 {
@@ -229,7 +229,7 @@ void System::changePassWord()
             getline(cin, temp);
             this->logged_in_user->setPassword(temp);
             cout << endl;
-            cout << "your password has changed!" << endl;
+            cout << "Your password has changed!" << endl;
         }
         isSucceeded = false;
         cout << "the password you entered is incorrect, please try again!" << endl;

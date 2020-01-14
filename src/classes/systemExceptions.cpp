@@ -86,5 +86,5 @@ void UserException::show() const
 //our terminate function in case of unknown problem
 void Terminate()
 {
-    cout << "Something went wrong, please call support for further information!" << endl;
+    cout << "-->Something went wrong, please call support for further information<--" << endl;
 }

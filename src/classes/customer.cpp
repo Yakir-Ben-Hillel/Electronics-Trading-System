@@ -22,12 +22,11 @@ Customer::Customer(const string &username, const string &password,
 }
 Customer::~Customer()
 {
-    vector<Product *>::iterator itrProd = this->c_wishList.begin();
-    vector<Product *>::iterator itrProdEnd = this->c_wishList.end();
+    /*we do not need to deallocate the products we have on the wish list 'cause we just point to 
+    them,and the seller whom own each product will deallocate all of his products.
+    although we should deallocate the orders we made.*/
     vector<Order *>::iterator itrOrder = this->orders_history.begin();
     vector<Order *>::iterator itrOrderEnd = this->orders_history.end();
-    for (; itrProd != itrProdEnd; ++itrProdEnd)
-        delete *(itrProd);
     for (; itrOrder != itrOrderEnd; ++itrOrder)
         delete *(itrOrder);
 }
