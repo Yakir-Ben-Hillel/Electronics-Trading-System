@@ -29,6 +29,7 @@ Customer::~Customer()
     vector<Order *>::iterator itrOrderEnd = this->orders_history.end();
     for (; itrOrder != itrOrderEnd; ++itrOrder)
         delete *(itrOrder);
+    this->orders_history.clear();
 }
 void Customer::setWishList(const vector<Product *> &wishList)
 {

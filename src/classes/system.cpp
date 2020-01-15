@@ -30,6 +30,7 @@ System::~System()
             delete casTemp;
         }
     }
+    this->users_array.clear();
 }
 bool System::setUsersArray(vector<User *> given_users_array)
 {

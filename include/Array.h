@@ -24,8 +24,8 @@ public:
 
     const Array &operator=(const Array &other);
     const Array &operator+=(const T &val);
-    T& operator[](int index);
-    const T& getVal(int location);
+    T &operator[](int index);
+    const T &getVal(int location);
     friend ostream &operator<<(ostream &out, const Array &arr)
     {
         for (const auto &x : arr)
@@ -37,6 +37,7 @@ public:
     inline int getFullSize() const { return physicSize; }
     inline char getDelimiter() const { return delimiter; }
     inline void setDelimiter(char ch) { this->delimiter = ch; }
+    void clear();
     bool Empty() const;
 };
 
@@ -96,15 +97,23 @@ bool Array<T>::Empty() const
 }
 
 template <class T>
-const T& Array<T>::getVal(int location)
+const T &Array<T>::getVal(int location)
 {
     return this->array[location];
 }
 
 template <class T>
-T& Array<T>::operator[](int index)
+T &Array<T>::operator[](int index)
 {
     return this->array[index];
+}
+
+template <class T>
+void Array<T>::clear()
+{
+    delete[] this->array;
+    this->logicSize=0;
+    this->physicSize=1;
 }
 
 #endif

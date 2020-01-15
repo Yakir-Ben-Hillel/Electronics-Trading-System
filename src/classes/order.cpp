@@ -15,8 +15,7 @@ Order::Order(const Order &&other)
 Order::~Order()
 {
     int size = this->order_products.getSize();
-    for (int i = 0; i < size; i++)
-        delete this->order_products[i];
+    this->order_products.clear();
 }
 bool Order::setPrice(float price_of_order)
 {

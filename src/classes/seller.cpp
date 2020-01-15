@@ -27,8 +27,10 @@ Seller::~Seller()
     vector<FeedBack *>::iterator itrFeedEnd = this->feedBack_array.end();
     for (; itrProd != itrProdEnd; ++itrProdEnd)
         delete *(itrProd);
+    this->s_stock.clear();
     for (; itrFeed != itrFeedEnd; ++itrFeed)
         delete *(itrFeed);
+    this->feedBack_array.clear();
 }
 void Seller::setStockArray(vector<Product *> given_product_array)
 {
