@@ -14,13 +14,13 @@ private:
     T *array;
 
 public:
-    Array(int physicSize = 1, char delimiter = ' ') : delimiter(delimiter), physicSize(physicSize), logicSize(0)
+    Array(int physicSize = 1, char delimiter = ' ') noexcept : delimiter(delimiter), physicSize(physicSize), logicSize(0)
     {
         array = new T[physicSize];
     }
-    Array(const Array &other);
-    Array(const Array &&other);
-    ~Array() { delete[] array; }
+    Array(const Array &other) noexcept;
+    Array(const Array &&other) noexcept;
+    ~Array() noexcept { delete[] array; }
 
     const Array &operator=(const Array &other);
     const Array &operator+=(const T &val);
@@ -37,18 +37,18 @@ public:
     inline int getFullSize() const { return physicSize; }
     inline char getDelimiter() const { return delimiter; }
     inline void setDelimiter(char ch) { this->delimiter = ch; }
-    void clear();
+    void clear() noexcept;
     bool Empty() const;
 };
 
 template <class T>
-Array<T>::Array(const Array &other) : array(nullptr)
+Array<T>::Array(const Array &other) noexcept : array(nullptr)
 {
     *this = other;
 }
 
 template <class T>
-Array<T>::Array(const Array &&other)
+Array<T>::Array(const Array &&other) noexcept
 {
 }
 
@@ -109,7 +109,7 @@ T &Array<T>::operator[](int index)
 }
 
 template <class T>
-void Array<T>::clear()
+void Array<T>::clear() noexcept
 {
     delete[] this->array;
     this->logicSize=0;
