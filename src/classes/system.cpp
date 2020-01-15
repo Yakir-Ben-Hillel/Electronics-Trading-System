@@ -11,23 +11,22 @@ System::~System()
 {
     vector<User *>::iterator itr = this->users_array.begin();
     vector<User *>::iterator itrEnd = this->users_array.end();
-
     for (; itr != itrEnd; ++itr)
     {
-        if (typeid(*itr) == typeid(Customer))
+        Customer *customerTemp = dynamic_cast<Customer *>(*itr);
+        Seller *sellerTemp = dynamic_cast<Seller *>(*itr);
+        CAS *casTemp = dynamic_cast<CAS *>(*itr);
+        if (casTemp)
         {
-            Customer *customerTemp = dynamic_cast<Customer *>(*itr);
-            delete customerTemp;
+            delete casTemp;
         }
-        else if (typeid(*itr) == typeid(Seller))
+        else if (sellerTemp)
         {
-            Seller *sellerTemp = dynamic_cast<Seller *>(*itr);
             delete sellerTemp;
         }
-        else if (typeid(*itr) == typeid(CAS))
+        else if (customerTemp)
         {
-            CAS *casTemp = dynamic_cast<CAS *>(*itr);
-            delete casTemp;
+            delete customerTemp;
         }
     }
     this->users_array.clear();
@@ -39,20 +38,21 @@ bool System::setUsersArray(vector<User *> given_users_array)
 
     for (; itr != itrEnd; ++itr)
     {
-        if (typeid(*itr) == typeid(Customer))
+        Customer *customerTemp = dynamic_cast<Customer *>(*itr);
+        Seller *sellerTemp = dynamic_cast<Seller *>(*itr);
+        CAS *casTemp = dynamic_cast<CAS *>(*itr);
+
+        if (casTemp)
         {
-            Customer *customerTemp = dynamic_cast<Customer *>(*itr);
-            users_array.push_back(customerTemp);
+            users_array.push_back(casTemp);
         }
-        else if (typeid(*itr) == typeid(Seller))
+        else if (sellerTemp)
         {
-            Seller *sellerTemp = dynamic_cast<Seller *>(*itr);
             users_array.push_back(sellerTemp);
         }
-        else if (typeid(*itr) == typeid(CAS))
+        else if (customerTemp)
         {
-            CAS *casTemp = dynamic_cast<CAS *>(*itr);
-            users_array.push_back(*itr);
+            users_array.push_back(customerTemp);
         }
         else
             return false; //Given users array is invalid.
