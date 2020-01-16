@@ -1,4 +1,4 @@
-2
+3
 CAS
 yakir985
 y9349931
@@ -11,3 +11,9 @@ y9349931
 ashdod
 somewhere
 55
+Customer
+maor ben moshe
+Maor9920
+holon
+zefat
+11

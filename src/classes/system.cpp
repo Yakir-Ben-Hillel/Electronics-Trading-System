@@ -229,10 +229,12 @@ void System::changePassWord()
             cout << "Please insert your new password: ";
             getline(cin, temp);
             this->logged_in_user->setPassword(temp);
-            cout << endl;
             cout << "Your password has changed!" << endl;
         }
-        isSucceeded = false;
-        cout << "the password you entered is incorrect, please try again!" << endl;
-    } while (isSucceeded);
+        else
+        {
+            isSucceeded = false;
+            cout << "the password you entered is incorrect, please try again!" << endl;
+        }
+    } while (!isSucceeded);
 }
