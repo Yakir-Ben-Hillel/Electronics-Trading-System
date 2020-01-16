@@ -79,23 +79,25 @@ void Customer::makeOrder() noexcept(false)
                 cout << "please pick from the following products the product you want to buy: " << endl;
                 vector<Product *>::iterator itr = this->c_wishList.begin();
                 vector<Product *>::iterator itrEnd = this->c_wishList.end();
-
-                for (; itr != itrEnd; ++itr)
+                do
                 {
-                    cout << "Product number #" << counter << " " << endl;
-                    cout << *(*itr);
-                    counter++;
-                }
-
-                cout << "please enter the number of product you would like to buy: " << endl;
-                cin >> index;
-                temp_list += this->c_wishList[index - 1];
+                    for (; itr != itrEnd; ++itr)
+                    {
+                        cout << "Product number #" << counter << " " << endl;
+                        cout << *(*itr);
+                        counter++;
+                    }
+                    cout << "please enter the number of product you would like to buy: " << endl;
+                    cin >> index;
+                    if (index > this->c_wishList.size() || index <= 0)
+                        cout << "Input is invalid, please try again." << endl;
+                } while (index > this->c_wishList.size() || index <= 0);
                 vector<Product *>::iterator temp = this->c_wishList.begin();
                 temp = temp + (index - 1);
+                temp_list += *temp;
                 price_of_order += (*temp)->getPrice();
                 temp_index++;
-                auto toDelete = this->c_wishList.begin() + (index - 1);
-                this->c_wishList.erase(toDelete);
+                this->c_wishList.erase(temp);
                 if (this->c_wishList.size() != 0)
                 {
                     cout << "do you want to buy something else?(y/n)" << endl;
@@ -164,9 +166,7 @@ void Customer::addFeedBackToSeller(Seller &seller) noexcept(false)
         seller.addFeedbackToArray(*curr_feedback);
     }
     else
-    {
-        cout << "you can't give a feedback to a seller you didn't buy from" << endl;
-    }
+        cout << "you can't give a feedback to a seller you didn't make a transaction with." << endl;
 }
 
 const Customer &Customer::operator=(const Customer &other)

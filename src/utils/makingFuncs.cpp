@@ -92,31 +92,39 @@ void System::chooseProductToAddToCustomerWishlist()
         }
         if (available_index_counter != 0)
         {
+            bool toContinue = false;
             do
-            {
-                for (int i = 0; i < available_index_counter; i++)
-                {
-                    cout << i + 1 << ")" << (*(this->users_array.begin() + *(indexes_array.begin() + i)))->getName() << endl;
-                }
-                cout << "Please choose a seller in-order to view his products: ";
-                cin >> seller_index;
-                seller_index--;
-            } while (!(seller_index <= available_index_counter && seller_index >= 0));
-            Seller *chosen_seller = dynamic_cast<Seller *>(this->users_array[indexes_array[seller_index]]);
-            if (chosen_seller)
             {
                 do
                 {
-                    chosen_seller->printSellerProducts();
-                    cout << endl
-                         << "Please choose the product you want to add into your wishlist: ";
-                    cin >> product_index;
-                    product_index--;
-                } while (!(product_index <= chosen_seller->getStock().size() && product_index >= 0));
-                product_array = chosen_seller->getStock();
-                vector<Product *>::iterator itr = ((product_array.begin()) + product_index);
-                customerTemp->addProductToWishlistArray(*(*itr));
-            }
+                    for (int i = 0; i < available_index_counter; i++)
+                    {
+                        cout << i + 1 << ")" << (*(this->users_array.begin() + *(indexes_array.begin() + i)))->getName() << endl;
+                    }
+                    cout << "Please choose a seller in-order to view his products: ";
+                    cin >> seller_index;
+                    seller_index--;
+                } while (!(seller_index <= available_index_counter && seller_index >= 0));
+                Seller *chosen_seller = dynamic_cast<Seller *>(this->users_array[indexes_array[seller_index]]);
+                if (chosen_seller)
+                {
+                    do
+                    {
+                        chosen_seller->printSellerProducts();
+                        cout << endl
+                             << "Please choose the product you want to add into your wishlist: ";
+                        cin >> product_index;
+                        product_index--;
+                    } while (!(product_index <= chosen_seller->getStock().size() && product_index >= 0));
+                    product_array = chosen_seller->getStock();
+                    vector<Product *>::iterator itr = ((product_array.begin()) + product_index);
+                    customerTemp->addProductToWishlistArray(*(*itr));
+                    cout << "Would you like to continue adding Products to the Wishlist? (y/n): ";
+                    char answer;
+                    cin >> answer;
+                    answer == 'y' ? toContinue = true : toContinue = false;
+                }
+            } while (toContinue);
         }
         else
         {
