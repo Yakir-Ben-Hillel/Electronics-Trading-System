@@ -111,7 +111,7 @@ void Customer::makeOrder() noexcept(false)
         } while (fContinue != false);
         Order *temp_order = new Order(temp_list, price_of_order);
         this->orders_history.push_back(temp_order);
-        cout << temp_order;
+        cout << *temp_order;
     }
     else
     {

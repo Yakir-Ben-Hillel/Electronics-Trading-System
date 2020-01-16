@@ -23,7 +23,7 @@ void Seller::makeProductForSale() noexcept(false)
     Seller *seller_of_product;
     unsigned int seller_index;
     bool isCategoryValid = false;
-    cout << "Please choose a name:";
+    cout << "Please choose a name: ";
     cin.ignore(256, '\n');
     getline(cin, product_name);
     while (!isCategoryValid)
@@ -112,7 +112,7 @@ void System::chooseProductToAddToCustomerWishlist()
                          << "Please choose the product you want to add into your wishlist: ";
                     cin >> product_index;
                     product_index--;
-                } while (!(product_index <= !(chosen_seller->getStock().empty()) && product_index >= 0));
+                } while (!(product_index <= chosen_seller->getStock().size() && product_index >= 0));
                 product_array = chosen_seller->getStock();
                 vector<Product *>::iterator itr = ((product_array.begin()) + product_index);
                 customerTemp->addProductToWishlistArray(*(*itr));

@@ -122,9 +122,9 @@ void Seller::printSellerProducts()
     vector<Product *>::const_iterator itr = products_array.begin();
     vector<Product *>::const_iterator itrEnd = products_array.end();
     Product *product = nullptr;
-    for (int i = 0; itr != itrEnd; ++itr)
+    for (int i = 1; itr != itrEnd; ++itr, i++)
     {
-        cout << "Product number #" << i + 1 << " ";
+        cout << "Product number #" << i << " ";
         cout << *(*itr);
         cout << endl;
     }
