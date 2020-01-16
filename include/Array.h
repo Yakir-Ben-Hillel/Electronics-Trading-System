@@ -9,7 +9,7 @@ template <class T>
 class Array
 {
 private:
-    int logicSize, physicSize; //by default if the physicSize is full we increase the size multiplied by two
+    int logicSize = 0, physicSize; //by default if the physicSize is full we increase the size multiplied by two
     char delimiter;
     T *array;
 
@@ -75,14 +75,16 @@ const Array<T> &Array<T>::operator+=(const T &val)
 {
     if (this->logicSize < this->physicSize)
     {
-        this->array[this->logicSize++] = val;
+        this->array[this->logicSize] = val;
+        this->logicSize++;
     }
     else //we have to allocate new space for the new val
     {
         Array<T> temp(this->physicSize * 2, this->delimiter);
         for (int i = 0; i < this->logicSize; i++)
-            temp += this->array[i];
-        temp += val;
+            temp[i] = this->array[i];
+        temp[this->logicSize] = val;
+        this->logicSize++;
         *this = temp;
     }
     return *this;
@@ -112,8 +114,8 @@ template <class T>
 void Array<T>::clear() noexcept
 {
     delete[] this->array;
-    this->logicSize=0;
-    this->physicSize=1;
+    this->logicSize = 0;
+    this->physicSize = 1;
 }
 
 #endif

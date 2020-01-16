@@ -63,8 +63,8 @@ void Seller::makeProductForSale() noexcept(false)
     }
     cout << "Please choose a price for your product: ";
     cin >> price;
-    Product new_product(product_name, category, *this, price);
-    this->addProductToStockArray(new_product);
+    Product *new_product = new Product(product_name, category, *this, price);
+    this->addProductToStockArray(*new_product);
 }
 void System::chooseProductToAddToCustomerWishlist()
 {

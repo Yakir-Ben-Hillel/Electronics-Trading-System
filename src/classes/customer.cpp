@@ -7,7 +7,6 @@ Customer::Customer(const Customer &other) : User(other)
 }
 Customer::Customer(ifstream &inFile) : User(inFile)
 {
-    // inFile >> *this;
 }
 Customer::Customer(Customer &&other) : User(std::move(other))
 {
@@ -78,10 +77,13 @@ void Customer::makeOrder() noexcept(false)
                 int counter = 1;
                 int tempList_size = temp_list.getSize();
                 cout << "please pick from the following products the product you want to buy: " << endl;
-                for (int i = 0; i < tempList_size; ++i)
+                vector<Product *>::iterator itr = this->c_wishList.begin();
+                vector<Product *>::iterator itrEnd = this->c_wishList.end();
+
+                for (; itr != itrEnd; ++itr)
                 {
                     cout << "Product number #" << counter << " " << endl;
-                    cout << *temp_list[i];
+                    cout << *(*itr);
                     counter++;
                 }
 
