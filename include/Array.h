@@ -85,6 +85,7 @@ const Array<T> &Array<T>::operator+=(const T &val)
             temp[i] = this->array[i];
         temp[this->logicSize] = val;
         this->logicSize++;
+        temp.logicSize = this->logicSize;
         *this = temp;
     }
     return *this;

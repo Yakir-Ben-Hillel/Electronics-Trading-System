@@ -90,7 +90,9 @@ void Customer::makeOrder() noexcept(false)
                 cout << "please enter the number of product you would like to buy: " << endl;
                 cin >> index;
                 temp_list += this->c_wishList[index - 1];
-                price_of_order += temp_list[temp_index]->getPrice();
+                vector<Product *>::iterator temp = this->c_wishList.begin();
+                temp = temp + (index - 1);
+                price_of_order += (*temp)->getPrice();
                 temp_index++;
                 auto toDelete = this->c_wishList.begin() + (index - 1);
                 this->c_wishList.erase(toDelete);
@@ -137,7 +139,7 @@ bool Customer::didCustomerOrderedFromSeller(Seller &seller)
             for (int i = 0; i < size; ++i)
             {
                 Product *t_product = temp.getVal(i);
-                if (t_product->getSeller() == seller)
+                if (!(t_product->getSeller() == seller))
                     return true;
             }
         }
@@ -158,8 +160,8 @@ void Customer::addFeedBackToSeller(Seller &seller) noexcept(false)
         int day, month, year;
         cout << "what date is it? (format: dd/mm/yyyy)" << endl;
         cin >> day >> month >> year;
-        FeedBack curr_feedback(temp, *this, Date(day, month, year));
-        seller.addFeedbackToArray(curr_feedback);
+        FeedBack *curr_feedback = new FeedBack(temp, *this, Date(day, month, year));
+        seller.addFeedbackToArray(*curr_feedback);
     }
     else
     {

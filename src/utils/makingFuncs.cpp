@@ -129,7 +129,6 @@ bool System::addFeedback(Customer &customer) noexcept(false)
     vector<int> indexes_array;
     int x;
     Seller *seller_temp = nullptr;
-    int available_index_counter = 0;
     vector<User *>::iterator itr = this->users_array.begin();
     vector<User *>::iterator itrEnd = this->users_array.end();
     for (int i = 0; itr != itrEnd; ++itr, i++)
@@ -138,11 +137,10 @@ bool System::addFeedback(Customer &customer) noexcept(false)
         if (seller_temp)
             if (customer.didCustomerOrderedFromSeller(*seller_temp))
             {
-                indexes_array[available_index_counter] = i;
-                available_index_counter++;
+                indexes_array.push_back(i);
             }
     }
-    if (available_index_counter != 0)
+    if (!indexes_array.empty())
     {
         this->printAllAvailableSellersToGiveFeedbacks(customer);
         cout << "Please insert the number of the seller you want to leave a feedback on: ";
