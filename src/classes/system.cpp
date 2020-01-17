@@ -175,17 +175,7 @@ void System::compareCustomers() const
         {
             std::cout << "Please choose the customers you would like to compare: (option1,option2) ";
             cin >> op1 >> op2;
-            if ((op1 == op2) || (op1 < 0) || (op2 < 0))
-            {
-                std::cout << endl;
-                std::cout << "wrong input,please try again!" << endl;
-                isValid = false;
-            }
-            Customer *temp1, *temp2;
-            itr = this->users_array.begin();
-            temp1 = dynamic_cast<Customer *>(*(itr) + *(indexes_array.begin() + (op1 - 1)));
-            temp2 = dynamic_cast<Customer *>(*(itr) + *(indexes_array.begin() + (op2 - 1)));
-            if (!temp1 || !temp2)
+            if ((op1 == op2) || (op1 < 0) || (op2 < 0) || (op1 > indexes_array.size()) || (op2 > indexes_array.size()))
             {
                 std::cout << endl;
                 std::cout << "wrong input,please try again!" << endl;
@@ -193,20 +183,40 @@ void System::compareCustomers() const
             }
             else
             {
-                if (*temp1 < *temp2)
+                Customer *temp1, *temp2;
+                itr = this->users_array.begin();
+                vector<int>::iterator itrInt = indexes_array.begin();
+                itrInt = itrInt + (op1 - 1);
+                itr = itr + *itrInt;
+                temp1 = dynamic_cast<Customer *>(*itr);
+                itr = this->users_array.begin();
+                itrInt = indexes_array.begin();
+                itrInt = itrInt + (op2 - 1);
+                itr = itr + *itrInt;
+                temp2 = dynamic_cast<Customer *>(*itr);
+                if (!temp1 || !temp2)
                 {
-                    std::cout << temp2->getName() << "'s wishlist is bigger than " << temp1->getName() << "'s wishlist" << endl;
-                }
-                else if (*temp1 > *temp2)
-                {
-                    std::cout << temp1->getName() << "'s wishlist is bigger than " << temp2->getName() << "'s wishlist" << endl;
+                    std::cout << endl;
+                    std::cout << "wrong input,please try again!" << endl;
+                    isValid = false;
                 }
                 else
                 {
-                    std::cout << "The Customers Wishlists Prices are identical!" << endl;
+                    isValid = true;
+                    if (*temp1 < *temp2)
+                    {
+                        std::cout << temp2->getName() << "'s wishlist is bigger than " << temp1->getName() << "'s wishlist" << endl;
+                    }
+                    else if (*temp1 > *temp2)
+                    {
+                        std::cout << temp1->getName() << "'s wishlist is bigger than " << temp2->getName() << "'s wishlist" << endl;
+                    }
+                    else
+                    {
+                        std::cout << "The Customers Wishlists Prices are identical!" << endl;
+                    }
                 }
             }
-
         } while (!isValid);
     }
     else

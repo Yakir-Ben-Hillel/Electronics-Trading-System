@@ -25,7 +25,7 @@ Seller::~Seller()
     vector<Product *>::iterator itrProdEnd = this->s_stock.end();
     vector<FeedBack *>::iterator itrFeed = this->feedBack_array.begin();
     vector<FeedBack *>::iterator itrFeedEnd = this->feedBack_array.end();
-    for (; itrProd != itrProdEnd; ++itrProdEnd)
+    for (; itrProd != itrProdEnd; ++itrProd)
         delete *(itrProd);
     this->s_stock.clear();
     for (; itrFeed != itrFeedEnd; ++itrFeed)

@@ -4,7 +4,7 @@ char *Product::CategoryNames[4] = {(char *)"Children", (char *)"Electricity", (c
 unsigned int Product::counter = 0;
 
 Product::Product(const string &name, eCategory category, const Seller &seller, float price) noexcept(false)
-    : p_serialNumber(++counter),p_seller(seller)
+    : p_serialNumber(++counter), p_seller(seller)
 {
     if (name.empty() || price < 0)
         throw ProductException(name, price);
@@ -19,7 +19,9 @@ Product::Product(const Product &other) : p_seller(other.p_seller)
     p_serialNumber = other.p_serialNumber;
     p_category = other.p_category;
 }
-
+Product::~Product()
+{
+}
 Product::Product(Product &&other) : p_seller(other.p_seller)
 {
     this->p_name = other.p_name;
@@ -89,4 +91,3 @@ ostream &operator<<(ostream &out, const Product &product)
     out << "Product seller's name: " << product.p_seller.getName() << endl;
     return out;
 }
-

@@ -17,10 +17,10 @@ public:
 	};
 	static char *CategoryNames[4];
 	//constructors&&distructors
-	Product(const string &name, eCategory category,const Seller &seller, float price) noexcept(false);
+	Product(const string &name, eCategory category, const Seller &seller, float price) noexcept(false);
 	Product(const Product &other);
 	Product(Product &&other);
-	~Product() {}
+	~Product();
 	//seters
 	bool setName(const string &name);
 	bool setPrice(float price);
