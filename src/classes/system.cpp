@@ -113,6 +113,7 @@ void System::loadUsersFromFile()
             }
             catch (SystemException &e)
             {
+                e.show();//need to know first where the problem was,and repair the file!.
                 cout << "FILE IS CURROPTED!!! ABORTED." << endl;
                 exit(1);
             }
