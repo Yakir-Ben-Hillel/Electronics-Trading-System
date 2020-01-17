@@ -149,12 +149,15 @@ void System::printAllAvailableSellersToGiveFeedbacks(Customer &customer)
         }
     }
 }
-void System::showProductsWithTheSameName(const string &name)
+void System::showProductsWithTheSameName()
 {
+    string name;
     Seller *seller_temp = nullptr;
     bool isFound = false;
     vector<User *>::const_iterator itr = this->users_array.begin();
     vector<User *>::const_iterator itrEnd = this->users_array.end();
+    cout << "Please insert the name of the product you want to search for: ";
+    getline(cin, name,'\n');
     for (; itr != itrEnd; ++itr)
     {
         seller_temp = dynamic_cast<Seller *>(*itr);
@@ -163,7 +166,7 @@ void System::showProductsWithTheSameName(const string &name)
             vector<Product *> stock = seller_temp->getStock();
             vector<Product *>::const_iterator itrP = stock.begin();
             vector<Product *>::const_iterator itrPEnd = stock.end();
-
+            
             for (; itrP != itrPEnd; ++itrP)
             {
                 if (isSubstring(name, (*itrP)->getName()))
@@ -173,6 +176,7 @@ void System::showProductsWithTheSameName(const string &name)
                     cout << endl;
                 }
             }
+            cout<<endl;
             isFound ? cout << "The Products you have searched for ,is shown to you above: " << endl : cout << "No similar Products as been found." << endl;
         }
     }

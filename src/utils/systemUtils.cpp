@@ -56,7 +56,6 @@ void System::mainMenu()
         {
             printOptionsAsCustomer();
             cin >> option;
-            string name;
             bool check;
             switch (option)
             {
@@ -97,9 +96,7 @@ void System::mainMenu()
                 this->printSellersNames();
                 break;
             case 5:
-                cout << "Please insert the name of the product you want to search for: ";
-                getline(cin, name);
-                this->showProductsWithTheSameName(name);
+                this->showProductsWithTheSameName();
                 break;
             case 6:
                 cout << *customer_temp;
@@ -180,7 +177,6 @@ void System::mainMenu()
         {
             printOptionAsCAS();
             vector<FeedBack*> array_feedbacks;
-            string name;
             cin >> option;
             bool check;
             switch (option)
@@ -241,10 +237,7 @@ void System::mainMenu()
                 break;
 
             case 6:
-                cout << "Please insert the name of the product you want to search for: ";
-                cin.ignore(256, '\n');
-                getline(cin, name);
-                this->showProductsWithTheSameName(name);
+                this->showProductsWithTheSameName();
                 break;
 
             case 7:
@@ -296,6 +289,7 @@ void System::mainMenu()
         }
     }
     this->writeUsersToFile();
+    cout<<"Thank you for using our system, we hope you will come back soon !"<<endl;
 }
 bool System::checkUsernameAvailability(const string &username)
 {

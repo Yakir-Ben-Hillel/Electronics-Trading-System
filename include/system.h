@@ -62,7 +62,7 @@ public:
 	void printOpening() const;
 	void printAllAvailableSellersToGiveFeedbacks(Customer &customer);
 	void printOptionsWhenAnonymous() const;
-	void showProductsWithTheSameName(const string &name);
+	void showProductsWithTheSameName();
 
 private:
 	const string system_name = "The Trading System";
