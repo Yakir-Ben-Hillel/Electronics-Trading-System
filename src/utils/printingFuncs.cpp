@@ -37,6 +37,7 @@ void System::printOptionsAsCustomer() const
     cout << "7) change PassWord." << endl;
     cout << "8) Logout." << endl;
     cout << "9) Exit." << endl;
+    cout << "Please insert the number of your chosen option: ";
 }
 void System::printOptionsAsSeller() const
 {
@@ -46,6 +47,7 @@ void System::printOptionsAsSeller() const
     cout << "4) change PassWord." << endl;
     cout << "5) Logout." << endl;
     cout << "6) Exit." << endl;
+    cout << "Please insert the number of your chosen option: ";
 }
 void System::printOptionAsCAS() const
 {
@@ -61,6 +63,7 @@ void System::printOptionAsCAS() const
     cout << "10) change PassWord." << endl;
     cout << "11) Logout." << endl;
     cout << "12) Exit." << endl;
+    cout << "Please insert the number of your chosen option: ";
 }
 void System::printCustomersNames() const
 {
@@ -156,8 +159,9 @@ void System::showProductsWithTheSameName()
     bool isFound = false;
     vector<User *>::const_iterator itr = this->users_array.begin();
     vector<User *>::const_iterator itrEnd = this->users_array.end();
-    cout << "Please insert the name of the product you want to search for: ";
-    getline(cin, name,'\n');
+    cout << "Please insert the name of the product you want to search for:";
+    getchar();
+    getline(std::cin, name,'\n');
     for (; itr != itrEnd; ++itr)
     {
         seller_temp = dynamic_cast<Seller *>(*itr);
@@ -176,8 +180,7 @@ void System::showProductsWithTheSameName()
                     cout << endl;
                 }
             }
-            cout<<endl;
-            isFound ? cout << "The Products you have searched for ,is shown to you above: " << endl : cout << "No similar Products as been found." << endl;
         }
     }
+    isFound ? cout << "The Products you have searched for ,is shown to you above: " << endl : cout << "No similar Products as been found." << endl;
 }
