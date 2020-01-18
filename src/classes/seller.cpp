@@ -80,8 +80,8 @@ void Seller::toOs(ostream &out) const
             out << "Products: " << endl;
             vector<Product *>::const_iterator itr = s_stock.begin();
             vector<Product *>::const_iterator itrEnd = s_stock.end();
-            for (; itr != itrEnd; ++itr)
-                out << *(*itr) << endl;
+            for (int i = 1; itr != itrEnd; ++i, ++itr)
+                out << i << ") " << *(*itr) << endl;
         }
         else
             out << "Has no Products" << endl;
@@ -91,8 +91,8 @@ void Seller::toOs(ostream &out) const
             vector<FeedBack *>::const_iterator itr = feedBack_array.begin();
             vector<FeedBack *>::const_iterator itrEnd = feedBack_array.end();
 
-            for (; itr != itrEnd; ++itr)
-                out << *(*itr) << endl;
+            for (int i = 1; itr != itrEnd; ++i, ++itr)
+                out << i << ") " << *(*itr) << endl;
         }
         else
             out << "Has no Feedbacks" << endl;
@@ -106,7 +106,7 @@ User *Seller::clone() const
 
 bool Seller::operator==(const User &other) const
 {
-    if (!User::operator==(other))
+    if (!User::operator==(other)) //its enough to check customer/seller by the user details cause we dont allow for two users to be with the same name !
         return false;
     return true;
 }

@@ -29,7 +29,7 @@ public:
 	//Constructors && Distructors
 	//In my option the user should not set arrays sizes by himself.-Yakir
 	System() = default;
-	System(vector<User *> users_array, User *logged_in_user = nullptr);
+	System(vector<User *> users_array,User *logged_in_user = nullptr);
 	System(const System &other);
 	~System();
 	//Setters Functions.

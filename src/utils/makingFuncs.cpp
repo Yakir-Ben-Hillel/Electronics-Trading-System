@@ -23,6 +23,7 @@ void Seller::makeProductForSale() noexcept(false)
     Seller *seller_of_product;
     unsigned int seller_index;
     bool isCategoryValid = false;
+    cout << "Please follow the instruction to add your product to the system." << endl;
     cout << "Please choose a name: ";
     cin.ignore(256, '\n');
     getline(cin, product_name);
@@ -65,6 +66,7 @@ void Seller::makeProductForSale() noexcept(false)
     cin >> price;
     Product *new_product = new Product(product_name, category, *this, price);
     this->addProductToStockArray(*new_product);
+    cout << "Product added successfully to the system!" << endl;
 }
 void System::chooseProductToAddToCustomerWishlist()
 {
@@ -101,7 +103,7 @@ void System::chooseProductToAddToCustomerWishlist()
                     {
                         cout << i + 1 << ")" << (*(this->users_array.begin() + *(indexes_array.begin() + i)))->getName() << endl;
                     }
-                    cout << "Please choose a seller in-order to view his products: ";
+                    cout <<endl<< "Please choose a seller in-order to view his products: ";
                     cin >> seller_index;
                     seller_index--;
                 } while (!(seller_index <= available_index_counter && seller_index >= 0));
@@ -266,5 +268,6 @@ void System::signup()
         }
     } while (!check);
     *this += user;
-    cout << "User added successfully, please enjoy your using on our trade system!" << endl;
+    cout << endl
+         << "User added successfully, please enjoy your using on our trade system!" << endl;
 }

@@ -76,7 +76,7 @@ void Customer::makeOrder() noexcept(false)
             {
                 int counter = 1;
                 int tempList_size = temp_list.getSize();
-                cout << "please pick from the following products the product you want to buy: " << endl;
+                cout << "please pick from the following products the product you want to buy: ";
                 vector<Product *>::iterator itr = this->c_wishList.begin();
                 vector<Product *>::iterator itrEnd = this->c_wishList.end();
                 do
@@ -162,7 +162,8 @@ void Customer::addFeedBackToSeller(Seller &seller) noexcept(false)
         int day, month, year;
         cout << "what date is it? (format: dd/mm/yyyy)" << endl;
         cin >> day >> month >> year;
-        FeedBack *curr_feedback = new FeedBack(temp, *this, Date(day, month, year));
+        Date* temp_date=new Date(day,month,year);
+        FeedBack *curr_feedback = new FeedBack(temp, *this,*temp_date);
         seller.addFeedbackToArray(*curr_feedback);
     }
     else
@@ -217,8 +218,8 @@ void Customer::toOs(ostream &out) const
         {
             vector<Product *>::const_iterator itrProduct = this->c_wishList.begin();
             vector<Product *>::const_iterator itrProductEnd = this->c_wishList.end();
-            for (; itrProduct != itrProductEnd; ++itrProduct)
-                out << *(*itrProduct) << endl;
+            for (int i = 1; itrProduct != itrProductEnd; ++i, ++itrProduct)
+                out << i << ") " << *(*itrProduct) << endl;
         }
         else
             out << "Wishlist is Empty." << endl;
@@ -226,11 +227,11 @@ void Customer::toOs(ostream &out) const
         {
             vector<Order *>::const_iterator itrOrder = this->orders_history.begin();
             vector<Order *>::const_iterator itrOrderEnd = this->orders_history.end();
-            for (; itrOrder != itrOrderEnd; ++itrOrder)
-                out << *(*itrOrder) << endl;
+            for (int i = 1; itrOrder != itrOrderEnd; ++i, ++itrOrder)
+                out << i << ") " << *(*itrOrder) << endl;
         }
         else
-            out << "The user didn't made any Order" << endl;
+            out << "The user didn't make any Order" << endl;
     }
 }
 
@@ -241,7 +242,7 @@ User *Customer::clone() const
 
 bool Customer::operator==(const User &other) const
 {
-    if (!User::operator==(other))
+    if (!User::operator==(other)) //its enough to check customer/seller by the user details cause we dont allow for two users to be with the same name !
         return false;
     return true;
 }

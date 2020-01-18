@@ -127,7 +127,7 @@ void Seller::printSellerProducts()
     Product *product = nullptr;
     for (int i = 1; itr != itrEnd; ++itr, i++)
     {
-        cout << "Product number #" << i << " ";
+        cout << "Product number #" << i << endl;
         cout << *(*itr);
         cout << endl;
     }

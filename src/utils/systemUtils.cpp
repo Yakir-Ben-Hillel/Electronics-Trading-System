@@ -19,8 +19,10 @@ void System::mainMenu()
         bool isValid = true;
         if (!this->logged_in_user)
         {
+            cout<<endl;
             printOptionsAsGuest();
             cin >> option;
+            cout<<endl;
             cin.ignore(256, '\n');
             switch (option)
             {
@@ -54,8 +56,10 @@ void System::mainMenu()
         }
         else if (customer_temp && !cas_temp)
         {
+            cout<<endl;
             printOptionsAsCustomer();
             cin >> option;
+            cout<<endl;
             bool check;
             switch (option)
             {
@@ -106,6 +110,7 @@ void System::mainMenu()
                 break;
             case 8:
                 this->logged_in_user = nullptr;
+                cout<<"Returning to the main menu!"<<endl;
                 break;
             case 9:
                 isFinished = true;
@@ -118,8 +123,10 @@ void System::mainMenu()
         }
         else if (seller_temp && !cas_temp)
         {
+            cout<<endl;
             printOptionsAsSeller();
             cin >> option;
+            cout<<endl;
             bool check;
             vector<FeedBack*> array_feedbacks;
             switch (option)
@@ -163,6 +170,7 @@ void System::mainMenu()
                 break;
             case 5:
                 this->logged_in_user = nullptr;
+                cout<<"Returning to the main menu!"<<endl;
                 break;
             case 6:
                 isFinished = true;
@@ -175,9 +183,11 @@ void System::mainMenu()
         }
         else if (cas_temp)
         {
+            cout<<endl;
             printOptionAsCAS();
             vector<FeedBack*> array_feedbacks;
             cin >> option;
+            cout<<endl;
             bool check;
             switch (option)
             {
@@ -281,6 +291,7 @@ void System::mainMenu()
                 break;
             case 11:
                 this->logged_in_user = nullptr;
+                cout<<"Returning to the main menu!"<<endl;
                 break;
             case 12:
                 isFinished = true;
