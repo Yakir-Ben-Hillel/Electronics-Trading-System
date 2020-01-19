@@ -15,9 +15,6 @@ FeedBack::FeedBack(FeedBack &&other)
     : notes(other.notes), date_of_feedback(other.date_of_feedback), customer(other.customer)
 {
 }
-FeedBack::~FeedBack()
-{
-}
 bool FeedBack::setNotes(const string &givenNote)
 {
     this->notes = givenNote;

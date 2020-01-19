@@ -13,7 +13,7 @@ public:
     FeedBack(const string &note, const Customer &customer_data, const Date &curr_date) noexcept(false);
     FeedBack(const FeedBack &other);
     FeedBack(FeedBack &&other);
-    virtual ~FeedBack();
+    virtual ~FeedBack() {}
 
     //seters and geters
     bool setNotes(const string &givenNote);
