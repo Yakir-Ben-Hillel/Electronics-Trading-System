@@ -39,7 +39,7 @@ ostream &operator<<(ostream &out, const FeedBack &feedback)
 {
 
     out << "the customer who gave you the feedback: " << feedback.customer.getName() << endl;
-    out << "the date of the feedback is: " << feedback.date_of_feedback << endl;
+    out << "the date of the feedback is: " << feedback.date_of_feedback;
     out << "the notes are: " << feedback.notes << endl;
     return out;
 }
