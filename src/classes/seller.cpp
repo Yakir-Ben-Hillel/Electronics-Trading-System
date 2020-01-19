@@ -54,6 +54,7 @@ bool Seller::addFeedbackToArray(FeedBack &new_feedback)
     if (feedBack_array.capacity() == feedBack_array.size())
         feedBack_array.reserve(feedBack_array.capacity() * 2 + 1);
     this->feedBack_array.push_back(&new_feedback);
+    cout<<"Feedback added successfully to "<<this->getName()<<" "<<endl;
     return true;
 }
 vector<FeedBack *> Seller::getfeedBacksArray() const

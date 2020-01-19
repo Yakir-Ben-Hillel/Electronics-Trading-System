@@ -76,7 +76,7 @@ void Customer::makeOrder() noexcept(false)
             {
                 int counter = 1;
                 int tempList_size = temp_list.getSize();
-                cout << "please pick from the following products the product you want to buy: ";
+                cout << "please pick from the following products the product you want to buy: "<<endl;
                 vector<Product *>::iterator itr = this->c_wishList.begin();
                 vector<Product *>::iterator itrEnd = this->c_wishList.end();
                 do
