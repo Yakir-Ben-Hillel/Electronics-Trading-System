@@ -10,7 +10,7 @@ class Order
 public:
     Order(Array<Product *> order_list, float price) noexcept(false);
     Order(const Order &other);
-    Order(const Order &&other); //
+    Order(const Order &&other);
     ~Order();
 
     bool setPrice(float price_of_order);
@@ -26,5 +26,4 @@ private:
     float price_of_order;
     Array<Product *> order_products; //pointer to array of products we have already bought.
 };
-
 #endif

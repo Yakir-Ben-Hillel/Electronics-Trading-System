@@ -3,7 +3,7 @@
 #define __FEEDBACK_H
 
 #include <string>
-class Date;
+#include "Date.h"
 class Customer;
 
 class FeedBack
@@ -25,7 +25,7 @@ public:
 private:
     const Customer &customer;
     string notes;
-    const Date &date_of_feedback;
+    Date date_of_feedback;
 };
 
 #endif

@@ -1,6 +1,6 @@
 #include "../../include/system.h"
 //static declaration
-char *Product::CategoryNames[4] = {(char *)"Children", (char *)"Electricity", (char *)"Office", (char *)"Clothing"};
+string Product::CategoryNames[4] = {"Children", "Electricity", "Office", "Clothing"};
 unsigned int Product::counter = 0;
 
 Product::Product(const string &name, eCategory category, const Seller &seller, float price) noexcept(false)
@@ -55,8 +55,8 @@ bool Product::setCategory(eCategory category)
         this->p_category = category;
         return true;
     }
-    cout << "the section you have chosen is not allowed" << endl;
-    cout << "please choose one of the available sections" << endl;
+    cout << "the section you have chosen is not allowed." << endl;
+    cout << "please choose one of the available sections." << endl;
     return false;
 }
 

@@ -15,7 +15,7 @@ public:
 		Office,
 		Clothing
 	};
-	static char *CategoryNames[4];
+	static string CategoryNames[4];
 	//constructors&&distructors
 	Product(const string &name, eCategory category, const Seller &seller, float price) noexcept(false);
 	Product(const Product &other);

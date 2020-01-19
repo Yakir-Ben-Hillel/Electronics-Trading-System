@@ -17,9 +17,6 @@ FeedBack::FeedBack(FeedBack &&other)
 }
 FeedBack::~FeedBack()
 {
-    /*although we save here only a reference to the date,the date is allocated on the heap.
-    the only use of the class date is by the class feedback.
-    because all of that we delete the date here on the distructor.*/
 }
 bool FeedBack::setNotes(const string &givenNote)
 {
